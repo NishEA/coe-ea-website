@@ -11,6 +11,12 @@
  *   (6) Cinematic media + microcopy — caption bottom-left, scroll cue centred,
  *       mini-microcopy bottom-right. Only the 3D moves.
  *
+ * Sizing: each panel has an explicit `min-h-[50vh]` so the media panel can't be
+ * compressed by the type panel's content height (a flex-1 distribution would
+ * collapse the bottom panel when the headline + CTAs push the top toward
+ * min-content). The Diorama is the brand statement — it gets equal visual
+ * weight by construction.
+ *
  * Reduced motion (DESIGN.md §7/§10): Diorama → static poster image.
  *
  * Copy is PLACEHOLDER — final pass in W9 (re-baselined Section 11).
@@ -30,12 +36,9 @@ export function HeroSpread() {
   }, []);
 
   return (
-    <section
-      aria-label="Hero — spread 001"
-      className="flex min-h-screen flex-col"
-    >
+    <section aria-label="Hero — spread 001" className="flex flex-col">
       {/* Top panel — cream, type */}
-      <div className="flex flex-1 flex-col justify-between gap-12 border-b border-brand-navy/15 bg-bg-paper px-6 py-10 tablet:px-12 tablet:py-14 desktop:px-20 desktop:py-16">
+      <div className="flex min-h-[50vh] flex-col justify-between gap-12 border-b border-brand-navy/15 bg-bg-paper px-6 py-10 tablet:px-12 tablet:py-14 desktop:px-20 desktop:py-16">
         <div className="flex items-baseline justify-between">
           <span className="font-mono text-[13px] tracking-[0.18em] text-brand-cerulean">
             001 / 005
@@ -71,8 +74,10 @@ export function HeroSpread() {
         </div>
       </div>
 
-      {/* Bottom panel — midnight, cinematic media */}
-      <div className="relative flex flex-1 items-end overflow-hidden bg-bg-midnight">
+      {/* Bottom panel — midnight, cinematic media. Min height guarantees the
+          Diorama gets real estate; microcopy band is absolutely positioned so
+          it doesn't fight the video for flex sizing. */}
+      <div className="relative min-h-[50vh] overflow-hidden bg-bg-midnight">
         {reduceMotion ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -96,7 +101,7 @@ export function HeroSpread() {
         )}
 
         {/* Microcopy band — caption (BL), scroll cue (centre), mini-microcopy (BR). */}
-        <div className="relative z-10 flex w-full items-end justify-between px-6 pb-6 tablet:px-12 tablet:pb-8 desktop:px-20 desktop:pb-10">
+        <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between px-6 pb-6 tablet:px-12 tablet:pb-8 desktop:px-20 desktop:pb-10">
           <span className="font-mono text-[12px] uppercase tracking-[0.18em] text-text-on-midnight/80">
             The Glass Diorama
           </span>
