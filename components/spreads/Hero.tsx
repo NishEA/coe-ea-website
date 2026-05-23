@@ -11,11 +11,13 @@
  *   (6) Cinematic media + microcopy — caption bottom-left, scroll cue centred,
  *       mini-microcopy bottom-right. Only the 3D moves.
  *
- * Sizing: each panel has an explicit `min-h-[50vh]` so the media panel can't be
- * compressed by the type panel's content height (a flex-1 distribution would
- * collapse the bottom panel when the headline + CTAs push the top toward
- * min-content). The Diorama is the brand statement — it gets equal visual
- * weight by construction.
+ * Composition: the type panel anchors its title + CTAs at the BOTTOM of the
+ * cream area (just above the hairline) via `mt-auto`. Pagination sits at top.
+ * Breathing room lives ABOVE the title, not between content blocks — magazine-
+ * cover editorial layout where the headline "rests on" the cinematic break.
+ *
+ * Sizing: each panel has an explicit `min-h-[50vh]` so the media panel can't
+ * be compressed by the type panel's content height.
  *
  * Reduced motion (DESIGN.md §7/§10): Diorama → static poster image.
  *
@@ -37,8 +39,10 @@ export function HeroSpread() {
 
   return (
     <section aria-label="Hero — spread 001" className="flex flex-col">
-      {/* Top panel — cream, type */}
-      <div className="flex min-h-[50vh] flex-col justify-between gap-12 border-b border-brand-navy/15 bg-bg-paper px-6 py-10 tablet:px-12 tablet:py-14 desktop:px-20 desktop:py-16">
+      {/* Top panel — cream, type. Pagination at the very top; everything else
+          (headline → CTAs) is pushed to the bottom of the panel via mt-auto, so
+          the title rests on the hairline above the Diorama. */}
+      <div className="flex min-h-[50vh] flex-col gap-8 border-b border-brand-navy/15 bg-bg-paper px-6 py-10 tablet:px-12 tablet:py-14 desktop:px-20 desktop:py-16">
         <div className="flex items-baseline justify-between">
           <span className="font-mono text-[13px] tracking-[0.18em] text-brand-cerulean">
             001 / 005
@@ -48,7 +52,7 @@ export function HeroSpread() {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 items-end gap-8 tablet:grid-cols-12">
+        <div className="mt-auto grid grid-cols-1 items-end gap-8 tablet:grid-cols-12">
           <h1 className="font-display text-[42px] leading-[1.05] tracking-[-0.01em] text-brand-navy tablet:col-span-8 tablet:text-[64px] desktop:text-[80px]">
             Build the systems that move India next.
           </h1>
@@ -74,9 +78,8 @@ export function HeroSpread() {
         </div>
       </div>
 
-      {/* Bottom panel — midnight, cinematic media. Min height guarantees the
-          Diorama gets real estate; microcopy band is absolutely positioned so
-          it doesn't fight the video for flex sizing. */}
+      {/* Bottom panel — midnight, cinematic media. Microcopy band is
+          absolutely positioned so it doesn't compete with the video for sizing. */}
       <div className="relative min-h-[50vh] overflow-hidden bg-bg-midnight">
         {reduceMotion ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -100,7 +103,6 @@ export function HeroSpread() {
           </video>
         )}
 
-        {/* Microcopy band — caption (BL), scroll cue (centre), mini-microcopy (BR). */}
         <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between px-6 pb-6 tablet:px-12 tablet:pb-8 desktop:px-20 desktop:pb-10">
           <span className="font-mono text-[12px] uppercase tracking-[0.18em] text-text-on-midnight/80">
             The Glass Diorama
