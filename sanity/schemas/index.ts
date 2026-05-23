@@ -1,10 +1,26 @@
 /**
- * Sanity schema types — W1 placeholder.
+ * Sanity schema types — design-doc §9 + the `impactMetrics` singleton (§17).
  *
- * Schema authoring follows W1 (design-doc §9 + §17). Planned types:
- *   startup, partner, pillar, event, news, team, page, impactMetrics (singleton).
- *
- * Leave this export empty until W1 schema-design completes — the Studio will
- * render an empty schema, which is intentional during scaffolding.
+ * Singleton enforcement (only one `impactMetrics` document) is layered on
+ * later in the Studio structure config. For the scaffold, defining the type
+ * is sufficient — editors will see it as a single entry in the structure.
  */
-export const schemaTypes: never[] = [];
+import { startup } from "./startup";
+import { partner } from "./partner";
+import { pillar } from "./pillar";
+import { event } from "./event";
+import { news } from "./news";
+import { team } from "./team";
+import { page } from "./page";
+import { impactMetrics } from "./impactMetrics";
+
+export const schemaTypes = [
+  startup,
+  partner,
+  pillar,
+  event,
+  news,
+  team,
+  page,
+  impactMetrics,
+];
