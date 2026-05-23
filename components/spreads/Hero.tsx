@@ -11,13 +11,19 @@
  *   (6) Cinematic media + microcopy — caption bottom-left, scroll cue centred,
  *       mini-microcopy bottom-right. Only the 3D moves.
  *
- * Composition: the type panel anchors its title + CTAs at the BOTTOM of the
- * cream area (just above the hairline) via `mt-auto`. Pagination sits at top.
- * Breathing room lives ABOVE the title, not between content blocks — magazine-
- * cover editorial layout where the headline "rests on" the cinematic break.
+ * Sizing — the entire hero fits in one screen:
+ *   - Section height = 100dvh minus the masthead (`calc(100dvh - 3.5rem)`),
+ *     so the user never has to scroll past the hero to see the Diorama or
+ *     the microcopy band. `dvh` survives mobile-browser-chrome appearing.
+ *   - CSS Grid `grid-rows-2` splits the section 50/50 deterministically —
+ *     no flex-1 + min-content negotiation that previously collapsed the
+ *     bottom panel.
+ *   - Headline uses `clamp(40px, 5.5vw, 72px)` so on narrower desktops the
+ *     display type can't push the top row past its allotted half.
  *
- * Sizing: each panel has an explicit `min-h-[50vh]` so the media panel can't
- * be compressed by the type panel's content height.
+ * Composition: pagination at the very top; the headline + CTAs anchor to the
+ * BOTTOM of the cream panel via `mt-auto`, so the title rests on the hairline
+ * above the Diorama — magazine-cover editorial layout.
  *
  * Reduced motion (DESIGN.md §7/§10): Diorama → static poster image.
  *
@@ -38,11 +44,12 @@ export function HeroSpread() {
   }, []);
 
   return (
-    <section aria-label="Hero — spread 001" className="flex flex-col">
-      {/* Top panel — cream, type. Pagination at the very top; everything else
-          (headline → CTAs) is pushed to the bottom of the panel via mt-auto, so
-          the title rests on the hairline above the Diorama. */}
-      <div className="flex min-h-[50vh] flex-col gap-8 border-b border-brand-navy/15 bg-bg-paper px-6 py-10 tablet:px-12 tablet:py-14 desktop:px-20 desktop:py-16">
+    <section
+      aria-label="Hero — spread 001"
+      className="grid h-[calc(100dvh-3.5rem)] grid-rows-2"
+    >
+      {/* Top panel — cream, type. Anchors title + CTAs to the hairline. */}
+      <div className="flex flex-col gap-6 overflow-hidden border-b border-brand-navy/15 bg-bg-paper px-6 py-8 tablet:px-12 tablet:py-10 desktop:px-20 desktop:py-12">
         <div className="flex items-baseline justify-between">
           <span className="font-mono text-[13px] tracking-[0.18em] text-brand-cerulean">
             001 / 005
@@ -52,11 +59,11 @@ export function HeroSpread() {
           </span>
         </div>
 
-        <div className="mt-auto grid grid-cols-1 items-end gap-8 tablet:grid-cols-12">
-          <h1 className="font-display text-[42px] leading-[1.05] tracking-[-0.01em] text-brand-navy tablet:col-span-8 tablet:text-[64px] desktop:text-[80px]">
+        <div className="mt-auto grid grid-cols-1 items-end gap-6 tablet:grid-cols-12">
+          <h1 className="font-display leading-[1.05] tracking-[-0.01em] text-brand-navy tablet:col-span-8 text-[clamp(40px,5.5vw,72px)]">
             Build the systems that move India next.
           </h1>
-          <p className="font-body text-[17px] leading-[1.6] text-brand-navy/70 tablet:col-span-4 tablet:text-right">
+          <p className="font-body text-[15px] leading-[1.6] text-brand-navy/70 tablet:col-span-4 tablet:text-right">
             Six Industry&nbsp;4.0 capabilities. Founder-forward incubation,
             backed by STPI.
           </p>
@@ -65,22 +72,21 @@ export function HeroSpread() {
         <div className="flex flex-wrap gap-3">
           <Link
             href="#apply"
-            className="rounded-full bg-brand-navy px-6 py-3 font-body text-text-on-midnight transition hover:bg-brand-navy/90"
+            className="rounded-full bg-brand-navy px-5 py-2.5 font-body text-text-on-midnight transition hover:bg-brand-navy/90"
           >
             Apply for incubation
           </Link>
           <Link
             href="#work"
-            className="rounded-full border border-brand-navy/30 px-6 py-3 font-body text-brand-navy transition hover:border-brand-cerulean hover:text-brand-cerulean"
+            className="rounded-full border border-brand-navy/30 px-5 py-2.5 font-body text-brand-navy transition hover:border-brand-cerulean hover:text-brand-cerulean"
           >
             Read the work
           </Link>
         </div>
       </div>
 
-      {/* Bottom panel — midnight, cinematic media. Microcopy band is
-          absolutely positioned so it doesn't compete with the video for sizing. */}
-      <div className="relative min-h-[50vh] overflow-hidden bg-bg-midnight">
+      {/* Bottom panel — midnight, cinematic media. */}
+      <div className="relative overflow-hidden bg-bg-midnight">
         {reduceMotion ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -103,7 +109,7 @@ export function HeroSpread() {
           </video>
         )}
 
-        <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between px-6 pb-6 tablet:px-12 tablet:pb-8 desktop:px-20 desktop:pb-10">
+        <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between px-6 pb-5 tablet:px-12 tablet:pb-6 desktop:px-20 desktop:pb-8">
           <span className="font-mono text-[12px] uppercase tracking-[0.18em] text-text-on-midnight/80">
             The Glass Diorama
           </span>
