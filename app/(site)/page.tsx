@@ -1,31 +1,55 @@
-const spreads = [
-  { n: "001", title: "Hero" },
-  { n: "002", title: "Work" },
-  { n: "003", title: "Portfolio" },
-  { n: "004", title: "Apply" },
-  { n: "005", title: "Impact & Partners" },
+import { HeroSpread } from "@/components/spreads/Hero";
+import { WorkSpread } from "@/components/spreads/Work";
+
+/** The five-spread editorial home. 001 + 002 built in W2; 003 / 004 / 005 follow. */
+const remaining = [
+  {
+    n: "003",
+    id: "portfolio",
+    title: "Portfolio",
+    note: "Ledger of ventures with metrics. Built W3 (design-doc §6).",
+  },
+  {
+    n: "004",
+    id: "apply",
+    title: "Apply",
+    note: "Apply form anchored here; the canonical route is /apply. Built W3–W4.",
+  },
+  {
+    n: "005",
+    id: "impact",
+    title: "Impact & Partners",
+    note: "Audited impact figures + partner logo band. Built W5.",
+  },
 ];
 
-/** Home — the five editorial spreads (design-doc §6). Placeholders; built W2+. */
 export default function HomePage() {
   return (
-    <div>
-      {spreads.map((s) => (
+    <>
+      <HeroSpread />
+      <WorkSpread />
+      {remaining.map((s) => (
         <section
           key={s.n}
-          className="flex min-h-[60vh] flex-col justify-center border-b border-ice px-6 py-24 desktop:px-20"
+          id={s.id}
+          className="flex min-h-[60vh] flex-col justify-center border-b border-brand-navy/15 bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20"
         >
-          <span className="font-mono text-[13px] tracking-[0.06em] text-brand-cerulean">
-            {s.n} / 005
-          </span>
-          <h2 className="mt-4 font-display text-5xl text-brand-navy">
+          <div className="flex items-baseline justify-between">
+            <span className="font-mono text-[13px] tracking-[0.18em] text-brand-cerulean">
+              {s.n} / 005
+            </span>
+            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-navy/60">
+              {s.title}
+            </span>
+          </div>
+          <h2 className="mt-8 font-display text-[36px] text-brand-navy tablet:text-[52px]">
             {s.title}
           </h2>
           <p className="mt-3 max-w-prose font-body text-brand-navy/60">
-            Spread {s.n} — placeholder. Built in W2 onward.
+            Spread {s.n} — placeholder. {s.note}
           </p>
         </section>
       ))}
-    </div>
+    </>
   );
 }
