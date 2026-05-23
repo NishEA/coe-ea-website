@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens — derived from DESIGN.md, which is the SOURCE OF TRUTH.
+ * DESIGN.md §2 colour, §4 type, §5 grid/breakpoints, §6 spacing.
+ * Do not change token VALUES here first — edit DESIGN.md, then mirror here.
+ */
+@theme {
+  /* Colour tokens — DESIGN.md §2 (names kept verbatim) */
+  --color-bg-paper: #f7f4ed;
+  --color-bg-midnight: #0b1633;
+  --color-brand-navy: #0e2d7a;
+  --color-brand-cerulean: #00a4e4;
+  --color-accent-spark: #2ee6ff;
+  --color-ice: #b7cfe8;
+  --color-text-on-paper: #0a1b40;
+  --color-text-on-midnight: #f7f4ed;
+
+  /* Breakpoints — DESIGN.md §5. Tailwind defaults reset so ONLY these exist. */
+  --breakpoint-*: initial;
+  --breakpoint-tablet: 48rem; /* 768px  — tablet and up */
+  --breakpoint-desktop: 75rem; /* 1200px — desktop and up */
+}
+
+/* Fonts — mapped from the next/font CSS vars set in app/fonts.ts (DESIGN.md §4). */
+@theme inline {
+  --font-display: var(--ff-display);
+  --font-body: var(--ff-body);
+  --font-mono: var(--ff-mono);
+}
+
+/*
+ * Spacing — DESIGN.md §6 scale (4·8·12·16·24·32·48·64·96·128 px) lines up with
+ * Tailwind's default spacing steps 1·2·3·4·6·8·12·16·24·32, so no override is
+ * needed. Hairline rule = 1px.
+ */
+
+body {
+  background: var(--color-bg-paper);
+  color: var(--color-text-on-paper);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
