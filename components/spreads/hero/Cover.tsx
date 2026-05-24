@@ -55,7 +55,7 @@ export function Cover() {
           {...animate(0)}
           className="mb-9 flex items-baseline justify-between font-mono text-[11px] uppercase tracking-[0.22em]"
         >
-          <span className="font-semibold text-brand-cerulean">001 / 005</span>
+          <span className="font-semibold text-brand-navy">001 / 005</span>
           <span className="text-text-on-paper/80">
             {/* TODO(W9): copy pass */}
             Center of Excellence — Efficiency Augmentation
@@ -93,13 +93,13 @@ export function Cover() {
                 mobile flex-col-reverse stacks primary on TOP. */}
             <Link
               href="#work"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-navy/30 px-6 py-3.5 font-body text-sm font-medium text-brand-navy transition hover:border-brand-navy"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-navy/30 px-6 py-3.5 font-body text-sm font-medium text-brand-navy transition hover:border-brand-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean focus-visible:ring-offset-2 focus-visible:ring-offset-bg-paper"
             >
               Read the work
             </Link>
             <Link
               href="/apply"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand-navy px-6 py-3.5 font-body text-sm font-semibold text-text-on-midnight shadow-[0_14px_32px_rgba(14,45,122,0.25)] transition hover:-translate-y-px hover:shadow-[0_20px_40px_rgba(14,45,122,0.4)]"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand-navy px-6 py-3.5 font-body text-sm font-semibold text-text-on-midnight shadow-[0_14px_32px_rgba(14,45,122,0.25)] transition hover:-translate-y-px hover:shadow-[0_20px_40px_rgba(14,45,122,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-spark focus-visible:ring-offset-2 focus-visible:ring-offset-bg-paper"
             >
               Apply for incubation
               <span className="transition group-hover:translate-x-0.5">→</span>
