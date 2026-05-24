@@ -8,7 +8,6 @@
  * <body> per app/globals.css.
  *
  * Architecture + visual reference: hero-redesign-v1.md (Option Z).
- * Visual demo (delete after this lands): public/_hero-demo-z.html.
  *
  * Replaces the failed cd2b62c attempt (90e05a8 → 9e6c0d1 → 3155079 → cd2b62c).
  */
