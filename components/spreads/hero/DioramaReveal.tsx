@@ -12,7 +12,9 @@
  * approach would letterbox vertically, shrinking the cube). Per paired
  * AI review.
  *
- * Reduced motion: video replaced by poster image, no autoplay.
+ * Reduced motion: autoPlay is disabled; the video element shows its
+ * poster attribute statically. No element-type swap (avoids SSR/CSR
+ * hydration mismatch).
  *
  * IntersectionObserver triggers entrance overlay fade-in when the
  * section is 30% in view. Video itself uses native autoplay/loop.
@@ -45,40 +47,31 @@ export function DioramaReveal() {
       aria-label="Hero — The Glass Diorama"
       className="relative h-[70dvh] snap-start overflow-hidden bg-bg-midnight tablet:h-[100dvh]"
     >
-      {reduceMotion ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src="/hero/diorama-hero-poster.jpg"
-          alt="The Glass Diorama — a transparent glass cube on a midnight studio plinth containing a 1:32 industrial micro-scene with a robotic arm, conveyor, and sensor LEDs."
-          className="absolute inset-0 h-full w-full object-cover tablet:object-contain"
+      <video
+        aria-hidden="true"
+        autoPlay={!reduceMotion}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster="/hero/diorama-hero-poster.jpg"
+        className="absolute inset-0 h-full w-full object-cover tablet:object-contain"
+      >
+        {/* Mobile: 1280x720 — smaller file, no thermal throttling on mid-range Android */}
+        <source
+          src="/hero/diorama-hero-mobile.webm"
+          type="video/webm"
+          media="(max-width: 768px)"
         />
-      ) : (
-        <video
-          aria-label="The Glass Diorama — a 12-second loop of a transparent glass cube on a midnight studio plinth containing a 1:32 industrial micro-scene with a robotic arm, conveyor, and sensor LEDs."
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="/hero/diorama-hero-poster.jpg"
-          className="absolute inset-0 h-full w-full object-cover tablet:object-contain"
-        >
-          {/* Mobile: 1280x720 — smaller file, no thermal throttling on mid-range Android */}
-          <source
-            src="/hero/diorama-hero-mobile.webm"
-            type="video/webm"
-            media="(max-width: 768px)"
-          />
-          <source
-            src="/hero/diorama-hero-mobile.mp4"
-            type="video/mp4"
-            media="(max-width: 768px)"
-          />
-          {/* Desktop: full 1920x1056 */}
-          <source src="/hero/diorama-hero.webm" type="video/webm" />
-          <source src="/hero/diorama-hero.mp4" type="video/mp4" />
-        </video>
-      )}
+        <source
+          src="/hero/diorama-hero-mobile.mp4"
+          type="video/mp4"
+          media="(max-width: 768px)"
+        />
+        {/* Desktop: full 1920x1056 */}
+        <source src="/hero/diorama-hero.webm" type="video/webm" />
+        <source src="/hero/diorama-hero.mp4" type="video/mp4" />
+      </video>
 
       {/* Radial ambient glow — boosts perceived saturation of the cube glow
           without altering the source. */}
