@@ -39,4 +39,7 @@ body {
   background: var(--color-bg-paper);
   color: var(--color-text-on-paper);
   font-family: var(--font-body), system-ui, sans-serif;
+  scroll-snap-type: y proximity;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
