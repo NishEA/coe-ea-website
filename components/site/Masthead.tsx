@@ -20,11 +20,11 @@ export function Masthead() {
   return (
     <header
       role="banner"
-      className="flex items-center justify-between border-b border-brand-navy/10 px-6 py-4 desktop:px-20"
+      className="flex items-center justify-between border-b border-brand-navy/10 bg-bg-paper px-6 py-4 desktop:px-20"
     >
       <Link href="/" className="font-display text-lg text-brand-navy">
         CoE-EA
-        <span className="ml-2 font-mono text-[11px] tracking-[0.18em] text-brand-navy/60">
+        <span className="ml-2 font-mono text-[11px] tracking-[0.18em] text-brand-navy/80">
           AN STPI INITIATIVE
         </span>
       </Link>
@@ -42,7 +42,7 @@ export function Masthead() {
           </Link>
         ))}
       </nav>
-      <span className="font-mono text-[10px] tracking-[0.18em] text-brand-navy/55">
+      <span className="font-mono text-[10px] tracking-[0.18em] text-brand-navy/80">
         EN · हिं
       </span>
     </header>
