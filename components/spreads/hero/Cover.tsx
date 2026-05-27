@@ -58,7 +58,7 @@ export function Cover() {
           <span className="font-semibold text-brand-navy">001 / 005</span>
           <span className="text-text-on-paper/80">
             {/* TODO(W9): copy pass */}
-            Center of Excellence — Efficiency Augmentation
+            Centre of Excellence — Efficiency Augmentation
           </span>
         </motion.div>
 

@@ -1,5 +1,6 @@
 "use server";
 import { redirect } from "next/navigation";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 
 export type ApplyState = {
   errors: Record<string, string>;
@@ -29,6 +30,7 @@ export async function submitApplication(
 
   const founderName = str(formData, "founder_name");
   const founderEmail = str(formData, "founder_email");
+  const founderPhone = str(formData, "founder_phone");
   const startupName = str(formData, "startup_name");
   const domain = str(formData, "domain");
   const stage = str(formData, "stage");
@@ -36,10 +38,15 @@ export async function submitApplication(
   const whyCoeEa = str(formData, "why_coe_ea");
   const karnatakaRegistered = str(formData, "karnataka_registered");
   const foundedInLast5Years = str(formData, "founded_in_last_5_years");
+  const raisedCapital = str(formData, "raised_capital") || null;
+  const referralSource = str(formData, "referral_source") || null;
+  const privacyConsentRaw = str(formData, "privacy_consent");
 
   if (!founderName) errors.founder_name = "Your name is required.";
   if (!founderEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(founderEmail))
     errors.founder_email = "A valid email address is required.";
+  if (!founderPhone || founderPhone.length < 6 || founderPhone.length > 30)
+    errors.founder_phone = "A valid phone number is required.";
   if (!startupName) errors.startup_name = "Startup name is required.";
   if (!VALID_DOMAINS.has(domain)) errors.domain = "Select a capability domain.";
   if (!VALID_STAGES.has(stage)) errors.stage = "Select your current stage.";
@@ -55,9 +62,36 @@ export async function submitApplication(
     errors.karnataka_registered = "Please answer the Karnataka registration question.";
   if (!VALID_FOUNDED.has(foundedInLast5Years))
     errors.founded_in_last_5_years = "Please answer the founding date question.";
+  if (privacyConsentRaw !== "true")
+    errors.privacy_consent = "You must consent to data processing to submit your application.";
 
   if (Object.keys(errors).length > 0) return { errors };
 
-  // W4: replace with Supabase write + Resend notification.
+  const supabase = createSupabaseAdminClient();
+  const { error: dbError } = await supabase.from("application_leads").insert({
+    founder_name: founderName,
+    founder_email: founderEmail,
+    founder_phone: founderPhone || null,
+    startup_name: startupName,
+    domain,
+    stage,
+    founded_in_last_5_years: foundedInLast5Years,
+    karnataka_registered: karnatakaRegistered,
+    problem_statement: problemStatement,
+    why_coe_ea: whyCoeEa,
+    raised_capital: raisedCapital,
+    referral_source: referralSource,
+    privacy_consent: true,
+    consent_recorded_at: new Date().toISOString(),
+  });
+
+  if (dbError) {
+    return {
+      errors: {},
+      message:
+        "We couldn’t save your application. Please try again or email blr.coeea@stpi.in.",
+    };
+  }
+
   redirect("/apply/thank-you");
 }

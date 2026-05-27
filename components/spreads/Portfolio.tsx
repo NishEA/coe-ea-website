@@ -27,7 +27,7 @@ const startups: Startup[] = [
   {
     slug: "waterbot",
     name: "WaterBot Online Solutions",
-    domain: "Smart Manufacturing · Home Automation",
+    domain: "Smart Manufacturing · Home & Office Automation",
     whatTheyBuild:
       "IoT-native water management — real-time monitoring, leak detection, and treatment automation for industrial and residential estates.",
     metric: { value: "₹50.9L", label: "raised" },
@@ -62,7 +62,7 @@ const startups: Startup[] = [
   {
     slug: "stglabs",
     name: "STG Labs India",
-    domain: "Asset Monitoring · Manufacturing Software",
+    domain: "Intelligent Asset Monitoring · Smart Manufacturing",
     whatTheyBuild:
       "Embedded systems and software for asset health — from single machines to multi-site industrial networks.",
     status: "active",
@@ -103,8 +103,7 @@ export function PortfolioSpread() {
           Who&rsquo;s already here.
         </h2>
         <p className="font-body text-[17px] leading-[1.6] text-bg-paper/70 tablet:col-span-5 tablet:text-right">
-          Six ventures that moved from idea to market inside the
-          Centre&rsquo;s four walls.
+          Six ventures supported by the Centre from prototype to pilot.
         </p>
       </div>
 

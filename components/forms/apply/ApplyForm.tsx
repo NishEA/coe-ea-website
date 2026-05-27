@@ -1,5 +1,5 @@
 "use client";
-import { useActionState, useRef, useEffect, useState } from "react";
+import { useActionState, useRef, useEffect } from "react";
 import { Field } from "@/components/forms/Field";
 import { TextareaField } from "@/components/forms/TextareaField";
 import { SelectField } from "@/components/forms/SelectField";
@@ -98,6 +98,15 @@ export function ApplyForm() {
           error={state.errors?.founder_email}
         />
       </div>
+      <Field
+        label="Phone number"
+        id="founder_phone"
+        name="founder_phone"
+        type="tel"
+        required
+        autoComplete="tel"
+        error={state.errors?.founder_phone}
+      />
 
       {/* — Startup ——————————————————————————————————— */}
       <div className="grid gap-8 tablet:grid-cols-2">
@@ -184,105 +193,44 @@ export function ApplyForm() {
         />
       </div>
 
-      {/* — Pitch deck drop-zone (W3: UI only, no upload) — */}
-      <PitchDeckDropZone />
+      {/* — DPDP Act 2023 consent (§7(a)) ———————————— */}
+      <div className="space-y-2">
+        <label className="flex cursor-pointer items-start gap-3">
+          <input
+            type="checkbox"
+            name="privacy_consent"
+            id="privacy_consent"
+            value="true"
+            className="mt-0.5 h-4 w-4 shrink-0 rounded border-brand-navy/30 text-brand-navy focus-visible:ring-2 focus-visible:ring-brand-cerulean"
+            aria-describedby="privacy_consent_desc"
+          />
+          <span
+            id="privacy_consent_desc"
+            className="font-body text-[14px] leading-[1.6] text-brand-navy/70"
+          >
+            I consent to Software Technology Parks of India (STPI) collecting
+            and processing the personal data in this form for evaluating my
+            incubation application, as described in the{" "}
+            <a
+              href="/privacy"
+              target="_blank"
+              rel="noreferrer"
+              className="text-brand-cerulean hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
+            >
+              privacy notice
+            </a>
+            . I understand I may withdraw consent at any time by writing to
+            blr.coeea@stpi.in.
+          </span>
+        </label>
+        {state.errors?.privacy_consent && (
+          <p className="font-body text-[13px] text-red-600" role="alert">
+            {state.errors.privacy_consent}
+          </p>
+        )}
+      </div>
 
       <SubmitButton pending={pending}>Submit application</SubmitButton>
     </form>
-  );
-}
-
-type DropState =
-  | { type: "idle" }
-  | { type: "selected"; name: string }
-  | { type: "rejected"; reason: string };
-
-function syncToInput(file: File, input: HTMLInputElement) {
-  try {
-    const dt = new DataTransfer();
-    dt.items.add(file);
-    input.files = dt.files;
-  } catch {
-    // DataTransfer not available in all environments; W4 upload handles the real path.
-  }
-}
-
-function handleFile(
-  file: File,
-  set: (s: DropState) => void,
-  input: HTMLInputElement | null,
-) {
-  if (file.type !== "application/pdf") {
-    if (input) input.value = "";
-    set({ type: "rejected", reason: "Only PDF files are accepted." });
-    return;
-  }
-  if (file.size > 10 * 1024 * 1024) {
-    if (input) input.value = "";
-    set({ type: "rejected", reason: "File exceeds the 10 MB limit." });
-    return;
-  }
-  if (input) syncToInput(file, input);
-  set({ type: "selected", name: file.name });
-}
-
-function PitchDeckDropZone() {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [status, setStatus] = useState<DropState>({ type: "idle" });
-
-  return (
-    <div className="space-y-2">
-      <span className="block font-mono text-[12px] uppercase tracking-[0.18em] text-brand-navy">
-        Pitch deck (optional)
-      </span>
-      <button
-        type="button"
-        onClick={() => inputRef.current?.click()}
-        onDragOver={(e) => e.preventDefault()}
-        onDrop={(e) => {
-          e.preventDefault();
-          const file = e.dataTransfer.files[0];
-          if (file) handleFile(file, setStatus, inputRef.current);
-        }}
-        aria-label="Upload pitch deck — drag a PDF here or click to browse"
-        className={`flex w-full flex-col items-center justify-center gap-2 border border-dashed py-8 text-center transition-colors ${
-          status.type === "selected"
-            ? "border-brand-cerulean bg-brand-cerulean/5"
-            : status.type === "rejected"
-            ? "border-red-400 bg-red-50"
-            : "border-brand-navy/20 hover:border-brand-navy/40"
-        }`}
-      >
-        {status.type === "idle" && (
-          <>
-            <span className="font-body text-[15px] text-brand-navy/60">
-              Drag a PDF here, or click to browse
-            </span>
-            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-navy/40">
-              PDF &middot; max 10 MB
-            </span>
-          </>
-        )}
-        {status.type === "selected" && (
-          <span className="font-body text-[15px] text-brand-navy">{status.name}</span>
-        )}
-        {status.type === "rejected" && (
-          <span className="font-body text-[15px] text-red-600">{status.reason}</span>
-        )}
-      </button>
-      <input
-        ref={inputRef}
-        type="file"
-        name="pitch_deck"
-        accept=".pdf,application/pdf"
-        tabIndex={-1}
-        aria-hidden
-        className="sr-only"
-        onChange={(e) => {
-          const file = e.target.files?.[0];
-          if (file) handleFile(file, setStatus, inputRef.current);
-        }}
-      />
-    </div>
   );
 }

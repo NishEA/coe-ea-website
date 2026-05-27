@@ -6,6 +6,7 @@
  * The form itself — ApplyForm (client component, useActionState).
  * Cohort footer — "Next cohort opens [TBD]" placeholder.
  */
+import Link from "next/link";
 import { ApplyForm } from "@/components/forms/apply/ApplyForm";
 
 const BENEFITS = [
@@ -93,19 +94,29 @@ export function ApplySpread() {
         </p>
         <ul className="space-y-3">
           <li className="flex items-baseline gap-3 font-body text-[15px] leading-[1.6] text-brand-navy/70">
-            <span aria-hidden className="font-mono text-brand-cerulean">
-              &#x2192;
-            </span>
+            <span aria-hidden className="font-mono text-brand-cerulean">&#x2192;</span>
             Incorporated or registrable entity founded in the last 5 years.
           </li>
           <li className="flex items-baseline gap-3 font-body text-[15px] leading-[1.6] text-brand-navy/70">
-            <span aria-hidden className="font-mono text-brand-cerulean">
-              &#x2192;
-            </span>
-            Working on a problem in one of the Centre&rsquo;s ten Industry&nbsp;4.0
-            domains.
+            <span aria-hidden className="font-mono text-brand-cerulean">&#x2192;</span>
+            Working on a problem in one of the Centre&rsquo;s ten Industry&nbsp;4.0 domains.
+          </li>
+          <li className="flex items-baseline gap-3 font-body text-[15px] leading-[1.6] text-brand-navy/70">
+            <span aria-hidden className="font-mono text-brand-cerulean">&#x2192;</span>
+            Majority Indian shareholding; lead founder must be an Indian citizen.
+          </li>
+          <li className="flex items-baseline gap-3 font-body text-[15px] leading-[1.6] text-brand-navy/70">
+            <span aria-hidden className="font-mono text-brand-cerulean">&#x2192;</span>
+            Not currently incubated at another STPI Centre of Excellence.
           </li>
         </ul>
+        <p className="mt-4 font-body text-[13px] text-brand-navy/50">
+          Full eligibility criteria and selection process are described in the{" "}
+          <Link href="#contact" className="text-brand-cerulean hover:underline">
+            Centre section
+          </Link>
+          .
+        </p>
       </div>
 
       {/* Application form */}
@@ -117,10 +128,23 @@ export function ApplySpread() {
         </div>
       </div>
 
-      {/* Cohort footer */}
-      <p className="mt-16 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-navy/40 tablet:mt-20">
-        Next cohort opens — TBD. Applications reviewed on a rolling basis.
-      </p>
+      {/* Scheme citation + cohort footer */}
+      <div className="mt-16 space-y-3 tablet:mt-20">
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-navy/40">
+          Next cohort opens — TBD. Applications reviewed on a rolling basis.
+        </p>
+        <p className="font-body text-[13px] leading-[1.6] text-brand-navy/40">
+          The &#x20B9;10L seed grant is disbursed under the STPI Centre of Excellence
+          Programme (CoE-P), an initiative of Software Technology Parks of India
+          under the Ministry of Electronics and Information Technology (MeitY),
+          Government of India. Disbursement is milestone-gated per GoI financial norms.
+          By submitting, you agree to our{" "}
+          <Link href="/privacy" className="text-brand-cerulean hover:underline">
+            privacy notice
+          </Link>
+          .
+        </p>
+      </div>
     </section>
   );
 }

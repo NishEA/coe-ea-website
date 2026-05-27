@@ -4,11 +4,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Center of Excellence — Efficiency Augmentation",
+    default: "Centre of Excellence — Efficiency Augmentation",
     template: "%s · CoE-EA",
   },
   description:
-    "An STPI initiative — the Center of Excellence on Efficiency Augmentation.",
+    "A MeitY / STPI initiative — the Centre of Excellence on Efficiency Augmentation, Bengaluru.",
 };
 
 export default function RootLayout({
