@@ -50,16 +50,44 @@ const pillars: Pillar[] = [
     acceptingApplications: true,
   },
   {
-    slug: "intelligent-asset-monitoring",
-    name: "Intelligent Asset Monitoring",
+    slug: "home-office-automation",
+    name: "Home & Office Automation",
     description:
-      "Predictive maintenance, condition monitoring, asset-health analytics.",
+      "Smart building controls, energy management, occupancy-aware systems for residential and commercial spaces.",
     acceptingApplications: true,
   },
   {
     slug: "connected-transportation",
     name: "Connected Transportation",
     description: "Vehicle telematics, fleet operations, mobility platforms.",
+    acceptingApplications: true,
+  },
+  {
+    slug: "weather-monitoring",
+    name: "Weather Monitoring",
+    description:
+      "Environmental sensing, micro-climate data, agri-weather and disaster early-warning systems.",
+    acceptingApplications: true,
+  },
+  {
+    slug: "smart-hospital",
+    name: "Smart Hospital",
+    description:
+      "IoT-enabled clinical workflows, patient monitoring, medical-asset tracking.",
+    acceptingApplications: true,
+  },
+  {
+    slug: "smart-security",
+    name: "Smart Security",
+    description:
+      "Intelligent surveillance, access control, anomaly detection for premises and infrastructure.",
+    acceptingApplications: true,
+  },
+  {
+    slug: "intelligent-asset-monitoring",
+    name: "Intelligent Asset Monitoring",
+    description:
+      "Predictive maintenance, condition monitoring, asset-health analytics.",
     acceptingApplications: true,
   },
 ];
@@ -82,16 +110,16 @@ export function WorkSpread() {
 
       <div className="grid grid-cols-1 items-end gap-8 tablet:grid-cols-12">
         <h2 className="font-display text-[36px] leading-[1.1] tracking-[-0.01em] text-brand-navy tablet:col-span-8 tablet:text-[52px]">
-          Six capabilities. Where you&rsquo;d fit.
+          Ten capabilities. Where you&rsquo;d fit.
         </h2>
         <p className="font-body text-[17px] leading-[1.6] text-brand-navy/70 tablet:col-span-4 tablet:text-right">
-          The Centre&rsquo;s six Industry&nbsp;4.0 capability domains — your
+          The Centre&rsquo;s ten Industry&nbsp;4.0 capability domains — your
           starting surface as a founder applying in.
         </p>
       </div>
 
       {/* Desktop + tablet: grid. Mobile: native accordion (no JS). */}
-      <ul className="mt-12 hidden gap-x-12 gap-y-14 tablet:grid tablet:grid-cols-2 desktop:mt-16 desktop:grid-cols-3">
+      <ul className="mt-12 hidden gap-x-12 gap-y-14 tablet:grid tablet:grid-cols-2 desktop:mt-16 desktop:grid-cols-5">
         {pillars.map((p) => (
           <li key={p.slug}>
             <h3 className="font-display text-[24px] text-brand-navy">

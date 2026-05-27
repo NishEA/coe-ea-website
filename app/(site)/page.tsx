@@ -1,20 +1,10 @@
 import { HeroSpread } from "@/components/spreads/Hero";
+import { PortfolioSpread } from "@/components/spreads/Portfolio";
 import { WorkSpread } from "@/components/spreads/Work";
+import { ApplySpread } from "@/components/spreads/Apply";
 
-/** The five-spread editorial home. 001 + 002 built in W2; 003 / 004 / 005 follow. */
+/** The five-spread editorial home. 001–004 built; 005 follows. */
 const remaining = [
-  {
-    n: "003",
-    id: "portfolio",
-    title: "Portfolio",
-    note: "Ledger of ventures with metrics. Built W3 (design-doc §6).",
-  },
-  {
-    n: "004",
-    id: "apply",
-    title: "Apply",
-    note: "Apply form anchored here; the canonical route is /apply. Built W3–W4.",
-  },
   {
     n: "005",
     id: "impact",
@@ -28,6 +18,8 @@ export default function HomePage() {
     <>
       <HeroSpread />
       <WorkSpread />
+      <PortfolioSpread />
+      <ApplySpread />
       {remaining.map((s) => (
         <section
           key={s.n}

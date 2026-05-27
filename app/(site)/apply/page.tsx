@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
+import { ApplySpread } from "@/components/spreads/Apply";
 
-export const metadata: Metadata = { title: "Apply" };
+export const metadata: Metadata = {
+  title: "Apply — Centre of Excellence on Efficiency Augmentation",
+  description:
+    "Apply to join the CoE-EA incubation programme. Seed funding, hardware lab access, and a network of Industry 4.0 partners.",
+};
 
-/** Incubation application — design-doc §8. Placeholder; built W3–W4. */
 export default function ApplyPage() {
-  return (
-    <section className="px-6 py-24 desktop:px-20">
-      <h1 className="font-display text-4xl text-brand-navy">Apply</h1>
-      <p className="mt-3 font-body text-brand-navy/60">
-        Incubation application form — placeholder. Built in W3–W4.
-      </p>
-    </section>
-  );
+  return <ApplySpread />;
 }
