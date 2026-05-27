@@ -1,6 +1,11 @@
 "use server";
 import { redirect } from "next/navigation";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
+import { resend } from "@/lib/resend/client";
+import {
+  newApplicationEmailHtml,
+  newApplicationEmailText,
+} from "@/lib/resend/emails/new-application";
 
 export type ApplyState = {
   errors: Record<string, string>;
@@ -16,6 +21,13 @@ const VALID_DOMAINS = new Set([
 const VALID_STAGES = new Set(["idea", "mvp", "pilot", "revenue"]);
 const VALID_KARNATAKA = new Set(["yes", "in_process", "no"]);
 const VALID_FOUNDED = new Set(["yes", "no"]);
+
+const NOTIFY_EMAIL = "blr.coeea@stpi.in";
+const FROM_EMAIL =
+  process.env.RESEND_FROM_EMAIL ?? "CoE-EA <onboarding@resend.dev>";
+const ADMIN_URL =
+  (process.env.NEXT_PUBLIC_SITE_URL ?? "https://coe-ea-website.vercel.app") +
+  "/admin/applications";
 
 function str(formData: FormData, key: string): string {
   const val = formData.get(key);
@@ -63,35 +75,56 @@ export async function submitApplication(
   if (!VALID_FOUNDED.has(foundedInLast5Years))
     errors.founded_in_last_5_years = "Please answer the founding date question.";
   if (privacyConsentRaw !== "true")
-    errors.privacy_consent = "You must consent to data processing to submit your application.";
+    errors.privacy_consent =
+      "You must consent to data processing to submit your application.";
 
   if (Object.keys(errors).length > 0) return { errors };
 
+  const submittedAt = new Date().toISOString();
+
   const supabase = createSupabaseAdminClient();
-  const { error: dbError } = await supabase.from("application_leads").insert({
-    founder_name: founderName,
-    founder_email: founderEmail,
-    founder_phone: founderPhone || null,
-    startup_name: startupName,
-    domain,
-    stage,
-    founded_in_last_5_years: foundedInLast5Years,
-    karnataka_registered: karnatakaRegistered,
-    problem_statement: problemStatement,
-    why_coe_ea: whyCoeEa,
-    raised_capital: raisedCapital,
-    referral_source: referralSource,
-    privacy_consent: true,
-    consent_recorded_at: new Date().toISOString(),
-  });
+  const { data: row, error: dbError } = await supabase
+    .from("application_leads")
+    .insert({
+      founder_name: founderName,
+      founder_email: founderEmail,
+      founder_phone: founderPhone || null,
+      startup_name: startupName,
+      domain,
+      stage,
+      founded_in_last_5_years: foundedInLast5Years,
+      karnataka_registered: karnatakaRegistered,
+      problem_statement: problemStatement,
+      why_coe_ea: whyCoeEa,
+      raised_capital: raisedCapital,
+      referral_source: referralSource,
+      privacy_consent: true,
+      consent_recorded_at: submittedAt,
+    })
+    .select("id")
+    .single();
 
   if (dbError) {
     return {
       errors: {},
       message:
-        "We couldn’t save your application. Please try again or email blr.coeea@stpi.in.",
+        "We couldn't save your application. Please try again or email blr.coeea@stpi.in.",
     };
   }
+
+  // Fire-and-forget — a send failure must never block the applicant redirect.
+  const refId = (row?.id as string | undefined)?.slice(0, 8).toUpperCase() ?? "UNKNOWN";
+  resend.emails
+    .send({
+      from: FROM_EMAIL,
+      to: NOTIFY_EMAIL,
+      subject: `New CoE-EA application — ref ${refId}`,
+      html: newApplicationEmailHtml({ refId, submittedAt, domain, stage, adminUrl: ADMIN_URL }),
+      text: newApplicationEmailText({ refId, submittedAt, domain, stage, adminUrl: ADMIN_URL }),
+    })
+    .catch(() => {
+      // Non-fatal. Application is saved to DB regardless.
+    });
 
   redirect("/apply/thank-you");
 }
