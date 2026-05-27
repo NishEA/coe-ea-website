@@ -79,9 +79,9 @@ export function Cover() {
             className="max-w-[42ch] font-body text-[clamp(16px,1.1vw,18px)] leading-[1.55] text-text-on-paper"
           >
             {/* TODO(W9): copy pass */}
-            Six Industry&nbsp;4.0 capabilities — manufacturing, energy, water,
-            farming, asset monitoring, transport. Founder-forward incubation,
-            backed by STPI.
+            Ten Industry&nbsp;4.0 capabilities — manufacturing, energy, water,
+            farming, automation, transport, weather, hospital, security, asset
+            monitoring. Founder-forward incubation, backed by STPI.
           </motion.p>
 
           <motion.div
