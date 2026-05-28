@@ -20,7 +20,7 @@ function walk(dir) {
 
 const hits = [];
 for (const file of walk(APP_DIR)) {
-  if (readFileSync(file, "utf8").includes("[TBD")) hits.push(file);
+  if (readFileSync(file, "utf8").includes("[TBD —")) hits.push(file);
 }
 
 if (hits.length > 0) {

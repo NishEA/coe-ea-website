@@ -127,18 +127,18 @@ export default function PrivacyPage() {
             <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50">
               Grievance Officer
             </p>
-            {/* TODO: GO-LIVE BLOCKER — replace with named Grievance Officer before publishing */}
             <p className="mt-2 font-body text-[15px] text-brand-navy">
-              <span className="font-mono text-[13px] text-brand-cerulean">
-                [TBD &mdash; name and designation]
-              </span>
+              Dr. Nishant Peddagopu
+            </p>
+            <p className="mt-0.5 font-body text-[13px] text-brand-navy/60">
+              Chief Operating Officer, CoE-EA
             </p>
             <p className="mt-1 font-body text-[14px] text-brand-navy/60">
               <a
-                href="mailto:blr.coeea@stpi.in"
+                href="mailto:nishant.peddagopu@stpi.in"
                 className="font-mono text-[13px] text-brand-cerulean hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
               >
-                blr.coeea@stpi.in
+                nishant.peddagopu@stpi.in
               </a>
               {" · "}CoE-EA, Jayanagar, Bengaluru, Karnataka
             </p>
@@ -440,10 +440,10 @@ export default function PrivacyPage() {
           <p className="mt-6 font-body text-[14px] leading-[1.6] text-brand-navy/60">
             To exercise any right, email our Grievance Officer at{" "}
             <a
-              href="mailto:blr.coeea@stpi.in"
+              href="mailto:nishant.peddagopu@stpi.in"
               className="font-mono text-[13px] text-brand-cerulean hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
             >
-              blr.coeea@stpi.in
+              nishant.peddagopu@stpi.in
             </a>{" "}
             quoting your application or booking reference number.
           </p>
@@ -502,17 +502,17 @@ export default function PrivacyPage() {
               <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50">
                 Grievance Officer
               </p>
-              {/* TODO: GO-LIVE BLOCKER — replace with named Grievance Officer before publishing */}
               <p className="mt-2 font-body text-[15px] text-brand-navy">
-                <span className="font-mono text-[13px] text-brand-cerulean">
-                  [TBD &mdash; name, designation]
-                </span>
+                Dr. Nishant Peddagopu
+              </p>
+              <p className="mt-0.5 font-body text-[13px] text-brand-navy/60">
+                Chief Operating Officer, CoE-EA
               </p>
               <a
-                href="mailto:blr.coeea@stpi.in"
+                href="mailto:nishant.peddagopu@stpi.in"
                 className="mt-1 block font-mono text-[13px] text-brand-cerulean hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
               >
-                blr.coeea@stpi.in
+                nishant.peddagopu@stpi.in
               </a>
               <p className="mt-1 font-body text-[13px] text-brand-navy/50">
                 CoE-EA, Jayanagar, Bengaluru, Karnataka
