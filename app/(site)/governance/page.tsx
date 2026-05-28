@@ -34,9 +34,72 @@ const OVERSIGHT = [
   },
 ];
 
+const GOVERNING_COUNCIL = [
+  {
+    name: "Sh. Arvind Kumar",
+    designation: "Director General, STPI, MeitY, Government of India",
+    role: "Chairperson",
+    note: "",
+  },
+  {
+    name: "Dr. Sanjay Kumar Gupta",
+    designation: "Senior Director, STPI",
+    role: "Vice Chairperson",
+    note: "",
+  },
+  {
+    name: "Smt. Bhawna Agarwal",
+    designation: "Senior Vice President & Managing Director, Hewlett Packard Enterprise, India",
+    role: "Chief Mentor & Member",
+    note: "",
+  },
+  {
+    name: "Dr. Sanjay Tyagi",
+    designation: "Director, STPI Bengaluru",
+    role: "Member",
+    note: "",
+  },
+  {
+    name: "Sh. Rahul S., IAS",
+    designation: "Managing Director, KITS & Director, Dept of Electronics, IT, BT & S&T, Government of Karnataka",
+    role: "Member",
+    note: "",
+  },
+  {
+    name: "Sh. Pradeep Gupta",
+    designation: "Chairman, Cyber Media Group",
+    role: "Member",
+    note: "Leave of absence granted",
+  },
+  {
+    name: "Sh. Ashok Chandak",
+    designation: "President, India Electronics & Semiconductor Association (IESA), Bengaluru",
+    role: "Member",
+    note: "",
+  },
+  {
+    name: "Sh. Debabrata Das",
+    designation: "Director, International Institute of Information Technology Bangalore (IIITB)",
+    role: "Member",
+    note: "",
+  },
+  {
+    name: "Sh. Rakesh Dubey",
+    designation: "Director, Startups & Innovation, STPI",
+    role: "Member",
+    note: "",
+  },
+  {
+    name: "Dr. Nishant Peddagopu",
+    designation: "Chief Operating Officer, CoE-EA",
+    role: "Member Secretary",
+    note: "",
+  },
+];
+
 const PMG = [
   {
-    name: "Chait",
+    name: "Smt. Bhawna Agarwal",
     designation: "Senior Vice President & Managing Director, Hewlett Packard Enterprise, India",
     role: "Chairperson & Chief Mentor",
   },
@@ -145,6 +208,56 @@ export default function GovernancePage() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Governing Council */}
+        <section aria-labelledby="s-gc" className="mt-16 border-t border-brand-navy/15 pt-12">
+          <h2 id="s-gc" className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+            Governing Council
+          </h2>
+          <p className="mb-8 font-body text-[15px] leading-[1.7] text-brand-navy/60">
+            The Apex Body of CoE-EA. The Governing Council sets the strategic
+            direction of the Centre, approves the annual programme plan, and
+            reviews overall performance. It is chaired by the Director General,
+            STPI.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse" aria-label="Governing Council members">
+              <thead>
+                <tr className="border-b border-brand-navy/15">
+                  {["Name", "Designation", "Role"].map((h) => (
+                    <th
+                      key={h}
+                      scope="col"
+                      className="pb-3 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50"
+                    >
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-brand-navy/10">
+                {GOVERNING_COUNCIL.map((m) => (
+                  <tr key={m.name + m.role}>
+                    <td className="py-4 pr-6 font-body text-[14px] font-medium text-brand-navy">
+                      {m.name}
+                    </td>
+                    <td className="py-4 pr-6 font-body text-[14px] leading-[1.5] text-brand-navy/70">
+                      {m.designation}
+                    </td>
+                    <td className="py-4 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-cerulean">
+                      {m.role}
+                      {m.note && (
+                        <span className="ml-2 normal-case tracking-normal text-brand-navy/40">
+                          ({m.note})
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </section>
 
