@@ -72,8 +72,8 @@ export default function GovernancePage() {
         </p>
 
         {/* Oversight structure */}
-        <div className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-oversight" className="mt-16 border-t border-brand-navy/15 pt-12">
+          <h2 id="s-oversight" className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
             Oversight structure
           </h2>
           <div className="space-y-6">
@@ -98,11 +98,11 @@ export default function GovernancePage() {
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Reporting cadence */}
-        <div className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-reporting" className="mt-16 border-t border-brand-navy/15 pt-12">
+          <h2 id="s-reporting" className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
             Reporting cadence
           </h2>
           <div className="overflow-x-auto">
@@ -112,6 +112,7 @@ export default function GovernancePage() {
                   {["Cadence", "Audience", "Content"].map((h) => (
                     <th
                       key={h}
+                      scope="col"
                       className="pb-3 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50"
                     >
                       {h}
@@ -136,11 +137,11 @@ export default function GovernancePage() {
               </tbody>
             </table>
           </div>
-        </div>
+        </section>
 
         {/* Published reports */}
-        <div className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-reports" className="mt-16 border-t border-brand-navy/15 pt-12">
+          <h2 id="s-reports" className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
             Published reports
           </h2>
           <div className="border border-brand-navy/10 px-8 py-14 text-center">
@@ -151,11 +152,11 @@ export default function GovernancePage() {
               Annual and quarterly reports will appear here when released.
             </p>
           </div>
-        </div>
+        </section>
 
         {/* RTI */}
-        <div className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 className="mb-4 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-rti" className="mt-16 border-t border-brand-navy/15 pt-12">
+          <h2 id="s-rti" className="mb-4 font-display text-[24px] text-brand-navy tablet:text-[30px]">
             RTI &amp; grievance
           </h2>
           <p className="mb-6 font-body text-[15px] leading-[1.7] text-brand-navy/70">
@@ -173,21 +174,21 @@ export default function GovernancePage() {
                 href={l.href}
                 className="font-mono text-[12px] uppercase tracking-[0.18em] text-brand-cerulean hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
                 {...(l.href.startsWith("http")
-                  ? { target: "_blank", rel: "noreferrer" }
+                  ? { target: "_blank", rel: "noopener noreferrer" }
                   : {})}
               >
-                {l.label} →
+                {l.label} &rarr;
               </Link>
             ))}
           </div>
-        </div>
+        </section>
 
         <div className="mt-16 border-t border-brand-navy/15 pt-8">
           <Link
             href="/"
             className="font-mono text-[12px] uppercase tracking-[0.18em] text-brand-cerulean hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
           >
-            ← Back to home
+            &larr; Back to home
           </Link>
         </div>
       </div>

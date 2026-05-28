@@ -224,7 +224,7 @@ export default function PrivacyPage() {
               "maintain aggregate, non-identifying statistics about site usage.",
             ].map((item) => (
               <li key={item} className="flex items-start gap-3">
-                <span className="mt-[7px] h-1.5 w-1.5 flex-none rounded-full bg-brand-cerulean" />
+                <span aria-hidden="true" className="mt-[7px] h-1.5 w-1.5 flex-none rounded-full bg-brand-cerulean" />
                 <span className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
                   {item}
                 </span>
@@ -234,8 +234,8 @@ export default function PrivacyPage() {
           <p className="mt-4 font-body text-[15px] leading-[1.7] text-brand-navy/70">
             Our legal basis is your{" "}
             <strong className="text-brand-navy">consent</strong>, given by a clear
-            affirmative action at each point of collection (DPDP Act s.6). We will not use
-            your data for any purpose not listed here without asking you again.
+            affirmative action at each point of collection (DPDP Act ss.5–6). We will not
+            use your data for any purpose not listed here without asking you again.
           </p>
         </section>
 
@@ -271,6 +271,7 @@ export default function PrivacyPage() {
                   {["Data", "Retention period", "Then"].map((h) => (
                     <th
                       key={h}
+                      scope="col"
                       className="pb-3 pr-6 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50"
                     >
                       {h}
@@ -313,7 +314,7 @@ export default function PrivacyPage() {
               "Service providers (Data Processors) listed in Section 8 — each bound by a written Data Processing Agreement.",
             ].map((item) => (
               <li key={item} className="flex items-start gap-3">
-                <span className="mt-[7px] h-1.5 w-1.5 flex-none rounded-full bg-brand-cerulean" />
+                <span aria-hidden="true" className="mt-[7px] h-1.5 w-1.5 flex-none rounded-full bg-brand-cerulean" />
                 <span className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
                   {item}
                 </span>
@@ -338,6 +339,10 @@ export default function PrivacyPage() {
             them. The DPDP Act permits this transfer; no destination is on a
             DPDP-restricted list.
           </p>
+          <p className="mb-6 font-body text-[13px] leading-[1.6] text-brand-navy/50">
+            Sanity and Plausible receive <strong className="text-brand-navy/70">no personal data</strong> — Sanity
+            holds only website content, and Plausible records only anonymous aggregate traffic.
+          </p>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse" aria-label="Data processor locations">
               <thead>
@@ -345,6 +350,7 @@ export default function PrivacyPage() {
                   {["Provider", "What it handles", "Location"].map((h) => (
                     <th
                       key={h}
+                      scope="col"
                       className="pb-3 pr-6 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50"
                     >
                       {h}
