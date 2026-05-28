@@ -36,6 +36,11 @@ const OVERSIGHT = [
 
 const PMG = [
   {
+    name: "Senior Vice President & Managing Director",
+    designation: "Hewlett Packard Enterprise, India",
+    role: "Chairperson & Chief Mentor",
+  },
+  {
     name: "Dr. Sanjay Tyagi",
     designation: "Director, STPI Bengaluru",
     role: "Co-Chair",
@@ -46,8 +51,8 @@ const PMG = [
     role: "Member",
   },
   {
-    name: "Dr. Prasanna Kumar S.C.",
-    designation: "Professor, R.V. College of Engineering",
+    name: "Sh. Pradeep Gupta",
+    designation: "Chairman, Cyber Media Group",
     role: "Member",
   },
   {
@@ -56,23 +61,18 @@ const PMG = [
     role: "Member",
   },
   {
-    name: "Sh. Mahadesha V",
-    designation: "Scientist 'F', STPI Bengaluru",
-    role: "Member",
-  },
-  {
-    name: "SVP & Managing Director",
-    designation: "Hewlett Packard Enterprise, India",
-    role: "Chief Mentor",
-  },
-  {
-    name: "Sh. Pradeep Gupta",
-    designation: "Chairman, Cyber Media Group",
+    name: "Dr. Prasanna Kumar S.C.",
+    designation: "Representative from Academia · Professor, R.V. College of Engineering",
     role: "Member",
   },
   {
     name: "Sh. Rakesh Dubey",
     designation: "Director, STPI HQ",
+    role: "Member",
+  },
+  {
+    name: "Sh. Mahadesha V",
+    designation: "Scientist 'F', STPI Bengaluru",
     role: "Member",
   },
   {
