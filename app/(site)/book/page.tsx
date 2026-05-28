@@ -111,7 +111,7 @@ export default function BookPage() {
                         src={f.image}
                         alt={f.imageAlt}
                         fill
-                        className={`object-cover ${f.id === "lab" ? "object-top" : "object-center"}`}
+                        className={`object-cover ${f.id === "lab" ? "object-bottom" : "object-center"}`}
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     </div>
