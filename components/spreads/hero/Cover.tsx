@@ -50,7 +50,7 @@ export function Cover() {
     >
       <Masthead />
 
-      <main className="flex flex-1 flex-col justify-end px-6 pb-28 pt-12 tablet:px-12 tablet:pb-32 desktop:px-20">
+      <main className="flex flex-1 flex-col justify-end px-6 pb-40 pt-12 tablet:px-12 tablet:pb-44 desktop:px-20">
         <motion.div
           {...animate(0)}
           className="mb-9 flex items-baseline justify-between font-mono text-[11px] uppercase tracking-[0.22em]"
@@ -121,11 +121,11 @@ export function Cover() {
                 { value: "23", label: "Patents filed" },
               ] as const
             ).map((s) => (
-              <li key={s.label} className="flex items-baseline gap-2 whitespace-nowrap">
-                <span className="font-display text-[20px] leading-none tracking-[-0.01em] text-brand-navy tablet:text-[22px]">
+              <li key={s.label} className="flex items-baseline gap-2.5 whitespace-nowrap">
+                <span className="font-display text-[26px] leading-none tracking-[-0.01em] text-brand-navy tablet:text-[30px]">
                   {s.value}
                 </span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-brand-navy/40">
+                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-brand-navy/55">
                   {s.label}
                 </span>
               </li>
