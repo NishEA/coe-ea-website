@@ -17,7 +17,7 @@ export default function ThankYouPage() {
         <div className="relative mx-auto mb-8 h-[160px] w-[160px]">
           <Image
             src="/images/thank-you-cube.png"
-            alt=""
+            alt="CoE-EA geometric cube — application received"
             fill
             className="object-contain"
             sizes="160px"

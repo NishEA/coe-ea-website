@@ -1,5 +1,5 @@
 /**
- * Spread 003 — Portfolio ledger. Design-doc §6 (six incubated startups per KITS Annexure)
+ * Spread 003 — Portfolio ledger. Design-doc §6 (ten incubated startups per DPR; six featured here)
  * + §16 Pass 1 (editorial ledger, not a card grid).
  *
  * One featured venture (large typographic block + portrait placeholder),
@@ -113,7 +113,7 @@ export function PortfolioSpread() {
           Who&rsquo;s already here.
         </h2>
         <p className="font-body text-[17px] leading-[1.6] text-bg-paper/70 tablet:col-span-5 tablet:text-right">
-          Six ventures the Centre has accelerated from prototype toward market.
+          Ten ventures the Centre has accelerated from prototype toward market.
         </p>
       </div>
 

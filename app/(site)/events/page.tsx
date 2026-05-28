@@ -93,7 +93,7 @@ export default function EventsPage() {
             <div className="relative flex h-56 w-full items-center justify-center bg-bg-midnight">
               <Image
                 src="/images/events-illustration.png"
-                alt=""
+                alt="Abstract geometric illustration representing CoE-EA events"
                 fill
                 className="object-cover opacity-70"
                 sizes="100vw"
