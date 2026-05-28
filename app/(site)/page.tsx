@@ -1,5 +1,4 @@
 import { HeroSpread } from "@/components/spreads/Hero";
-import { StatsBar } from "@/components/ui/StatsBar";
 import { WorkSpread } from "@/components/spreads/Work";
 import { PortfolioSpread } from "@/components/spreads/Portfolio";
 import { ApplySpread } from "@/components/spreads/Apply";
@@ -9,7 +8,6 @@ export default function HomePage() {
   return (
     <>
       <HeroSpread />
-      <StatsBar />
       <WorkSpread />
       <PortfolioSpread />
       <ApplySpread />

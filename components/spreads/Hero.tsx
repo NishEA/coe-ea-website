@@ -14,11 +14,13 @@
 
 import { Cover } from "./hero/Cover";
 import { DioramaReveal } from "./hero/DioramaReveal";
+import { StatsBar } from "../ui/StatsBar";
 
 export function HeroSpread() {
   return (
     <>
       <Cover />
+      <StatsBar />
       <DioramaReveal />
     </>
   );
