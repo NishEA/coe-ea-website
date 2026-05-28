@@ -11,12 +11,13 @@
  *
  * Mono is NOT a placeholder — JetBrains Mono is the final choice (free, SIL OFL).
  */
-import { Cormorant_Garamond, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Source_Serif_4, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 
-/** Editorial serif — Cormorant Garamond (SIL OFL). */
-export const fontDisplay = Cormorant_Garamond({
+/** Editorial serif — Source Serif 4 (SIL OFL). Structured, screen-optimised,
+ *  stable numerals, proper black weight for display headlines. */
+export const fontDisplay = Source_Serif_4({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "600", "700", "900"],
   style: ["normal", "italic"],
   variable: "--ff-display",
   display: "swap",
