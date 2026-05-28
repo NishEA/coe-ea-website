@@ -36,8 +36,8 @@ const OVERSIGHT = [
 
 const PMG = [
   {
-    name: "Senior Vice President & Managing Director",
-    designation: "Hewlett Packard Enterprise, India",
+    name: "Chait",
+    designation: "Senior Vice President & Managing Director, Hewlett Packard Enterprise, India",
     role: "Chairperson & Chief Mentor",
   },
   {
