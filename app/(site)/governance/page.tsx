@@ -166,7 +166,7 @@ export default function GovernancePage() {
             {[
               { label: "RTI portal — STPI", href: "https://www.stpi.in/rti.html" },
               { label: "STPI India", href: "https://www.stpi.in" },
-              /* Privacy notice link added when /privacy route is built (W4) */
+              { label: "Privacy notice", href: "/privacy" },
             ].map((l) => (
               <Link
                 key={l.label}
