@@ -16,8 +16,8 @@ export default function SiteLayout({
               Centre of Excellence — Efficiency Augmentation
             </p>
             <p className="mt-1 font-body text-[13px] leading-[1.6] text-brand-navy/50">
-              An STPI initiative. Software Technology Parks of India is an
-              autonomous society under MeitY, Government of India.
+              Funded by KITS · STPI · HPE. Software Technology Parks of India
+              is an autonomous society under MeitY, Government of India.
             </p>
           </div>
           <nav

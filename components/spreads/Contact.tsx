@@ -1,7 +1,7 @@
 /**
  * Spread 005 — The Centre (Contact + Institutional Identity).
  *
- * Surfaces STPI/MeitY attribution, physical address, programme officer contact,
+ * Surfaces KITS/STPI/HPE attribution, physical address, programme officer contact,
  * selection process disclosure, and institutional links. Required before launch
  * per STPI Gate 1 review: government-affiliated CoE must show institutional
  * identity and an accountable contact point.
@@ -68,24 +68,21 @@ export function ContactSpread() {
             </h2>
             <p className="mt-6 font-body text-[17px] leading-[1.6] text-brand-navy/70">
               The Centre of Excellence on Efficiency Augmentation (CoE-EA) is
-              an initiative of{" "}
+              jointly funded by{" "}
+              <strong className="font-semibold text-brand-navy">
+                Karnataka Innovation &amp; Technology Society (KITS)
+              </strong>
+              , Government of Karnataka,{" "}
               <strong className="font-semibold text-brand-navy">
                 Software Technology Parks of India (STPI)
               </strong>
-              , an autonomous society under the{" "}
-              <strong className="font-semibold text-brand-navy">
-                Ministry of Electronics and Information Technology (MeitY)
-              </strong>
-              , Government of India. The Centre is set up in collaboration with
-              the{" "}
-              <strong className="font-semibold text-brand-navy">
-                Department of IT, BT &amp; ST, Government of Karnataka
-              </strong>
-              , and supported by{" "}
+              , and{" "}
               <strong className="font-semibold text-brand-navy">
                 Hewlett Packard Enterprise (HPE)
               </strong>
-              .
+              . STPI is the implementing agency and an autonomous society under
+              the Ministry of Electronics and Information Technology (MeitY),
+              Government of India.
             </p>
             <p className="mt-4 font-body text-[15px] leading-[1.6] text-brand-navy/60">
               The incubation programme supports early-stage Industry&nbsp;4.0
@@ -198,12 +195,11 @@ export function ContactSpread() {
             ))}
           </ul>
           <p className="mt-4 font-body text-[13px] leading-[1.6] text-brand-navy/50">
-            The &#x20B9;10L seed grant is disbursed under the STPI Centre of
-            Excellence Programme (CoE-P), Ministry of Electronics and
-            Information Technology, Government of India. Disbursement is subject
-            to selection committee approval, successful onboarding, and
-            milestone gating at 3-month intervals per standard GoI financial
-            norms and the terms of the incubation agreement.
+            The &#x20B9;10L seed grant is funded by KITS (Karnataka Innovation
+            &amp; Technology Society), Government of Karnataka, in collaboration
+            with STPI and HPE. Disbursement is subject to selection committee
+            approval, equity agreement signing, and milestone gating at
+            3-month intervals per the terms of the incubation agreement.
           </p>
         </div>
       </div>

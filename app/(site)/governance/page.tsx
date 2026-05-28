@@ -9,41 +9,35 @@ export const metadata: Metadata = {
 
 const OVERSIGHT = [
   {
-    role: "Funding ministry",
-    body: "Ministry of Electronics and Information Technology (MeitY), Government of India",
-    detail:
-      "Provides policy mandate and programme funding under the STPI Centre of Excellence Programme (CoE-P).",
-  },
-  {
-    role: "Implementing agency",
-    body: "Software Technology Parks of India (STPI)",
-    detail:
-      "Operates the Centre, manages grant disbursement, and submits quarterly milestone reports to MeitY.",
-  },
-  {
-    role: "State partner",
-    body: "Department of IT, BT & ST, Government of Karnataka",
-    detail:
-      "Co-sponsors the Centre's presence in Bengaluru and supports Karnataka-based startup intake.",
-  },
-  {
-    role: "Karnataka co-sponsor",
-    body: "Karnataka Innovation & Technology Society (KITS)",
+    role: "Primary funder",
+    body: "Karnataka Innovation & Technology Society (KITS), Government of Karnataka",
     detail:
       "An autonomous society under the Dept of IT, BT & ST, Govt of Karnataka. Administers the state grant-in-aid and provides Karnataka-level programme oversight.",
   },
   {
-    role: "Technology partner",
+    role: "Implementing agency & co-funder",
+    body: "Software Technology Parks of India (STPI)",
+    detail:
+      "Co-funds and operates the Centre, manages grant disbursement, and submits quarterly milestone reports to KITS and the Dept of IT, BT & ST. STPI is an autonomous society under MeitY, Government of India.",
+  },
+  {
+    role: "Technology & infrastructure co-funder",
     body: "Hewlett Packard Enterprise (HPE)",
     detail:
-      "Provides laboratory infrastructure, hardware access, and technical mentorship to incubatees.",
+      "Co-funds the Centre and provides laboratory infrastructure, hardware access, and technical mentorship to incubatees.",
+  },
+  {
+    role: "State nodal department",
+    body: "Department of IT, BT & ST, Government of Karnataka",
+    detail:
+      "Nodal state department overseeing the Centre's establishment in Bengaluru and Karnataka-based startup intake.",
   },
 ];
 
 const REPORTING = [
   {
     cadence: "Quarterly",
-    audience: "STPI HQ & MeitY",
+    audience: "KITS & STPI HQ",
     content:
       "Milestone progress, grant utilisation, startup KPIs, and cohort status.",
   },
@@ -72,9 +66,9 @@ export default function GovernancePage() {
           How the Centre is run.
         </h1>
         <p className="mt-4 max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-navy/60">
-          CoE-EA operates under a formal governance framework defined by STPI
-          and MeitY. This page is for funding bodies, programme managers, and
-          RTI / audit stakeholders.
+          CoE-EA operates under a formal governance framework defined by KITS,
+          STPI, and HPE. This page is for funding bodies, programme managers,
+          and RTI / audit stakeholders.
         </p>
 
         {/* Oversight structure */}

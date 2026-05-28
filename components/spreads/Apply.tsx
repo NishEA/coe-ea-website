@@ -140,10 +140,10 @@ export function ApplySpread() {
           Next cohort opens — TBD. Applications reviewed on a rolling basis.
         </p>
         <p className="font-body text-[13px] leading-[1.6] text-brand-navy/40">
-          The &#x20B9;10L seed grant is disbursed under the STPI Centre of Excellence
-          Programme (CoE-P), an initiative of Software Technology Parks of India
-          under the Ministry of Electronics and Information Technology (MeitY),
-          Government of India. Disbursement is milestone-gated per GoI financial norms.
+          The &#x20B9;10L seed grant is funded by KITS (Karnataka Innovation &amp;
+          Technology Society), Government of Karnataka, in collaboration with
+          STPI and HPE. Disbursement is milestone-gated and subject to equity
+          agreement signing and programme reporting obligations.
           By submitting, you agree to our{" "}
           <Link href="/privacy" className="text-brand-cerulean hover:underline">
             privacy notice

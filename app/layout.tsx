@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: "%s · CoE-EA",
   },
   description:
-    "A MeitY / STPI initiative — the Centre of Excellence on Efficiency Augmentation, Bengaluru.",
+    "A KITS · STPI · HPE initiative — the Centre of Excellence on Efficiency Augmentation, Bengaluru.",
 };
 
 export default function RootLayout({
