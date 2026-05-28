@@ -69,7 +69,7 @@ const GOVERNING_COUNCIL = [
     name: "Sh. Pradeep Gupta",
     designation: "Chairman, Cyber Media Group",
     role: "Member",
-    note: "Leave of absence granted",
+    note: "",
   },
   {
     name: "Sh. Ashok Chandak",
