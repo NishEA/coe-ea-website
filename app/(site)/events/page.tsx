@@ -116,7 +116,7 @@ export default function EventsPage() {
             Stay informed
           </h2>
           <p className="mb-6 max-w-[48ch] font-body text-[15px] leading-[1.7] text-brand-navy/60">
-            Events are announced through STPI's official channels. To express
+            Events are announced through STPI&rsquo;s official channels. To express
             interest in participating or hosting an event at the Centre, reach
             out directly.
           </p>
@@ -141,7 +141,7 @@ export default function EventsPage() {
         <div className="mt-16 border-t border-brand-navy/15 pt-8">
           <Link
             href="/"
-            className="font-mono text-[12px] uppercase tracking-[0.18em] text-brand-cerulean hover:underline"
+            className="font-mono text-[12px] uppercase tracking-[0.18em] text-brand-cerulean hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
           >
             ← Back to home
           </Link>

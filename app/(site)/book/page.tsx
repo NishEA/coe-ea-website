@@ -88,7 +88,7 @@ export default function BookPage() {
           Book a facility.
         </h1>
         <p className="mt-4 max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-navy/60">
-          CoE-EA's Bengaluru facility is available to incubatees, partners, and
+          CoE-EA&rsquo;s Bengaluru facility is available to incubatees, partners, and
           invited teams. Lab space, meeting infrastructure, and demo suites —
           all under one roof.
         </p>

@@ -36,7 +36,7 @@ export default function ThankYouPage() {
         </p>
         <Link
           href="/"
-          className="mt-10 inline-block font-mono text-[12px] uppercase tracking-[0.18em] text-brand-cerulean hover:underline"
+          className="mt-10 inline-block font-mono text-[12px] uppercase tracking-[0.18em] text-brand-cerulean hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
         >
           &larr; Back to home
         </Link>
