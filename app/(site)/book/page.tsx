@@ -14,8 +14,8 @@ const FACILITIES = [
     name: "Prototype & Testing Lab",
     area: "~1,200 sq ft",
     capacity: "Up to 8 workstations",
-    image: "/images/facilities/lab-hero.png",
-    imageAlt: "CoE-EA prototype and testing lab — deep-tech hardware workbenches",
+    image: "/images/facilities/lab-hero.jpg",
+    imageAlt: "CoE-EA prototype and testing lab — dual rows of equipped workbenches",
     description:
       "Equipped workbenches, oscilloscopes, soldering stations, and access to HPE compute nodes for hardware-software integration work.",
     useCases: ["Prototype assembly", "Hardware-in-the-loop testing", "PCB debugging", "Edge AI inference"],
@@ -26,8 +26,8 @@ const FACILITIES = [
     name: "Boardroom",
     area: "~400 sq ft",
     capacity: "12 seats",
-    image: "/images/facilities/boardroom.png",
-    imageAlt: "CoE-EA boardroom — walnut table, 12 seats, 4K display",
+    image: "/images/facilities/boardroom.jpg",
+    imageAlt: "CoE-EA boardroom — walnut table, ergonomic chairs, wall-mounted display",
     description:
       "Fully equipped for investor meetings, partner reviews, and formal presentations. 4K display, video conferencing, and whiteboard wall.",
     useCases: ["Investor pitches", "Partner meetings", "Board reviews", "Regulatory demos"],
@@ -38,8 +38,8 @@ const FACILITIES = [
     name: "Demo Suite",
     area: "~600 sq ft",
     capacity: "20 attendees",
-    image: "/images/facilities/demo-suite.png",
-    imageAlt: "CoE-EA demo suite — open-plan presentation space with audience seating",
+    image: "/images/facilities/demo-suite.jpg",
+    imageAlt: "CoE-EA demo suite — training room with tablet chairs and presentation screen",
     description:
       "Open-plan space designed for product demonstrations, proof-of-concept presentations, and small group workshops.",
     useCases: ["Customer demos", "POC presentations", "Workshops", "Industrial visits"],
@@ -50,8 +50,8 @@ const FACILITIES = [
     name: "Co-working Bay",
     area: "~800 sq ft",
     capacity: "16 hot desks",
-    image: "/images/facilities/coworking.png",
-    imageAlt: "CoE-EA co-working bay — 16 hot desks with monitors",
+    image: "/images/facilities/coworking.jpg",
+    imageAlt: "CoE-EA co-working bay — open-plan desks with dividers",
     description:
       "Day-use desks with high-speed fibre, lockers, and access to the Centre's common areas. Available to cohort members and invited guests.",
     useCases: ["Sprint weeks", "Remote team offsites", "Partner team embeds"],
