@@ -34,6 +34,54 @@ const OVERSIGHT = [
   },
 ];
 
+const PMG = [
+  {
+    name: "Dr. Sanjay Tyagi",
+    designation: "Director, STPI Bengaluru",
+    role: "Co-Chair",
+  },
+  {
+    name: "Smt. Ranjitha M. P., KAS",
+    designation: "General Manager – IT, KITS, Government of Karnataka",
+    role: "Member",
+  },
+  {
+    name: "Dr. Prasanna Kumar S.C.",
+    designation: "Professor, R.V. College of Engineering",
+    role: "Member",
+  },
+  {
+    name: "Sh. Ashok Chandak",
+    designation: "President, India Electronics & Semiconductor Association (IESA)",
+    role: "Member",
+  },
+  {
+    name: "Sh. Mahadesha V",
+    designation: "Scientist 'F', STPI Bengaluru",
+    role: "Member",
+  },
+  {
+    name: "SVP & Managing Director",
+    designation: "Hewlett Packard Enterprise, India",
+    role: "Chief Mentor",
+  },
+  {
+    name: "Sh. Pradeep Gupta",
+    designation: "Chairman, Cyber Media Group",
+    role: "Member",
+  },
+  {
+    name: "Sh. Rakesh Dubey",
+    designation: "Director, STPI HQ",
+    role: "Member",
+  },
+  {
+    name: "Dr. Nishant Peddagopu",
+    designation: "Chief Operating Officer, CoE-EA",
+    role: "Member Secretary",
+  },
+];
+
 const REPORTING = [
   {
     cadence: "Quarterly",
@@ -97,6 +145,49 @@ export default function GovernancePage() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* PMG */}
+        <section aria-labelledby="s-pmg" className="mt-16 border-t border-brand-navy/15 pt-12">
+          <h2 id="s-pmg" className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+            Project Management Group
+          </h2>
+          <p className="mb-8 font-body text-[15px] leading-[1.7] text-brand-navy/60">
+            The PMG is the governing body responsible for programme oversight,
+            cohort selection, milestone review, and strategic direction of CoE-EA.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse" aria-label="PMG members">
+              <thead>
+                <tr className="border-b border-brand-navy/15">
+                  {["Name", "Designation", "Role"].map((h) => (
+                    <th
+                      key={h}
+                      scope="col"
+                      className="pb-3 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50"
+                    >
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-brand-navy/10">
+                {PMG.map((m) => (
+                  <tr key={m.name + m.role}>
+                    <td className="py-4 pr-6 font-body text-[14px] font-medium text-brand-navy">
+                      {m.name}
+                    </td>
+                    <td className="py-4 pr-6 font-body text-[14px] leading-[1.5] text-brand-navy/70">
+                      {m.designation}
+                    </td>
+                    <td className="py-4 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-cerulean">
+                      {m.role}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </section>
 

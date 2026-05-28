@@ -13,7 +13,7 @@ const SELECTION_STEPS = [
     step: "01",
     title: "Application review",
     detail:
-      "All submissions are reviewed by the Centre's selection committee — comprising the Centre Director, a STPI Programme Officer, and two domain-expert advisors. Rolling intake; you'll hear within two weeks of submission.",
+      "All submissions are reviewed by the Project Management Group (PMG) — a nine-member body of STPI, KITS, HPE, industry, and academic representatives. Rolling intake; you'll hear within two weeks of submission.",
   },
   {
     step: "02",
@@ -152,12 +152,12 @@ export function ContactSpread() {
             How selection works.
           </h3>
           <p className="font-body text-[15px] leading-[1.6] text-brand-navy/60 tablet:col-span-6 tablet:col-start-7">
-            Selection is conducted by a committee of four: the Centre Director,
-            a STPI Programme Officer, an industry domain expert, and an
-            independent academic advisor. Criteria are weighted across technical
-            feasibility, market opportunity, team capability, and alignment with
-            the Centre&rsquo;s ten priority domains. Incubation term is 12
-            months, renewable for 6 months on demonstrated progress.
+            Selection is conducted by the Project Management Group (PMG) — a
+            nine-member body comprising STPI, KITS, HPE, industry, and academic
+            representatives. Criteria are weighted across technical feasibility,
+            market opportunity, team capability, and alignment with the
+            Centre&rsquo;s ten priority domains. Incubation term is 12 months,
+            renewable for 6 months on demonstrated progress.
           </p>
         </div>
 
