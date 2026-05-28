@@ -13,6 +13,8 @@
  * TODO(W5): replace hard-coded data with GROQ against `startup` schema.
  */
 
+import Image from "next/image";
+
 type Startup = {
   slug: string;
   name: string;
@@ -85,8 +87,16 @@ export function PortfolioSpread() {
     <section
       id="portfolio"
       aria-label="Portfolio — spread 003"
-      className="border-b border-ice/20 bg-bg-midnight px-6 py-20 tablet:px-12 tablet:py-24 desktop:px-20 desktop:py-32"
+      className="relative border-b border-ice/20 bg-bg-midnight px-6 py-20 tablet:px-12 tablet:py-24 desktop:px-20 desktop:py-32"
     >
+      <Image
+        src="/images/circuit-texture.png"
+        alt=""
+        fill
+        className="pointer-events-none select-none object-cover opacity-[0.08]"
+        sizes="100vw"
+        aria-hidden
+      />
       {/* Spread header */}
       <header className="mb-12 flex items-baseline justify-between tablet:mb-16">
         <span className="font-mono text-[13px] tracking-[0.18em] text-brand-cerulean">

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -13,6 +14,16 @@ export default function ThankYouPage() {
       aria-label="Application received"
     >
       <div className="w-full max-w-[520px]">
+        <div className="relative mx-auto mb-8 h-[160px] w-[160px]">
+          <Image
+            src="/images/thank-you-cube.png"
+            alt=""
+            fill
+            className="object-contain"
+            sizes="160px"
+            priority
+          />
+        </div>
         <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
           Done
         </span>

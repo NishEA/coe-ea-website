@@ -10,6 +10,7 @@
  * The "branching diagram" lives as a structural typographic grid — the Banyan
  * metaphor stays INVISIBLE (no roots / branches / fruits language; §16 Pass 4).
  */
+import Image from "next/image";
 import Link from "next/link";
 
 type Pillar = {
@@ -97,8 +98,16 @@ export function WorkSpread() {
     <section
       id="work"
       aria-label="Work — spread 002"
-      className="border-b border-brand-navy/15 bg-bg-paper px-6 py-20 tablet:px-12 tablet:py-24 desktop:px-20 desktop:py-32"
+      className="relative border-b border-brand-navy/15 bg-bg-paper px-6 py-20 tablet:px-12 tablet:py-24 desktop:px-20 desktop:py-32"
     >
+      <Image
+        src="/images/circuit-texture.png"
+        alt=""
+        fill
+        className="pointer-events-none select-none object-cover opacity-[0.06]"
+        sizes="100vw"
+        aria-hidden
+      />
       <header className="mb-12 flex items-baseline justify-between tablet:mb-16">
         <span className="font-mono text-[13px] tracking-[0.18em] text-brand-cerulean">
           002 / 005

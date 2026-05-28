@@ -1,5 +1,6 @@
 "use server";
 import { redirect } from "next/navigation";
+import { after } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { resend } from "@/lib/resend/client";
 import {
@@ -112,19 +113,22 @@ export async function submitApplication(
     };
   }
 
-  // Fire-and-forget — a send failure must never block the applicant redirect.
+  // after() runs the callback after the response is sent, preventing the
+  // serverless function from being frozen before the Resend fetch completes.
   const refId = (row?.id as string | undefined)?.slice(0, 8).toUpperCase() ?? "UNKNOWN";
-  resend.emails
-    .send({
-      from: FROM_EMAIL,
-      to: NOTIFY_EMAIL,
-      subject: `New CoE-EA application — ref ${refId}`,
-      html: newApplicationEmailHtml({ refId, submittedAt, domain, stage, adminUrl: ADMIN_URL }),
-      text: newApplicationEmailText({ refId, submittedAt, domain, stage, adminUrl: ADMIN_URL }),
-    })
-    .catch(() => {
-      // Non-fatal. Application is saved to DB regardless.
-    });
+  after(async () => {
+    await resend.emails
+      .send({
+        from: FROM_EMAIL,
+        to: NOTIFY_EMAIL,
+        subject: `New CoE-EA application — ref ${refId}`,
+        html: newApplicationEmailHtml({ refId, submittedAt, domain, stage, adminUrl: ADMIN_URL }),
+        text: newApplicationEmailText({ refId, submittedAt, domain, stage, adminUrl: ADMIN_URL }),
+      })
+      .catch(() => {
+        // Non-fatal. Application is saved to DB regardless.
+      });
+  });
 
   redirect("/apply/thank-you");
 }

@@ -34,15 +34,27 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isLoginPage = pathname === "/admin/login";
 
-  // Unauthenticated on any admin route → login
-  if (!isLoginPage && !user) {
+  // Restrict to explicitly allowed admin emails. If ADMIN_EMAIL is unset
+  // the check passes through (backwards-compatible), but any configured
+  // value is enforced — prevents a non-admin Supabase account from reaching
+  // the service-role–backed dashboard.
+  const allowedEmails = (process.env.ADMIN_EMAIL ?? "")
+    .split(",")
+    .map((e) => e.trim())
+    .filter(Boolean);
+  const isAuthorized =
+    !!user &&
+    (allowedEmails.length === 0 || allowedEmails.includes(user.email ?? ""));
+
+  // Unauthenticated or unauthorised on any admin route → login
+  if (!isLoginPage && !isAuthorized) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin/login";
     return NextResponse.redirect(url);
   }
 
   // Already authenticated on login page → dashboard
-  if (isLoginPage && user) {
+  if (isLoginPage && isAuthorized) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin/applications";
     return NextResponse.redirect(url);
