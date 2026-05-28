@@ -50,7 +50,7 @@ export function Cover() {
     >
       <Masthead />
 
-      <main className="flex flex-1 flex-col justify-end px-6 pb-40 pt-12 tablet:px-12 tablet:pb-44 desktop:px-20">
+      <main className="flex flex-1 flex-col justify-end px-6 pb-28 pt-12 tablet:px-12 tablet:pb-32 desktop:px-20">
         <motion.div
           {...animate(0)}
           className="mb-9 flex items-baseline justify-between font-mono text-[11px] uppercase tracking-[0.22em]"
@@ -64,7 +64,7 @@ export function Cover() {
 
         <motion.h1
           {...animate(0.06)}
-          className="mb-9 max-w-[18ch] font-display text-[clamp(56px,7.2vw,124px)] font-normal leading-[0.95] tracking-[-0.028em] text-brand-navy"
+          className="mb-7 max-w-[22ch] font-display text-[clamp(48px,6vw,104px)] font-normal leading-[0.95] tracking-[-0.028em] text-brand-navy"
         >
           {/* TODO(W9): copy pass */}
           <span className="block">Build the systems</span>
