@@ -106,6 +106,32 @@ export function Cover() {
             </Link>
           </motion.div>
         </div>
+
+        {/* Proof strip — visible without scrolling; full breakdown in 005 */}
+        <motion.div
+          {...animate(0.34)}
+          className="mt-10 border-t border-brand-navy/10 pt-7"
+        >
+          <ul className="flex flex-wrap items-center gap-x-8 gap-y-3 tablet:gap-x-12">
+            {(
+              [
+                { value: "52", label: "Startups incubated" },
+                { value: "336", label: "Jobs created" },
+                { value: "₹230 Cr", label: "Portfolio valuation" },
+                { value: "23", label: "Patents filed" },
+              ] as const
+            ).map((s) => (
+              <li key={s.label} className="flex items-baseline gap-2 whitespace-nowrap">
+                <span className="font-display text-[20px] leading-none tracking-[-0.01em] text-brand-navy tablet:text-[22px]">
+                  {s.value}
+                </span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-brand-navy/40">
+                  {s.label}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
       </main>
 
       {!reduceMotion && (

@@ -15,10 +15,55 @@
  */
 
 import Link from "next/link";
+import { sanityClient } from "@/lib/sanity/client";
 
-// Metrics numbers live in StatsBar (above the Diorama) — not repeated here.
-// The impactMetrics Sanity singleton remains available for future use
-// (e.g. a dedicated /impact page or the Governance page).
+// ── Types ────────────────────────────────────────────────────────────────────
+
+type Metric = {
+  label: string;
+  value: string;
+  source: string;
+  asOfDate: string;
+};
+
+type ImpactMetricsDoc = {
+  metrics: Metric[];
+};
+
+// ── Fallback data (April 2026 KPI review) ────────────────────────────────────
+
+const FALLBACK_METRICS: Metric[] = [
+  { label: "Jobs created",       value: "336",       source: "KPI review Apr 2026 — cumulative employment across portfolio", asOfDate: "2026-04-30" },
+  { label: "Startups selected",  value: "52",        source: "KPI review Apr 2026",                                          asOfDate: "2026-04-30" },
+  { label: "Revenue generated",  value: "₹10.35 Cr", source: "KPI review Apr 2026",                                          asOfDate: "2026-04-30" },
+  { label: "Patents filed",      value: "23",        source: "KPI review Apr 2026",                                          asOfDate: "2026-04-30" },
+  { label: "Portfolio valuation",value: "₹230 Cr",   source: "KPI review Apr 2026 — combined founder-reported, FY 2025–26",  asOfDate: "2026-04-30" },
+  { label: "Products & services",value: "70",        source: "KPI review Apr 2026",                                          asOfDate: "2026-04-30" },
+  { label: "Prototypes developed",value: "127",      source: "KPI review Apr 2026",                                          asOfDate: "2026-04-30" },
+  { label: "Partners",           value: "13",        source: "KPI review Apr 2026",                                          asOfDate: "2026-04-30" },
+  { label: "Fund raised",        value: "₹5.60 Cr",  source: "KPI review Apr 2026",                                          asOfDate: "2026-04-30" },
+];
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+const MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+function formatAsOf(isoDate: string): string {
+  const [year, month] = isoDate.split("-");
+  return `${MONTH_NAMES[parseInt(month, 10) - 1]} ${year}`;
+}
+
+function parseMetricValue(value: string): { symbol: string; number: string; denom: string } {
+  let remaining = value.trim();
+  let symbol = "";
+  let denom = "";
+  if (remaining.startsWith("₹")) { symbol = "₹"; remaining = remaining.slice(1).trim(); }
+  const m = remaining.match(/^([\d.,]+)\s+(Cr)$/);
+  if (m) { remaining = m[1]; denom = m[2]; }
+  return { symbol, number: remaining, denom };
+}
+
+const GROQ = `*[_type == "impactMetrics"][0]{ metrics[]{ label, value, source, asOfDate } }`;
 
 // ── Partners ─────────────────────────────────────────────────────────────────
 // Typography-only until high-res SVG logos are collected from brand teams.
@@ -74,7 +119,29 @@ const PROGRAMME_TERMS = [
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
-export function ImpactSpread() {
+export async function ImpactSpread() {
+  let data: ImpactMetricsDoc | null = null;
+  try {
+    data = await sanityClient.fetch<ImpactMetricsDoc | null>(GROQ);
+  } catch {
+    // Sanity unavailable at build time — fallback values render instead
+  }
+
+  const allMetrics: Metric[] =
+    data?.metrics && data.metrics.length > 0 ? data.metrics : FALLBACK_METRICS;
+
+  const dominant = allMetrics.slice(0, 5);
+  const secondary = allMetrics.slice(5);
+
+  const latestAsOf = dominant.reduce<string>(
+    (acc, m) => (!acc || m.asOfDate > acc ? m.asOfDate : acc),
+    ""
+  );
+
+  const hasValuation = dominant.some((m) =>
+    m.label.toLowerCase().includes("valuation")
+  );
+
   return (
     <>
       {/* ── Upper: dark impact zone ─────────────────────────────────────── */}
@@ -96,13 +163,77 @@ export function ImpactSpread() {
         {/* Section headline */}
         <div className="mb-16 grid grid-cols-1 gap-6 tablet:mb-20 tablet:grid-cols-12">
           <h2 className="font-display text-[36px] leading-[1.1] tracking-[-0.01em] text-bg-paper tablet:col-span-7 tablet:text-[52px]">
-            The institutions behind the Centre.
+            Measured impact.
           </h2>
           <p className="font-body text-[17px] leading-[1.6] text-bg-paper/70 tablet:col-span-4 tablet:col-start-9 tablet:text-right">
-            Government, corporate, and academic partners committed to
-            India&rsquo;s Industry&nbsp;4.0 ecosystem.
+            Five years of incubation, in numbers.
           </p>
         </div>
+
+        {/* Dominant counters */}
+        <div
+          aria-label="Impact metrics"
+          className="mb-4 grid grid-cols-2 gap-x-8 gap-y-12 border-t border-ice/20 pt-12 desktop:grid-cols-5 desktop:pt-16"
+        >
+          {dominant.map((m, i) => {
+            const parsed = parseMetricValue(m.value);
+            const isValuation = m.label.toLowerCase().includes("valuation");
+            return (
+              <div key={m.label} className={i === 4 ? "col-span-2 desktop:col-span-1" : ""}>
+                <div
+                  className="flex items-baseline gap-[0.05em] tabular-nums"
+                  aria-label={`${m.value} — ${m.label}`}
+                >
+                  {parsed.symbol && (
+                    <span className="font-mono text-[26px] leading-none text-ice/70 tablet:text-[30px] desktop:text-[34px]">
+                      {parsed.symbol}
+                    </span>
+                  )}
+                  <span className="font-display text-[44px] leading-none tracking-[-0.02em] text-bg-paper tablet:text-[52px] desktop:text-[60px]">
+                    {parsed.number}
+                  </span>
+                  {parsed.denom && (
+                    <span className="font-mono text-[18px] leading-none text-ice/50 tablet:text-[20px] desktop:text-[22px]">
+                      {parsed.denom}
+                    </span>
+                  )}
+                  {isValuation && (
+                    <sup className="font-mono text-[11px] text-brand-cerulean">*</sup>
+                  )}
+                </div>
+                <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-ice/60">
+                  {m.label}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Valuation footnote */}
+        {hasValuation && (
+          <p className="mb-10 font-mono text-[11px] leading-[1.6] text-ice/35">
+            * Portfolio valuation — combined founder-reported figures,
+            FY&nbsp;2025–26. Not independently audited.
+          </p>
+        )}
+
+        {/* Secondary metrics band */}
+        {secondary.length > 0 && (
+          <div className="mb-16 border-t border-ice/10 pt-8">
+            <ul className="flex flex-wrap gap-x-10 gap-y-4">
+              {secondary.map((m) => (
+                <li key={m.label} className="flex items-baseline gap-2">
+                  <span className="font-mono text-[15px] font-medium text-bg-paper/75">
+                    {m.value}
+                  </span>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ice/40">
+                    {m.label}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {/* Partner band */}
         <div className="border-t border-ice/20 pt-12 tablet:pt-16">
@@ -157,9 +288,11 @@ export function ImpactSpread() {
             </div>
           </div>
 
-          <p className="mt-10 font-mono text-[11px] text-ice/30">
-            Partner relationships as of April 2026
-          </p>
+          {latestAsOf && (
+            <p className="mt-10 font-mono text-[11px] text-ice/30">
+              Figures as of {formatAsOf(latestAsOf)}
+            </p>
+          )}
         </div>
       </section>
 
