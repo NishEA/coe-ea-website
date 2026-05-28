@@ -53,13 +53,34 @@ function formatAsOf(isoDate: string): string {
   return `${MONTH_NAMES[parseInt(month, 10) - 1]} ${year}`;
 }
 
+// Robustly splits a metric value string into three display parts.
+// Handles all common Sanity input variations so wrapping never occurs:
+//   "₹10.35 Cr"  → { symbol:"₹", number:"10.35", denom:"Cr" }
+//   "₹10.35 Cr." → same (trailing period stripped)
+//   "10.35 Cr."  → { symbol:"",  number:"10.35", denom:"Cr" } (₹ missing → omit silently)
+//   "₹230 Cr"    → { symbol:"₹", number:"230",   denom:"Cr" }
+//   "336"        → { symbol:"",  number:"336",    denom:""   }
+// Rule for Sanity editors: enter values as "₹10.35 Cr" (₹ prefix, no trailing period).
 function parseMetricValue(value: string): { symbol: string; number: string; denom: string } {
   let remaining = value.trim();
   let symbol = "";
   let denom = "";
-  if (remaining.startsWith("₹")) { symbol = "₹"; remaining = remaining.slice(1).trim(); }
-  const m = remaining.match(/^([\d.,]+)\s+(Cr)$/);
-  if (m) { remaining = m[1]; denom = m[2]; }
+
+  // Extract any leading currency symbol (₹, $, £, €)
+  const currencyPrefix = remaining.match(/^([₹$£€])\s*/);
+  if (currencyPrefix) {
+    symbol = currencyPrefix[1];
+    remaining = remaining.slice(currencyPrefix[0].length);
+  }
+
+  // Extract trailing denomination — accepts "Cr", "Cr.", "L", "L.", "Lakhs", "%"
+  // Trailing period is normalised away so it never appears in the rendered denom span.
+  const denomMatch = remaining.match(/^([\d.,]+)\s+(Cr\.?|L\.?|Lakhs?|%)$/i);
+  if (denomMatch) {
+    remaining = denomMatch[1];
+    denom = denomMatch[2].replace(/\.$/, "").toUpperCase().replace("LAKHS", "L");
+  }
+
   return { symbol, number: remaining, denom };
 }
 
@@ -221,16 +242,22 @@ export async function ImpactSpread() {
         {secondary.length > 0 && (
           <div className="mb-16 border-t border-ice/10 pt-8">
             <ul className="flex flex-wrap gap-x-10 gap-y-4">
-              {secondary.map((m) => (
-                <li key={m.label} className="flex items-baseline gap-2">
-                  <span className="font-mono text-[15px] font-medium text-bg-paper/75">
-                    {m.value}
-                  </span>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ice/40">
-                    {m.label}
-                  </span>
-                </li>
-              ))}
+              {secondary.map((m) => {
+                // Normalise secondary values the same way so "5.60 Cr." renders
+                // as "5.60 Cr" (trailing period stripped, symbol kept inline).
+                const sp = parseMetricValue(m.value);
+                const displayValue = `${sp.symbol}${sp.number}${sp.denom ? ` ${sp.denom}` : ""}`;
+                return (
+                  <li key={m.label} className="flex items-baseline gap-2">
+                    <span className="font-mono text-[15px] font-medium text-bg-paper/75">
+                      {displayValue}
+                    </span>
+                    <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ice/40">
+                      {m.label}
+                    </span>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         )}
