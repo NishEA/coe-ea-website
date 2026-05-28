@@ -154,6 +154,31 @@ function formatAsOf(isoDate: string): string {
   return `${MONTH_NAMES[parseInt(month, 10) - 1]} ${year}`;
 }
 
+// Splits "₹10.35 Cr" → { symbol: "₹", number: "10.35", denom: "Cr" }
+// Keeps plain values like "336" unchanged: { symbol: "", number: "336", denom: "" }
+function parseMetricValue(value: string): {
+  symbol: string;
+  number: string;
+  denom: string;
+} {
+  let remaining = value.trim();
+  let symbol = "";
+  let denom = "";
+
+  if (remaining.startsWith("₹")) {
+    symbol = "₹";
+    remaining = remaining.slice(1).trim();
+  }
+
+  const denomMatch = remaining.match(/^([\d.,]+)\s+(Cr)$/);
+  if (denomMatch) {
+    remaining = denomMatch[1];
+    denom = denomMatch[2];
+  }
+
+  return { symbol, number: remaining, denom };
+}
+
 const GROQ = `*[_type == "impactMetrics"][0]{ metrics[]{ label, value, source, asOfDate } }`;
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -214,27 +239,44 @@ export async function ImpactSpread() {
           aria-label="Impact metrics"
           className="mb-4 grid grid-cols-2 gap-x-8 gap-y-12 border-t border-ice/20 pt-12 desktop:grid-cols-5 desktop:pt-16"
         >
-          {dominant.map((m, i) => (
-            <div
-              key={m.label}
-              className={i === 4 ? "col-span-2 desktop:col-span-1" : ""}
-            >
-              <p
-                className="font-display text-[44px] leading-none tracking-[-0.02em] text-bg-paper tablet:text-[52px] desktop:text-[60px]"
-                aria-label={`${m.value} — ${m.label}`}
+          {dominant.map((m, i) => {
+            const parsed = parseMetricValue(m.value);
+            const isValuation = m.label.toLowerCase().includes("valuation");
+            return (
+              <div
+                key={m.label}
+                className={i === 4 ? "col-span-2 desktop:col-span-1" : ""}
               >
-                {m.value}
-                {m.label.toLowerCase().includes("valuation") && (
-                  <sup className="ml-0.5 font-mono text-[13px] text-brand-cerulean">
-                    *
-                  </sup>
-                )}
-              </p>
-              <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-ice/60">
-                {m.label}
-              </p>
-            </div>
-          ))}
+                {/* Three-part value: ₹ symbol · numeric body · Cr denomination */}
+                <div
+                  className="flex items-baseline gap-[0.05em] tabular-nums"
+                  aria-label={`${m.value} — ${m.label}`}
+                >
+                  {parsed.symbol && (
+                    <span className="font-mono text-[26px] leading-none text-ice/70 tablet:text-[30px] desktop:text-[34px]">
+                      {parsed.symbol}
+                    </span>
+                  )}
+                  <span className="font-display text-[44px] leading-none tracking-[-0.02em] text-bg-paper tablet:text-[52px] desktop:text-[60px]">
+                    {parsed.number}
+                  </span>
+                  {parsed.denom && (
+                    <span className="font-mono text-[18px] leading-none text-ice/50 tablet:text-[20px] desktop:text-[22px]">
+                      {parsed.denom}
+                    </span>
+                  )}
+                  {isValuation && (
+                    <sup className="font-mono text-[11px] text-brand-cerulean">
+                      *
+                    </sup>
+                  )}
+                </div>
+                <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-ice/60">
+                  {m.label}
+                </p>
+              </div>
+            );
+          })}
         </div>
 
         {/* Valuation footnote */}
