@@ -2,7 +2,7 @@ import { HeroSpread } from "@/components/spreads/Hero";
 import { WorkSpread } from "@/components/spreads/Work";
 import { PortfolioSpread } from "@/components/spreads/Portfolio";
 import { ApplySpread } from "@/components/spreads/Apply";
-import { ContactSpread } from "@/components/spreads/Contact";
+import { ImpactSpread } from "@/components/spreads/Impact";
 
 export default function HomePage() {
   return (
@@ -11,7 +11,7 @@ export default function HomePage() {
       <WorkSpread />
       <PortfolioSpread />
       <ApplySpread />
-      <ContactSpread />
+      <ImpactSpread />
     </>
   );
 }
