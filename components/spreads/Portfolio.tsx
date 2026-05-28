@@ -1,5 +1,5 @@
 /**
- * Spread 003 — Portfolio ledger. Design-doc §6 (six incubated startups)
+ * Spread 003 — Portfolio ledger. Design-doc §6 (six incubated startups per KITS Annexure)
  * + §16 Pass 1 (editorial ledger, not a card grid).
  *
  * One featured venture (large typographic block + portrait placeholder),

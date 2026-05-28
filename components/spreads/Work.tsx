@@ -1,9 +1,9 @@
 /**
- * Spread 002 — Work. Design-doc §6 (six domain pillars) + §16 Pass 3
+ * Spread 002 — Work. Design-doc §6 (ten domain pillars) + §16 Pass 3
  * (forward-looking, "where you'd fit"; startup mentions are names ONLY here —
  * the metric-bearing portfolio ledger is spread 003).
  *
- * Desktop: a typographic 2×3 grid. Tablet: 2-col. Mobile: native <details>
+ * Desktop: a typographic 2×5 grid. Tablet: 2-col. Mobile: native <details>
  * accordion (Section 16 Pass 6). Pillar data is hard-coded for W2; W5 swaps
  * this for a GROQ query against `pillar` (sanity/schemas/pillar.ts).
  *

@@ -29,15 +29,14 @@ const SELECTION_STEPS = [
   },
   {
     step: "04",
-    title: "Offer & onboarding",
+    title: "Equity signing & onboarding",
     detail:
-      "Selected startups receive a formal incubation offer letter within six weeks of submission. Onboarding follows within one month of offer acceptance.",
+      "Selected startups receive a formal incubation offer letter within six weeks of submission. Onboarding is completed only after the equity agreement is signed. The Centre takes an equity stake as the basis of the incubation engagement.",
   },
 ];
 
 const PROGRAMME_TERMS = [
-  "No equity — ever.",
-  "No revenue share.",
+  "Equity-based engagement — onboarding is completed only after the equity agreement is signed.",
   "IP developed during incubation is founder-owned.",
   "Programme reporting obligations apply (quarterly milestone updates to STPI).",
   "Grant disbursement is milestone-gated at 3-month intervals per GoI financial norms.",

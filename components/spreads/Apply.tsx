@@ -60,8 +60,9 @@ export function ApplySpread() {
           Apply to join the next cohort.
         </h2>
         <p className="font-body text-[17px] leading-[1.6] text-brand-navy/70 tablet:col-span-4 tablet:text-right">
-          Applications are reviewed on a rolling basis. Shortlisted founders are
-          contacted within two weeks.
+          Equity-based engagement. Onboarding completes only after the equity
+          agreement is signed. Applications reviewed on a rolling basis —
+          shortlisted founders contacted within two weeks.
         </p>
       </div>
 
