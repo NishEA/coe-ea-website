@@ -14,7 +14,7 @@ const EVENT_TYPES = [
     label: "Hackathon",
     tagline: "48-hour problem sprints.",
     description:
-      "Intensive build events focused on real industrial problems. Teams compete to ship working prototypes; winners get fast-tracked into the incubation pipeline.",
+      "Intensive build events focused on real industrial problems. Teams compete to ship working prototypes; standout teams are invited to apply to the Centre's next cohort.",
     who: "Open to engineers, designers, and domain experts. Teams of 2 – 5.",
   },
   {

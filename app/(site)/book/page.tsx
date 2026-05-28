@@ -192,6 +192,28 @@ export default function BookPage() {
             Include: facility name, preferred dates, number of attendees, and
             purpose. We respond within two working days.
           </p>
+          <div className="mt-8 grid grid-cols-1 gap-4 tablet:grid-cols-2">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50">
+                Location
+              </p>
+              <p className="mt-2 font-body text-[14px] leading-[1.6] text-brand-navy/70">
+                No. 4, 1st Floor, 31st Cross<br />
+                11th Main Road, 4th T Block<br />
+                Jayanagar, Bengaluru – 560 011<br />
+                Karnataka, India
+              </p>
+            </div>
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50">
+                Pricing
+              </p>
+              <p className="mt-2 font-body text-[14px] leading-[1.6] text-brand-navy/70">
+                Facility use is included for CoE-EA incubatees. Pricing for
+                external and partner bookings is available on request.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Access policy note */}

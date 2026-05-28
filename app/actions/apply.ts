@@ -65,8 +65,8 @@ export async function submitApplication(
   if (!VALID_STAGES.has(stage)) errors.stage = "Select your current stage.";
   if (!problemStatement || problemStatement.length < 30)
     errors.problem_statement = "Describe the problem in at least 30 characters.";
-  if (problemStatement.length > 280)
-    errors.problem_statement = "Problem statement must be 280 characters or fewer.";
+  if (problemStatement.length > 400)
+    errors.problem_statement = "Problem statement must be 400 characters or fewer.";
   if (!whyCoeEa || whyCoeEa.length < 30)
     errors.why_coe_ea = "Tell us why in at least 30 characters.";
   if (whyCoeEa.length > 500)

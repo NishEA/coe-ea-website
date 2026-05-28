@@ -50,6 +50,13 @@ const RAISED_OPTIONS = [
   { value: "yes_over_1cr", label: "Yes — over ₹1 Cr" },
 ];
 
+const TEAM_SIZE_OPTIONS = [
+  { value: "solo", label: "Solo founder" },
+  { value: "2", label: "2 co-founders" },
+  { value: "3", label: "3 co-founders" },
+  { value: "4+", label: "4 or more" },
+];
+
 const REFERRAL_OPTIONS = [
   { value: "linkedin", label: "LinkedIn" },
   { value: "partner_event", label: "Partner event" },
@@ -160,7 +167,7 @@ export function ApplyForm() {
         label="Problem statement"
         id="problem_statement"
         name="problem_statement"
-        maxLength={280}
+        maxLength={400}
         rows={4}
         required
         error={state.errors?.problem_statement}
@@ -185,13 +192,20 @@ export function ApplyForm() {
           defaultValue="no"
         />
         <SelectField
-          label="How did you hear about us? (optional)"
-          id="referral_source"
-          name="referral_source"
-          options={REFERRAL_OPTIONS}
+          label="Team size (optional)"
+          id="team_size"
+          name="team_size"
+          options={TEAM_SIZE_OPTIONS}
           placeholder="Select one"
         />
       </div>
+      <SelectField
+        label="How did you hear about us? (optional)"
+        id="referral_source"
+        name="referral_source"
+        options={REFERRAL_OPTIONS}
+        placeholder="Select one"
+      />
 
       {/* — DPDP Act 2023 consent (§7(a)) ———————————— */}
       <div className="space-y-2">
@@ -220,7 +234,7 @@ export function ApplyForm() {
               privacy notice
             </a>
             . I understand I may withdraw consent at any time by writing to
-            blr.coeea@stpi.in.
+            nishant.peddagopu@stpi.in.
           </span>
         </label>
         {state.errors?.privacy_consent && (

@@ -113,7 +113,7 @@ export function PortfolioSpread() {
           Who&rsquo;s already here.
         </h2>
         <p className="font-body text-[17px] leading-[1.6] text-bg-paper/70 tablet:col-span-5 tablet:text-right">
-          Six ventures supported by the Centre from prototype to pilot.
+          Six ventures the Centre has accelerated from prototype toward market.
         </p>
       </div>
 

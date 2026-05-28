@@ -27,6 +27,12 @@ const OVERSIGHT = [
       "Co-sponsors the Centre's presence in Bengaluru and supports Karnataka-based startup intake.",
   },
   {
+    role: "Karnataka co-sponsor",
+    body: "Karnataka Innovation & Technology Society (KITS)",
+    detail:
+      "An autonomous society under the Dept of IT, BT & ST, Govt of Karnataka. Administers the state grant-in-aid and provides Karnataka-level programme oversight.",
+  },
+  {
     role: "Technology partner",
     body: "Hewlett Packard Enterprise (HPE)",
     detail:

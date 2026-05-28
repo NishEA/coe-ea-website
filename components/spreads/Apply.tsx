@@ -109,6 +109,10 @@ export function ApplySpread() {
             <span aria-hidden className="font-mono text-brand-cerulean">&#x2192;</span>
             Not currently incubated at another STPI Centre of Excellence.
           </li>
+          <li className="flex items-baseline gap-3 font-body text-[15px] leading-[1.6] text-brand-navy/70">
+            <span aria-hidden className="font-mono text-brand-cerulean">&#x2192;</span>
+            Outstation startups welcome — must be willing to operate from the Bengaluru Centre during the incubation term.
+          </li>
         </ul>
         <p className="mt-4 font-body text-[13px] text-brand-navy/50">
           Full eligibility criteria and selection process are described in the{" "}
