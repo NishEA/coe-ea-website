@@ -20,7 +20,7 @@ const RETENTION_ROWS = [
   },
   {
     data: "Pitch deck (PDF)",
-    period: "Erased on rejection, or within 30 days of a decision",
+    period: "Within 30 days of any decision (rejection or acceptance)",
     then: "Permanent deletion from storage and backups",
   },
   {
@@ -127,6 +127,7 @@ export default function PrivacyPage() {
             <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50">
               Grievance Officer
             </p>
+            {/* TODO: GO-LIVE BLOCKER — replace with named Grievance Officer before publishing */}
             <p className="mt-2 font-body text-[15px] text-brand-navy">
               <span className="font-mono text-[13px] text-brand-cerulean">
                 [TBD &mdash; name and designation]
@@ -501,6 +502,7 @@ export default function PrivacyPage() {
               <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50">
                 Grievance Officer
               </p>
+              {/* TODO: GO-LIVE BLOCKER — replace with named Grievance Officer before publishing */}
               <p className="mt-2 font-body text-[15px] text-brand-navy">
                 <span className="font-mono text-[13px] text-brand-cerulean">
                   [TBD &mdash; name, designation]
