@@ -1,5 +1,6 @@
 'use client'
 
+import { Suspense } from 'react'
 import { FieldProvider } from '@/components/field/FieldProvider'
 import { FieldCanvas }   from '@/components/field/FieldCanvas'
 import { TheDiagnosis }   from '@/components/spreads/TheDiagnosis'
@@ -16,7 +17,9 @@ export default function HomePage() {
       <TheResolve />
       <TheLedger />
       <TheInstrument />
-      <TheApplication />
+      <Suspense>
+        <TheApplication />
+      </Suspense>
     </FieldProvider>
   )
 }

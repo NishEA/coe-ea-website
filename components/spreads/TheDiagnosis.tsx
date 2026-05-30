@@ -47,7 +47,7 @@ export function TheDiagnosis() {
 
       <a
         href="#apply"
-        className={`font-mono text-[13px] uppercase tracking-[0.14em] transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean ${
+        className={`cursor-pointer font-mono text-[13px] uppercase tracking-[0.14em] transition-all duration-500 outline-none ring-brand-cerulean ring-offset-2 focus:ring-2 focus-visible:ring-2 ${
           ctaActive ? 'text-electric-spark underline underline-offset-4' : 'text-brand-ice/50'
         }`}
         aria-label="Show us where it breaks — apply to CoE-EA"

@@ -3,23 +3,24 @@
 import { useEffect, useRef } from 'react'
 import { useField } from './FieldProvider'
 import { DOMAINS, DOMAIN_11 } from '@/data/domain-provenance'
-import { createParticles, tickDrift, computeRevealLuminance } from './particles'
+import {
+  createParticles, tickDrift, computeRevealLuminance,
+  getDeviceTier, TIER_COUNTS, probeFrameTier,
+} from './particles'
 import { createCounter, tickCounter, formatCounterValue } from './counters'
 import { SCHEMATICS } from './schematics'
 import type { Particle } from './particles'
 import type { DomainCounter } from './counters'
+import type { DeviceTier } from './particles'
 
-const PARTICLE_COUNT = 900
 const REVEAL_RADIUS = 220
+const PROBE_INTERVAL = 60 // frames between tier probes
 
 export function FieldCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const {
-    pointer, resolvedDomains, resolveDomain,
-    setActiveDomain, prefersReducedMotion,
-  } = useField()
+  const { pointer, resolvedDomains, setActiveDomain, prefersReducedMotion, setCanvasReady } = useField()
 
-  // Expose refs for RAF reads (stale-closure-safe)
+  // Refs for stale-closure-safe RAF reads
   const pointerRef = useRef(pointer)
   const resolvedRef = useRef(resolvedDomains)
   useEffect(() => { pointerRef.current = pointer }, [pointer])
@@ -27,14 +28,23 @@ export function FieldCanvas() {
 
   useEffect(() => {
     const canvas = canvasRef.current
-    if (!canvas) return
+    if (!canvas) {
+      setCanvasReady(false)
+      return
+    }
     const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    if (!ctx) {
+      setCanvasReady(false)
+      return
+    }
+
+    setCanvasReady(true)
 
     let W = 0, H = 0
+    let tier: DeviceTier = getDeviceTier()
     let particles: Particle[] = []
     const counters: Record<string, DomainCounter> = {}
-    let t = 0, lastTime = 0, frame = 0
+    let t = 0, lastTime = 0, frame = 0, frameCount = 0
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
@@ -42,25 +52,38 @@ export function FieldCanvas() {
       canvas.width = W * dpr; canvas.height = H * dpr
       canvas.style.width = W + 'px'; canvas.style.height = H + 'px'
       ctx.scale(dpr, dpr)
-      particles = createParticles(PARTICLE_COUNT, W, H)
+      particles = createParticles(TIER_COUNTS[tier], W, H)
     }
 
     resize()
     window.addEventListener('resize', resize)
     for (const d of DOMAINS) counters[d.id] = createCounter(d)
 
+    // Reduced-motion: draw once statically, no RAF loop
+    if (prefersReducedMotion) {
+      drawReducedMotion(ctx, W, H)
+      return () => window.removeEventListener('resize', resize)
+    }
+
     const draw = (now: number) => {
-      frame = requestAnimationFrame(draw)
       const dt = Math.min((now - lastTime) / 1000, 0.05)
-      lastTime = now; t += dt
+      const frameMs = now - lastTime
+      lastTime = now; t += dt; frameCount++
+
+      // Adaptive tier probe every PROBE_INTERVAL frames
+      if (frameCount % PROBE_INTERVAL === 0) {
+        const newTier = probeFrameTier(frameMs, tier)
+        if (newTier !== tier) {
+          tier = newTier
+          particles = createParticles(TIER_COUNTS[tier], W, H)
+        }
+      }
+
+      // Schedule next frame AFTER all work (fixes reduced-motion RAF leak)
+      frame = requestAnimationFrame(draw)
 
       ctx.fillStyle = '#060b18'
       ctx.fillRect(0, 0, W, H)
-
-      if (prefersReducedMotion) {
-        drawReducedMotion(ctx, W, H)
-        return
-      }
 
       const ptr = pointerRef.current
       const resolved = resolvedRef.current
@@ -79,6 +102,7 @@ export function FieldCanvas() {
       }
 
       let foundActive = false
+      let foundId: string | null = null
       for (const d of DOMAINS) {
         const nx = d.fieldX * W, ny = d.fieldY * H
         const dx = ptr.x - nx, dy = ptr.y - ny
@@ -87,7 +111,7 @@ export function FieldCanvas() {
 
         if (inLens) {
           foundActive = true
-          setActiveDomain(d.id)
+          foundId = d.id
           const schema = SCHEMATICS[d.id]
           if (schema) {
             isResolved
@@ -110,7 +134,9 @@ export function FieldCanvas() {
           ctx.beginPath(); ctx.arc(nx, ny, 2, 0, Math.PI * 2); ctx.fill(); ctx.restore()
         }
       }
-      if (!foundActive) setActiveDomain(null)
+
+      // Guard: only call setActiveDomain when value changes (prevents 60fps state writes)
+      setActiveDomain(foundActive ? foundId : null)
 
       const nx11 = DOMAIN_11.fieldX * W, ny11 = DOMAIN_11.fieldY * H
       const dx11 = ptr.x - nx11, dy11 = ptr.y - ny11
@@ -122,18 +148,14 @@ export function FieldCanvas() {
       }
     }
 
-    if (!prefersReducedMotion) {
-      frame = requestAnimationFrame(draw)
-    } else {
-      draw(0)
-    }
+    frame = requestAnimationFrame(draw)
 
     return () => {
       cancelAnimationFrame(frame)
       window.removeEventListener('resize', resize)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [prefersReducedMotion, setActiveDomain])
+  }, [prefersReducedMotion, setActiveDomain, setCanvasReady])
 
   return (
     <canvas
@@ -168,6 +190,8 @@ function drawCounter(
 }
 
 function drawReducedMotion(ctx: CanvasRenderingContext2D, W: number, H: number) {
+  ctx.fillStyle = '#060b18'
+  ctx.fillRect(0, 0, W, H)
   for (const d of DOMAINS) {
     const nx = d.fieldX * W, ny = d.fieldY * H
     ctx.save()

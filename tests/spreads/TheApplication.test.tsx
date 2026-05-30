@@ -2,6 +2,10 @@ import { render, screen } from '@testing-library/react'
 import { TheApplication } from '@/components/spreads/TheApplication'
 import { FieldProvider } from '@/components/field/FieldProvider'
 
+vi.mock('next/navigation', () => ({
+  useSearchParams: () => new URLSearchParams(),
+}))
+
 vi.mock('@/components/forms/apply/ApplyForm', () => ({
   ApplyForm: () => <form aria-label="Apply form" />,
 }))

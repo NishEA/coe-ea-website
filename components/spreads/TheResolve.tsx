@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useRef } from 'react'
+import { track } from '@vercel/analytics'
 import { useField } from '@/components/field/FieldProvider'
 import { DOMAINS } from '@/data/domain-provenance'
 
@@ -9,9 +10,18 @@ const HOLD_MS = 700
 export function TheResolve() {
   const { resolvedDomains, resolveDomain } = useField()
   const timers = useRef<Record<string, ReturnType<typeof setTimeout>>>({})
+  const holdStart = useRef<Record<string, number>>({})
 
   const startHold = useCallback((id: string) => {
-    timers.current[id] = setTimeout(() => resolveDomain(id), HOLD_MS)
+    holdStart.current[id] = Date.now()
+    timers.current[id] = setTimeout(() => {
+      resolveDomain(id)
+      track('domain_resolved', {
+        domain: id,
+        timeToResolve: Date.now() - (holdStart.current[id] ?? 0),
+        mobile: window.matchMedia('(pointer: coarse)').matches,
+      })
+    }, HOLD_MS)
   }, [resolveDomain])
 
   const cancelHold = useCallback((id: string) => {

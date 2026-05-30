@@ -1,7 +1,16 @@
 'use client'
 
+import { useSearchParams } from 'next/navigation'
 import { useField } from '@/components/field/FieldProvider'
 import { ApplyForm } from '@/components/forms/apply/ApplyForm'
+
+// DB enum values from app/actions/apply.ts — duplicated here because that
+// file uses 'use server' and cannot be imported by client components.
+const VALID_PILLAR_VALUES = new Set([
+  'smart_manufacturing', 'smart_energy', 'smart_water', 'smart_farming',
+  'home_office_automation', 'connected_transportation', 'weather_monitoring',
+  'smart_hospital', 'smart_security', 'intelligent_asset_monitoring',
+])
 
 const BENEFITS = [
   { value: '₹10L',     label: 'Non-dilutive seed grant',    detail: 'No equity taken. Get moving.' },
@@ -13,6 +22,9 @@ const BENEFITS = [
 
 export function TheApplication() {
   const { resolvedDomains } = useField()
+  const searchParams = useSearchParams()
+  const rawPillar = searchParams.get('pillar') ?? ''
+  const defaultDomain = VALID_PILLAR_VALUES.has(rawPillar) ? rawPillar : ''
 
   return (
     <section
@@ -54,7 +66,7 @@ export function TheApplication() {
       </ul>
 
       <div className="max-w-2xl">
-        <ApplyForm />
+        <ApplyForm defaultDomain={defaultDomain} />
       </div>
     </section>
   )

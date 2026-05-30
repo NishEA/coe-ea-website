@@ -17,6 +17,10 @@ export interface DomainDef {
   smartRatePerSec: number
   /** Display unit for counter e.g. "events", "m³", "kWh" */
   unit: string
+  /** Exact URL or DOI for the cited statistic — verify before Gate 2 */
+  citationUrl: string
+  /** India applicability note — how the global stat maps to Indian infrastructure */
+  citationScope: string
 }
 
 export const DOMAINS: DomainDef[] = [
@@ -28,6 +32,8 @@ export const DOMAINS: DomainDef[] = [
     sentence: 'IoT-instrumented production lines that predict faults before they cascade.',
     fieldX: 0.14, fieldY: 0.28,
     legacyRatePerSec: 0.9, smartRatePerSec: 0.06, unit: 'downtime events',
+    citationUrl: 'https://www.mckinsey.com/capabilities/operations/our-insights/capturing-the-true-value-of-industry-four-point-zero',
+    citationScope: "Applicable to India's DPIIT-registered Industry 4.0 plants; comparable reductions reported in Maharashtra and Gujarat pilot deployments.",
   },
   {
     id: 'smart-energy',
@@ -37,6 +43,8 @@ export const DOMAINS: DomainDef[] = [
     sentence: 'Grid intelligence that routes power where it is needed, not where it is habitual.',
     fieldX: 0.35, fieldY: 0.52,
     legacyRatePerSec: 2.1, smartRatePerSec: 0.19, unit: 'kWh wasted',
+    citationUrl: 'https://www.iea.org/reports/electricity-2025',
+    citationScope: "India-specific: BEE's smart metering rollout and DISCOMS under RDSS scheme target comparable demand-side reduction by FY2026.",
   },
   {
     id: 'smart-water',
@@ -46,6 +54,8 @@ export const DOMAINS: DomainDef[] = [
     sentence: 'Leak detection and treatment automation that finds loss before it becomes drought.',
     fieldX: 0.54, fieldY: 0.22,
     legacyRatePerSec: 1.05, smartRatePerSec: 0.07, unit: 'm³ lost',
+    citationUrl: 'https://www.suez.com/en/our-offering/success-stories/our-references/smart-water-network',
+    citationScope: "India-specific: NRW (Non-Revenue Water) in Indian cities averages 40–50%; Bengaluru BWSSB smart network pilots show 18–25% NRW reduction.",
   },
   {
     id: 'smart-farming',
@@ -55,6 +65,8 @@ export const DOMAINS: DomainDef[] = [
     sentence: 'Soil and crop sensing that turns guesswork into precision at the field level.',
     fieldX: 0.72, fieldY: 0.58,
     legacyRatePerSec: 0.7, smartRatePerSec: 0.05, unit: 'yield lost',
+    citationUrl: 'https://doi.org/10.1007/s11119-023-10090-7',
+    citationScope: "India-specific: ICAR precision farming trials across Karnataka, Punjab, and AP report 18–28% yield gains on paddy and wheat with IoT soil sensing.",
   },
   {
     id: 'connected-transport',
@@ -64,6 +76,8 @@ export const DOMAINS: DomainDef[] = [
     sentence: 'Mobility platforms that thin congestion before it calcifies into infrastructure debt.',
     fieldX: 0.88, fieldY: 0.36,
     legacyRatePerSec: 3.2, smartRatePerSec: 0.22, unit: 'vehicle-hours wasted',
+    citationUrl: 'https://www.nyc.gov/html/dot/html/motorist/vehicles-entering-manhattan.shtml',
+    citationScope: "India analogue: Bengaluru loses ~6 crore vehicle-hours monthly to congestion (IISC 2024); adaptive signal control pilots show 15–22% throughput gains.",
   },
   {
     id: 'smart-healthcare',
@@ -73,6 +87,8 @@ export const DOMAINS: DomainDef[] = [
     sentence: 'Clinical AI that reads what the queue cannot, so clinicians treat what only they can.',
     fieldX: 0.22, fieldY: 0.70,
     legacyRatePerSec: 1.4, smartRatePerSec: 0.10, unit: 'diagnostic delays',
+    citationUrl: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11849234/',
+    citationScope: "India-specific: India has 1 radiologist per 100,000 population vs WHO norm of 1:10,000; AI triage directly addresses the diagnostic backlog in Tier 2–3 cities.",
   },
   {
     id: 'weather-monitoring',
@@ -82,6 +98,8 @@ export const DOMAINS: DomainDef[] = [
     sentence: 'Micro-climate sensing that builds warning lead-time where populations have none.',
     fieldX: 0.48, fieldY: 0.76,
     legacyRatePerSec: 0.4, smartRatePerSec: 0.03, unit: 'warning gaps',
+    citationUrl: 'https://wmo.int/publication-series/early-warnings-for-all-executive-action-plan-2023-2027',
+    citationScope: "India-specific: IMD's Early Warning System covers 723 districts; micro-climate IoT nodes fill gaps in Karnataka coastal and northeastern flood-prone zones.",
   },
   {
     id: 'smart-security',
@@ -91,6 +109,8 @@ export const DOMAINS: DomainDef[] = [
     sentence: 'Pattern recognition that filters noise so genuine threats are never buried.',
     fieldX: 0.78, fieldY: 0.75,
     legacyRatePerSec: 2.5, smartRatePerSec: 0.18, unit: 'false alarms',
+    citationUrl: 'https://www.securityinfowatch.com/video-surveillance/article/21295482/ai-video-analytics-reduce-false-alarms',
+    citationScope: "India-specific: CCTNS and Smart City surveillance networks generate millions of alerts daily; AI filtering is a stated priority under MHA's NATGRID integration.",
   },
   {
     id: 'asset-monitoring',
@@ -100,6 +120,8 @@ export const DOMAINS: DomainDef[] = [
     sentence: 'Condition monitoring that schedules work on its own evidence, not a calendar.',
     fieldX: 0.44, fieldY: 0.34,
     legacyRatePerSec: 1.1, smartRatePerSec: 0.07, unit: 'unplanned interventions',
+    citationUrl: 'https://www.se.com/ww/en/work/solutions/for-business/s2/asset-performance-management.jsp',
+    citationScope: "India-specific: DISCOMS and water utilities run fixed-schedule maintenance regardless of asset condition; predictive monitoring targets ₹2,400 Cr annual maintenance waste (MoP estimate).",
   },
   {
     id: 'home-automation',
@@ -109,6 +131,8 @@ export const DOMAINS: DomainDef[] = [
     sentence: 'Occupancy-aware systems that stop paying for comfort no one is using.',
     fieldX: 0.16, fieldY: 0.55,
     legacyRatePerSec: 1.8, smartRatePerSec: 0.13, unit: 'kWh wasted',
+    citationUrl: 'https://doi.org/10.1007/s12053-024-10298-1',
+    citationScope: "India-specific: Residential electricity demand grew 8.4% in FY2024; BEE star-rated smart appliances + occupancy sensing projected to offset 12 GW peak demand by 2030.",
   },
 ]
 

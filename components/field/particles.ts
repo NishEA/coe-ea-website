@@ -1,3 +1,27 @@
+export type DeviceTier = 'high' | 'mid' | 'low'
+
+export const TIER_COUNTS: Record<DeviceTier, number> = {
+  high: 900,
+  mid: 450,
+  low: 180,
+}
+
+/** Synchronous hardware check — call once at canvas init */
+export function getDeviceTier(): DeviceTier {
+  const mem = (navigator as any).deviceMemory as number | undefined ?? 4
+  const cores = navigator.hardwareConcurrency ?? 4
+  if (mem < 2 || cores < 2) return 'low'
+  if (mem < 4 || cores < 4) return 'mid'
+  return 'high'
+}
+
+/** Frame probe — call from RAF loop every N frames to downgrade if lagging */
+export function probeFrameTier(frameMs: number, current: DeviceTier): DeviceTier {
+  if (frameMs > 32 && current !== 'low') return 'low'   // <30fps sustained
+  if (frameMs > 20 && current === 'high') return 'mid'  // <50fps sustained
+  return current
+}
+
 export interface Particle {
   x: number; y: number
   homeX: number; homeY: number

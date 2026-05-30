@@ -50,6 +50,13 @@ const ctx2d = {
 HTMLCanvasElement.prototype.getContext = vi.fn(() => ctx2d) as unknown as typeof HTMLCanvasElement.prototype.getContext
 HTMLCanvasElement.prototype.toDataURL = vi.fn(() => '')
 
+// ResizeObserver mock — jsdom has no ResizeObserver; needs class form for `new`
+global.ResizeObserver = class {
+  observe = vi.fn()
+  unobserve = vi.fn()
+  disconnect = vi.fn()
+}
+
 // matchMedia mock — jsdom has no media query implementation
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
