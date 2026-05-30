@@ -5,7 +5,7 @@ export function TheLedger() {
     <section
       id="ledger"
       aria-label="The Ledger — CoE-EA outcomes and partnerships"
-      className="relative min-h-dvh w-full px-8 py-24 tablet:px-16"
+      className="relative min-h-dvh w-full bg-bg-midnight/90 px-8 py-24 backdrop-blur-sm tablet:px-16"
     >
       <header className="mb-12">
         <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
@@ -30,7 +30,7 @@ export function TheLedger() {
       </div>
 
       <div className="mt-20" aria-label="Partner organisations">
-        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-navy/40">
+        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/40">
           Partners
         </p>
         <ul className="flex flex-wrap gap-6" role="list">
