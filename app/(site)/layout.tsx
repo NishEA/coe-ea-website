@@ -27,7 +27,7 @@ export default function SiteLayout({
             {[
               { label: "Privacy", href: "/privacy" },
               { label: "Apply", href: "/apply" },
-              { label: "Contact", href: "/#contact" },
+              { label: "Contact", href: "/#instrument" },
               { label: "STPI", href: "https://www.stpi.in" },
               { label: "RTI", href: "https://www.stpi.in/rti.html" },
             ].map((l) => (
