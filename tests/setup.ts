@@ -49,3 +49,18 @@ const ctx2d = {
 
 HTMLCanvasElement.prototype.getContext = vi.fn(() => ctx2d) as unknown as typeof HTMLCanvasElement.prototype.getContext
 HTMLCanvasElement.prototype.toDataURL = vi.fn(() => '')
+
+// matchMedia mock — jsdom has no media query implementation
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: vi.fn().mockImplementation((query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
+})
