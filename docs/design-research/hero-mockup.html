@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CoE-EA Hero Mockup</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --midnight:    #0a0f1e;
+    --midnight-80: rgba(10,15,30,0.82);
+    --ice:         #b7cfe8;
+    --ice-30:      rgba(183,207,232,0.30);
+    --ice-15:      rgba(183,207,232,0.15);
+    --ice-08:      rgba(183,207,232,0.08);
+    --sage:        #7a9e8e;
+    --green-op:    #22c55e;
+    --white:       #ffffff;
+    --w50:         rgba(255,255,255,0.50);
+    --w30:         rgba(255,255,255,0.30);
+    --w15:         rgba(255,255,255,0.15);
+    --w08:         rgba(255,255,255,0.08);
+  }
+  html, body { width:100%; height:100%; background:var(--midnight); color:var(--white);
+    font-family:-apple-system,'Inter','Helvetica Neue',sans-serif; overflow:hidden; }
+
+  /* NAV */
+  nav { position:fixed; top:0; left:0; right:0; z-index:50; height:58px;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 40px; background:var(--midnight-80); backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--w08); }
+  .nav-logo { display:flex; align-items:center; gap:9px; font-size:12px; font-weight:600;
+    letter-spacing:0.14em; text-transform:uppercase; color:var(--ice); text-decoration:none; }
+  .op-dot { width:7px; height:7px; border-radius:50%; background:var(--green-op);
+    box-shadow:0 0 8px var(--green-op); flex-shrink:0;
+    animation:pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+  .nav-links { display:flex; gap:30px; list-style:none; font-size:10.5px;
+    letter-spacing:0.14em; text-transform:uppercase; color:var(--w50); }
+  .nav-links a { color:inherit; text-decoration:none; }
+  .nav-cta { padding:7px 18px; border:1px solid var(--ice-30); border-radius:100px;
+    font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--ice); text-decoration:none; }
+
+  /* CANVAS */
+  canvas { position:fixed; inset:0; z-index:0; }
+
+  /* STATUS BADGE */
+  .badge {
+    position:fixed; top:76px; left:50%; transform:translateX(-50%); z-index:20;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:5px 13px; border:1px solid rgba(34,197,94,0.28); border-radius:100px;
+    background:rgba(34,197,94,0.06); font-size:9.5px; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--green-op); white-space:nowrap;
+  }
+  .badge-dot { width:5px; height:5px; border-radius:50%; background:var(--green-op);
+    box-shadow:0 0 6px var(--green-op); }
+
+  /* CHAPTER SIDEBAR */
+  .chapters { position:fixed; left:22px; top:50%; transform:translateY(-50%);
+    z-index:30; display:flex; flex-direction:column; align-items:center; gap:0; }
+  .ch { display:flex; flex-direction:column; align-items:center; gap:4px; padding:6px 0; }
+  .ch-dot { width:5px; height:5px; border-radius:50%;
+    background:var(--w15); border:1px solid var(--w30); transition:all .3s; }
+  .ch-dot.active { background:var(--ice); border-color:var(--ice); box-shadow:0 0 8px var(--ice-30); }
+  .ch-line { width:1px; height:18px; background:var(--w08); }
+  .ch-num { font-size:7.5px; letter-spacing:0.1em; color:var(--w30);
+    writing-mode:vertical-lr; transform:rotate(180deg); font-variant-numeric:tabular-nums; }
+  .ch-num.active { color:var(--ice); }
+
+  /* HERO SPLIT */
+  .hero-grid {
+    position:relative; z-index:10; height:100vh; display:flex;
+    align-items:center; padding:0 56px; gap:0; pointer-events:none;
+  }
+  .col { flex:0 0 300px; pointer-events:auto; }
+  .col-right { margin-left:auto; text-align:right; }
+  .spacer { flex:1; }
+
+  .h1 { font-size:clamp(1.8rem,2.8vw,2.8rem); font-weight:700; line-height:1.18;
+    color:var(--white); letter-spacing:-0.025em; }
+  .h2 { font-size:clamp(1.8rem,2.8vw,2.8rem); font-weight:300; line-height:1.18;
+    color:var(--w50); letter-spacing:-0.025em; margin-top:6px; }
+  .sub { margin-top:22px; font-size:11.5px; line-height:1.75; color:var(--w30);
+    letter-spacing:0.01em; max-width:270px; }
+  .col-right .sub { margin-left:auto; }
+
+  /* DOMAIN NODES */
+  .node { position:fixed; z-index:20; display:flex; flex-direction:column;
+    align-items:center; gap:5px; cursor:crosshair; }
+  .node-ring { width:30px; height:30px; border-radius:50%;
+    border:1px solid var(--ice-30); display:flex; align-items:center; justify-content:center;
+    transition:all .35s; position:relative; }
+  .node-ring::after { content:''; width:7px; height:7px; border-radius:50%;
+    background:var(--ice-15); transition:all .35s; }
+  .node-label { font-size:8.5px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--w30); white-space:nowrap; text-align:center; transition:color .3s; }
+  .node-meta { display:none; font-size:7.5px; letter-spacing:0.09em;
+    color:#2EE6FF; opacity:.75; white-space:nowrap; text-align:center; }
+
+  /* resolved state */
+  .node.resolved .node-ring {
+    border-color:#2EE6FF; box-shadow:0 0 18px rgba(46,230,255,.22); }
+  .node.resolved .node-ring::after {
+    background:#2EE6FF; box-shadow:0 0 10px #2EE6FF; }
+  .node.resolved .node-label { color:var(--ice); }
+  .node.resolved .node-meta { display:block; }
+
+  /* hold progress ring (SVG overlay) */
+  .hold-ring { position:absolute; top:-5px; left:-5px; width:40px; height:40px;
+    transform:rotate(-90deg); pointer-events:none; opacity:0; transition:opacity .2s; }
+  .node.holding .hold-ring { opacity:1; }
+  .hold-ring circle { fill:none; stroke:#2EE6FF; stroke-width:1.5;
+    stroke-dasharray:101; stroke-dashoffset:101; stroke-linecap:round;
+    transition:stroke-dashoffset linear; }
+
+  /* HINTS */
+  .hint { position:fixed; bottom:100px; left:50%; transform:translateX(-50%);
+    z-index:20; display:flex; flex-direction:column; align-items:center; gap:7px;
+    font-size:9.5px; letter-spacing:0.16em; text-transform:uppercase; color:var(--w30); }
+  .hint-line { width:1px; height:28px; background:linear-gradient(to bottom,var(--w15),transparent); }
+
+  .scroll-cue { position:fixed; bottom:32px; left:50%; transform:translateX(-50%);
+    z-index:20; font-size:9px; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--w30); display:flex; flex-direction:column; align-items:center; gap:5px; }
+  .arr { width:18px; height:18px; border:1px solid var(--w15); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    animation:bob 1.8s ease-in-out infinite; }
+  @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+
+  .ver { position:fixed; bottom:14px; right:18px; font-size:8.5px; letter-spacing:0.1em;
+    color:var(--w15); z-index:30; font-family:monospace; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <rect width="20" height="20" rx="4" fill="rgba(183,207,232,0.10)"/>
+      <path d="M4 10h12M10 4v12" stroke="#b7cfe8" stroke-width="1.4" stroke-linecap="round"/>
+      <circle cx="10" cy="10" r="2.5" stroke="#b7cfe8" stroke-width="1"/>
+    </svg>
+    CoE–EA
+    <div class="op-dot"></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Diagnosis</a></li>
+    <li><a href="#">Resolve</a></li>
+    <li><a href="#">Ledger</a></li>
+    <li><a href="#">Instrument</a></li>
+  </ul>
+  <a class="nav-cta" href="#">Apply Now</a>
+</nav>
+
+<canvas id="c"></canvas>
+
+<div class="badge">
+  <div class="badge-dot"></div>
+  Centre Active &nbsp;·&nbsp; Instruments Deployed &nbsp;·&nbsp; 52 Startups
+</div>
+
+<!-- Chapter sidebar -->
+<div class="chapters">
+  <div class="ch"><div class="ch-dot active"></div><div class="ch-num active">01</div></div>
+  <div class="ch-line"></div>
+  <div class="ch"><div class="ch-dot"></div><div class="ch-num">02</div></div>
+  <div class="ch-line"></div>
+  <div class="ch"><div class="ch-dot"></div><div class="ch-num">03</div></div>
+  <div class="ch-line"></div>
+  <div class="ch"><div class="ch-dot"></div><div class="ch-num">04</div></div>
+  <div class="ch-line"></div>
+  <div class="ch"><div class="ch-dot"></div><div class="ch-num">05</div></div>
+</div>
+
+<!-- Hero split -->
+<div class="hero-grid">
+  <div class="col">
+    <div class="h1">Indian industry<br>runs on instinct</div>
+    <div class="h2">where it could<br>run on signal.</div>
+    <div class="sub">IoT, AI/ML, and Edge intelligence — deployed across 10 domains of Indian industrial infrastructure.</div>
+  </div>
+  <div class="spacer"></div>
+  <div class="col col-right">
+    <div class="h1">CoE-EA is<br>the instrument</div>
+    <div class="h2">that turns signal<br>into efficiency.</div>
+    <div class="sub">Hold any domain node to resolve its diagnostic. 52 startups have already crossed the threshold.</div>
+  </div>
+</div>
+
+<!-- Domain nodes (positioned across the particle field center) -->
+<div class="node" id="n1" style="top:24%;left:32%">
+  <div class="node-ring">
+    <svg class="hold-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16"/></svg>
+  </div>
+  <div class="node-label">Smart Manufacturing</div>
+  <div class="node-meta">35% less downtime · McKinsey 2024</div>
+</div>
+<div class="node" id="n2" style="top:42%;left:28%">
+  <div class="node-ring"><svg class="hold-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16"/></svg></div>
+  <div class="node-label">Smart Energy</div>
+  <div class="node-meta">5–10% electricity reduction · IEA 2025</div>
+</div>
+<div class="node" id="n3" style="top:19%;left:45%">
+  <div class="node-ring"><svg class="hold-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16"/></svg></div>
+  <div class="node-label">Smart Water</div>
+  <div class="node-meta">33M m³ saved annually · SUEZ 2024</div>
+</div>
+<div class="node" id="n4" style="top:57%;left:37%">
+  <div class="node-ring"><svg class="hold-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16"/></svg></div>
+  <div class="node-label">Smart Farming</div>
+  <div class="node-meta">20–30% yield gain · Springer 2024</div>
+</div>
+<div class="node" id="n5" style="top:34%;left:50%">
+  <div class="node-ring"><svg class="hold-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16"/></svg></div>
+  <div class="node-label">Connected Transport</div>
+  <div class="node-meta">1M fewer vehicles/mo · NYC 2025</div>
+</div>
+<div class="node" id="n6" style="top:63%;left:50%">
+  <div class="node-ring"><svg class="hold-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16"/></svg></div>
+  <div class="node-label">Smart Healthcare</div>
+  <div class="node-meta">53% less radiologist load · PMC 2025</div>
+</div>
+<div class="node" id="n7" style="top:20%;left:60%">
+  <div class="node-ring"><svg class="hold-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16"/></svg></div>
+  <div class="node-label">Weather Monitoring</div>
+  <div class="node-meta">6× lower disaster mortality · WMO 2025</div>
+</div>
+<div class="node" id="n8" style="top:48%;left:63%">
+  <div class="node-ring"><svg class="hold-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16"/></svg></div>
+  <div class="node-label">Smart Security</div>
+  <div class="node-meta">57–90% fewer false alarms</div>
+</div>
+<div class="node" id="n9" style="top:30%;left:72%">
+  <div class="node-ring"><svg class="hold-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16"/></svg></div>
+  <div class="node-label">Asset Monitoring</div>
+  <div class="node-meta">40% fewer interventions · Schneider</div>
+</div>
+<div class="node" id="n10" style="top:60%;left:68%">
+  <div class="node-ring"><svg class="hold-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16"/></svg></div>
+  <div class="node-label">Home Automation</div>
+  <div class="node-meta">22–28% energy savings · Springer</div>
+</div>
+
+<div class="hint">
+  <div class="hint-line"></div>
+  Hold any node 700ms to resolve
+</div>
+
+<div class="scroll-cue">
+  <div class="arr">
+    <svg width="7" height="7" viewBox="0 0 7 7" fill="none">
+      <path d="M3.5 1v5M1 4l2.5 2.5L6 4" stroke="rgba(255,255,255,.4)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  Scroll to explore
+</div>
+
+<div class="ver">CoE-EA · The Instrument · v2 Hero Mockup</div>
+
+<script>
+// Particle field
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [], mouse = {x:-9999,y:-9999};
+
+class P {
+  constructor() {
+    this.reset();
+    this.y = Math.random()*H;
+  }
+  reset() {
+    this.x = Math.random()*W; this.y = -5;
+    this.vx=(Math.random()-.5)*.18; this.vy=Math.random()*.14+.04;
+    this.r=Math.random()*1.2+.3; this.baseLum=Math.random()*.3+.04; this.lum=this.baseLum;
+  }
+  tick() {
+    this.x+=this.vx; this.y+=this.vy;
+    if(this.y>H||this.x<0||this.x>W) this.reset();
+    const dx=this.x-mouse.x, dy=this.y-mouse.y, d=Math.sqrt(dx*dx+dy*dy);
+    this.lum = d<130 ? this.baseLum+(1-d/130)*.6 : this.baseLum;
+  }
+  draw() {
+    ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(183,207,232,${this.lum})`; ctx.fill();
+  }
+}
+
+function resize() {
+  W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight;
+}
+
+function connections() {
+  const t=85;
+  for(let i=0;i<particles.length;i++) for(let j=i+1;j<particles.length;j++) {
+    const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+    const d=Math.sqrt(dx*dx+dy*dy);
+    if(d<t){
+      ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y);
+      ctx.strokeStyle=`rgba(183,207,232,${(1-d/t)*.07})`; ctx.lineWidth=.35; ctx.stroke();
+    }
+  }
+}
+
+function loop() {
+  ctx.fillStyle='#0a0f1e'; ctx.fillRect(0,0,W,H);
+  connections();
+  particles.forEach(p=>{p.tick();p.draw();});
+  requestAnimationFrame(loop);
+}
+
+function init() {
+  resize();
+  particles=[];
+  const n=Math.min(320,Math.floor(W*H/5500));
+  for(let i=0;i<n;i++) particles.push(new P());
+  loop();
+}
+
+window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+window.addEventListener('resize',init);
+init();
+
+// Hold-to-resolve on nodes
+document.querySelectorAll('.node').forEach(node=>{
+  const circle = node.querySelector('circle');
+  const dur = 700;
+  let timer=null, start=null, raf=null;
+
+  function animate(ts) {
+    if(!start) start=ts;
+    const p = Math.min((ts-start)/dur, 1);
+    const offset = 101-(101*p);
+    circle.style.strokeDashoffset = offset;
+    circle.style.transition = 'none';
+    if(p<1) raf=requestAnimationFrame(animate);
+    else {
+      node.classList.remove('holding');
+      node.classList.add('resolved');
+    }
+  }
+
+  node.addEventListener('mouseenter',()=>{
+    if(node.classList.contains('resolved')) return;
+    node.classList.add('holding');
+    start=null;
+    raf=requestAnimationFrame(animate);
+  });
+  node.addEventListener('mouseleave',()=>{
+    cancelAnimationFrame(raf);
+    node.classList.remove('holding');
+    circle.style.strokeDashoffset=101;
+    start=null;
+  });
+});
+</script>
+</body>
+</html>

@@ -66,7 +66,7 @@ const REFERRAL_OPTIONS = [
   { value: "other", label: "Other" },
 ];
 
-export function ApplyForm() {
+export function ApplyForm({ defaultDomain = '' }: { defaultDomain?: string }) {
   const [state, formAction, pending] = useActionState(submitApplication, initialState);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -132,6 +132,7 @@ export function ApplyForm() {
           options={DOMAINS}
           placeholder="Select a domain"
           required
+          defaultValue={defaultDomain}
           error={state.errors?.domain}
         />
       </div>
