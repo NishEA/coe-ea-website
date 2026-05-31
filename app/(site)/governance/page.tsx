@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DarkHero } from "@/components/ui/DarkHero";
+import { HierarchyMorph } from "@/components/ui/morphs/HierarchyMorph";
 
 export const metadata: Metadata = {
   title: "Governance & Reports · CoE-EA",
@@ -168,15 +170,20 @@ const REPORTING = [
 
 export default function GovernancePage() {
   return (
-    <main className="bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
+    <>
+      <DarkHero
+        label="Tripartite structure · KITS · STPI · HPE"
+        title={
+          <>
+            How the instrument is <span className="text-amber">governed.</span>
+          </>
+        }
+        visual={<HierarchyMorph className="h-full w-auto max-w-[520px]" />}
+      />
+
+      <main className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[900px]">
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
-          Governance
-        </span>
-        <h1 className="mt-4 font-display text-[32px] leading-[1.1] tracking-[-0.01em] text-brand-navy tablet:text-[44px]">
-          How the Centre is run.
-        </h1>
-        <p className="mt-4 max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-navy/60">
+        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-navy/60">
           CoE-EA operates under a formal governance framework defined by KITS,
           STPI, and HPE. This page is for funding bodies, programme managers,
           and RTI / audit stakeholders.
@@ -396,6 +403,7 @@ export default function GovernancePage() {
           </Link>
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

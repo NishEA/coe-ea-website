@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import { DarkHero } from "@/components/ui/DarkHero";
+import { TimelineMorph } from "@/components/ui/morphs/TimelineMorph";
 
 export const metadata: Metadata = {
   title: "Events · CoE-EA",
@@ -45,15 +46,20 @@ const EVENT_TYPES = [
 
 export default function EventsPage() {
   return (
-    <main className="bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
+    <>
+      <DarkHero
+        label="Open to engineers · researchers · startup founders"
+        title={
+          <>
+            Where signal meets <span className="text-amber">founder.</span>
+          </>
+        }
+        visual={<TimelineMorph className="h-auto w-full max-w-[760px]" />}
+      />
+
+      <main className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[900px]">
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
-          Events
-        </span>
-        <h1 className="mt-4 font-display text-[32px] leading-[1.1] tracking-[-0.01em] text-brand-navy tablet:text-[44px]">
-          Where ideas meet industry.
-        </h1>
-        <p className="mt-4 max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-navy/60">
+        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-navy/60">
           CoE-EA runs hackathons, ideathons, workshops, and industrial visits
           throughout the year — connecting founders with domain problems and
           partner infrastructure.
@@ -90,19 +96,12 @@ export default function EventsPage() {
             Upcoming events
           </h2>
           <div className="overflow-hidden border border-brand-navy/10">
-            <div className="relative flex h-56 w-full items-center justify-center bg-bg-midnight">
-              <Image
-                src="/images/events-illustration.png"
-                alt="Abstract geometric illustration representing CoE-EA events"
-                fill
-                className="object-cover opacity-70"
-                sizes="100vw"
-              />
-              <div className="relative z-10 px-8 py-10 text-center">
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-bg-paper/50">
+            <div className="relative flex h-56 w-full items-center justify-center bg-bg-void px-8 py-10 text-center">
+              <div className="relative z-10">
+                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/50">
                   No events scheduled yet
                 </p>
-                <p className="mt-2 font-body text-[13px] text-bg-paper/40">
+                <p className="mt-2 font-body text-[13px] text-brand-ice/40">
                   Events for the current cohort cycle will appear here when announced.
                 </p>
               </div>
@@ -147,6 +146,7 @@ export default function EventsPage() {
           </Link>
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

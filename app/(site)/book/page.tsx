@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import { DarkHero } from "@/components/ui/DarkHero";
+import { FloorPlanMorph } from "@/components/ui/morphs/FloorPlanMorph";
 
 export const metadata: Metadata = {
   title: "Book a Facility · CoE-EA",
@@ -14,8 +15,6 @@ const FACILITIES = [
     name: "Prototype & Testing Lab",
     area: "~1,200 sq ft",
     capacity: "Up to 8 workstations",
-    image: "/images/facilities/lab-hero.jpg",
-    imageAlt: "CoE-EA prototype and testing lab — dual rows of equipped workbenches",
     description:
       "Equipped workbenches, oscilloscopes, soldering stations, and access to HPE compute nodes for hardware-software integration work.",
     useCases: ["Prototype assembly", "Hardware-in-the-loop testing", "PCB debugging", "Edge AI inference"],
@@ -26,8 +25,6 @@ const FACILITIES = [
     name: "Boardroom",
     area: "~400 sq ft",
     capacity: "12 seats",
-    image: "/images/facilities/boardroom.jpg",
-    imageAlt: "CoE-EA boardroom — walnut table, ergonomic chairs, wall-mounted display",
     description:
       "Fully equipped for investor meetings, partner reviews, and formal presentations. 4K display, video conferencing, and whiteboard wall.",
     useCases: ["Investor pitches", "Partner meetings", "Board reviews", "Regulatory demos"],
@@ -38,8 +35,6 @@ const FACILITIES = [
     name: "Demo Suite",
     area: "~600 sq ft",
     capacity: "20 attendees",
-    image: "/images/facilities/demo-suite.jpg",
-    imageAlt: "CoE-EA demo suite — training room with tablet chairs and presentation screen",
     description:
       "Open-plan space designed for product demonstrations, proof-of-concept presentations, and small group workshops.",
     useCases: ["Customer demos", "POC presentations", "Workshops", "Industrial visits"],
@@ -50,8 +45,6 @@ const FACILITIES = [
     name: "Co-working Bay",
     area: "~800 sq ft",
     capacity: "16 hot desks",
-    image: "/images/facilities/coworking.jpg",
-    imageAlt: "CoE-EA co-working bay — open-plan desks with dividers",
     description:
       "Day-use desks with high-speed fibre, lockers, and access to the Centre's common areas. Available to cohort members and invited guests.",
     useCases: ["Sprint weeks", "Remote team offsites", "Partner team embeds"],
@@ -79,15 +72,20 @@ const STEPS = [
 
 export default function BookPage() {
   return (
-    <main className="bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
+    <>
+      <DarkHero
+        label="Bengaluru · 12,000 sq ft · Industry 4.0 infrastructure"
+        title={
+          <>
+            The field, in <span className="text-amber">physical space.</span>
+          </>
+        }
+        visual={<FloorPlanMorph className="h-full w-auto max-w-[640px]" />}
+      />
+
+      <main className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[900px]">
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
-          Facilities
-        </span>
-        <h1 className="mt-4 font-display text-[32px] leading-[1.1] tracking-[-0.01em] text-brand-navy tablet:text-[44px]">
-          Book a facility.
-        </h1>
-        <p className="mt-4 max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-navy/60">
+        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-navy/60">
           CoE-EA&rsquo;s Bengaluru facility is available to incubatees, partners, and
           invited teams. Lab space, meeting infrastructure, and demo suites —
           all under one roof.
@@ -106,16 +104,7 @@ export default function BookPage() {
               >
                 <div className="grid grid-cols-1 gap-4 tablet:grid-cols-12 tablet:gap-8">
                   <div className="tablet:col-span-4">
-                    <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden">
-                      <Image
-                        src={f.image}
-                        alt={f.imageAlt}
-                        fill
-                        className="object-cover object-center"
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                      />
-                    </div>
-                    <p className="font-display text-[18px] text-brand-navy">
+                    <p className="font-display text-[18px] font-semibold text-brand-navy">
                       {f.name}
                     </p>
                     <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
@@ -238,6 +227,7 @@ export default function BookPage() {
           </Link>
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

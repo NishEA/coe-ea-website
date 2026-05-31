@@ -29,11 +29,7 @@ export default function PortfolioPage() {
           </>
         }
         subhead="52 STARTUPS · 10 DOMAINS · COHORT 1–3"
-        visual={
-          <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center opacity-80">
-            <PortfolioMorph className="h-[80%] w-auto max-w-[600px]" />
-          </div>
-        }
+        visual={<PortfolioMorph className="h-full w-auto max-w-[600px]" />}
       />
 
       {/* Dark card grid */}
