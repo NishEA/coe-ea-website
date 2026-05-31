@@ -1,13 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useField } from '@/components/field/FieldProvider'
-
-const COPY = [
-  'Your infrastructure is already talking.',
-  "Most systems can't hear it.",
-  'The data was always there. Legacy was blind to it.',
-]
 
 export function TheDiagnosis() {
   const { setPointer, resolvedDomains } = useField()
@@ -24,37 +18,59 @@ export function TheDiagnosis() {
     <section
       id="diagnosis"
       aria-label="The Diagnosis — interactive infrastructure diagnostic"
-      className="relative flex h-dvh w-full flex-col items-start justify-end p-8 tablet:p-16"
+      className="relative flex h-dvh w-full items-center"
     >
-      <h1 className="mb-2 font-display text-[11px] uppercase tracking-[0.22em] text-brand-cerulean">
-        Centre of Excellence on Efficiency Augmentation
-      </h1>
-
-      <div className="mb-8 max-w-xl space-y-3">
-        {COPY.map((line, i) => (
-          <p key={i} className="font-mono text-[13px] leading-relaxed tracking-[0.06em] text-brand-ice">
-            {line}
-          </p>
-        ))}
+      {/* Status badge — centered below fixed nav */}
+      <div className="absolute left-1/2 top-24 -translate-x-1/2 text-center">
+        <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-brand-ice/50">
+          <span className="text-operational">●</span>
+          {' '}CENTRE ACTIVE · INSTRUMENTS DEPLOYED · 52 STARTUPS
+        </p>
       </div>
 
-      <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/40">
-        Move your cursor across the field to diagnose the ten domains
-      </p>
+      {/* LEFT column — problem statement */}
+      <div className="absolute left-8 top-1/2 max-w-[30vw] -translate-y-1/2 space-y-2 tablet:left-16">
+        <p className="font-display text-3xl font-semibold leading-[1.1] tracking-tight text-brand-ice desktop:text-5xl">
+          Indian industry<br />runs on instinct
+        </p>
+        <p className="font-display text-3xl font-light leading-[1.1] tracking-tight text-brand-ice/50 desktop:text-5xl">
+          where it could<br />run on signal.
+        </p>
+      </div>
 
-      <a
-        href="#apply"
-        className={`cursor-pointer font-mono text-[13px] uppercase tracking-[0.14em] transition-all duration-500 outline-none ring-brand-cerulean ring-offset-2 focus:ring-2 focus-visible:ring-2 ${
-          ctaActive
-            ? 'text-brand-cerulean underline underline-offset-4'
-            : 'text-brand-ice/60 hover:text-brand-ice'
-        }`}
-        aria-label="Show us where it breaks — apply to CoE-EA"
+      {/* RIGHT column — solution statement */}
+      <div className="absolute right-8 top-1/2 max-w-[30vw] -translate-y-1/2 space-y-2 text-right tablet:right-16">
+        <p className="font-display text-3xl font-semibold leading-[1.1] tracking-tight text-brand-ice desktop:text-5xl">
+          CoE-EA is<br />the instrument
+        </p>
+        <p className="font-display text-3xl font-light leading-[1.1] tracking-tight text-brand-ice/50 desktop:text-5xl">
+          that turns signal<br />into efficiency.
+        </p>
+      </div>
+
+      {/* Bottom hint + CTA */}
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 text-center">
+        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/35">
+          Hold any node 700ms to resolve
+        </p>
+        <a
+          href="#apply"
+          className={`cursor-pointer font-mono text-[13px] uppercase tracking-[0.14em] transition-all duration-500 outline-none ring-brand-cerulean ring-offset-2 focus:ring-2 focus-visible:ring-2 ${
+            ctaActive
+              ? 'text-brand-cerulean underline underline-offset-4'
+              : 'text-brand-ice/60 hover:text-brand-ice'
+          }`}
+          aria-label="Show us where it breaks — apply to CoE-EA"
+        >
+          Show us where it breaks →
+        </a>
+      </div>
+
+      {/* Scroll hint */}
+      <p
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.12em] text-brand-ice/25"
+        aria-hidden="true"
       >
-        Show us where it breaks →
-      </a>
-
-      <p className="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.12em] text-brand-ice/25" aria-hidden="true">
         Scroll to explore ↓
       </p>
     </section>

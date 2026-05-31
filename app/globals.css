@@ -16,6 +16,8 @@
   --color-ice: #b7cfe8;
   --color-text-on-paper: #0a1b40;
   --color-text-on-midnight: #f7f4ed;
+  /* Operational green — status dot only (functional state encoding, not decorative) */
+  --color-operational: #22c55e;
 
   /* Breakpoints — DESIGN.md §5. Tailwind defaults reset so ONLY these exist. */
   --breakpoint-*: initial;

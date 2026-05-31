@@ -22,12 +22,17 @@ export default function SiteLayout({
       >
         <Link
           href="/"
-          className="font-display text-[1rem] leading-none text-brand-ice focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
+          className="flex items-center gap-2 font-display text-[1rem] leading-none text-brand-ice focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
         >
           CoE-EA
-          <span className="ml-2 font-mono text-[9px] uppercase tracking-[0.18em] text-brand-ice/50">
+          <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-brand-ice/50">
             An STPI Initiative
           </span>
+          <span
+            className="inline-block h-1.5 w-1.5 rounded-full bg-operational animate-pulse"
+            aria-label="Centre active"
+            title="Centre active"
+          />
         </Link>
         <nav
           aria-label="Primary"
