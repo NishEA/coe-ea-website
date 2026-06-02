@@ -216,6 +216,7 @@ export function ApplyForm({ defaultDomain = '' }: { defaultDomain?: string }) {
             name="privacy_consent"
             id="privacy_consent"
             value="true"
+            suppressHydrationWarning
             className="mt-0.5 h-4 w-4 shrink-0 rounded border-brand-navy/30 text-brand-navy focus-visible:ring-2 focus-visible:ring-brand-cerulean"
             aria-describedby="privacy_consent_desc"
           />

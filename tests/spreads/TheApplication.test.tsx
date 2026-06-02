@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import { TheApplication } from '@/components/spreads/TheApplication'
 import { FieldProvider } from '@/components/field/FieldProvider'
 
@@ -20,7 +20,8 @@ describe('TheApplication', () => {
 
   it('renders 5 benefit items', () => {
     render(<TheApplication />, { wrapper: W })
-    expect(screen.getAllByRole('listitem')).toHaveLength(5)
+    const benefitsList = screen.getByRole('list', { name: /what you get/i })
+    expect(within(benefitsList).getAllByRole('listitem')).toHaveLength(5)
   })
 
   it('renders ApplyForm', () => {
