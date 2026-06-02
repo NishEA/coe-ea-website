@@ -4,7 +4,7 @@ import { DarkHero } from '@/components/ui/DarkHero'
 import { PortfolioMorph } from '@/components/ui/morphs/PortfolioMorph'
 
 export const metadata: Metadata = {
-  title: 'Portfolio — CoE-EA',
+  title: 'Portfolio',
   description:
     'Startups incubated by the Centre of Excellence on Efficiency Augmentation.',
 }
