@@ -85,7 +85,7 @@ export default function BookPage() {
 
       <main className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[900px]">
-        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-navy/60">
+        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-ink/75">
           CoE-EA&rsquo;s Bengaluru facility is available to incubatees, partners, and
           invited teams. Lab space, meeting infrastructure, and demo suites —
           all under one roof.
@@ -108,10 +108,10 @@ export default function BookPage() {
                       {f.name}
                     </p>
                     <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-brand-navy/50">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink/60">
                         {f.area}
                       </span>
-                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-brand-navy/50">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink/60">
                         {f.capacity}
                       </span>
                     </div>
@@ -120,14 +120,14 @@ export default function BookPage() {
                     </p>
                   </div>
                   <div className="tablet:col-span-8">
-                    <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
+                    <p className="font-body text-[15px] leading-[1.7] text-ink/85">
                       {f.description}
                     </p>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {f.useCases.map((u) => (
                         <span
                           key={u}
-                          className="border border-brand-navy/15 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-brand-navy/50"
+                          className="border border-brand-navy/15 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-ink/60"
                         >
                           {u}
                         </span>
@@ -154,7 +154,7 @@ export default function BookPage() {
                 <p className="mt-2 font-display text-[16px] text-brand-navy">
                   {s.title}
                 </p>
-                <p className="mt-1 font-body text-[14px] leading-[1.6] text-brand-navy/60">
+                <p className="mt-1 font-body text-[14px] leading-[1.6] text-ink/75">
                   {s.body}
                 </p>
               </div>
@@ -167,7 +167,7 @@ export default function BookPage() {
           <h2 className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
             Make an enquiry
           </h2>
-          <p className="mb-6 max-w-[48ch] font-body text-[15px] leading-[1.7] text-brand-navy/60">
+          <p className="mb-6 max-w-[48ch] font-body text-[15px] leading-[1.7] text-ink/75">
             Online booking is coming soon. Until then, email the Centre directly
             with your requirement and preferred dates.
           </p>
@@ -177,16 +177,16 @@ export default function BookPage() {
           >
             Email blr.coeea@stpi.in →
           </a>
-          <p className="mt-4 font-body text-[13px] text-brand-navy/40">
+          <p className="mt-4 font-body text-[13px] text-ink/50">
             Include: facility name, preferred dates, number of attendees, and
             purpose. We respond within two working days.
           </p>
           <div className="mt-8 grid grid-cols-1 gap-4 tablet:grid-cols-2">
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50">
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60">
                 Location
               </p>
-              <p className="mt-2 font-body text-[14px] leading-[1.6] text-brand-navy/70">
+              <p className="mt-2 font-body text-[14px] leading-[1.6] text-ink/85">
                 No. 4, 1st Floor, 31st Cross<br />
                 11th Main Road, 4th T Block<br />
                 Jayanagar, Bengaluru – 560 011<br />
@@ -194,10 +194,10 @@ export default function BookPage() {
               </p>
             </div>
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50">
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60">
                 Pricing
               </p>
-              <p className="mt-2 font-body text-[14px] leading-[1.6] text-brand-navy/70">
+              <p className="mt-2 font-body text-[14px] leading-[1.6] text-ink/85">
                 Facility use is included for CoE-EA incubatees. Pricing for
                 external and partner bookings is available on request.
               </p>
@@ -207,10 +207,10 @@ export default function BookPage() {
 
         {/* Access policy note */}
         <div className="mt-12 border border-brand-navy/10 px-6 py-5">
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/40">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/50">
             Access policy
           </p>
-          <p className="mt-2 font-body text-[13px] leading-[1.6] text-brand-navy/50">
+          <p className="mt-2 font-body text-[13px] leading-[1.6] text-ink/60">
             Facilities are primarily reserved for CoE-EA incubatees. External
             bookings are considered for partner organisations and invited teams
             at the discretion of the Centre management. All visitors must sign

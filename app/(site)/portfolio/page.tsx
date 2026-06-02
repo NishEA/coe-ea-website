@@ -30,6 +30,7 @@ export default function PortfolioPage() {
         }
         subhead="52 STARTUPS · 10 DOMAINS · COHORT 1–3"
         visual={<PortfolioMorph className="h-full w-auto max-w-[600px]" />}
+        bridge={false}
       />
 
       {/* Dark card grid */}

@@ -183,7 +183,7 @@ export default function GovernancePage() {
 
       <main className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[900px]">
-        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-navy/60">
+        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-ink/75">
           CoE-EA operates under a formal governance framework defined by KITS,
           STPI, and HPE. This page is for funding bodies, programme managers,
           and RTI / audit stakeholders.
@@ -201,7 +201,7 @@ export default function GovernancePage() {
                 className="grid grid-cols-1 gap-2 border-b border-brand-navy/10 pb-6 tablet:grid-cols-12 tablet:gap-8"
               >
                 <div className="tablet:col-span-3">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60">
                     {o.role}
                   </p>
                 </div>
@@ -209,7 +209,7 @@ export default function GovernancePage() {
                   <p className="font-body text-[15px] font-medium text-brand-navy">
                     {o.body}
                   </p>
-                  <p className="mt-1 font-body text-[14px] leading-[1.6] text-brand-navy/60">
+                  <p className="mt-1 font-body text-[14px] leading-[1.6] text-ink/75">
                     {o.detail}
                   </p>
                 </div>
@@ -223,7 +223,7 @@ export default function GovernancePage() {
           <h2 id="s-gc" className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
             Governing Council
           </h2>
-          <p className="mb-8 font-body text-[15px] leading-[1.7] text-brand-navy/60">
+          <p className="mb-8 font-body text-[15px] leading-[1.7] text-ink/75">
             The Apex Body of CoE-EA. The Governing Council sets the strategic
             direction of the Centre, approves the annual programme plan, and
             reviews overall performance. It is chaired by the Director General,
@@ -237,7 +237,7 @@ export default function GovernancePage() {
                     <th
                       key={h}
                       scope="col"
-                      className="pb-3 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50"
+                      className="pb-3 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60"
                     >
                       {h}
                     </th>
@@ -250,13 +250,13 @@ export default function GovernancePage() {
                     <td className="py-4 pr-6 font-body text-[14px] font-medium text-brand-navy">
                       {m.name}
                     </td>
-                    <td className="py-4 pr-6 font-body text-[14px] leading-[1.5] text-brand-navy/70">
+                    <td className="py-4 pr-6 font-body text-[14px] leading-[1.5] text-ink/85">
                       {m.designation}
                     </td>
                     <td className="py-4 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-cerulean">
                       {m.role}
                       {m.note && (
-                        <span className="ml-2 normal-case tracking-normal text-brand-navy/40">
+                        <span className="ml-2 normal-case tracking-normal text-ink/50">
                           ({m.note})
                         </span>
                       )}
@@ -273,7 +273,7 @@ export default function GovernancePage() {
           <h2 id="s-pmg" className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
             Project Management Group
           </h2>
-          <p className="mb-8 font-body text-[15px] leading-[1.7] text-brand-navy/60">
+          <p className="mb-8 font-body text-[15px] leading-[1.7] text-ink/75">
             The PMG is the governing body responsible for programme oversight,
             cohort selection, milestone review, and strategic direction of CoE-EA.
           </p>
@@ -285,7 +285,7 @@ export default function GovernancePage() {
                     <th
                       key={h}
                       scope="col"
-                      className="pb-3 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50"
+                      className="pb-3 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60"
                     >
                       {h}
                     </th>
@@ -298,7 +298,7 @@ export default function GovernancePage() {
                     <td className="py-4 pr-6 font-body text-[14px] font-medium text-brand-navy">
                       {m.name}
                     </td>
-                    <td className="py-4 pr-6 font-body text-[14px] leading-[1.5] text-brand-navy/70">
+                    <td className="py-4 pr-6 font-body text-[14px] leading-[1.5] text-ink/85">
                       {m.designation}
                     </td>
                     <td className="py-4 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-cerulean">
@@ -324,7 +324,7 @@ export default function GovernancePage() {
                     <th
                       key={h}
                       scope="col"
-                      className="pb-3 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50"
+                      className="pb-3 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60"
                     >
                       {h}
                     </th>
@@ -340,7 +340,7 @@ export default function GovernancePage() {
                     <td className="py-4 pr-6 font-body text-[14px] text-brand-navy">
                       {r.audience}
                     </td>
-                    <td className="py-4 font-body text-[14px] leading-[1.6] text-brand-navy/60">
+                    <td className="py-4 font-body text-[14px] leading-[1.6] text-ink/75">
                       {r.content}
                     </td>
                   </tr>
@@ -356,10 +356,10 @@ export default function GovernancePage() {
             Published reports
           </h2>
           <div className="border border-brand-navy/10 px-8 py-14 text-center">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-navy/40">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/50">
               No reports published yet
             </p>
-            <p className="mt-2 font-body text-[13px] text-brand-navy/40">
+            <p className="mt-2 font-body text-[13px] text-ink/50">
               Annual and quarterly reports will appear here when released.
             </p>
           </div>
@@ -370,7 +370,7 @@ export default function GovernancePage() {
           <h2 id="s-rti" className="mb-4 font-display text-[24px] text-brand-navy tablet:text-[30px]">
             RTI &amp; grievance
           </h2>
-          <p className="mb-6 font-body text-[15px] leading-[1.7] text-brand-navy/70">
+          <p className="mb-6 font-body text-[15px] leading-[1.7] text-ink/85">
             RTI applications and grievances for CoE-EA matters are handled
             through STPI&rsquo;s established RTI machinery.
           </p>

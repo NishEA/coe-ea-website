@@ -97,11 +97,11 @@ export function OrbitCanvas({
         const x = ox + Math.cos(a) * nr
         const y = oy + Math.sin(a) * nr * 0.4
         const col = DCOLS[i % 3]
-        const g = ctx!.createRadialGradient(x, y, 0, x, y, 14)
+        const g = ctx!.createRadialGradient(x, y, 0, x, y, 16)
         g.addColorStop(0, col + '0.22)')
         g.addColorStop(1, col + '0)')
-        ctx!.fillStyle = g; ctx!.beginPath(); ctx!.arc(x, y, 14, 0, Math.PI * 2); ctx!.fill()
-        ctx!.fillStyle = col + '0.9)'; ctx!.beginPath(); ctx!.arc(x, y, 4, 0, Math.PI * 2); ctx!.fill()
+        ctx!.fillStyle = g; ctx!.beginPath(); ctx!.arc(x, y, 16, 0, Math.PI * 2); ctx!.fill()
+        ctx!.fillStyle = col + '0.9)'; ctx!.beginPath(); ctx!.arc(x, y, 5, 0, Math.PI * 2); ctx!.fill()
         if (showLabels) {
           ctx!.fillStyle = 'rgba(183,207,232,0.4)'
           ctx!.font = '7px "Space Mono", monospace'

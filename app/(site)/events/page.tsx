@@ -54,12 +54,13 @@ export default function EventsPage() {
             Where signal meets <span className="text-amber">founder.</span>
           </>
         }
-        visual={<TimelineMorph className="h-auto w-full max-w-[760px]" />}
+        align="left"
+        visual={<TimelineMorph className="h-auto w-auto max-w-[420px]" />}
       />
 
       <main className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[900px]">
-        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-navy/60">
+        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-ink/75">
           CoE-EA runs hackathons, ideathons, workshops, and industrial visits
           throughout the year — connecting founders with domain problems and
           partner infrastructure.
@@ -79,7 +80,7 @@ export default function EventsPage() {
                 <p className="mt-2 font-display text-[18px] text-brand-navy">
                   {e.tagline}
                 </p>
-                <p className="mt-2 font-body text-[14px] leading-[1.6] text-brand-navy/60">
+                <p className="mt-2 font-body text-[14px] leading-[1.6] text-ink/75">
                   {e.description}
                 </p>
                 <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.13em] text-brand-navy/40">
@@ -114,7 +115,7 @@ export default function EventsPage() {
           <h2 className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
             Stay informed
           </h2>
-          <p className="mb-6 max-w-[48ch] font-body text-[15px] leading-[1.7] text-brand-navy/60">
+          <p className="mb-6 max-w-[48ch] font-body text-[15px] leading-[1.7] text-ink/75">
             Events are announced through STPI&rsquo;s official channels. To express
             interest in participating or hosting an event at the Centre, reach
             out directly.

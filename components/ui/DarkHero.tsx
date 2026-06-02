@@ -14,6 +14,7 @@ export function DarkHero({
   children,
   visual,
   align = 'center',
+  bridge = true,
 }: {
   label: string
   title: ReactNode
@@ -21,6 +22,7 @@ export function DarkHero({
   children?: ReactNode
   visual?: ReactNode
   align?: 'center' | 'left'
+  bridge?: boolean
 }) {
   const centred = align === 'center'
   return (
@@ -34,11 +36,16 @@ export function DarkHero({
       <span aria-hidden className="corner-bracket bottom-3 left-3 border-b border-l" />
       <span aria-hidden className="corner-bracket bottom-3 right-3 border-b border-r" />
 
-      {/* Visual layer — absolute behind text */}
+      {/* Visual layer — right-anchored behind text, clearly decorative */}
       {visual && (
-        <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center opacity-70">
+        <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-end pr-16 opacity-30">
           {visual}
         </div>
+      )}
+
+      {/* Gradient bridge: dark void → bg-paper. Disable when next section is dark. */}
+      {bridge && (
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-28 bg-gradient-to-b from-transparent to-[#f7f4ed]" />
       )}
 
       <div
