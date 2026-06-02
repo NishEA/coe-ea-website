@@ -1,24 +1,34 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 /**
- * Book hero visual — Cube → Floor Plan morph.
+ * Book hero visual — Cube → Voronoi crystal growth.
  *
- * Three-stage animation: (0) tilted cube → (1) container rotates face-on
- * (600ms) → (2) faces spread into floor plan (1200ms). Staging ensures faces
- * never animate across a 3D perspective transform, eliminating visual teleport.
+ * Three-stage: (0) tilted cube → (1) container rotates face-on (600ms) →
+ * (2) cube faces fade, canvas grows a Voronoi diagram from 4 room seeds
+ * outward using nearest-neighbour expansion (1200ms+).
+ *
+ * The Voronoi is precomputed once (per-pixel nearest seed + distance), then
+ * revealed by an expanding radius — mimicking crystal nucleation from the
+ * four room centres: LAB · MEETING · H·BAY · DEMO.
  */
 
 const FACE = 52
 const TRANSLATE = 26
-const EASE = 'cubic-bezier(0.4, 0, 0.2, 1)'
-const T = `all 1.2s ${EASE}`
+const W = 160, H = 120
+const EZ = 'cubic-bezier(0.4,0,0.2,1)'
 
-type FaceStyle = React.CSSProperties
+const SEEDS = [
+  { x: 30,  y: 60,  label: 'LAB',     r: 0,   g: 164, b: 228 },
+  { x: 80,  y: 22,  label: 'MEETING', r: 34,  g: 197, b: 94  },
+  { x: 130, y: 60,  label: 'H·BAY',   r: 212, g: 168, b: 83  },
+  { x: 80,  y: 98,  label: 'DEMO',    r: 0,   g: 184, b: 210 },
+]
 
 export function FloorPlanMorph({ className = '' }: { className?: string }) {
   const [stage, setStage] = useState(0)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     const reduce =
@@ -30,94 +40,139 @@ export function FloorPlanMorph({ className = '' }: { className?: string }) {
     return () => { window.clearTimeout(t1); window.clearTimeout(t2) }
   }, [])
 
-  const morphed = stage >= 2
+  useEffect(() => {
+    if (stage < 2) return
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
 
-  const faceBase: FaceStyle = {
-    position: 'absolute',
-    border: '1px solid rgba(0, 164, 228, 0.4)',
-    background: 'rgba(0, 164, 228, 0.04)',
-    display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    transition: T,
-    fontFamily: '"Space Mono", monospace',
-    fontSize: '7px',
-    letterSpacing: '0.14em',
-    textTransform: 'uppercase',
-    color: 'rgba(183, 207, 232, 0.7)',
-    padding: '4px',
-    boxSizing: 'border-box',
-    width: FACE,
-    height: FACE,
-  }
+    // One-time precomputation: nearest seed + distance for every pixel.
+    const N = W * H
+    const owner = new Uint8Array(N)
+    const pdist = new Float32Array(N)
+    for (let y = 0; y < H; y++) {
+      for (let x = 0; x < W; x++) {
+        let minD = Infinity, minI = 0
+        SEEDS.forEach((s, i) => {
+          const d = Math.hypot(x - s.x, y - s.y)
+          if (d < minD) { minD = d; minI = i }
+        })
+        const idx = y * W + x
+        owner[idx] = minI
+        pdist[idx] = minD
+      }
+    }
 
-  // Top face — becomes the building footprint.
-  const top: FaceStyle = morphed
-    ? { ...faceBase, width: 160, height: 120, transform: `translate(-54px, -34px) translateZ(0px)`, background: 'rgba(0, 164, 228, 0.06)' }
-    : { ...faceBase, transform: `rotateX(90deg) translateZ(${TRANSLATE}px)`, transformOrigin: 'bottom center' }
-
-  // Four walls — collapse to 2px tall, expand in width.
-  const wall = (
-    label: string,
-    rest: FaceStyle,
-    morphRest: FaceStyle,
-    amber = false,
-  ): { style: FaceStyle; label: string } => ({
-    label,
-    style: morphed
-      ? {
-          ...faceBase,
-          ...morphRest,
-          height: 2,
-          background: amber ? 'rgba(212, 168, 83, 0.5)' : 'rgba(0, 164, 228, 0.5)',
-          borderColor: amber ? 'rgba(212, 168, 83, 0.6)' : 'rgba(0, 164, 228, 0.5)',
+    // Voronoi boundary: pixel whose neighbour belongs to a different seed.
+    const edge = new Uint8Array(N)
+    for (let y = 0; y < H; y++) {
+      for (let x = 0; x < W; x++) {
+        const i = y * W + x, si = owner[i]
+        if ((x > 0   && owner[i - 1] !== si) ||
+            (x < W-1 && owner[i + 1] !== si) ||
+            (y > 0   && owner[i - W] !== si) ||
+            (y < H-1 && owner[i + W] !== si)) {
+          edge[i] = 1
         }
-      : { ...faceBase, ...rest },
-  })
+      }
+    }
+    const maxDist = pdist.reduce((m, v) => (v > m ? v : m), 0)
 
-  const front = wall('LAB',
-    { transform: `translateZ(${TRANSLATE}px)`, transformOrigin: 'top center' },
-    { width: 160, transform: `translate(-54px, 24px) translateZ(0px)` },
-  )
-  const back = wall('MEETING',
-    { transform: `rotateY(180deg) translateZ(${TRANSLATE}px)`, transformOrigin: 'top center' },
-    { width: 160, transform: `translate(-54px, -56px) translateZ(0px)` },
-  )
-  const left = wall('DEMO',
-    { transform: `rotateY(-90deg) translateZ(${TRANSLATE}px)`, transformOrigin: 'right center' },
-    { width: 120, transform: `translate(-88px, -16px) rotate(90deg) translateZ(0px)` },
-  )
-  const right = wall('HARDWARE BAY',
-    { transform: `rotateY(90deg) translateZ(${TRANSLATE}px)`, transformOrigin: 'left center' },
-    { width: 120, transform: `translate(72px, -16px) rotate(90deg) translateZ(0px)` },
-    true,
-  )
+    const skipAnim =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    let radius = skipAnim ? maxDist + 1 : 0
+    let rafId: number
+
+    const drawFrame = () => {
+      const img = ctx.createImageData(W, H)
+      const px = img.data
+      for (let i = 0; i < N; i++) {
+        if (pdist[i] > radius) continue
+        const s = SEEDS[owner[i]]
+        const b = i << 2
+        px[b] = s.r; px[b + 1] = s.g; px[b + 2] = s.b
+        px[b + 3] = edge[i] ? 220 : 30
+      }
+      ctx.clearRect(0, 0, W, H)
+      ctx.putImageData(img, 0, 0)
+
+      // Seed nucleus dots
+      SEEDS.forEach(s => {
+        ctx.beginPath()
+        ctx.arc(s.x, s.y, 2.5, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(${s.r},${s.g},${s.b},0.95)`
+        ctx.fill()
+      })
+
+      // Labels once cells are sufficiently grown
+      if (radius > 40) {
+        ctx.font = '6px "Space Mono", monospace'
+        SEEDS.forEach(s => {
+          const offX = s.x < 75 ? -10 : s.x > 85 ? 10 : 0
+          const offY = s.y < 55 ? -10 : s.y > 65 ? 11 : 0
+          ctx.textAlign   = s.x < 75 ? 'right' : s.x > 85 ? 'left' : 'center'
+          ctx.textBaseline = 'middle'
+          ctx.fillStyle   = `rgba(${s.r},${s.g},${s.b},0.85)`
+          ctx.fillText(s.label, s.x + offX, s.y + offY)
+        })
+      }
+
+      radius += 2.5
+      if (radius <= maxDist + 5) rafId = requestAnimationFrame(drawFrame)
+    }
+
+    rafId = requestAnimationFrame(drawFrame)
+    return () => cancelAnimationFrame(rafId)
+  }, [stage])
+
+  const T = `all 1.2s ${EZ}`
+  const face = (transform: string): React.CSSProperties => ({
+    position: 'absolute',
+    width: FACE, height: FACE,
+    border: '1px solid rgba(0,164,228,0.4)',
+    background: 'rgba(0,164,228,0.04)',
+    transition: `opacity 0.3s ease-out, ${T}`,
+    transform,
+    opacity: stage >= 2 ? 0 : 1,
+  })
 
   return (
     <div
       className={className}
       aria-hidden="true"
       role="presentation"
-      style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
     >
-      <div
-        style={{
-          width: FACE,
-          height: FACE,
-          position: 'relative',
+      <div style={{ width: W, height: H, position: 'relative' }}>
+        {/* CSS cube — centered in canvas area, fades out at stage 2 */}
+        <div style={{
+          position: 'absolute',
+          left: (W - FACE) / 2, top: (H - FACE) / 2,
+          width: FACE, height: FACE,
           transformStyle: 'preserve-3d',
-          // Stage 1: rotate container face-on first so faces animate in flat 2D space.
           transition: 'transform 0.6s ease-out',
-          transform: stage >= 1
-            ? 'rotateX(0deg) rotateZ(0deg)'
-            : 'rotateX(-52deg) rotateZ(-12deg)',
-        }}
-      >
-        <div style={top} />
-        <div style={front.style}>{front.label}</div>
-        <div style={back.style}>{back.label}</div>
-        <div style={left.style}>{left.label}</div>
-        <div style={right.style}>{right.label}</div>
+          transform: stage >= 1 ? 'rotateX(0deg) rotateZ(0deg)' : 'rotateX(-52deg) rotateZ(-12deg)',
+        }}>
+          <div style={face(`rotateX(90deg) translateZ(${TRANSLATE}px)`)} />
+          <div style={face(`translateZ(${TRANSLATE}px)`)} />
+          <div style={face(`rotateY(180deg) translateZ(${TRANSLATE}px)`)} />
+          <div style={face(`rotateY(-90deg) translateZ(${TRANSLATE}px)`)} />
+          <div style={face(`rotateY(90deg) translateZ(${TRANSLATE}px)`)} />
+        </div>
+
+        {/* Voronoi canvas — covers full W×H, fades in at stage 2 */}
+        <canvas
+          ref={canvasRef}
+          width={W}
+          height={H}
+          style={{
+            position: 'absolute', top: 0, left: 0,
+            opacity: stage >= 2 ? 1 : 0,
+            transition: 'opacity 0.4s ease-out 0.2s',
+          }}
+        />
       </div>
     </div>
   )
