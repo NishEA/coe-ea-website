@@ -76,27 +76,9 @@ export function TheApplication() {
       <div className="desktop:grid desktop:grid-cols-[3fr_2fr] desktop:items-start desktop:gap-16">
         <ApplyForm defaultDomain={defaultDomain} />
 
-        {/* Eligibility sidebar — desktop only */}
+        {/* Process sidebar — desktop only */}
         <aside className="mt-16 hidden desktop:block desktop:sticky desktop:top-24">
           <h3 className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-cerulean">
-            Eligibility
-          </h3>
-          <ul className="space-y-4 border-t border-brand-navy/15 pt-6">
-            {[
-              'Incorporated or registrable entity founded in the last 5 years',
-              'Working on one of the Centre\'s ten Industry 4.0 domains',
-              'Majority Indian shareholding; lead founder must be Indian',
-              'Not currently incubated at another STPI Centre of Excellence',
-              'Karnataka registration preferred; outstation founders must operate from the Centre',
-            ].map(item => (
-              <li key={item} className="flex items-start gap-3">
-                <span aria-hidden className="mt-1 inline-block h-1.5 w-1.5 flex-shrink-0 bg-amber" />
-                <span className="font-body text-[14px] leading-[1.55] text-ink/75">{item}</span>
-              </li>
-            ))}
-          </ul>
-
-          <h3 className="mb-6 mt-10 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-cerulean">
             What happens next
           </h3>
           <ol className="space-y-5 border-t border-brand-navy/15 pt-6">

@@ -30,15 +30,14 @@ export function DarkHero({
       aria-label={typeof title === 'string' ? title : label}
       className="relative flex min-h-[45vh] w-full items-center overflow-hidden px-6 py-20 tablet:px-12"
     >
-      <div className="grid-bg" />
       <span aria-hidden className="corner-bracket left-3 top-3 border-l border-t" />
       <span aria-hidden className="corner-bracket right-3 top-3 border-r border-t" />
       <span aria-hidden className="corner-bracket bottom-3 left-3 border-b border-l" />
       <span aria-hidden className="corner-bracket bottom-3 right-3 border-b border-r" />
 
-      {/* Visual layer — right-anchored behind text, clearly decorative */}
+      {/* Visual layer — right-anchored, full opacity, behind text (z-0 vs copy z-10) */}
       {visual && (
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-0 flex w-[45%] items-center justify-center opacity-30">
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-0 flex w-[45%] items-center justify-center">
           <div className="h-[320px] w-[320px]">
             {visual}
           </div>
