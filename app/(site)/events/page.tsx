@@ -4,7 +4,7 @@ import { DarkHero } from "@/components/ui/DarkHero";
 import { TimelineMorph } from "@/components/ui/morphs/TimelineMorph";
 
 export const metadata: Metadata = {
-  title: "Events · CoE-EA",
+  title: "Events",
   description:
     "Hackathons, ideathons, workshops, and industrial visits organised by the Centre of Excellence on Efficiency Augmentation.",
 };
@@ -96,16 +96,14 @@ export default function EventsPage() {
           <h2 className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
             Upcoming events
           </h2>
-          <div className="overflow-hidden border border-brand-navy/10">
-            <div className="relative flex h-56 w-full items-center justify-center bg-bg-void px-8 py-10 text-center">
-              <div className="relative z-10">
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/50">
-                  No events scheduled yet
-                </p>
-                <p className="mt-2 font-body text-[13px] text-brand-ice/40">
-                  Events for the current cohort cycle will appear here when announced.
-                </p>
-              </div>
+          <div className="flex h-56 w-full items-center justify-center border border-dashed border-brand-navy/20 bg-bg-paper px-8 py-10 text-center">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/40">
+                No events scheduled yet
+              </p>
+              <p className="mt-2 font-body text-[13px] leading-[1.55] text-ink/35">
+                Events for the current cohort cycle will appear here when announced.
+              </p>
             </div>
           </div>
         </div>

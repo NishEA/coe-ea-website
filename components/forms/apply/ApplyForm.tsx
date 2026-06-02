@@ -235,7 +235,7 @@ export function ApplyForm({ defaultDomain = '' }: { defaultDomain?: string }) {
               privacy notice
             </a>
             . I understand I may withdraw consent at any time by writing to
-            nishant.peddagopu@stpi.in.
+            blr.coeea@stpi.in.
           </span>
         </label>
         {state.errors?.privacy_consent && (
@@ -245,7 +245,7 @@ export function ApplyForm({ defaultDomain = '' }: { defaultDomain?: string }) {
         )}
       </div>
 
-      <SubmitButton pending={pending}>Submit application</SubmitButton>
+      <SubmitButton pending={pending}>Apply to the cohort →</SubmitButton>
     </form>
   );
 }

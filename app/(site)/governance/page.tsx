@@ -4,7 +4,7 @@ import { DarkHero } from "@/components/ui/DarkHero";
 import { HierarchyMorph } from "@/components/ui/morphs/HierarchyMorph";
 
 export const metadata: Metadata = {
-  title: "Governance & Reports · CoE-EA",
+  title: "Governance & Reports",
   description:
     "Programme governance, oversight structure, and official reports for the Centre of Excellence on Efficiency Augmentation.",
 };

@@ -4,7 +4,7 @@ import { DarkHero } from "@/components/ui/DarkHero";
 import { FloorPlanMorph } from "@/components/ui/morphs/FloorPlanMorph";
 
 export const metadata: Metadata = {
-  title: "Book a Facility · CoE-EA",
+  title: "Book a Facility",
   description:
     "Reserve lab space, meeting rooms, or demo infrastructure at CoE-EA's Bengaluru facility.",
 };
@@ -84,7 +84,7 @@ export default function BookPage() {
       />
 
       <main className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
-      <div className="mx-auto max-w-[900px]">
+      <div className="mx-auto max-w-[1160px]">
         <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-ink/75">
           CoE-EA&rsquo;s Bengaluru facility is available to incubatees, partners, and
           invited teams. Lab space, meeting infrastructure, and demo suites —
@@ -173,7 +173,7 @@ export default function BookPage() {
           </p>
           <a
             href="mailto:blr.coeea@stpi.in?subject=Facility%20Booking%20Enquiry"
-            className="inline-block bg-brand-navy px-7 py-3.5 font-mono text-[12px] uppercase tracking-[0.18em] text-bg-paper transition hover:bg-brand-navy/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean focus-visible:ring-offset-2"
+            className="inline-block bg-amber px-7 py-3.5 font-mono text-[12px] uppercase tracking-[0.18em] text-bg-void transition hover:bg-amber-hi focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean focus-visible:ring-offset-2"
           >
             Email blr.coeea@stpi.in →
           </a>

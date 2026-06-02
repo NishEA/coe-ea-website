@@ -225,7 +225,7 @@ body {
   width: 36px;
   height: 36px;
   transform-style: preserve-3d;
-  transform: rotateX(-22deg) rotateY(-28deg);
+  transform: rotateX(-30deg) rotateY(-30deg);
   position: relative;
 }
 .cube-face {
@@ -262,7 +262,7 @@ body {
 }
 @keyframes cube-spin {
   to {
-    transform: rotateX(-22deg) rotateY(332deg);
+    transform: rotateX(-30deg) rotateY(332deg);
   }
 }
 .connector {

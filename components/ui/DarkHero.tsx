@@ -28,7 +28,7 @@ export function DarkHero({
   return (
     <section
       aria-label={typeof title === 'string' ? title : label}
-      className="relative flex min-h-[55vh] w-full items-center overflow-hidden px-6 py-20 tablet:px-12"
+      className="relative flex min-h-[45vh] w-full items-center overflow-hidden px-6 py-20 tablet:px-12"
     >
       <div className="grid-bg" />
       <span aria-hidden className="corner-bracket left-3 top-3 border-l border-t" />

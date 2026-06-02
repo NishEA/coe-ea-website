@@ -73,8 +73,53 @@ export function TheApplication() {
         ))}
       </ul>
 
-      <div className="max-w-2xl">
+      <div className="desktop:grid desktop:grid-cols-[3fr_2fr] desktop:items-start desktop:gap-16">
         <ApplyForm defaultDomain={defaultDomain} />
+
+        {/* Eligibility sidebar — desktop only */}
+        <aside className="mt-16 hidden desktop:block desktop:sticky desktop:top-24">
+          <h3 className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-cerulean">
+            Eligibility
+          </h3>
+          <ul className="space-y-4 border-t border-brand-navy/15 pt-6">
+            {[
+              'Incorporated startup (Pvt. Ltd. or LLP)',
+              'Karnataka-registered or willing to register',
+              'Industry 4.0 / IoT / AI domain focus',
+              'Pre-revenue to early-revenue stage',
+              'At least one technical co-founder',
+            ].map(item => (
+              <li key={item} className="flex items-start gap-3">
+                <span aria-hidden className="mt-1 inline-block h-1.5 w-1.5 flex-shrink-0 bg-amber" />
+                <span className="font-body text-[14px] leading-[1.55] text-ink/75">{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <h3 className="mb-6 mt-10 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-cerulean">
+            What happens next
+          </h3>
+          <ol className="space-y-5 border-t border-brand-navy/15 pt-6">
+            {[
+              ['01', 'Application reviewed within 5 working days'],
+              ['02', 'Shortlisted founders invited to a 30-min virtual call'],
+              ['03', 'Final selection by domain expert panel'],
+              ['04', 'Onboarding into the Centre within 2 weeks'],
+            ].map(([n, text]) => (
+              <li key={n} className="flex items-start gap-4">
+                <span className="font-mono text-[10px] text-ink/35">{n}</span>
+                <span className="font-body text-[14px] leading-[1.55] text-ink/75">{text}</span>
+              </li>
+            ))}
+          </ol>
+
+          <p className="mt-10 border-t border-brand-navy/10 pt-6 font-body text-[13px] leading-[1.6] text-ink/50">
+            Questions? Write to{' '}
+            <a href="mailto:blr.coeea@stpi.in" className="text-brand-cerulean underline underline-offset-2">
+              blr.coeea@stpi.in
+            </a>
+          </p>
+        </aside>
       </div>
     </section>
   )
