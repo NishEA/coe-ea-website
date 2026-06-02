@@ -5,13 +5,9 @@ import { useEffect, useState } from 'react'
 /**
  * Events hero visual — Cube → Timeline morph.
  *
- * Starts as the 52px instrument cube, then after a 600ms mount delay the front
- * face stretches into a 200px × 4px horizontal track. Once stretched, four
- * labelled node dots pop in sequentially (staggered 200ms each):
- * HACKATHON · IDEATHON · WORKSHOP · INDUSTRIAL VISIT.
- *
- * Pure CSS 3D + inline styles. No Three.js, no GSAP. Honours
- * prefers-reduced-motion by skipping to the end state.
+ * Four-stage animation: (0) tilted cube → (1) container rotates face-on
+ * (600ms) → (2) front face stretches into track (1200ms) → (3) node dots
+ * pop in sequentially (2400ms). Staging keeps each phase in flat 2D space.
  */
 
 const FACE = 52
@@ -25,27 +21,21 @@ const NODES = ['HACKATHON', 'IDEATHON', 'WORKSHOP', 'INDUSTRIAL VISIT']
 type S = React.CSSProperties
 
 export function TimelineMorph({ className = '' }: { className?: string }) {
-  // 0 = cube · 1 = stretched track · 2 = nodes revealed
   const [stage, setStage] = useState(0)
 
   useEffect(() => {
     const reduce =
       typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduce) {
-      setStage(2)
-      return
-    }
+    if (reduce) { setStage(3); return }
     const t1 = window.setTimeout(() => setStage(1), 600)
-    const t2 = window.setTimeout(() => setStage(2), 600 + 1200)
-    return () => {
-      window.clearTimeout(t1)
-      window.clearTimeout(t2)
-    }
+    const t2 = window.setTimeout(() => setStage(2), 1200)
+    const t3 = window.setTimeout(() => setStage(3), 2400)
+    return () => { window.clearTimeout(t1); window.clearTimeout(t2); window.clearTimeout(t3) }
   }, [])
 
-  const stretched = stage >= 1
-  const nodesIn = stage >= 2
+  const stretched = stage >= 2
+  const nodesIn = stage >= 3
 
   // Front face → timeline track.
   const track: S = stretched
@@ -55,8 +45,7 @@ export function TimelineMorph({ className = '' }: { className?: string }) {
         height: 4,
         left: -(TRACK_W - FACE) / 2,
         top: FACE / 2 - 2,
-        background:
-          'linear-gradient(90deg, rgba(0,164,228,0.6), rgba(212,168,83,0.6))',
+        background: 'linear-gradient(90deg, rgba(0,164,228,0.6), rgba(212,168,83,0.6))',
         border: 'none',
         transition: T,
         transform: 'translateZ(0px)',
@@ -71,6 +60,7 @@ export function TimelineMorph({ className = '' }: { className?: string }) {
         background: 'rgba(0,164,228,0.04)',
         transition: T,
         transform: `translateZ(${TRANSLATE}px)`,
+        transformOrigin: 'top center',
       }
 
   return (
@@ -86,12 +76,16 @@ export function TimelineMorph({ className = '' }: { className?: string }) {
           height: FACE,
           position: 'relative',
           transformStyle: 'preserve-3d',
-          transform: 'rotateX(-16deg) rotateY(-10deg)',
+          // Stage 1: rotate container face-on first so track stretches in flat 2D space.
+          transition: 'transform 0.6s ease-out',
+          transform: stage >= 1
+            ? 'rotateX(0deg) rotateY(0deg)'
+            : 'rotateX(-16deg) rotateY(-10deg)',
         }}
       >
         <div style={track} />
 
-        {/* Node dots along the track — staggered fade/scale in. */}
+        {/* Node dots along the track — staggered fade/scale in after track is drawn. */}
         {stretched &&
           NODES.map((label, i) => {
             const x = -(TRACK_W - FACE) / 2 + (TRACK_W / (NODES.length - 1)) * i
@@ -117,12 +111,8 @@ export function TimelineMorph({ className = '' }: { className?: string }) {
                     width: 9,
                     height: 9,
                     borderRadius: '50%',
-                    background: amber
-                      ? 'rgba(212,168,83,0.95)'
-                      : 'rgba(0,164,228,0.9)',
-                    boxShadow: `0 0 8px ${
-                      amber ? 'rgba(212,168,83,0.6)' : 'rgba(0,164,228,0.6)'
-                    }`,
+                    background: amber ? 'rgba(212,168,83,0.95)' : 'rgba(0,164,228,0.9)',
+                    boxShadow: `0 0 8px ${amber ? 'rgba(212,168,83,0.6)' : 'rgba(0,164,228,0.6)'}`,
                   }}
                 />
                 <span
@@ -134,9 +124,7 @@ export function TimelineMorph({ className = '' }: { className?: string }) {
                     fontSize: '7px',
                     letterSpacing: '0.12em',
                     textTransform: 'uppercase',
-                    color: amber
-                      ? 'rgba(212,168,83,0.9)'
-                      : 'rgba(183,207,232,0.7)',
+                    color: amber ? 'rgba(212,168,83,0.9)' : 'rgba(183,207,232,0.7)',
                     transform: i % 2 === 0 ? 'translateY(0)' : 'translateY(10px)',
                   }}
                 >

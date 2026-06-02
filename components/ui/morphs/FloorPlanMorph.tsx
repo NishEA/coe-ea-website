@@ -5,13 +5,9 @@ import { useEffect, useState } from 'react'
 /**
  * Book hero visual — Cube → Floor Plan morph.
  *
- * Starts as the 52px instrument cube (same geometry as the hero), then after a
- * 600ms mount delay the top face expands into a flat building footprint and the
- * four side faces collapse to near-zero height while widening into the building
- * outline. The four side faces are labelled LAB · MEETING · DEMO · HARDWARE BAY.
- *
- * Pure CSS 3D + inline styles. No Three.js, no GSAP. Honours
- * prefers-reduced-motion by skipping straight to the end state.
+ * Three-stage animation: (0) tilted cube → (1) container rotates face-on
+ * (600ms) → (2) faces spread into floor plan (1200ms). Staging ensures faces
+ * never animate across a 3D perspective transform, eliminating visual teleport.
  */
 
 const FACE = 52
@@ -22,19 +18,19 @@ const T = `all 1.2s ${EASE}`
 type FaceStyle = React.CSSProperties
 
 export function FloorPlanMorph({ className = '' }: { className?: string }) {
-  const [morphed, setMorphed] = useState(false)
+  const [stage, setStage] = useState(0)
 
   useEffect(() => {
     const reduce =
       typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduce) {
-      setMorphed(true)
-      return
-    }
-    const id = window.setTimeout(() => setMorphed(true), 600)
-    return () => window.clearTimeout(id)
+    if (reduce) { setStage(2); return }
+    const t1 = window.setTimeout(() => setStage(1), 600)
+    const t2 = window.setTimeout(() => setStage(2), 1200)
+    return () => { window.clearTimeout(t1); window.clearTimeout(t2) }
   }, [])
+
+  const morphed = stage >= 2
 
   const faceBase: FaceStyle = {
     position: 'absolute',
@@ -55,18 +51,12 @@ export function FloorPlanMorph({ className = '' }: { className?: string }) {
     height: FACE,
   }
 
-  // Top face — becomes the building footprint (the "floor").
+  // Top face — becomes the building footprint.
   const top: FaceStyle = morphed
-    ? {
-        ...faceBase,
-        width: 160,
-        height: 120,
-        transform: `translate(-54px, -34px) rotateX(90deg) translateZ(0px)`,
-        background: 'rgba(0, 164, 228, 0.06)',
-      }
-    : { ...faceBase, transform: `rotateX(90deg) translateZ(${TRANSLATE}px)` }
+    ? { ...faceBase, width: 160, height: 120, transform: `translate(-54px, -34px) translateZ(0px)`, background: 'rgba(0, 164, 228, 0.06)' }
+    : { ...faceBase, transform: `rotateX(90deg) translateZ(${TRANSLATE}px)`, transformOrigin: 'bottom center' }
 
-  // Four walls — collapse to 2px tall, expand in width to form the outline.
+  // Four walls — collapse to 2px tall, expand in width.
   const wall = (
     label: string,
     rest: FaceStyle,
@@ -79,34 +69,26 @@ export function FloorPlanMorph({ className = '' }: { className?: string }) {
           ...faceBase,
           ...morphRest,
           height: 2,
-          background: amber
-            ? 'rgba(212, 168, 83, 0.5)'
-            : 'rgba(0, 164, 228, 0.5)',
-          borderColor: amber
-            ? 'rgba(212, 168, 83, 0.6)'
-            : 'rgba(0, 164, 228, 0.5)',
+          background: amber ? 'rgba(212, 168, 83, 0.5)' : 'rgba(0, 164, 228, 0.5)',
+          borderColor: amber ? 'rgba(212, 168, 83, 0.6)' : 'rgba(0, 164, 228, 0.5)',
         }
       : { ...faceBase, ...rest },
   })
 
-  const front = wall(
-    'LAB',
-    { transform: `translateZ(${TRANSLATE}px)` },
+  const front = wall('LAB',
+    { transform: `translateZ(${TRANSLATE}px)`, transformOrigin: 'top center' },
     { width: 160, transform: `translate(-54px, 24px) translateZ(0px)` },
   )
-  const back = wall(
-    'MEETING',
-    { transform: `rotateY(180deg) translateZ(${TRANSLATE}px)` },
+  const back = wall('MEETING',
+    { transform: `rotateY(180deg) translateZ(${TRANSLATE}px)`, transformOrigin: 'top center' },
     { width: 160, transform: `translate(-54px, -56px) translateZ(0px)` },
   )
-  const left = wall(
-    'DEMO',
-    { transform: `rotateY(-90deg) translateZ(${TRANSLATE}px)` },
+  const left = wall('DEMO',
+    { transform: `rotateY(-90deg) translateZ(${TRANSLATE}px)`, transformOrigin: 'right center' },
     { width: 120, transform: `translate(-88px, -16px) rotate(90deg) translateZ(0px)` },
   )
-  const right = wall(
-    'HARDWARE BAY',
-    { transform: `rotateY(90deg) translateZ(${TRANSLATE}px)` },
+  const right = wall('HARDWARE BAY',
+    { transform: `rotateY(90deg) translateZ(${TRANSLATE}px)`, transformOrigin: 'left center' },
     { width: 120, transform: `translate(72px, -16px) rotate(90deg) translateZ(0px)` },
     true,
   )
@@ -116,11 +98,7 @@ export function FloorPlanMorph({ className = '' }: { className?: string }) {
       className={className}
       aria-hidden="true"
       role="presentation"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
+      style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
     >
       <div
         style={{
@@ -128,7 +106,11 @@ export function FloorPlanMorph({ className = '' }: { className?: string }) {
           height: FACE,
           position: 'relative',
           transformStyle: 'preserve-3d',
-          transform: 'rotateX(-52deg) rotateZ(-12deg)',
+          // Stage 1: rotate container face-on first so faces animate in flat 2D space.
+          transition: 'transform 0.6s ease-out',
+          transform: stage >= 1
+            ? 'rotateX(0deg) rotateZ(0deg)'
+            : 'rotateX(-52deg) rotateZ(-12deg)',
         }}
       >
         <div style={top} />

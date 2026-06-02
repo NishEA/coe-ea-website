@@ -43,8 +43,8 @@ const ELIGIBILITY = [
 export function TheInstrument() {
   return (
     <>
-      {/* Gradient bridge: dark void sections above → paper below */}
-      <div className="h-24 bg-gradient-to-b from-[#050507] to-[#f7f4ed]" aria-hidden="true" />
+      {/* Seam hairline: 1px cerulean at the dark/cream boundary */}
+      <div className="h-px bg-brand-cerulean" aria-hidden="true" />
     <section
       id="instrument"
       aria-label="The Instrument — about the Centre of Excellence"

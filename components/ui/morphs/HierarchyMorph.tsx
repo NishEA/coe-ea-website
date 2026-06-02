@@ -5,14 +5,9 @@ import { useEffect, useState } from 'react'
 /**
  * Governance hero visual — Cube → Org Chart morph.
  *
- * Starts as the 52px instrument cube, then after a 600ms mount delay the faces
- * fly apart into a diamond of four nodes: the top face rises to become the
- * CoE-EA node (amber), the left and right faces slide out to KITS and STPI
- * (ice), and the bottom face drops to HPE. Thin connecting lines expand via
- * scaleX/scaleY between them.
- *
- * Pure CSS 3D + inline styles. No Three.js, no GSAP. Honours
- * prefers-reduced-motion by skipping to the end state.
+ * Three-stage animation: (0) tilted cube → (1) container rotates face-on
+ * (600ms) → (2) faces fly out into org chart nodes (1200ms). Connectors
+ * grow after nodes land via scaleX/scaleY with delay.
  */
 
 const FACE = 52
@@ -24,19 +19,19 @@ const SPREAD = 78
 type S = React.CSSProperties
 
 export function HierarchyMorph({ className = '' }: { className?: string }) {
-  const [morphed, setMorphed] = useState(false)
+  const [stage, setStage] = useState(0)
 
   useEffect(() => {
     const reduce =
       typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduce) {
-      setMorphed(true)
-      return
-    }
-    const id = window.setTimeout(() => setMorphed(true), 600)
-    return () => window.clearTimeout(id)
+    if (reduce) { setStage(2); return }
+    const t1 = window.setTimeout(() => setStage(1), 600)
+    const t2 = window.setTimeout(() => setStage(2), 1200)
+    return () => { window.clearTimeout(t1); window.clearTimeout(t2) }
   }, [])
+
+  const morphed = stage >= 2
 
   const node = (amber = false): S => ({
     position: 'absolute',
@@ -54,28 +49,27 @@ export function HierarchyMorph({ className = '' }: { className?: string }) {
     transition: T,
   })
 
-  // Faces in cube state vs. node state.
   const top: S = morphed
-    ? { ...node(true), transform: `translate(-28px, -${SPREAD}px) rotateX(0deg) translateZ(0px)` }
-    : { ...node(true), width: FACE, height: FACE, transform: `rotateX(90deg) translateZ(${TRANSLATE}px)` }
+    ? { ...node(true), transform: `translate(-28px, -${SPREAD}px) translateZ(0px)` }
+    : { ...node(true), width: FACE, height: FACE, transform: `rotateX(90deg) translateZ(${TRANSLATE}px)`, transformOrigin: 'bottom center' }
 
   const left: S = morphed
-    ? { ...node(), transform: `translate(-${SPREAD + 28}px, -20px) rotateY(0deg) translateZ(0px)` }
-    : { ...node(), width: FACE, height: FACE, transform: `rotateY(-90deg) translateZ(${TRANSLATE}px)` }
+    ? { ...node(), transform: `translate(-${SPREAD + 28}px, -20px) translateZ(0px)` }
+    : { ...node(), width: FACE, height: FACE, transform: `rotateY(-90deg) translateZ(${TRANSLATE}px)`, transformOrigin: 'right center' }
 
   const right: S = morphed
-    ? { ...node(), transform: `translate(${SPREAD - 28}px, -20px) rotateY(0deg) translateZ(0px)` }
-    : { ...node(), width: FACE, height: FACE, transform: `rotateY(90deg) translateZ(${TRANSLATE}px)` }
+    ? { ...node(), transform: `translate(${SPREAD - 28}px, -20px) translateZ(0px)` }
+    : { ...node(), width: FACE, height: FACE, transform: `rotateY(90deg) translateZ(${TRANSLATE}px)`, transformOrigin: 'left center' }
 
   const bottom: S = morphed
-    ? { ...node(), transform: `translate(-28px, ${SPREAD - 40}px) rotateX(0deg) translateZ(0px)` }
-    : { ...node(), width: FACE, height: FACE, transform: `rotateX(-90deg) translateZ(${TRANSLATE}px)` }
+    ? { ...node(), transform: `translate(-28px, ${SPREAD - 40}px) translateZ(0px)` }
+    : { ...node(), width: FACE, height: FACE, transform: `rotateX(-90deg) translateZ(${TRANSLATE}px)`, transformOrigin: 'top center' }
 
-  // Connecting lines — fade + scale in once morphed.
+  // Connectors grow after nodes land (0.4s delay so nodes are already in place).
   const line = (extra: S): S => ({
     position: 'absolute',
     background: 'rgba(183,207,232,0.3)',
-    transition: T,
+    transition: `all 0.6s ${EASE} 0.4s`,
     opacity: morphed ? 1 : 0,
     ...extra,
   })
@@ -93,10 +87,14 @@ export function HierarchyMorph({ className = '' }: { className?: string }) {
           height: FACE,
           position: 'relative',
           transformStyle: 'preserve-3d',
-          transform: 'rotateX(-18deg) rotateY(-14deg)',
+          // Stage 1: rotate container face-on first so nodes animate in flat 2D space.
+          transition: 'transform 0.6s ease-out',
+          transform: stage >= 1
+            ? 'rotateX(0deg) rotateY(0deg)'
+            : 'rotateX(-18deg) rotateY(-14deg)',
         }}
       >
-        {/* vertical spine: top → bottom */}
+        {/* vertical spine — grows down from top node */}
         <div
           style={line({
             left: 0,
@@ -107,7 +105,7 @@ export function HierarchyMorph({ className = '' }: { className?: string }) {
             transformOrigin: 'top',
           })}
         />
-        {/* horizontal bar: left → right */}
+        {/* horizontal bar — grows from center outward */}
         <div
           style={line({
             left: -SPREAD,

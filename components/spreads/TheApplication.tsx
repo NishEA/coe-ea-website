@@ -13,11 +13,11 @@ const VALID_PILLAR_VALUES = new Set([
 ])
 
 const BENEFITS = [
-  { value: '₹10L',     label: 'Non-dilutive seed grant',    detail: 'No equity taken. Get moving.' },
-  { value: 'Hardware', label: 'Lab access',                 detail: 'IoT testbeds, instrumented bays, edge compute.' },
-  { value: 'Mentors',  label: 'Domain practitioners',       detail: 'Industry specialists, not generalist advisors.' },
-  { value: '50%',      label: 'Market support',             detail: 'Reimbursement on qualifying customer-development travel.' },
-  { value: 'Network',  label: 'Partner ecosystem',          detail: 'HPE · Intel · Bosch · Schneider · MathWorks.' },
+  { value: '₹10L',     label: 'Seed grant',            detail: 'Equity-based; Centre takes 1–3% on signing.' },
+  { value: 'Hardware', label: 'Lab access',             detail: 'IoT testbeds, instrumented bays, edge compute.' },
+  { value: 'Mentors',  label: 'Domain practitioners',   detail: 'Industry specialists, not generalist advisors.' },
+  { value: '50%',      label: 'Market support',         detail: 'Reimbursement on qualifying customer-development travel.' },
+  { value: 'Network',  label: 'Partner ecosystem',      detail: 'Anchor industry and research partners.' },
 ]
 
 export function TheApplication() {
@@ -83,11 +83,11 @@ export function TheApplication() {
           </h3>
           <ul className="space-y-4 border-t border-brand-navy/15 pt-6">
             {[
-              'Incorporated startup (Pvt. Ltd. or LLP)',
-              'Karnataka-registered or willing to register',
-              'Industry 4.0 / IoT / AI domain focus',
-              'Pre-revenue to early-revenue stage',
-              'At least one technical co-founder',
+              'Incorporated or registrable entity founded in the last 5 years',
+              'Working on one of the Centre\'s ten Industry 4.0 domains',
+              'Majority Indian shareholding; lead founder must be Indian',
+              'Not currently incubated at another STPI Centre of Excellence',
+              'Karnataka registration preferred; outstation founders must operate from the Centre',
             ].map(item => (
               <li key={item} className="flex items-start gap-3">
                 <span aria-hidden className="mt-1 inline-block h-1.5 w-1.5 flex-shrink-0 bg-amber" />
@@ -101,10 +101,10 @@ export function TheApplication() {
           </h3>
           <ol className="space-y-5 border-t border-brand-navy/15 pt-6">
             {[
-              ['01', 'Application reviewed within 5 working days'],
-              ['02', 'Shortlisted founders invited to a 30-min virtual call'],
-              ['03', 'Final selection by domain expert panel'],
-              ['04', 'Onboarding into the Centre within 2 weeks'],
+              ['01', 'PMG review — you\'ll hear within two weeks of submission'],
+              ['02', 'Shortlisted founders invited to a 30-minute pitch session'],
+              ['03', 'Due diligence by the nine-member PMG committee'],
+              ['04', 'Offer within six weeks; onboarding after equity signing'],
             ].map(([n, text]) => (
               <li key={n} className="flex items-start gap-4">
                 <span className="font-mono text-[10px] text-ink/35">{n}</span>

@@ -5,12 +5,9 @@ import { useEffect, useState } from 'react'
 /**
  * Portfolio hero visual — Cube → Startup Network morph.
  *
- * Starts as the amber instrument cube, then after 600ms the faces fly out
- * into 6 startup-node cards in two arcing rows, with a central amber CoE-EA
- * hub and thin cerulean connecting spokes.
- *
- * Pure CSS 3D + inline styles. No Three.js, no GSAP. Honours
- * prefers-reduced-motion by skipping straight to end state.
+ * Three-stage animation: (0) tilted cube → (1) container rotates face-on
+ * (600ms) → (2) faces fly out into network nodes (1200ms). Connecting
+ * spokes grow after nodes land via opacity + transitionDelay.
  */
 
 const FACE = 52
@@ -32,16 +29,19 @@ const POSITIONS: { dx: number; dy: number }[] = [
 ]
 
 export function PortfolioMorph({ className = '' }: { className?: string }) {
-  const [morphed, setMorphed] = useState(false)
+  const [stage, setStage] = useState(0)
 
   useEffect(() => {
     const reduce =
       typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduce) { setMorphed(true); return }
-    const id = window.setTimeout(() => setMorphed(true), 600)
-    return () => window.clearTimeout(id)
+    if (reduce) { setStage(2); return }
+    const t1 = window.setTimeout(() => setStage(1), 600)
+    const t2 = window.setTimeout(() => setStage(2), 1200)
+    return () => { window.clearTimeout(t1); window.clearTimeout(t2) }
   }, [])
+
+  const morphed = stage >= 2
 
   const hub: S = {
     position: 'absolute',
@@ -56,6 +56,7 @@ export function PortfolioMorph({ className = '' }: { className?: string }) {
     transform: morphed
       ? 'translate(-26px, -18px) translateZ(0px)'
       : `rotateX(90deg) translateZ(${TRANSLATE}px)`,
+    transformOrigin: 'bottom center',
     transition: T,
   }
 
@@ -71,10 +72,14 @@ export function PortfolioMorph({ className = '' }: { className?: string }) {
           width: FACE, height: FACE,
           position: 'relative',
           transformStyle: 'preserve-3d',
-          transform: 'rotateX(-14deg) rotateY(-10deg)',
+          // Stage 1: rotate container face-on first so nodes animate in flat 2D space.
+          transition: 'transform 0.6s ease-out',
+          transform: stage >= 1
+            ? 'rotateX(0deg) rotateY(0deg)'
+            : 'rotateX(-14deg) rotateY(-10deg)',
         }}
       >
-        {/* Connecting spokes — appear once morphed */}
+        {/* Connecting spokes — appear after nodes land (0.3s base delay) */}
         {POSITIONS.map((p, i) => {
           const angle = Math.atan2(p.dy, p.dx) * (180 / Math.PI)
           const dist = Math.sqrt(p.dx * p.dx + p.dy * p.dy)
@@ -87,10 +92,9 @@ export function PortfolioMorph({ className = '' }: { className?: string }) {
                 width: dist, height: 1,
                 background: 'rgba(0,164,228,0.25)',
                 transformOrigin: '0 0',
-                transform: `rotate(${angle}deg)`,
+                transform: `rotate(${angle}deg) scaleX(${morphed ? 1 : 0})`,
                 opacity: morphed ? 1 : 0,
-                transition: T,
-                transitionDelay: `${0.3 + i * 0.05}s`,
+                transition: `all 0.5s ${EASE} ${0.3 + i * 0.05}s`,
               }}
             />
           )
@@ -118,6 +122,7 @@ export function PortfolioMorph({ className = '' }: { className?: string }) {
                 width: FACE, height: FACE,
                 opacity: 0,
                 transform: `rotateY(${i % 2 === 0 ? -90 : 90}deg) translateZ(${TRANSLATE}px)`,
+                transformOrigin: i % 2 === 0 ? 'right center' : 'left center',
                 transition: T,
               }
           return (

@@ -38,14 +38,16 @@ export function DarkHero({
 
       {/* Visual layer — right-anchored behind text, clearly decorative */}
       {visual && (
-        <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-end pr-16 opacity-30">
-          {visual}
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-0 flex w-[45%] items-center justify-center opacity-30">
+          <div className="h-[320px] w-[320px]">
+            {visual}
+          </div>
         </div>
       )}
 
-      {/* Gradient bridge: dark void → bg-paper. Disable when next section is dark. */}
+      {/* Seam hairline: 1px cerulean at the dark/cream boundary. */}
       {bridge && (
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-28 bg-gradient-to-b from-transparent to-[#f7f4ed]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-px bg-brand-cerulean" />
       )}
 
       <div

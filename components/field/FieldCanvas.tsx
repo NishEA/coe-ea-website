@@ -93,11 +93,13 @@ export function FieldCanvas() {
         counters[id] = tickCounter(counters[id], dt)
       }
 
-      // Suppress particle reveal in the orbit zone (right half) to avoid
-      // visual congestion with the cube cluster and orbit canvas overlay.
-      const inOrbitZone = ptr.x > W * 0.5
       for (const p of particles) {
-        const lum = inOrbitZone ? 0 : computeRevealLuminance(p, ptr.x, ptr.y, REVEAL_RADIUS)
+        // Suppress reveal boost for particles in the orbit zone (right half) to
+        // avoid congestion with the cube cluster, but keep a 0.12 baseline so
+        // the field is always visible regardless of pointer position.
+        const inOrbitZone = p.x > W * 0.5
+        const boost = inOrbitZone ? 0 : computeRevealLuminance(p, ptr.x, ptr.y, REVEAL_RADIUS)
+        const lum = Math.max(0.12, boost)
         ctx.fillStyle = `rgba(183,207,232,${lum})`
         ctx.beginPath()
         ctx.arc(p.x, p.y, 1 + lum * 0.8, 0, Math.PI * 2)
