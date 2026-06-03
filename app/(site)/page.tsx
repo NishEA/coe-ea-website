@@ -4,6 +4,7 @@ import { Suspense } from 'react'
 import { FieldProvider } from '@/components/field/FieldProvider'
 import { FieldCanvas } from '@/components/field/FieldCanvas'
 import { DomainMetadata } from '@/components/field/DomainMetadata'
+import { ChapterProgress } from '@/components/site/ChapterProgress'
 import { TheDiagnosis } from '@/components/spreads/TheDiagnosis'
 import { CredibilityBand } from '@/components/spreads/CredibilityBand'
 import { TheResolve } from '@/components/spreads/TheResolve'
@@ -16,6 +17,7 @@ export default function HomePage() {
     <FieldProvider>
       <FieldCanvas />
       <DomainMetadata />
+      <ChapterProgress />
       <TheDiagnosis />
       <CredibilityBand />
       <TheResolve />
