@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const STATS = [
   { value: '₹10L', label: 'Seed grant' },
   { value: '12 mo', label: 'Programme' },
-  { value: '10L', label: 'Sq ft lab' },
+  { value: '16K', label: 'Sq ft lab' },
   { value: '13', label: 'Partners' },
 ]
 

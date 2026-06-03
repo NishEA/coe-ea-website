@@ -3,11 +3,10 @@
 import { useEffect, useRef, useState } from 'react'
 
 /**
- * Portfolio hero visual — Cube → Orbital mechanics.
+ * Portfolio hero visual — Cube → Concentric orbital rings.
  *
- * Six portfolio startups orbit the CoE-EA hub. Angular velocities follow
- * Kepler's third law (ω ∝ r⁻³/²) so inner orbits complete faster.
- * Each body leaves a fading trail. Orbit ellipses appear as faint guides.
+ * Five clean rings pulse gently around the CoE-EA hub.
+ * No startup bodies, no trails, no initials.
  */
 
 const FACE = 52
@@ -15,26 +14,15 @@ const TRANSLATE = 26
 const W = 500, H = 480
 const CX = 250, CY = 240
 const EZ = 'cubic-bezier(0.4,0,0.2,1)'
-const TRAIL_LEN = 48
 
-const ω0 = 0.6, r0 = 80
-
-const ORBITS = [
-  { r: 80,  ecc: 0.08, inc: 0,   θ0: 0,           short: 'WB',  amber: false },
-  { r: 115, ecc: 0.12, inc: 15,  θ0: Math.PI/3,   short: 'YP',  amber: false },
-  { r: 148, ecc: 0.10, inc: -20, θ0: Math.PI*0.8, short: 'AV',  amber: false },
-  { r: 178, ecc: 0.15, inc: 10,  θ0: Math.PI*1.3, short: 'OR',  amber: true  },
-  { r: 205, ecc: 0.08, inc: -8,  θ0: Math.PI*1.7, short: 'VC',  amber: false },
-  { r: 228, ecc: 0.11, inc: 25,  θ0: Math.PI*0.4, short: 'STG', amber: false },
-].map(o => ({ ...o, ω: ω0 * Math.pow(r0 / o.r, 1.5) }))
-
-function bodyPos(o: typeof ORBITS[0], θ: number): [number, number] {
-  const rr = o.r * (1 - o.ecc * Math.cos(θ))
-  const incR = (o.inc * Math.PI) / 180
-  const x = CX + rr * (Math.cos(θ) * Math.cos(incR) - Math.sin(θ) * Math.sin(incR))
-  const y = CY + rr * (Math.cos(θ) * Math.sin(incR) + Math.sin(θ) * Math.cos(incR)) * 0.38
-  return [x, y]
-}
+// Five concentric rings: [semi-major radius, y-scale (isometric tilt), phase offset (seconds)]
+const RINGS: [number, number, number][] = [
+  [72,  0.38, 0.0],
+  [108, 0.38, 0.7],
+  [144, 0.38, 1.4],
+  [180, 0.38, 2.1],
+  [214, 0.38, 2.8],
+]
 
 export function PortfolioMorph({ className = '' }: { className?: string }) {
   const [stage, setStage] = useState(0)
@@ -64,24 +52,29 @@ export function PortfolioMorph({ className = '' }: { className?: string }) {
     t0Ref.current = performance.now()
     let rafId: number
 
-    const trails: [number, number][][] = ORBITS.map(() => [])
-
     const draw = (now: number) => {
       const elapsed = skipAnim ? 8 : (now - t0Ref.current) / 1000
       ctx.clearRect(0, 0, W, H)
 
-      // Orbit guides
-      const guideAlpha = Math.min(0.18, elapsed * 0.09)
-      ORBITS.forEach(o => {
-        const incR = (o.inc * Math.PI) / 180
+      // Concentric pulsing rings
+      RINGS.forEach(([r, ys, phaseOffset], i) => {
+        // Fade ring in over first 2 s, staggered
+        const appear = Math.min(1, Math.max(0, (elapsed - i * 0.2) / 0.8))
+        if (appear <= 0) return
+
+        // Pulse: opacity oscillates between 0.3 and 0.55, period ~3.5 s, offset per ring
+        const pulse = skipAnim
+          ? 0.42
+          : 0.3 + 0.25 * (0.5 + 0.5 * Math.sin(((elapsed + phaseOffset) / 3.5) * Math.PI * 2))
+        const alpha = appear * pulse
+
         ctx.save()
         ctx.translate(CX, CY)
-        ctx.rotate(incR)
-        ctx.scale(1, 0.38)
+        ctx.scale(1, ys)
         ctx.beginPath()
-        ctx.ellipse(0, 0, o.r, o.r * (1 - o.ecc), 0, 0, Math.PI * 2)
-        ctx.strokeStyle = `rgba(0,164,228,${guideAlpha})`
-        ctx.lineWidth = 0.5
+        ctx.ellipse(0, 0, r, r, 0, 0, Math.PI * 2)
+        ctx.strokeStyle = `rgba(0,164,228,${alpha.toFixed(3)})`
+        ctx.lineWidth = 1.2
         ctx.stroke()
         ctx.restore()
       })
@@ -89,67 +82,39 @@ export function PortfolioMorph({ className = '' }: { className?: string }) {
       // Hub glow + dot
       const hubGrow = Math.min(1, elapsed / 0.4)
       if (hubGrow > 0) {
-        const grad = ctx.createRadialGradient(CX, CY, 0, CX, CY, 18 * hubGrow)
-        grad.addColorStop(0, `rgba(212,168,83,${hubGrow * 0.3})`)
+        const grad = ctx.createRadialGradient(CX, CY, 0, CX, CY, 20 * hubGrow)
+        grad.addColorStop(0, `rgba(212,168,83,${hubGrow * 0.35})`)
         grad.addColorStop(1, 'rgba(0,0,0,0)')
         ctx.beginPath()
-        ctx.arc(CX, CY, 18 * hubGrow, 0, Math.PI * 2)
+        ctx.arc(CX, CY, 20 * hubGrow, 0, Math.PI * 2)
         ctx.fillStyle = grad
         ctx.fill()
+
         ctx.beginPath()
         ctx.arc(CX, CY, 5 * hubGrow, 0, Math.PI * 2)
         ctx.fillStyle = `rgba(212,168,83,${hubGrow * 0.95})`
         ctx.fill()
-        if (elapsed > 0.5) {
-          const la = Math.min(1, (elapsed - 0.5) / 0.4)
-          ctx.font = '9px "Space Mono", monospace'
+
+        // "CoE-EA" label (amber)
+        const la = Math.min(1, Math.max(0, (elapsed - 0.5) / 0.4))
+        if (la > 0) {
+          ctx.font = '10px "Space Mono", monospace'
           ctx.textAlign = 'center'
           ctx.textBaseline = 'top'
-          ctx.fillStyle = `rgba(212,168,83,${la * 0.85})`
-          ctx.fillText('CoE-EA', CX, CY + 9)
+          ctx.fillStyle = `rgba(212,168,83,${la * 0.9})`
+          ctx.fillText('CoE-EA', CX, CY + 10)
+        }
+
+        // "STARTUPS" label (cerulean) below CoE-EA
+        const lb = Math.min(1, Math.max(0, (elapsed - 0.9) / 0.5))
+        if (lb > 0) {
+          ctx.font = '7px "Space Mono", monospace'
+          ctx.textAlign = 'center'
+          ctx.textBaseline = 'top'
+          ctx.fillStyle = `rgba(0,164,228,${lb * 0.9})`
+          ctx.fillText('STARTUPS', CX, CY + 23)
         }
       }
-
-      // Bodies + trails
-      ORBITS.forEach((o, i) => {
-        const appear = Math.max(0, elapsed - 0.3 - i * 0.15)
-        if (appear <= 0) return
-        const θ = o.θ0 + o.ω * elapsed
-        const [bx, by] = bodyPos(o, θ)
-
-        trails[i].push([bx, by])
-        if (trails[i].length > TRAIL_LEN) trails[i].shift()
-
-        const trail = trails[i]
-        for (let j = 1; j < trail.length; j++) {
-          const a = (j / trail.length) * Math.min(1, appear / 0.5) * (o.amber ? 0.5 : 0.35)
-          ctx.beginPath()
-          ctx.moveTo(trail[j - 1][0], trail[j - 1][1])
-          ctx.lineTo(trail[j][0], trail[j][1])
-          ctx.strokeStyle = o.amber ? `rgba(212,168,83,${a})` : `rgba(0,164,228,${a})`
-          ctx.lineWidth = 1
-          ctx.stroke()
-        }
-
-        const dotAlpha = Math.min(1, appear / 0.3)
-        ctx.beginPath()
-        ctx.arc(bx, by, 3, 0, Math.PI * 2)
-        ctx.fillStyle = o.amber
-          ? `rgba(212,168,83,${dotAlpha * 0.95})`
-          : `rgba(0,164,228,${dotAlpha * 0.85})`
-        ctx.fill()
-
-        if (appear > 0.5) {
-          const la = Math.min(1, (appear - 0.5) / 0.5)
-          ctx.font = '8px "Space Mono", monospace'
-          ctx.textAlign = bx > CX ? 'left' : 'right'
-          ctx.textBaseline = 'middle'
-          ctx.fillStyle = o.amber
-            ? `rgba(212,168,83,${la * 0.8})`
-            : `rgba(183,207,232,${la * 0.65})`
-          ctx.fillText(o.short, bx + (bx > CX ? 7 : -7), by)
-        }
-      })
 
       rafId = requestAnimationFrame(draw)
     }
