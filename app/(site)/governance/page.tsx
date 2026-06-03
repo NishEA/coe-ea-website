@@ -172,7 +172,7 @@ export default function GovernancePage() {
   return (
     <>
       <DarkHero
-        label="Tripartite structure · KITS · STPI · HPE"
+        label="Tripartite structure · STPI · KITS · HPE"
         title={
           <>
             How the instrument is <span className="text-amber">governed.</span>

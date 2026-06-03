@@ -81,7 +81,7 @@ export default function ApplyPage() {
           </div>
 
           <p className="mt-12 max-w-xl font-mono text-[11px] uppercase tracking-[0.16em] text-brand-ice/35">
-            The ₹10L seed grant is funded by KITS · STPI · HPE. Disbursement is
+            The ₹10L seed grant is funded by STPI · KITS · HPE. Disbursement is
             milestone-gated and subject to the equity agreement.
           </p>
         </div>

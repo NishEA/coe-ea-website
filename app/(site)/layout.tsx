@@ -22,6 +22,7 @@ export default function SiteLayout({
 }) {
   const pathname = usePathname()
   const [mounted, setMounted] = useState(false)
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
   // Frame draws in once after first paint.
   useEffect(() => {
@@ -29,11 +30,24 @@ export default function SiteLayout({
     return () => cancelAnimationFrame(id)
   }, [])
 
+  // Close drawer on route change (back-button, Link navigation).
+  useEffect(() => {
+    setDrawerOpen(false)
+  }, [pathname])
+
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href)
 
   return (
     <div className={`app-frame ${mounted ? 'frame-enter' : 'opacity-0'}`}>
+      {/* Skip-to-content (WCAG 2.4.1) */}
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:left-4 focus:top-4 focus:rounded focus:bg-brand-cerulean focus:px-4 focus:py-2 focus:text-white focus:outline-none"
+      >
+        Skip to content
+      </a>
+
       <div className="grid-bg" />
       {/* Ambient particle field on all sub-pages — homepage provides its own via FieldProvider in page.tsx */}
       {pathname !== '/' && (
@@ -43,10 +57,7 @@ export default function SiteLayout({
       )}
 
       {/* ── Pill nav ── */}
-      <header
-        role="banner"
-        className="relative z-30 flex items-center justify-between gap-4 px-6 py-5 tablet:px-9"
-      >
+      <header className="relative z-30 flex items-center justify-between gap-4 px-6 py-5 tablet:px-9">
         <Link
           href="/"
           className="flex items-center gap-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
@@ -61,6 +72,7 @@ export default function SiteLayout({
           </span>
         </Link>
 
+        {/* Desktop nav */}
         <nav aria-label="Primary" className="hidden items-center gap-1.5 tablet:flex">
           {NAV.map(item => (
             <Link
@@ -81,17 +93,54 @@ export default function SiteLayout({
           </Link>
         </nav>
 
-        {/* Mobile: condensed apply pill */}
-        <Link
-          href="/apply"
-          className="pill pill-amber tablet:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
-        >
-          Apply →
-        </Link>
+        {/* Mobile: Apply pill + hamburger */}
+        <div className="flex items-center gap-2 tablet:hidden">
+          <Link
+            href="/apply"
+            className="pill pill-amber focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
+          >
+            Apply →
+          </Link>
+          <button
+            type="button"
+            aria-label={drawerOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={drawerOpen}
+            aria-controls="mobile-nav"
+            onClick={() => setDrawerOpen(v => !v)}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition hover:border-white/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
+          >
+            {drawerOpen ? '✕' : '☰'}
+          </button>
+        </div>
       </header>
 
+      {/* Mobile drawer — slides in below header, hidden on tablet+ */}
+      {drawerOpen && (
+        <nav
+          id="mobile-nav"
+          aria-label="Mobile navigation"
+          className="relative z-20 border-b border-white/[0.06] bg-bg-void/95 backdrop-blur-sm tablet:hidden"
+        >
+          {NAV.map(item => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setDrawerOpen(false)}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+              className={`block px-6 py-4 font-mono text-[11px] uppercase tracking-[0.14em] transition ${
+                isActive(item.href)
+                  ? 'text-white'
+                  : 'text-white/60 hover:text-white'
+              } focus-visible:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-brand-cerulean`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+      )}
+
       {/* Page content */}
-      <main className="relative z-10">{children}</main>
+      <main id="main" className="relative z-10">{children}</main>
 
       {/* Footer */}
       <footer className="relative z-10 border-t border-white/[0.06] px-6 py-10 tablet:px-9">
@@ -101,7 +150,7 @@ export default function SiteLayout({
               Centre of Excellence — Efficiency Augmentation
             </p>
             <p className="mt-1 max-w-md font-body text-[13px] leading-[1.6] text-brand-ice/40">
-              Funded by KITS · STPI · HPE. Software Technology Parks of India is
+              Funded by STPI · KITS · HPE. Software Technology Parks of India is
               an autonomous society under MeitY, Government of India.
             </p>
           </div>
@@ -120,7 +169,7 @@ export default function SiteLayout({
               <a
                 key={l.label}
                 href={l.href}
-                className="transition hover:text-brand-cerulean focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
+                className="py-2 transition hover:text-brand-cerulean focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
                 {...(l.href.startsWith('http')
                   ? { target: '_blank', rel: 'noreferrer' }
                   : {})}

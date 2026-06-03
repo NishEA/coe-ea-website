@@ -32,6 +32,11 @@
   --color-legacy: #e0894a; /* warm amber-orange — before/legacy state */
   --color-operational: #22c55e; /* operational dot only */
 
+  /* Canvas palette — used in FieldCanvas ctx.fillStyle (not accessible via CSS vars at runtime) */
+  --color-canvas-bg: #060b18;
+  --color-legacy-warm: #f3d8c2; /* "before" text in TheResolve split */
+  --color-resolve-cool: #cfeefb; /* "after" text in TheResolve split */
+
   /* Breakpoints — only these exist. */
   --breakpoint-*: initial;
   --breakpoint-tablet: 48rem; /* 768px */
@@ -41,7 +46,7 @@
 /* Fonts — mapped from the next/font CSS vars in app/fonts.ts. */
 @theme inline {
   --font-display: var(--ff-display);
-  --font-body: var(--ff-body);
+  --font-body: var(--ff-display); /* single Space Grotesk load — see app/fonts.ts */
   --font-mono: var(--ff-mono);
 }
 
@@ -107,7 +112,7 @@ body {
 
 /* ── Pill nav ── */
 .pill {
-  padding: 8px 18px;
+  padding: 12px 18px;
   border-radius: 999px;
   font-family: var(--font-mono), monospace;
   font-size: 10px;

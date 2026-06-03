@@ -23,7 +23,7 @@ export interface FieldContextValue {
   activeSection: number   // 0-4 index into the 5 spreads, -1 = none
   resolvedDomains: Set<string>
   activeDomainId: string | null
-  pointer: PointerState
+  pointerRef: { current: PointerState } // ref, not state — avoids 60fps re-renders on pointermove
   prefersReducedMotion: boolean
   canvasReady: boolean
   unrevealedCount: number
@@ -49,9 +49,11 @@ export function FieldProvider({ children }: { children: React.ReactNode }) {
   const [activeSection, setActiveSection] = useState(-1)
   const [resolvedDomains, setResolvedDomains] = useState<Set<string>>(new Set())
   const [activeDomainId, setActiveDomainState] = useState<string | null>(null)
-  const [pointer, setPointerState] = useState<PointerState>({ x: -999, y: -999, holding: false })
   const [canvasReady, setCanvasReady] = useState(false)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+
+  // Pointer stored as a ref — pointermove fires at 60fps and must not cause re-renders
+  const pointerRef = useRef<PointerState>({ x: -999, y: -999, holding: false })
 
   // resolvedDomainsRef kept in sync for stale-closure-safe RAF reads
   const resolvedDomainsRef = useRef(resolvedDomains)
@@ -113,8 +115,9 @@ export function FieldProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
+  // Writes directly to the ref — no React state update, no re-render
   const setPointer = useCallback((p: Partial<PointerState>) => {
-    setPointerState(prev => ({ ...prev, ...p }))
+    pointerRef.current = { ...pointerRef.current, ...p }
   }, [])
 
   const unrevealedCount = useMemo(
@@ -125,12 +128,12 @@ export function FieldProvider({ children }: { children: React.ReactNode }) {
   const value = useMemo<FieldContextValue>(
     () => ({
       scrollProgress, scrollZones, activeSection,
-      resolvedDomains, activeDomainId, pointer,
+      resolvedDomains, activeDomainId, pointerRef,
       prefersReducedMotion, canvasReady, unrevealedCount,
       resolveDomain, setActiveDomain, setPointer, setCanvasReady,
     }),
     [scrollProgress, scrollZones, activeSection, resolvedDomains, activeDomainId,
-     pointer, prefersReducedMotion, canvasReady, unrevealedCount,
+     prefersReducedMotion, canvasReady, unrevealedCount,
      resolveDomain, setActiveDomain, setPointer, setCanvasReady]
   )
 

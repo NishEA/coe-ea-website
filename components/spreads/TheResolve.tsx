@@ -110,7 +110,7 @@ export function TheResolve() {
           <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-legacy">
             Before — Legacy state
           </p>
-          <p className="font-display text-[1.5rem] font-light leading-[1.15] text-[#f3d8c2] tablet:text-[1.85rem]">
+          <p className="font-display text-[1.5rem] font-light leading-[1.15] text-legacy-warm tablet:text-[1.85rem]">
             Indian industry runs on instinct: fixed-schedule maintenance,
             blind grids, 38% water lost to leaks no one can see.
           </p>
@@ -120,7 +120,7 @@ export function TheResolve() {
           <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-brand-cerulean">
             After — Instrumented
           </p>
-          <p className="font-display text-[1.5rem] font-light leading-[1.15] text-[#cfeefb] tablet:text-[1.85rem]">
+          <p className="font-display text-[1.5rem] font-light leading-[1.15] text-resolve-cool tablet:text-[1.85rem]">
             CoE-EA turns that signal into measured efficiency — every claim
             bound to a citation, every domain diagnosed.
           </p>

@@ -15,15 +15,14 @@ import type { DeviceTier } from './particles'
 
 const REVEAL_RADIUS = 220
 const PROBE_INTERVAL = 60 // frames between tier probes
+const CANVAS_BG = '#060b18' // see --color-canvas-bg in globals.css
 
 export function FieldCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const { pointer, resolvedDomains, setActiveDomain, prefersReducedMotion, setCanvasReady } = useField()
+  const { pointerRef, resolvedDomains, setActiveDomain, prefersReducedMotion, setCanvasReady } = useField()
 
-  // Refs for stale-closure-safe RAF reads
-  const pointerRef = useRef(pointer)
+  // resolvedDomains ref for stale-closure-safe RAF reads
   const resolvedRef = useRef(resolvedDomains)
-  useEffect(() => { pointerRef.current = pointer }, [pointer])
   useEffect(() => { resolvedRef.current = resolvedDomains }, [resolvedDomains])
 
   useEffect(() => {
@@ -82,7 +81,7 @@ export function FieldCanvas() {
       // Schedule next frame AFTER all work (fixes reduced-motion RAF leak)
       frame = requestAnimationFrame(draw)
 
-      ctx.fillStyle = '#060b18'
+      ctx.fillStyle = CANVAS_BG
       ctx.fillRect(0, 0, W, H)
 
       const ptr = pointerRef.current
@@ -161,11 +160,23 @@ export function FieldCanvas() {
       }
     }
 
+    // Pause RAF when tab is hidden — prevents GPU work in background tabs
+    const onVisibility = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(frame)
+      } else {
+        lastTime = performance.now() // reset to avoid a large dt spike after long hide
+        frame = requestAnimationFrame(draw)
+      }
+    }
+    document.addEventListener('visibilitychange', onVisibility)
+
     frame = requestAnimationFrame(draw)
 
     return () => {
       cancelAnimationFrame(frame)
       window.removeEventListener('resize', resize)
+      document.removeEventListener('visibilitychange', onVisibility)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prefersReducedMotion, setActiveDomain, setCanvasReady])
@@ -203,7 +214,7 @@ function drawCounter(
 }
 
 function drawReducedMotion(ctx: CanvasRenderingContext2D, W: number, H: number) {
-  ctx.fillStyle = '#060b18'
+  ctx.fillStyle = CANVAS_BG
   ctx.fillRect(0, 0, W, H)
   for (const d of DOMAINS) {
     const nx = d.fieldX * W, ny = d.fieldY * H

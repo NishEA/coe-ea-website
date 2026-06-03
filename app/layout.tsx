@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { fontDisplay, fontBody, fontMono } from "./fonts";
+import { fontDisplay, fontMono } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: "%s · CoE-EA",
   },
   description:
-    "A KITS · STPI · HPE initiative — the Centre of Excellence on Efficiency Augmentation, Bengaluru.",
+    "A STPI · KITS · HPE initiative — the Centre of Excellence on Efficiency Augmentation, Bengaluru.",
 };
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable} h-full antialiased`}
+      className={`${fontDisplay.variable} ${fontMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-body">{children}</body>
     </html>

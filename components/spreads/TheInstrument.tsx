@@ -56,7 +56,7 @@ export function TheInstrument() {
           The Centre
         </span>
         <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/50">
-          KITS · STPI · HPE
+          STPI · KITS · HPE
         </span>
       </header>
 
