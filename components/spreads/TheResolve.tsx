@@ -71,25 +71,51 @@ export function TheResolve() {
     <section
       id="resolve"
       aria-label="The Resolve — hold to repair each infrastructure domain"
-      className="relative min-h-dvh w-full px-8 py-24 tablet:px-16"
+      className="relative min-h-dvh w-full px-8 pb-12 pt-24 tablet:px-16"
     >
       {/* Visible affordance */}
-      <div className="mb-12">
-        <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
-          002 / 005
+      <div className="mb-12 flex items-baseline justify-between">
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
+          The Diagnostic Field
         </p>
-        <p className="font-mono text-[13px] leading-relaxed tracking-[0.06em] text-brand-ice">
-          {resolved === 0
-            ? 'Ten domains. Each one is broken in a specific way.'
-            : resolved < 10
-            ? `${remaining} domain${remaining !== 1 ? 's' : ''} still failing.`
-            : 'All ten domains resolved.'}
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/40">
+          Hold to resolve
         </p>
       </div>
 
-      <p className="mb-16 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/40">
+      <p className="mb-3 font-mono text-[13px] leading-relaxed tracking-[0.06em] text-brand-ice">
+        {resolved === 0
+          ? 'Ten domains. Each one is broken in a specific way.'
+          : resolved < 10
+          ? `${remaining} domain${remaining !== 1 ? 's' : ''} still failing.`
+          : 'All ten domains resolved.'}
+      </p>
+      <p className="mb-12 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/40">
         Hover a node · Press and hold to resolve · Tab + Enter for keyboard
       </p>
+
+      {/* Before / After split — legacy amber vs instrumented cerulean */}
+      <div className="mb-16 grid grid-cols-1 gap-px border border-brand-ice/10 bg-brand-ice/10 tablet:grid-cols-[1fr_1px_1fr]">
+        <div className="bg-bg-midnight p-8 [background:radial-gradient(120%_120%_at_0_50%,rgba(224,137,74,.08),transparent_60%)]">
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-legacy">
+            Before — Legacy state
+          </p>
+          <p className="font-display text-[1.5rem] font-light leading-[1.15] text-[#f3d8c2] tablet:text-[1.85rem]">
+            Indian industry runs on instinct: fixed-schedule maintenance,
+            blind grids, 38% water lost to leaks no one can see.
+          </p>
+        </div>
+        <div aria-hidden className="hidden bg-gradient-to-b from-transparent via-brand-cerulean/40 to-transparent tablet:block" />
+        <div className="bg-bg-midnight p-8 text-right [background:radial-gradient(120%_120%_at_100%_50%,rgba(0,164,228,.10),transparent_60%)]">
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-brand-cerulean">
+            After — Instrumented
+          </p>
+          <p className="font-display text-[1.5rem] font-light leading-[1.15] text-[#cfeefb] tablet:text-[1.85rem]">
+            CoE-EA turns that signal into measured efficiency — every claim
+            bound to a citation, every domain diagnosed.
+          </p>
+        </div>
+      </div>
 
       {/* Resolved domain list — visible when any are resolved */}
       {resolved > 0 && (

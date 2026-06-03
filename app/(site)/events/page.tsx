@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import { DarkHero } from "@/components/ui/DarkHero";
+import { TimelineMorph } from "@/components/ui/morphs/TimelineMorph";
 
 export const metadata: Metadata = {
-  title: "Events · CoE-EA",
+  title: "Events",
   description:
     "Hackathons, ideathons, workshops, and industrial visits organised by the Centre of Excellence on Efficiency Augmentation.",
 };
@@ -45,15 +46,21 @@ const EVENT_TYPES = [
 
 export default function EventsPage() {
   return (
-    <main className="bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
+    <>
+      <DarkHero
+        label="Open to engineers · researchers · startup founders"
+        title={
+          <>
+            Where signal meets <span className="text-amber">founder.</span>
+          </>
+        }
+        align="left"
+        visual={<TimelineMorph className="h-auto w-auto max-w-[420px]" />}
+      />
+
+      <main className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[900px]">
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
-          Events
-        </span>
-        <h1 className="mt-4 font-display text-[32px] leading-[1.1] tracking-[-0.01em] text-brand-navy tablet:text-[44px]">
-          Where ideas meet industry.
-        </h1>
-        <p className="mt-4 max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-navy/60">
+        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-ink/75">
           CoE-EA runs hackathons, ideathons, workshops, and industrial visits
           throughout the year — connecting founders with domain problems and
           partner infrastructure.
@@ -73,7 +80,7 @@ export default function EventsPage() {
                 <p className="mt-2 font-display text-[18px] text-brand-navy">
                   {e.tagline}
                 </p>
-                <p className="mt-2 font-body text-[14px] leading-[1.6] text-brand-navy/60">
+                <p className="mt-2 font-body text-[14px] leading-[1.6] text-ink/75">
                   {e.description}
                 </p>
                 <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.13em] text-brand-navy/40">
@@ -89,23 +96,14 @@ export default function EventsPage() {
           <h2 className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
             Upcoming events
           </h2>
-          <div className="overflow-hidden border border-brand-navy/10">
-            <div className="relative flex h-56 w-full items-center justify-center bg-bg-midnight">
-              <Image
-                src="/images/events-illustration.png"
-                alt="Abstract geometric illustration representing CoE-EA events"
-                fill
-                className="object-cover opacity-70"
-                sizes="100vw"
-              />
-              <div className="relative z-10 px-8 py-10 text-center">
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-bg-paper/50">
-                  No events scheduled yet
-                </p>
-                <p className="mt-2 font-body text-[13px] text-bg-paper/40">
-                  Events for the current cohort cycle will appear here when announced.
-                </p>
-              </div>
+          <div className="flex h-56 w-full items-center justify-center border border-dashed border-brand-navy/20 bg-bg-paper px-8 py-10 text-center">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/40">
+                No events scheduled yet
+              </p>
+              <p className="mt-2 font-body text-[13px] leading-[1.55] text-ink/35">
+                Events for the current cohort cycle will appear here when announced.
+              </p>
             </div>
           </div>
         </div>
@@ -115,7 +113,7 @@ export default function EventsPage() {
           <h2 className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
             Stay informed
           </h2>
-          <p className="mb-6 max-w-[48ch] font-body text-[15px] leading-[1.7] text-brand-navy/60">
+          <p className="mb-6 max-w-[48ch] font-body text-[15px] leading-[1.7] text-ink/75">
             Events are announced through STPI&rsquo;s official channels. To express
             interest in participating or hosting an event at the Centre, reach
             out directly.
@@ -147,6 +145,7 @@ export default function EventsPage() {
           </Link>
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

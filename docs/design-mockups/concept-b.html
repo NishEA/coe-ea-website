@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Concept B — The Event Horizon · CoE-EA</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,900;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400&display=swap');
+  :root{
+    --void:#05070f;
+    --amber:#d4a853;
+    --amber-hi:#f0cд7e;
+    --amber-hi:#f0cd7e;
+    --ice:#b7cfe8;
+    --paper:#f7f4ed;
+    --cerulean:#00a4e4;
+    --spark:#2ee6ff;
+    --legacy:#e0894a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--void);color:var(--ice);font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden}
+  .serif{font-family:'Source Serif 4',serif}
+  .mono{font-family:'JetBrains Mono',monospace}
+
+  /* nebula */
+  .horizon{position:relative;min-height:100vh;display:flex;flex-direction:column;
+    background:
+      radial-gradient(60% 50% at 50% 42%, rgba(212,168,83,.20), transparent 62%),
+      radial-gradient(90% 70% at 50% 120%, rgba(180,110,40,.18), transparent 65%),
+      radial-gradient(40% 30% at 70% 18%, rgba(0,164,228,.10), transparent 60%),
+      var(--void);}
+  /* bokeh dust */
+  .dust{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+  .dust i{position:absolute;border-radius:50%;background:var(--amber);opacity:.0}
+  @keyframes twinkle{0%,100%{opacity:.05}50%{opacity:.5}}
+
+  nav{position:relative;z-index:20;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 44px}
+  .logo{font-family:'Source Serif 4';font-size:18px;letter-spacing:.04em;color:var(--paper);display:flex;gap:9px;align-items:center}
+  .logo .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber)}
+  .enter-link{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--amber);text-decoration:none}
+
+  .star{position:absolute;left:50%;top:18%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;
+    background:var(--amber-hi);box-shadow:0 0 16px 4px var(--amber),0 0 40px 10px rgba(212,168,83,.4);animation:twinkle 3s infinite}
+
+  .center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:10;padding:0 24px}
+  .sync{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:rgba(183,207,232,.5);margin-bottom:36px}
+  h1{font-family:'Source Serif 4';font-weight:400;font-size:clamp(3rem,9vw,8rem);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--paper);line-height:1;
+    background:linear-gradient(180deg,#fff,var(--amber-hi) 55%,var(--amber));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    text-shadow:0 0 60px rgba(212,168,83,.25)}
+  .tagline{margin-top:24px;font-family:'Source Serif 4';font-style:italic;font-size:clamp(1rem,2.2vw,1.5rem);color:rgba(247,244,237,.78);max-width:40rem}
+  .chapters{margin-top:42px;font-family:'JetBrains Mono';font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:rgba(212,168,83,.7);display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+  .chapters span{opacity:.85}
+  .enter{margin-top:54px}
+  .enter a{display:inline-block;font-family:'JetBrains Mono';font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--void);
+    background:linear-gradient(180deg,var(--amber-hi),var(--amber));padding:18px 44px;text-decoration:none;
+    box-shadow:0 0 40px rgba(212,168,83,.35);transition:.25s}
+  .enter a:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(212,168,83,.55)}
+  .hint{margin-top:20px;font-family:'JetBrains Mono';font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(183,207,232,.35)}
+
+  /* dual-split next section */
+  .split{position:relative;z-index:10;display:grid;grid-template-columns:1fr 1px 1fr;min-height:46vh;border-top:1px solid rgba(212,168,83,.18)}
+  .split .col{padding:48px 56px;display:flex;flex-direction:column;justify-content:center}
+  .split .rule{background:linear-gradient(180deg,transparent,rgba(212,168,83,.5),transparent)}
+  .col .k{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:14px}
+  .col .t{font-family:'Source Serif 4';font-size:1.9rem;line-height:1.12;font-weight:300}
+  .col.problem{background:radial-gradient(120% 120% at 0 50%, rgba(224,137,74,.10), transparent 60%)}
+  .col.problem .k{color:var(--legacy)}
+  .col.problem .t{color:#f3d8c2}
+  .col.solution{background:radial-gradient(120% 120% at 100% 50%, rgba(0,164,228,.12), transparent 60%);text-align:right;align-items:flex-end}
+  .col.solution .k{color:var(--spark)}
+  .col.solution .t{color:#cfeefb}
+  @media(max-width:860px){.split{grid-template-columns:1fr}.split .rule{display:none}.col.solution{text-align:left;align-items:flex-start}}
+</style>
+</head>
+<body>
+<section class="horizon">
+  <div class="dust" id="dust"></div>
+  <nav>
+    <div class="logo"><span class="dot"></span>CoE-EA</div>
+    <a class="enter-link" href="#">Enter the field ↓</a>
+  </nav>
+
+  <div class="star"></div>
+
+  <div class="center">
+    <div class="sync mono">Synchronising the instrument…</div>
+    <h1>The Instrument</h1>
+    <p class="tagline">A scroll-driven field-intelligence platform for India's infrastructure.</p>
+    <div class="chapters">
+      <span>The Diagnosis</span><span>·</span><span>The Resolve</span><span>·</span><span>The Ledger</span><span>·</span><span>The Centre</span><span>·</span><span>The Application</span>
+    </div>
+    <div class="enter"><a href="#">Enter the field →</a></div>
+    <div class="hint mono">Best experienced fullscreen · The field activates on enter</div>
+  </div>
+
+  <div class="split">
+    <div class="col problem">
+      <div class="k mono">Before — Legacy state</div>
+      <div class="t serif">Indian industry runs on instinct: fixed-schedule maintenance, blind grids, 38% water lost to leaks no one can see.</div>
+    </div>
+    <div class="rule"></div>
+    <div class="col solution">
+      <div class="k mono">After — Instrumented</div>
+      <div class="t serif">CoE-EA turns that signal into measured efficiency — every claim bound to a citation, every domain diagnosed.</div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // generate bokeh dust
+  const d=document.getElementById('dust');
+  for(let i=0;i<70;i++){const s=document.createElement('i');const sz=Math.random()*3+1;
+    s.style.width=s.style.height=sz+'px';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';
+    s.style.animation='twinkle '+(2+Math.random()*4)+'s infinite';s.style.animationDelay=(-Math.random()*5)+'s';
+    d.appendChild(s);}
+</script>
+</body>
+</html>

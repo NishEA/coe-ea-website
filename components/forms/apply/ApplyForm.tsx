@@ -216,6 +216,7 @@ export function ApplyForm({ defaultDomain = '' }: { defaultDomain?: string }) {
             name="privacy_consent"
             id="privacy_consent"
             value="true"
+            suppressHydrationWarning
             className="mt-0.5 h-4 w-4 shrink-0 rounded border-brand-navy/30 text-brand-navy focus-visible:ring-2 focus-visible:ring-brand-cerulean"
             aria-describedby="privacy_consent_desc"
           />
@@ -235,7 +236,7 @@ export function ApplyForm({ defaultDomain = '' }: { defaultDomain?: string }) {
               privacy notice
             </a>
             . I understand I may withdraw consent at any time by writing to
-            nishant.peddagopu@stpi.in.
+            blr.coeea@stpi.in.
           </span>
         </label>
         {state.errors?.privacy_consent && (
@@ -245,7 +246,7 @@ export function ApplyForm({ defaultDomain = '' }: { defaultDomain?: string }) {
         )}
       </div>
 
-      <SubmitButton pending={pending}>Submit application</SubmitButton>
+      <SubmitButton pending={pending}>Apply to the cohort →</SubmitButton>
     </form>
   );
 }

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DarkHero } from "@/components/ui/DarkHero";
 
 export const metadata: Metadata = {
-  title: "Privacy Notice · CoE-EA",
+  title: "Privacy Notice",
   description:
     "How the Centre of Excellence on Efficiency Augmentation collects, uses, and protects your personal data under India's Digital Personal Data Protection Act, 2023.",
 };
@@ -75,23 +76,15 @@ const PROCESSORS = [
 
 export default function PrivacyPage() {
   return (
-    <main className="bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
-      <div className="mx-auto max-w-[860px]">
+    <>
+      <DarkHero
+        label="Last updated: May 2026"
+        title="Privacy Policy."
+        subhead="Digital Personal Data Protection Act, 2023 · Version 1.0"
+      />
 
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
-          Legal
-        </span>
-        <h1 className="mt-4 font-display text-[32px] leading-[1.1] tracking-[-0.01em] text-brand-navy tablet:text-[44px]">
-          Privacy Notice.
-        </h1>
-        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-1">
-          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-brand-navy/50">
-            Version 1.0 &middot; May 2026
-          </p>
-          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-brand-navy/50">
-            Digital Personal Data Protection Act, 2023
-          </p>
-        </div>
+      <main className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
+      <div className="mx-auto max-w-[860px]">
 
         <div className="mt-8 border border-brand-cerulean/30 bg-brand-cerulean/5 px-6 py-5">
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-cerulean">
@@ -539,6 +532,7 @@ export default function PrivacyPage() {
           </Link>
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

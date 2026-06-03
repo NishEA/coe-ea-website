@@ -1,48 +1,422 @@
 @import "tailwindcss";
 
 /*
- * Design tokens — derived from DESIGN.md, which is the SOURCE OF TRUTH.
- * DESIGN.md §2 colour, §4 type, §5 grid/breakpoints, §6 spacing.
- * Do not change token VALUES here first — edit DESIGN.md, then mirror here.
+ * Design tokens — Concept D (approved build).
+ * Pure near-black void background, rounded instrument frame, Space Grotesk +
+ * Space Mono. Amber = action, cerulean = system, ice = secondary text,
+ * green = operational dot only.
  */
 @theme {
-  /* Colour tokens — DESIGN.md §2 (names kept verbatim) */
+  /* Surfaces */
+  --color-bg-void: #050507; /* pure near-black — primary background (Concept D) */
   --color-bg-paper: #f7f4ed;
-  --color-bg-midnight: #0b1633;
+  --color-bg-midnight: #050507; /* alias → void, so existing bg-bg-midnight reads pure black */
+  --color-bg-midnight-2: #0b1633;
+
+  /* Brand */
   --color-brand-navy: #0e2d7a;
-  --color-brand-cerulean: #00a4e4;
+  --color-brand-cerulean: #00a4e4; /* system colour — orbit dots, node labels, links */
   --color-accent-spark: #2ee6ff;
-  --color-brand-ice: #b7cfe8;
+  --color-brand-ice: #b7cfe8; /* secondary text, orbit particles */
   --color-ice: #b7cfe8;
-  --color-text-on-paper: #0a1b40;
+  --color-brand-paper: #f7f4ed;
+  --color-ink: #1a1c22;         /* near-black body ink for paper sections */
+  --color-text-on-paper: #1a1c22;
   --color-text-on-midnight: #f7f4ed;
   /* Operational green — status dot only (functional state encoding, not decorative) */
   --color-operational: #22c55e;
 
-  /* Breakpoints — DESIGN.md §5. Tailwind defaults reset so ONLY these exist. */
+  /* Action / state */
+  --color-amber: #d4a853; /* CTAs, animated key phrase, active highlights */
+  --color-amber-hi: #f0cd7e; /* amber highlight / hover */
+  --color-legacy: #e0894a; /* warm amber-orange — before/legacy state */
+  --color-operational: #22c55e; /* operational dot only */
+
+  /* Breakpoints — only these exist. */
   --breakpoint-*: initial;
-  --breakpoint-tablet: 48rem; /* 768px  — tablet and up */
-  --breakpoint-desktop: 75rem; /* 1200px — desktop and up */
+  --breakpoint-tablet: 48rem; /* 768px */
+  --breakpoint-desktop: 75rem; /* 1200px */
 }
 
-/* Fonts — mapped from the next/font CSS vars set in app/fonts.ts (DESIGN.md §4). */
+/* Fonts — mapped from the next/font CSS vars in app/fonts.ts. */
 @theme inline {
   --font-display: var(--ff-display);
   --font-body: var(--ff-body);
   --font-mono: var(--ff-mono);
 }
 
-/*
- * Spacing — DESIGN.md §6 scale (4·8·12·16·24·32·48·64·96·128 px) lines up with
- * Tailwind's default spacing steps 1·2·3·4·6·8·12·16·24·32, so no override is
- * needed. Hairline rule = 1px.
- */
+html,
+body {
+  background: var(--color-bg-void);
+}
 
 body {
-  background: var(--color-bg-paper);
-  color: var(--color-text-on-paper);
+  color: var(--color-text-on-midnight);
   font-family: var(--font-body), system-ui, sans-serif;
-  scroll-snap-type: y proximity;
-  overflow-y: scroll;
   overflow-x: hidden;
+}
+
+/* ───────────────────────────── Concept D shared design language ─────────── */
+
+/* App frame — the signature rounded instrument container. The site shell wraps
+ * page content in `.app-frame`; the border draws in once on first paint. */
+.app-frame {
+  position: relative;
+  margin: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  background: var(--color-bg-void);
+  overflow: clip;
+  min-height: calc(100dvh - 20px);
+}
+.app-frame.frame-enter {
+  animation: frame-draw 0.8s ease 0.1s both;
+}
+@keyframes frame-draw {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Grid dot background — on every dark section. */
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 44px 44px;
+  pointer-events: none;
+}
+
+/* Corner brackets — precision-instrument framing helper. */
+.corner-bracket {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  pointer-events: none;
+  border-color: rgba(183, 207, 232, 0.15);
+}
+
+/* ── Pill nav ── */
+.pill {
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  white-space: nowrap;
+}
+.pill-active {
+  background: #fff;
+  color: var(--color-bg-void);
+  font-weight: 700;
+}
+.pill-ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.7);
+}
+.pill-ghost:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.55);
+}
+.pill-amber {
+  background: var(--color-amber);
+  color: var(--color-bg-void);
+  font-weight: 700;
+}
+.pill-amber:hover {
+  background: var(--color-amber-hi);
+}
+
+/* Operational dot. */
+.op-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-operational);
+  box-shadow: 0 0 8px var(--color-operational);
+  flex-shrink: 0;
+  display: inline-block;
+  animation: op-pulse 2.4s ease-in-out infinite;
+}
+@keyframes op-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.75);
+  }
+}
+
+/* ── Domain marquee ── */
+.marquee-bar {
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 13px 0;
+  background: rgba(5, 5, 7, 0.8);
+}
+.marquee-inner {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+  animation: marquee-run 28s linear infinite;
+}
+.marquee-inner span {
+  font-family: var(--font-mono), monospace;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(183, 207, 232, 0.28);
+  padding: 0 28px;
+}
+.marquee-inner span.hi {
+  color: rgba(0, 164, 228, 0.6);
+}
+@keyframes marquee-run {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ── Waveform loader ── */
+.waveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 52px;
+}
+.waveform span {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--color-ice);
+  animation: wave 1.2s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes wave {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* ── CSS 3D instrument cubes ── */
+.cube {
+  width: 36px;
+  height: 36px;
+  transform-style: preserve-3d;
+  transform: rotateX(-30deg) rotateY(-30deg);
+  position: relative;
+}
+.cube-face {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(0, 164, 228, 0.28);
+  background: rgba(0, 164, 228, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cube-amber .cube-face {
+  border-color: rgba(212, 168, 83, 0.45);
+  background: rgba(212, 168, 83, 0.05);
+}
+.cube-face.f {
+  transform: translateZ(18px);
+}
+.cube-face.bk {
+  transform: rotateY(180deg) translateZ(18px);
+}
+.cube-face.l {
+  transform: rotateY(-90deg) translateZ(18px);
+}
+.cube-face.r {
+  transform: rotateY(90deg) translateZ(18px);
+}
+.cube-face.t {
+  transform: rotateX(90deg) translateZ(18px);
+}
+.cube-face.bo {
+  transform: rotateX(-90deg) translateZ(18px);
+}
+@keyframes cube-spin {
+  to {
+    transform: rotateX(-30deg) rotateY(332deg);
+  }
+}
+.connector {
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 164, 228, 0.5),
+    rgba(212, 168, 83, 0.5)
+  );
+  position: relative;
+}
+.dot-anim {
+  position: absolute;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-amber);
+  box-shadow: 0 0 6px var(--color-amber);
+  transform: translate(-50%, -50%);
+  animation: dot-slide 2s linear infinite;
+}
+.dot-anim.rev {
+  animation-direction: reverse;
+  background: var(--color-brand-cerulean);
+  box-shadow: 0 0 6px var(--color-brand-cerulean);
+}
+@keyframes dot-slide {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Vertical tagline on the right edge of the hero. */
+.tagline-vertical {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* Word-by-word headline reveal. */
+.word-rise {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: word-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes word-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Generic fade-up used by hero sub-elements after the load sequence. */
+.fade-up {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Cube cluster scale-in. */
+.cube-materialise {
+  animation: cube-materialise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes cube-materialise {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Orbital knowledge-graph rotation (decorative SVG fallbacks). */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Dark form scope ──
+ * The shared form primitives are authored for the cream paper background
+ * (navy labels, navy underline). On the void background we recolour them in
+ * one place rather than forking every field component. */
+.form-dark label > span,
+.form-dark legend {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+/* Recolour the navy text shades the form primitives use for paper. */
+.form-dark [class*='text-brand-navy'] {
+  color: rgba(183, 207, 232, 0.75) !important;
+}
+.form-dark input[type='text'],
+.form-dark input[type='email'],
+.form-dark input[type='tel'],
+.form-dark select,
+.form-dark textarea {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 5px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.form-dark input::placeholder,
+.form-dark textarea::placeholder {
+  color: rgba(183, 207, 232, 0.35);
+}
+.form-dark input:focus,
+.form-dark select:focus,
+.form-dark textarea:focus {
+  border-color: var(--color-brand-cerulean) !important;
+  outline: none;
+}
+.form-dark select option {
+  color: #000;
+}
+.form-dark a {
+  color: var(--color-brand-cerulean);
+}
+.form-dark input[type='radio'],
+.form-dark input[type='checkbox'] {
+  accent-color: var(--color-brand-cerulean);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-frame.frame-enter,
+  .word-rise,
+  .fade-up,
+  .cube-materialise,
+  .marquee-inner,
+  .waveform span,
+  .dot-anim,
+  .op-dot {
+    animation: none !important;
+  }
+  .word-rise,
+  .fade-up,
+  .cube-materialise {
+    opacity: 1;
+    transform: none;
+  }
 }

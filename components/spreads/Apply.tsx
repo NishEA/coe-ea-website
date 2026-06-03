@@ -33,7 +33,7 @@ const BENEFITS = [
   {
     value: "Network",
     label: "Partner ecosystem",
-    detail: "HPE · Intel · Bosch · Schneider · MathWorks.",
+    detail: "Anchor industry and research partners.",
   },
 ];
 
@@ -49,7 +49,7 @@ export function ApplySpread() {
         <span className="font-mono text-[13px] tracking-[0.18em] text-brand-cerulean">
           004 / 005
         </span>
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-navy/60">
+        <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-brand-cerulean">
           Apply
         </span>
       </header>

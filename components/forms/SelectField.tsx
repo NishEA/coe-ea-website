@@ -35,6 +35,7 @@ export function SelectField({
         defaultValue={defaultValue}
         aria-describedby={errorId}
         aria-invalid={!!error || undefined}
+        suppressHydrationWarning
         className="mt-2 w-full appearance-none border-b border-brand-navy/30 bg-transparent py-2 font-body text-brand-navy outline-none focus:border-brand-cerulean"
       >
         {placeholder && (

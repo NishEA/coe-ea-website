@@ -1,5 +1,6 @@
 'use client'
 
+import type { CSSProperties } from 'react'
 import { DOMAINS } from '@/data/domain-provenance'
 import { useField } from '@/components/field/FieldProvider'
 
@@ -14,14 +15,17 @@ export function DomainMetadata() {
   if (!d) return null
 
   const idx = DOMAIN_INDEX.get(d.id)!
-  const flipped = d.fieldX > 0.65
+  // Nodes in the right half of the viewport sit over the orbit + cube cluster.
+  // Pin their metadata to the left side so it never overlaps the diagram.
+  const positionStyle: CSSProperties = d.fieldX >= 0.5
+    ? { left: 'auto', right: '48%' }
+    : { left: `calc(${d.fieldX * 100}vw + 20px)`, right: 'auto' }
 
   return (
     <div
       className="pointer-events-none fixed z-10 max-w-[220px] transition-opacity duration-300"
       style={{
-        left: flipped ? 'auto' : `calc(${d.fieldX * 100}vw + 20px)`,
-        right: flipped ? `calc(${(1 - d.fieldX) * 100}vw + 20px)` : 'auto',
+        ...positionStyle,
         top: `calc(${d.fieldY * 100}vh + 14px)`,
       }}
       aria-live="polite"

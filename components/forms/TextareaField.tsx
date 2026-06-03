@@ -47,6 +47,7 @@ export function TextareaField({
         defaultValue={defaultValue}
         aria-describedby={[errorId, counterId].filter(Boolean).join(" ")}
         aria-invalid={!!error || undefined}
+        suppressHydrationWarning
         className="mt-2 w-full resize-none border-b border-brand-navy/30 bg-transparent py-2 font-body text-brand-navy outline-none focus:border-brand-cerulean"
         onChange={(e) => {
           setLength(e.target.value.length);

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Concept C — The Signal · CoE-EA</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500&display=swap');
+
+  :root{
+    --paper:#f7f4ed;
+    --midnight:#070d20;
+    --midnight-2:#0b1633;
+    --navy:#0e2d7a;
+    --cerulean:#00a4e4;
+    --spark:#2ee6ff;
+    --ice:#b7cfe8;
+    --amber:#d4a853;
+    --amber-hi:#f0cd7e;
+    --legacy:#e0894a;
+    --green:#22c55e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--midnight);color:var(--ice);overflow-x:hidden}
+  .serif{font-family:'Source Serif 4',Georgia,serif}
+  .mono{font-family:'JetBrains Mono',monospace}
+
+  /* ---- The split-page hero ---- */
+  .signal{
+    position:relative;min-height:100vh;display:flex;flex-direction:column;
+    /* cream top half, deep midnight bottom half — hard horizontal split */
+    background:linear-gradient(180deg, var(--paper) 0%, var(--paper) 50%, var(--midnight) 50%, var(--midnight) 100%);
+  }
+
+  /* nav — minimal */
+  nav{position:relative;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:26px 44px}
+  .logo{font-family:'Source Serif 4';font-style:italic;font-size:19px;letter-spacing:.01em;color:var(--midnight)}
+  .enter{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--midnight);text-decoration:none;opacity:.7;transition:.2s}
+  .enter:hover{opacity:1}
+
+  /* the editorial grid */
+  .grid{
+    position:relative;z-index:10;flex:1;
+    display:grid;grid-template-columns:1fr 1px 1fr;align-items:center;
+    padding:0 44px;gap:0;
+  }
+
+  /* center divider with pulsing signal dot */
+  .divider{position:relative;align-self:stretch;background:linear-gradient(180deg,rgba(14,45,122,.25),rgba(183,207,232,.25));}
+  .divider .signal-dot{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:12px;height:12px;border-radius:50%;background:var(--amber);
+    box-shadow:0 0 0 0 rgba(212,168,83,.6);animation:ping 2.4s cubic-bezier(0,0,.2,1) infinite;
+  }
+  .divider .signal-core{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:12px;height:12px;border-radius:50%;background:var(--amber-hi);
+  }
+  @keyframes ping{
+    0%{box-shadow:0 0 0 0 rgba(212,168,83,.55)}
+    70%{box-shadow:0 0 0 26px rgba(212,168,83,0)}
+    100%{box-shadow:0 0 0 0 rgba(212,168,83,0)}
+  }
+
+  .col{padding:0 56px}
+  .col.left{padding-right:80px}
+  .col.right{padding-left:80px}
+
+  /* The headline lives on the dark bottom half visually — white text */
+  .headline{
+    font-family:'Source Serif 4';font-style:italic;font-weight:600;
+    font-size:clamp(3rem,7.4vw,8rem);line-height:.96;letter-spacing:-.015em;
+    color:#fff;
+    text-shadow:0 1px 40px rgba(0,0,0,.4);
+  }
+  .subhead{
+    font-family:'Source Serif 4';font-weight:300;
+    font-size:clamp(2rem,5vw,5.4rem);line-height:1.02;letter-spacing:-.01em;
+    color:rgba(183,207,232,.5);text-align:right;
+  }
+  .subhead .amber{color:var(--amber);font-style:italic;font-weight:400}
+
+  /* engineering-spec body lines below the fold */
+  .specs{
+    position:relative;z-index:10;
+    border-top:1px solid rgba(183,207,232,.12);
+    background:var(--midnight);
+    padding:34px 44px 30px;
+    display:flex;flex-wrap:wrap;gap:8px 40px;align-items:center;justify-content:space-between;
+  }
+  .specline{font-family:'JetBrains Mono';font-size:12px;letter-spacing:.04em;color:rgba(183,207,232,.62);display:flex;align-items:center;gap:10px}
+  .specline::before{content:'>';color:var(--amber);font-weight:500}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:14px 24px;text-decoration:none;transition:.2s;white-space:nowrap}
+  .btn.fill{background:var(--paper);color:var(--midnight)}
+  .btn.fill:hover{background:#fff}
+  .btn.line{border:1px solid rgba(183,207,232,.3);color:var(--ice)}
+  .btn.line:hover{border-color:var(--cerulean);color:var(--spark)}
+
+  /* status row top-of-dark */
+  .status{position:absolute;left:50%;top:calc(50% + 18px);transform:translateX(-50%);font-family:'JetBrains Mono';font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:rgba(183,207,232,.45);white-space:nowrap}
+  .status .g{color:var(--green)}
+
+  /* ---- particle field that rises on scroll ---- */
+  .field{position:relative;min-height:100vh;background:var(--midnight);overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .field canvas{position:absolute;inset:0;width:100%;height:100%}
+  .field .label{position:relative;z-index:2;text-align:center}
+  .field .label .k{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--cerulean)}
+  .field .label .h{margin-top:14px;font-family:'Source Serif 4';font-style:italic;font-size:clamp(1.8rem,4vw,3.2rem);color:var(--paper)}
+
+  @media(max-width:900px){
+    .grid{grid-template-columns:1fr;gap:32px;padding:40px 28px}
+    .divider{display:none}
+    .col{padding:0}
+    .subhead{text-align:left}
+    .signal{background:linear-gradient(180deg,var(--paper) 0%,var(--paper) 26%,var(--midnight) 26%,var(--midnight) 100%)}
+    .specs{flex-direction:column;align-items:flex-start;gap:18px}
+  }
+</style>
+</head>
+<body>
+
+<section class="signal">
+  <nav>
+    <div class="logo">CoE-EA</div>
+    <a class="enter" href="#field">Enter ↓</a>
+  </nav>
+
+  <div class="grid">
+    <div class="col left">
+      <h1 class="headline">India&rsquo;s industry runs on instinct.</h1>
+    </div>
+    <div class="divider">
+      <div class="signal-dot"></div>
+      <div class="signal-core"></div>
+      <div class="status mono"><span class="g">●</span> SIGNAL LOCKED · CENTRE ACTIVE</div>
+    </div>
+    <div class="col right">
+      <p class="subhead serif">CoE-EA is the <span class="amber">instrument</span> that turns signal into efficiency.</p>
+    </div>
+  </div>
+
+  <div class="specs">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="specline mono">Built on citation-backed intelligence.</div>
+      <div class="specline mono">Deployed across 10 infrastructure domains.</div>
+      <div class="specline mono">52 startups in the field.</div>
+    </div>
+    <div class="cta-row">
+      <a class="btn fill mono" href="#">Request cohort access →</a>
+      <a class="btn line mono" href="#field">See the field ↓</a>
+    </div>
+  </div>
+</section>
+
+<section class="field" id="field">
+  <canvas id="particles"></canvas>
+  <div class="label">
+    <div class="k mono">002 / 005 — The Field</div>
+    <div class="h serif">Ten domains. Each one is broken in a specific way.</div>
+  </div>
+</section>
+
+<script>
+  // particle field "rises from below the fold"
+  const c = document.getElementById('particles');
+  const ctx = c.getContext('2d');
+  let W, H, pts = [];
+  function size(){
+    W = c.width = c.offsetWidth * devicePixelRatio;
+    H = c.height = c.offsetHeight * devicePixelRatio;
+    pts = Array.from({length:90}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      r: Math.random()*1.6+0.4, vy: -(Math.random()*0.25+0.05)*devicePixelRatio,
+      a: Math.random()*0.5+0.1,
+    }));
+  }
+  size(); addEventListener('resize', size);
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(const p of pts){
+      p.y += p.vy;
+      if(p.y < 0){ p.y = H; p.x = Math.random()*W; }
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r*devicePixelRatio,0,Math.PI*2);
+      ctx.fillStyle = `rgba(0,164,228,${p.a})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+</script>
+</body>
+</html>

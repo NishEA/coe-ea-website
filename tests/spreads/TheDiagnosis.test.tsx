@@ -16,8 +16,8 @@ describe('TheDiagnosis', () => {
       .toHaveAttribute('href', '#apply')
   })
 
-  it('renders first copy line', () => {
+  it('renders the cinematic headline copy', () => {
     render(<TheDiagnosis />, { wrapper: W })
-    expect(screen.getByText(/your infrastructure is already talking/i)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/measured\s*signal/i)
   })
 })

@@ -42,6 +42,9 @@ const ELIGIBILITY = [
 
 export function TheInstrument() {
   return (
+    <>
+      {/* Seam hairline: 1px cerulean at the dark/cream boundary */}
+      <div className="h-px bg-brand-cerulean" aria-hidden="true" />
     <section
       id="instrument"
       aria-label="The Instrument — about the Centre of Excellence"
@@ -49,11 +52,11 @@ export function TheInstrument() {
     >
       {/* Section header */}
       <header className="mb-16 flex items-baseline justify-between">
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
-          004 / 005
-        </span>
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-navy/60">
+        <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-brand-cerulean">
           The Centre
+        </span>
+        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/50">
+          KITS · STPI · HPE
         </span>
       </header>
 
@@ -64,7 +67,7 @@ export function TheInstrument() {
             <h2 className="font-display text-[2rem] font-light leading-[1.1] tracking-[-0.01em] text-brand-navy tablet:text-[3rem]">
               Who runs the Centre.
             </h2>
-            <p className="mt-6 font-body text-[17px] leading-[1.6] text-brand-navy/70">
+            <p className="mt-6 font-body text-[17px] leading-[1.6] text-ink/85">
               The Centre of Excellence on Efficiency Augmentation (CoE-EA) is jointly funded by{' '}
               <strong className="font-semibold text-brand-navy">Karnataka Innovation &amp; Technology Society (KITS)</strong>,
               Government of Karnataka,{' '}
@@ -72,7 +75,7 @@ export function TheInstrument() {
               <strong className="font-semibold text-brand-navy">Hewlett Packard Enterprise (HPE)</strong>.
               STPI is the implementing agency and an autonomous society under MeitY, Government of India.
             </p>
-            <p className="mt-4 font-body text-[15px] leading-[1.6] text-brand-navy/60">
+            <p className="mt-4 font-body text-[15px] leading-[1.6] text-ink/75">
               We instrument, diagnose, and augment infrastructure across ten domains. The work does not
               end when the instrument is built — it ends when the system no longer needs us.
             </p>
@@ -85,7 +88,7 @@ export function TheInstrument() {
               </p>
               <dl className="mt-6 space-y-5">
                 <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-brand-navy/50">Email</dt>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/60">Email</dt>
                   <dd className="mt-1 font-body text-[15px] text-brand-navy">
                     <a href="mailto:blr.coeea@stpi.in" className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean">
                       blr.coeea@stpi.in
@@ -93,7 +96,7 @@ export function TheInstrument() {
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-brand-navy/50">Address</dt>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/60">Address</dt>
                   <dd className="mt-1 font-body text-[15px] leading-[1.6] text-brand-navy">
                     No. 4, 1st Floor, 31st Cross<br />
                     11th Main Road, 4th T Block<br />
@@ -102,7 +105,7 @@ export function TheInstrument() {
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-brand-navy/50">Phone</dt>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/60">Phone</dt>
                   <dd className="mt-1 font-body text-[15px] text-brand-navy">
                     <a href="tel:+918024411785" className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean">
                       +91–80–2441–1785
@@ -121,10 +124,10 @@ export function TheInstrument() {
           <h3 className="font-display text-[1.75rem] leading-[1.1] tracking-[-0.01em] text-brand-navy tablet:col-span-5 tablet:text-[2.25rem]">
             How selection works.
           </h3>
-          <p className="font-body text-[15px] leading-[1.6] text-brand-navy/60 tablet:col-span-6 tablet:col-start-7">
+          <p className="font-body text-[15px] leading-[1.6] text-ink/75 tablet:col-span-6 tablet:col-start-7">
             Selection is conducted by the Project Management Group (PMG) — a nine-member body comprising
             STPI, KITS, HPE, industry, and academic representatives. Criteria are weighted across technical
-            feasibility, market opportunity, team capability, and alignment with the Centre's ten priority
+            feasibility, market opportunity, team capability, and alignment with the Centre&rsquo;s ten priority
             domains. Incubation term is 12 months, renewable for 6 months on demonstrated progress.
           </p>
         </div>
@@ -142,12 +145,12 @@ export function TheInstrument() {
         </ol>
 
         <div className="mt-12 border-t border-brand-navy/10 pt-8">
-          <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-navy/50">
+          <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60">
             Programme terms
           </p>
           <ul className="grid grid-cols-1 gap-2 tablet:grid-cols-2">
             {PROGRAMME_TERMS.map(t => (
-              <li key={t} className="flex items-start gap-2 font-body text-[14px] leading-[1.6] text-brand-navy/70">
+              <li key={t} className="flex items-start gap-2 font-body text-[14px] leading-[1.6] text-ink/85">
                 <span aria-hidden className="font-mono text-brand-cerulean">→</span>
                 {t}
               </li>
@@ -163,7 +166,7 @@ export function TheInstrument() {
         </h3>
         <ul className="space-y-3">
           {ELIGIBILITY.map(c => (
-            <li key={c} className="flex items-start gap-3 font-body text-[15px] leading-[1.6] text-brand-navy/70">
+            <li key={c} className="flex items-start gap-3 font-body text-[15px] leading-[1.6] text-ink/85">
               <span aria-hidden className="font-mono text-brand-cerulean">→</span>
               {c}
             </li>
@@ -173,7 +176,7 @@ export function TheInstrument() {
 
       {/* Institutional links */}
       <div>
-        <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-navy/50">
+        <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60">
           Institutional links
         </p>
         <ul className="flex flex-wrap gap-x-8 gap-y-3">
@@ -197,5 +200,6 @@ export function TheInstrument() {
         </ul>
       </div>
     </section>
+    </>
   )
 }

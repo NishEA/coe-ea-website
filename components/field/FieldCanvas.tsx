@@ -94,7 +94,12 @@ export function FieldCanvas() {
       }
 
       for (const p of particles) {
-        const lum = computeRevealLuminance(p, ptr.x, ptr.y, REVEAL_RADIUS)
+        // Suppress reveal boost for particles in the orbit zone (right half) to
+        // avoid congestion with the cube cluster, but keep a 0.12 baseline so
+        // the field is always visible regardless of pointer position.
+        const inOrbitZone = p.x > W * 0.5
+        const boost = inOrbitZone ? 0 : computeRevealLuminance(p, ptr.x, ptr.y, REVEAL_RADIUS)
+        const lum = Math.max(0.12, boost)
         ctx.fillStyle = `rgba(183,207,232,${lum})`
         ctx.beginPath()
         ctx.arc(p.x, p.y, 1 + lum * 0.8, 0, Math.PI * 2)
@@ -118,7 +123,12 @@ export function FieldCanvas() {
               ? schema.repair(ctx, t, 1, nx, ny)
               : schema.pathology(ctx, t, nx, ny)
           }
-          drawCounter(ctx, counters[d.id], nx, ny, isResolved)
+          // Only paint the text counter label for nodes in the left half of the
+          // viewport; right-half nodes (>= 0.5) sit under the orbit diagram, so
+          // their labels would clash with the SVG orbit / cube cluster.
+          if (d.fieldX < 0.5) {
+            drawCounter(ctx, counters[d.id], nx, ny, isResolved)
+          }
           ctx.save()
           ctx.shadowBlur = 20
           ctx.shadowColor = isResolved ? '#2EE6FF' : '#F59C3A'
@@ -140,7 +150,10 @@ export function FieldCanvas() {
 
       const nx11 = DOMAIN_11.fieldX * W, ny11 = DOMAIN_11.fieldY * H
       const dx11 = ptr.x - nx11, dy11 = ptr.y - ny11
-      if (dx11 * dx11 + dy11 * dy11 < REVEAL_RADIUS * REVEAL_RADIUS) {
+      if (
+        DOMAIN_11.fieldX < 0.5 &&
+        dx11 * dx11 + dy11 * dy11 < REVEAL_RADIUS * REVEAL_RADIUS
+      ) {
         ctx.save(); ctx.globalAlpha = 0.65; ctx.fillStyle = '#B7CFE8'
         ctx.font = '11px Courier New'
         ctx.fillText(DOMAIN_11.sentence, Math.min(nx11 + 12, W - 340), ny11 - 8)
