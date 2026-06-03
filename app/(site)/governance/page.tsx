@@ -150,7 +150,7 @@ const PMG = [
 const REPORTING = [
   {
     cadence: "Quarterly",
-    audience: "KITS & STPI HQ",
+    audience: "STPI & KITS HQ",
     content:
       "Milestone progress, grant utilisation, startup KPIs, and cohort status.",
   },
