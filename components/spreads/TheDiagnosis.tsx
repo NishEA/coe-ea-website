@@ -24,8 +24,15 @@ export function TheDiagnosis() {
 
   useEffect(() => {
     const onMove = (e: PointerEvent) => setPointer({ x: e.clientX, y: e.clientY })
+    const onDown = (e: PointerEvent) => {
+      if (e.pointerType === 'touch') setPointer({ x: e.clientX, y: e.clientY })
+    }
     window.addEventListener('pointermove', onMove, { passive: true })
-    return () => window.removeEventListener('pointermove', onMove)
+    window.addEventListener('pointerdown', onDown, { passive: true })
+    return () => {
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerdown', onDown)
+    }
   }, [setPointer])
 
   const ctaActive = resolvedDomains.size >= 1
@@ -122,7 +129,7 @@ export function TheDiagnosis() {
         {/* Diagnostic hint + state CTA — hidden until first scroll */}
         <div className={`relative z-10 mx-auto -mt-6 mb-10 max-w-md px-6 text-center transition-opacity duration-700 ${hintVisible ? 'opacity-100' : 'opacity-0'}`}>
           <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/35">
-            Hold any node 700ms to resolve
+            Tap · hold any node to resolve
           </p>
           <a
             href="#apply"

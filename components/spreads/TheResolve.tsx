@@ -34,16 +34,26 @@ export function TheResolve() {
     let timer: ReturnType<typeof setTimeout> | null = null
     const holdTs = { current: 0 }
 
-    const onDown = () => {
-      if (!activeDomainId || resolvedDomains.has(activeDomainId)) return
-      const id = activeDomainId
+    const onDown = (e: PointerEvent) => {
+      let id = activeDomainId
+      if (!id && e.pointerType === 'touch') {
+        const W = window.innerWidth, H = window.innerHeight
+        const R2 = 220 * 220
+        for (const d of DOMAINS) {
+          const dx = e.clientX - d.fieldX * W
+          const dy = e.clientY - d.fieldY * H
+          if (dx * dx + dy * dy < R2) { id = d.id; break }
+        }
+      }
+      if (!id || resolvedDomains.has(id)) return
+      const capturedId = id
       holdTs.current = Date.now()
       timer = setTimeout(() => {
-        resolveDomain(id)
+        resolveDomain(capturedId)
         track('domain_resolved', {
-          domain: id,
+          domain: capturedId,
           timeToResolve: Date.now() - holdTs.current,
-          mobile: false,
+          mobile: e.pointerType === 'touch',
         })
       }, HOLD_MS)
     }
@@ -91,7 +101,7 @@ export function TheResolve() {
           : 'All ten domains resolved.'}
       </p>
       <p className="mb-12 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/40">
-        Hover a node · Press and hold to resolve · Tab + Enter for keyboard
+        Tap or hover a node · Hold to resolve · Tab + Enter for keyboard
       </p>
 
       {/* Before / After split — legacy amber vs instrumented cerulean */}
