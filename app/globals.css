@@ -409,6 +409,16 @@ body {
   accent-color: var(--color-brand-cerulean);
 }
 
+/* ── Loading splash ──────────────────────────────────────────── */
+@keyframes splashPulse {
+  0%, 100% { opacity: 0.6; transform: scale(0.97); }
+  50%       { opacity: 1;   transform: scale(1); }
+}
+@keyframes splashDot {
+  0%, 80%, 100% { opacity: 0.15; transform: scale(0.7); }
+  40%            { opacity: 1;    transform: scale(1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .app-frame.frame-enter,
   .word-rise,
@@ -417,7 +427,9 @@ body {
   .marquee-inner,
   .waveform span,
   .dot-anim,
-  .op-dot {
+  .op-dot,
+  .splash-logo,
+  .splash-dot {
     animation: none !important;
   }
   .word-rise,

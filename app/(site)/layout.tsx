@@ -49,6 +49,28 @@ export default function SiteLayout({
 
   return (
     <LenisProvider>
+    {/* Splash — server-rendered, visible until React mounts (no blank screen) */}
+    {!mounted && (
+      <div
+        aria-hidden="true"
+        className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-5 bg-bg-void"
+      >
+        <Image
+          src="/logos/coe-ea.png"
+          alt=""
+          width={140}
+          height={52}
+          className="splash-logo h-16 w-auto object-contain brightness-0 invert"
+          style={{ animation: 'splashPulse 1.8s ease-in-out infinite' }}
+          priority
+        />
+        <div className="flex gap-2">
+          <span className="splash-dot h-1.5 w-1.5 rounded-full bg-brand-cerulean" style={{ animation: 'splashDot 1.2s ease-in-out infinite' }} />
+          <span className="splash-dot h-1.5 w-1.5 rounded-full bg-brand-cerulean" style={{ animation: 'splashDot 1.2s ease-in-out 0.2s infinite' }} />
+          <span className="splash-dot h-1.5 w-1.5 rounded-full bg-brand-cerulean" style={{ animation: 'splashDot 1.2s ease-in-out 0.4s infinite' }} />
+        </div>
+      </div>
+    )}
     <div className={`app-frame ${mounted ? 'frame-enter' : 'opacity-0'}`}>
       {/* Skip-to-content (WCAG 2.4.1) */}
       <a
