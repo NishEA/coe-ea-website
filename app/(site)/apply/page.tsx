@@ -17,7 +17,7 @@ const STATS = [
 ]
 
 const BENEFITS = [
-  { value: '₹10L', label: 'Seed funding', detail: 'Non-dilutive grant to get you moving.' },
+  { value: '₹10L', label: 'Seed grant', detail: 'Equity-based; Centre takes 1–3% on signing.' },
   { value: 'Lab', label: 'Hardware access', detail: 'IoT testbeds, instrumented bays, edge compute.' },
   { value: 'Mentors', label: 'Domain mentors', detail: 'Industry practitioners, not generalist advisors.' },
   { value: '50%', label: 'Market support', detail: 'Reimbursement on qualifying customer-development travel.' },
