@@ -3,6 +3,53 @@ import Link from 'next/link'
 import { DarkHero } from '@/components/ui/DarkHero'
 import { PortfolioMorph } from '@/components/ui/morphs/PortfolioMorph'
 
+// Domain → visual cluster (amber=hardware/energy, cerulean=digital/AI, operational=sustainability/life)
+const DOMAIN_CLUSTER: Record<string, 'amber' | 'cerulean' | 'operational'> = {
+  'Smart Energy':        'amber',
+  'Smart Manufacturing': 'amber',
+  'Industry 4.0':        'amber',
+  'IoT':                 'amber',
+  'Electronics':         'amber',
+  'Semiconductor':       'amber',
+  'E-Mobility':          'amber',
+  'Home Automation':     'amber',
+  'Smart Water':         'amber',
+  'MobilityTech':        'amber',
+  'AI / ML':             'cerulean',
+  'AI / DeepTech':       'cerulean',
+  'Industrial AI':       'cerulean',
+  'Enterprise SaaS':     'cerulean',
+  'IT Services':         'cerulean',
+  'FinTech':             'cerulean',
+  'ProductivityTech':    'cerulean',
+  'MarketingTech':       'cerulean',
+  'EdTech':              'cerulean',
+  'Extended Reality':    'cerulean',
+  'FashionTech':         'cerulean',
+  'DesignTech':          'cerulean',
+  'CreativeTech':        'cerulean',
+  'CleanTech':           'operational',
+  'AgriTech':            'operational',
+  'HealthTech':          'operational',
+  'Sustainability':      'operational',
+  'ClimateTech':         'operational',
+  'AssistiveTech':       'operational',
+  'Robotics':            'operational',
+  'SpaceTech':           'operational',
+  'DronesTech':          'operational',
+}
+
+const DOT_CLASS:  Record<string, string> = {
+  amber:       'bg-amber',
+  cerulean:    'bg-brand-cerulean',
+  operational: 'bg-operational',
+}
+const TEXT_CLASS: Record<string, string> = {
+  amber:       'text-amber',
+  cerulean:    'text-brand-cerulean',
+  operational: 'text-operational',
+}
+
 export const metadata: Metadata = {
   title: 'Startup Program',
   description:
@@ -194,25 +241,30 @@ export default function PortfolioPage() {
             aria-label="Portfolio startups"
             className="grid grid-cols-1 gap-px border border-white/[0.08] bg-white/[0.06] tablet:grid-cols-2 desktop:grid-cols-3"
           >
-            {STARTUPS.map(s => (
-              <li
-                key={s.name}
-                className="flex flex-col gap-3 bg-bg-void p-8 transition hover:bg-white/[0.03]"
-              >
-                <span aria-hidden className="inline-block h-2 w-2 bg-amber" />
-                <span className="font-display text-[1.4rem] font-semibold leading-tight text-white">
-                  {s.name}
-                </span>
-                <div className="mt-auto flex items-baseline justify-between pt-4">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-brand-cerulean">
-                    {s.domain}
+            {STARTUPS.map(s => {
+              const cluster = DOMAIN_CLUSTER[s.domain] ?? 'cerulean'
+              return (
+                <li
+                  key={s.name}
+                  className="flex flex-col gap-3 bg-bg-void p-8 transition hover:bg-white/[0.03]"
+                >
+                  <span aria-hidden className={`inline-block h-2 w-2 ${DOT_CLASS[cluster]}`} />
+                  <span className="font-display text-[1.4rem] font-semibold leading-tight text-white">
+                    {s.name}
                   </span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-brand-ice/40">
-                    {s.stage}
-                  </span>
-                </div>
-              </li>
-            ))}
+                  <div className="mt-auto flex items-baseline justify-between pt-4">
+                    <span className={`font-mono text-[10px] uppercase tracking-[0.14em] ${TEXT_CLASS[cluster]}`}>
+                      {s.domain}
+                    </span>
+                    <span className={`font-mono text-[10px] uppercase tracking-[0.1em] ${
+                      s.stage === 'Growth' ? 'text-amber/70' : 'text-brand-ice/40'
+                    }`}>
+                      {s.stage}
+                    </span>
+                  </div>
+                </li>
+              )
+            })}
           </ul>
 
           <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-ice/40">
