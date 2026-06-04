@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import { DomainMarquee } from '@/components/ui/DomainMarquee'
+import { LenisProvider } from '@/components/motion/LenisProvider'
 
 const NAV = [
   { href: '/', label: 'Home' },
@@ -46,6 +47,7 @@ export default function SiteLayout({
     href === '/' ? pathname === '/' : pathname.startsWith(href)
 
   return (
+    <LenisProvider>
     <div className={`app-frame ${mounted ? 'frame-enter' : 'opacity-0'}`}>
       {/* Skip-to-content (WCAG 2.4.1) */}
       <a
@@ -187,5 +189,6 @@ export default function SiteLayout({
       {/* Domain marquee — every page */}
       <DomainMarquee />
     </div>
+    </LenisProvider>
   )
 }
