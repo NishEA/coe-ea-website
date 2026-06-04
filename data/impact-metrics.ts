@@ -25,6 +25,6 @@ export const IMPACT_METRICS: ImpactMetric[] = [
 export const PARTNERS: Partner[] = [
   { name: 'HPE',       logoSrc: '/logos/hpe.avif',       chip: true },
   { name: 'Intel',     logoSrc: '/logos/intel.svg' },
-  { name: 'Bosch',     logoSrc: '/logos/bosch-si.svg' },
+  { name: 'Bosch',     logoSrc: '/logos/bosch-gst.png', chip: true },
   { name: 'Schneider', logoSrc: '/logos/schneider.svg' },
 ]

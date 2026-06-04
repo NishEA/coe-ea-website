@@ -7,7 +7,7 @@ const PROGRAMME_PARTNERS = [
   { name: 'HPE',                                              logoSrc: '/logos/hpe.avif',  chip: true },
   { name: 'Intel',                                            logoSrc: '/logos/intel.svg' },
   { name: 'Schneider Electric',                               logoSrc: '/logos/schneider.svg' },
-  { name: 'Bosch Global Software Technologies Pvt Ltd',       logoSrc: '/logos/bosch-si.svg' },
+  { name: 'Bosch Global Software Technologies Pvt Ltd',       logoSrc: '/logos/bosch-gst.png', chip: true },
   { name: 'IEEE',                                             logoSrc: '/logos/ieee.svg' },
   { name: 'KDEM',                                             logoSrc: undefined },
 ]
