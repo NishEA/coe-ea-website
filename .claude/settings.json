@@ -1,0 +1,70 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "cd /c/Users/Nishant/coe-ea-website && FILE=$(echo \"$CLAUDE_TOOL_INPUT\" | /c/Python314/python -c \"import sys,json; d=json.load(sys.stdin); print(d.get('file_path',''))\" 2>/dev/null || true); if echo \"$FILE\" | grep -qE '\\.(ts|tsx|css|mjs|json)$'; then node_modules/.bin/prettier --write \"$FILE\" 2>/dev/null || true; fi"
+          },
+          {
+            "type": "command",
+            "shell": "bash",
+            "asyncRewake": true,
+            "statusMessage": "Type-checking...",
+            "command": "FILE=$(echo \"$CLAUDE_TOOL_INPUT\" | /c/Python314/python -c \"import sys,json; d=json.load(sys.stdin); print(d.get('file_path',''))\" 2>/dev/null || true); if echo \"$FILE\" | grep -qE '\\.(ts|tsx)$'; then cd /c/Users/Nishant/coe-ea-website && OUTPUT=$(node_modules/.bin/tsc --noEmit 2>&1); CODE=$?; if [ $CODE -ne 0 ]; then echo \"$OUTPUT\" | head -20; exit 2; fi; fi"
+          },
+          {
+            "type": "command",
+            "shell": "bash",
+            "asyncRewake": true,
+            "statusMessage": "Linting...",
+            "command": "FILE=$(echo \"$CLAUDE_TOOL_INPUT\" | /c/Python314/python -c \"import sys,json; d=json.load(sys.stdin); print(d.get('file_path',''))\" 2>/dev/null || true); if echo \"$FILE\" | grep -qE '\\.(ts|tsx|js|jsx)$'; then cd /c/Users/Nishant/coe-ea-website && OUTPUT=$(node_modules/.bin/eslint --fix \"$FILE\" 2>&1); CODE=$?; if [ $CODE -ne 0 ]; then echo \"$OUTPUT\" | head -20; exit 2; fi; fi"
+          },
+          {
+            "type": "command",
+            "shell": "bash",
+            "asyncRewake": true,
+            "statusMessage": "Running tests...",
+            "command": "FILE=$(echo \"$CLAUDE_TOOL_INPUT\" | /c/Python314/python -c \"import sys,json; d=json.load(sys.stdin); print(d.get('file_path',''))\" 2>/dev/null || true); if echo \"$FILE\" | grep -qE '\\.test\\.(ts|tsx|js|jsx)$'; then cd /c/Users/Nishant/coe-ea-website && OUTPUT=$(node_modules/.bin/vitest run \"$FILE\" 2>&1); CODE=$?; if [ $CODE -ne 0 ]; then echo \"$OUTPUT\" | tail -20; exit 2; fi; fi"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "FILE=$(echo \"$CLAUDE_TOOL_INPUT\" | /c/Python314/python -c \"import sys,json; d=json.load(sys.stdin); print(d.get('file_path',''))\" 2>/dev/null || true); if echo \"$FILE\" | grep -q \"\\.env\\.local\"; then echo 'BLOCKED: .env.local is protected. Edit .env.example for schema changes.'; exit 2; fi"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "CMD=$(echo \"$CLAUDE_TOOL_INPUT\" | /c/Python314/python -c \"import sys,json; d=json.load(sys.stdin); print(d.get('command',''))\" 2>/dev/null || true); if echo \"$CMD\" | grep -qE 'git commit'; then cd /c/Users/Nishant/coe-ea-website && OUTPUT=$(npm run check:tbd 2>&1); CODE=$?; if [ $CODE -ne 0 ]; then printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"TBD placeholders found — run npm run check:tbd\"}}'; fi; fi"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "cd /c/Users/Nishant/coe-ea-website; TS=$(date +%Y%m%d-%H%M%S); DIR=\"$HOME/.gstack/projects/coe-ea-website/checkpoints\"; mkdir -p \"$DIR\"; { echo \"# Pre-Compact Checkpoint $TS\"; echo; echo \"## Branch\"; git branch --show-current; echo; echo \"## Git Status\"; git status --short; echo; echo \"## Recent Commits\"; git log --oneline -5; } > \"$DIR/${TS}-pre-compact.md\" 2>&1; printf '{\"systemMessage\": \"Checkpoint saved before compact\"}'"
+          }
+        ]
+      }
+    ]
+  }
+}
