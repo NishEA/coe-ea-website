@@ -71,13 +71,25 @@ export function TheLedger() {
             {PARTNERS.map(p => (
               <li key={p.name}>
                 {p.logoSrc ? (
-                  <Image
-                    src={p.logoSrc}
-                    alt={p.name}
-                    width={120}
-                    height={44}
-                    className="h-11 w-auto object-contain"
-                  />
+                  p.chip ? (
+                    <div className="rounded bg-white px-3 py-2">
+                      <Image
+                        src={p.logoSrc}
+                        alt={p.name}
+                        width={120}
+                        height={44}
+                        className="h-11 w-auto object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <Image
+                      src={p.logoSrc}
+                      alt={p.name}
+                      width={120}
+                      height={44}
+                      className="h-11 w-auto object-contain"
+                    />
+                  )
                 ) : (
                   <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
                     {p.name}

@@ -7,6 +7,7 @@ export interface ImpactMetric {
 export interface Partner {
   name: string
   logoSrc?: string
+  chip?: boolean  // true = render inside a white chip (for white-background images)
 }
 
 export const IMPACT_METRICS: ImpactMetric[] = [
@@ -22,7 +23,7 @@ export const IMPACT_METRICS: ImpactMetric[] = [
 ]
 
 export const PARTNERS: Partner[] = [
-  { name: 'HPE',       logoSrc: '/logos/hpe.avif' },
+  { name: 'HPE',       logoSrc: '/logos/hpe.avif',       chip: true },
   { name: 'Intel',     logoSrc: '/logos/intel.svg' },
   { name: 'Bosch',     logoSrc: '/logos/bosch-si.svg' },
   { name: 'Schneider', logoSrc: '/logos/schneider.svg' },
