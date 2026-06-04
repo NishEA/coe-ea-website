@@ -12,6 +12,21 @@ const VALID_PILLAR_VALUES = new Set([
   'smart_hospital', 'smart_security', 'intelligent_asset_monitoring',
 ])
 
+// Bridges provenance domain IDs (dash-separated, used by the particle field)
+// to DB enum values. Four entries are renames, not just dash→underscore.
+const PROVENANCE_TO_PILLAR: Record<string, string> = {
+  'smart-manufacturing':  'smart_manufacturing',
+  'smart-energy':         'smart_energy',
+  'smart-water':          'smart_water',
+  'smart-farming':        'smart_farming',
+  'connected-transport':  'connected_transportation',
+  'smart-healthcare':     'smart_hospital',
+  'weather-monitoring':   'weather_monitoring',
+  'smart-security':       'smart_security',
+  'asset-monitoring':     'intelligent_asset_monitoring',
+  'home-automation':      'home_office_automation',
+}
+
 const BENEFITS = [
   { value: '₹10L',     label: 'Seed grant',            detail: 'Equity-based; Centre takes 1–3% on signing.' },
   { value: 'Hardware', label: 'Lab access',             detail: 'IoT testbeds, instrumented bays, edge compute.' },
@@ -24,7 +39,8 @@ export function TheApplication() {
   const { resolvedDomains } = useField()
   const searchParams = useSearchParams()
   const rawPillar = searchParams.get('pillar') ?? ''
-  const defaultDomain = VALID_PILLAR_VALUES.has(rawPillar) ? rawPillar : ''
+  const resolvedPillar = PROVENANCE_TO_PILLAR[rawPillar] ?? rawPillar
+  const defaultDomain = VALID_PILLAR_VALUES.has(resolvedPillar) ? resolvedPillar : ''
 
   return (
     <section
