@@ -65,14 +65,14 @@ export const DOMAINS: DomainDef[] = [
   {
     id: 'smart-farming',
     name: 'Smart Farming',
-    stat: 'up to 20% yield increase from IoT precision irrigation',
+    stat: 'up to 30% yield increase from IoT precision irrigation',
     source: 'Springer Nature 2025',
     sentence: 'Soil and crop sensing that turns guesswork into precision at the field level.',
     fieldX: 0.72, fieldY: 0.58,
     legacyRatePerSec: 0.7, smartRatePerSec: 0.05, unit: 'yield lost',
     citationUrl: 'https://link.springer.com/article/10.1007/s44279-025-00430-1',
-    citationScope: "India-specific: ICAR precision farming trials across Karnataka, Punjab, and AP report comparable yield gains on paddy and wheat with IoT soil sensing. Digital Agriculture Mission targets AI-IoT coverage for 7.63 crore farmer IDs.",
-    shortStat: 'UP TO 20% MORE YIELD',
+    citationScope: "India-specific: Microsoft AI-driven IoT irrigation pilot in Andhra Pradesh achieved 30% yield increase and 70% water savings (Springer Nature 2025). ICAR precision farming trials across Karnataka, Punjab, and AP report comparable gains on paddy and wheat. Digital Agriculture Mission targets AI-IoT coverage for 7.63 crore farmer IDs.",
+    shortStat: 'UP TO 30% MORE YIELD',
   },
   {
     id: 'connected-transport',
