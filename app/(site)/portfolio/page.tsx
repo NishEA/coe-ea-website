@@ -4,9 +4,9 @@ import { DarkHero } from '@/components/ui/DarkHero'
 import { PortfolioMorph } from '@/components/ui/morphs/PortfolioMorph'
 
 export const metadata: Metadata = {
-  title: 'Startup Programme',
+  title: 'Incubatee Portfolio',
   description:
-    'The CoE-EA Startup Programme: ₹10L seed grant, 16,000 sq ft lab, domain mentors, and market support across 10 Industry 4.0 domains.',
+    'The CoE-EA Startup Programme: ₹10L seed grant, 16,000 sq ft centre, domain mentors, and market support across 10 Industry 4.0 domains.',
 }
 
 const BENEFITS = [
@@ -20,7 +20,7 @@ const BENEFITS = [
   {
     id: 'lab',
     label: 'Infrastructure',
-    headline: '16,000 sq ft lab',
+    headline: '16,000 sq ft centre',
     body: '10 domain modules covering smart water, energy, manufacturing, transport, healthcare, farming, security, weather, asset monitoring, and home automation. ICT infrastructure, co-working bays, meeting rooms, training rooms, and a cafeteria.',
     accent: 'cerulean',
   },
@@ -103,7 +103,7 @@ export default function PortfolioPage() {
     <>
       {/* ── 1. Hero ── */}
       <DarkHero
-        label="Startup Programme"
+        label="Incubatee Portfolio"
         title={
           <>
             Built inside <span className="text-amber">the machine.</span>
@@ -231,8 +231,8 @@ export default function PortfolioPage() {
             Cohort 3 applications are open.
           </h2>
           <p className="mt-4 max-w-md font-body text-[15px] leading-[1.65] text-brand-ice/60">
-            12 months. ₹10L. A lab, a domain expert, and a partner ecosystem
-            in your vertical. Based in Bengaluru.
+            12 months. ₹10L. A 16,000 sq ft centre, a domain expert, and a
+            partner ecosystem in your vertical. Based in Bengaluru.
           </p>
 
           <div className="mt-12 flex flex-wrap gap-4">
