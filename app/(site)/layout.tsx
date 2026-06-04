@@ -86,40 +86,40 @@ export default function SiteLayout({
       <header className="relative z-30 flex items-center justify-between gap-4 px-6 py-5 tablet:px-9">
         <Link
           href="/"
-          className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
+          className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
         >
-          {/* CoE-EA */}
-          <Image
-            src="/logos/coe-ea.png"
-            alt="CoE-EA — Centre of Excellence on Efficiency Augmentation"
-            width={150}
-            height={44}
-            className="h-10 w-auto object-contain brightness-0 invert"
-            priority
-          />
-          <span aria-hidden className="hidden h-6 w-px bg-white/12 tablet:block" />
-          {/* STPI */}
-          <div aria-hidden className="hidden rounded bg-white/90 px-2.5 py-1.5 tablet:block">
+          {/* Frosted glass frame — matches partner strip */}
+          <div className="flex items-center gap-3 rounded-sm border border-brand-ice/10 bg-brand-ice/5 px-4 py-2.5">
             <Image
-              src="/logos/stpi.png"
-              alt="STPI"
-              width={70}
-              height={26}
-              className="h-7 w-auto object-contain"
+              src="/logos/coe-ea.png"
+              alt="CoE-EA — Centre of Excellence on Efficiency Augmentation"
+              width={150}
+              height={44}
+              className="h-9 w-auto object-contain brightness-0 invert"
               priority
             />
-          </div>
-          <span aria-hidden className="hidden h-6 w-px bg-white/12 tablet:block" />
-          {/* KITS */}
-          <div aria-hidden className="hidden rounded bg-white/90 px-2.5 py-1.5 tablet:block">
-            <Image
-              src="/logos/kits.jpeg"
-              alt="KITS — Karnataka Innovation & Technology Society"
-              width={70}
-              height={26}
-              className="h-7 w-auto object-contain"
-              priority
-            />
+            <span aria-hidden className="hidden h-6 w-px bg-brand-ice/15 tablet:block" />
+            <div aria-hidden className="hidden rounded bg-white px-2 py-1 tablet:block">
+              <Image
+                src="/logos/stpi.png"
+                alt="STPI"
+                width={70}
+                height={26}
+                className="h-6 w-auto object-contain"
+                priority
+              />
+            </div>
+            <span aria-hidden className="hidden h-6 w-px bg-brand-ice/15 tablet:block" />
+            <div aria-hidden className="hidden rounded bg-white px-2 py-1 tablet:block">
+              <Image
+                src="/logos/kits.jpeg"
+                alt="KITS — Karnataka Innovation & Technology Society"
+                width={70}
+                height={26}
+                className="h-6 w-auto object-contain"
+                priority
+              />
+            </div>
           </div>
         </Link>
 
@@ -199,8 +199,8 @@ export default function SiteLayout({
       <footer className="relative z-10 border-t border-white/[0.06] px-6 py-10 tablet:px-9">
         <div className="flex flex-col gap-4 tablet:flex-row tablet:items-start tablet:justify-between">
           <div>
-            {/* Institution logos */}
-            <div className="mb-4 flex flex-wrap items-center gap-3">
+            {/* Institution logos — frosted glass frame */}
+            <div className="mb-4 inline-flex items-center gap-3 rounded-sm border border-brand-ice/10 bg-brand-ice/5 px-5 py-3">
               <Image
                 src="/logos/coe-ea.png"
                 alt="CoE-EA"
@@ -208,24 +208,24 @@ export default function SiteLayout({
                 height={38}
                 className="h-9 w-auto object-contain brightness-0 invert opacity-80"
               />
-              <span aria-hidden className="h-5 w-px bg-white/20" />
-              <div className="rounded bg-white/90 px-2.5 py-1.5">
+              <span aria-hidden className="h-6 w-px bg-brand-ice/15" />
+              <div className="rounded bg-white px-2 py-1">
                 <Image
                   src="/logos/stpi.png"
                   alt="STPI"
                   width={66}
                   height={26}
-                  className="h-7 w-auto object-contain"
+                  className="h-6 w-auto object-contain"
                 />
               </div>
-              <span aria-hidden className="h-5 w-px bg-white/20" />
-              <div className="rounded bg-white/90 px-2.5 py-1.5">
+              <span aria-hidden className="h-6 w-px bg-brand-ice/15" />
+              <div className="rounded bg-white px-2 py-1">
                 <Image
                   src="/logos/kits.jpeg"
                   alt="KITS — Karnataka Innovation & Technology Society"
                   width={66}
                   height={26}
-                  className="h-7 w-auto object-contain"
+                  className="h-6 w-auto object-contain"
                 />
               </div>
             </div>
