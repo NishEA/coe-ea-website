@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { DomainMarquee } from '@/components/ui/DomainMarquee'
 import { FieldProvider } from '@/components/field/FieldProvider'
 import { FieldCanvas } from '@/components/field/FieldCanvas'
@@ -35,6 +35,15 @@ export default function SiteLayout({
     setDrawerOpen(false)
   }, [pathname])
 
+  // WCAG 2.1.2 — dismiss drawer with Escape key.
+  const closeDrawer = useCallback(() => setDrawerOpen(false), [])
+  useEffect(() => {
+    if (!drawerOpen) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeDrawer() }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [drawerOpen, closeDrawer])
+
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href)
 
@@ -43,7 +52,7 @@ export default function SiteLayout({
       {/* Skip-to-content (WCAG 2.4.1) */}
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:left-4 focus:top-4 focus:rounded focus:bg-brand-cerulean focus:px-4 focus:py-2 focus:text-white focus:outline-none"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:left-4 focus:top-4 focus:rounded focus:bg-brand-cerulean focus:px-4 focus:py-2 focus:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1"
       >
         Skip to content
       </a>
@@ -115,29 +124,31 @@ export default function SiteLayout({
       </header>
 
       {/* Mobile drawer — slides in below header, hidden on tablet+ */}
-      {drawerOpen && (
-        <nav
-          id="mobile-nav"
-          aria-label="Mobile navigation"
-          className="relative z-20 border-b border-white/[0.06] bg-bg-void/95 backdrop-blur-sm tablet:hidden"
-        >
-          {NAV.map(item => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setDrawerOpen(false)}
-              aria-current={isActive(item.href) ? 'page' : undefined}
-              className={`block px-6 py-4 font-mono text-[11px] uppercase tracking-[0.14em] transition ${
-                isActive(item.href)
-                  ? 'text-white'
-                  : 'text-white/60 hover:text-white'
-              } focus-visible:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-brand-cerulean`}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-      )}
+      <nav
+        id="mobile-nav"
+        aria-label="Mobile navigation"
+        aria-hidden={!drawerOpen}
+        className={`relative z-20 overflow-hidden border-b border-white/[0.06] bg-bg-void/95 backdrop-blur-sm transition-[max-height,opacity] duration-150 ease-out tablet:hidden ${
+          drawerOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        {NAV.map(item => (
+          <Link
+            key={item.href}
+            href={item.href}
+            onClick={closeDrawer}
+            tabIndex={drawerOpen ? undefined : -1}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            className={`block px-6 py-4 font-mono text-[11px] uppercase tracking-[0.14em] transition ${
+              isActive(item.href)
+                ? 'text-white'
+                : 'text-white/60 hover:text-white'
+            } focus-visible:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-brand-cerulean`}
+          >
+            {item.label}
+          </Link>
+        ))}
+      </nav>
 
       {/* Page content */}
       <main id="main" className="relative z-10">{children}</main>
