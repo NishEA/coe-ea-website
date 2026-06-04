@@ -15,9 +15,9 @@ describe('IMPACT_METRICS', () => {
 })
 
 describe('PARTNERS', () => {
-  it('includes the 5 named partners', () => {
+  it('includes the named partners', () => {
     const names = PARTNERS.map(p => p.name)
-    for (const expected of ['HPE', 'Intel', 'Bosch', 'Schneider', 'MathWorks']) {
+    for (const expected of ['HPE', 'Intel', 'Bosch', 'Schneider']) {
       expect(names).toContain(expected)
     }
   })

@@ -76,7 +76,7 @@ export function TheLedger() {
                     alt={p.name}
                     width={120}
                     height={44}
-                    className="h-11 w-auto object-contain brightness-0 invert opacity-65"
+                    className="h-11 w-auto object-contain"
                   />
                 ) : (
                   <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">

@@ -88,26 +88,31 @@ export default function SiteLayout({
           href="/"
           className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
         >
-          {/* CoE-EA: transparent-bg logo inverted to white on dark nav */}
+          {/* CoE-EA */}
           <Image
             src="/logos/coe-ea.png"
             alt="CoE-EA — Centre of Excellence on Efficiency Augmentation"
-            width={120}
-            height={36}
-            className="h-8 w-auto object-contain brightness-0 invert"
+            width={150}
+            height={44}
+            className="h-10 w-auto object-contain brightness-0 invert"
             priority
           />
-          <span aria-hidden className="hidden h-[22px] w-px bg-white/12 tablet:block" />
-          {/* STPI: white-bg logo in a chip so it reads on dark nav */}
-          <div aria-hidden className="hidden rounded bg-white/90 px-2 py-1 tablet:block">
+          <span aria-hidden className="hidden h-6 w-px bg-white/12 tablet:block" />
+          {/* STPI */}
+          <div aria-hidden className="hidden rounded bg-white/90 px-2.5 py-1.5 tablet:block">
             <Image
               src="/logos/stpi.png"
               alt="STPI"
-              width={56}
-              height={20}
-              className="h-5 w-auto object-contain"
+              width={70}
+              height={26}
+              className="h-7 w-auto object-contain"
               priority
             />
+          </div>
+          <span aria-hidden className="hidden h-6 w-px bg-white/12 tablet:block" />
+          {/* KITS — text chip until logo file is provided */}
+          <div aria-hidden className="hidden rounded bg-white/90 px-2.5 py-1.5 tablet:block">
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-[#3a5ca8]">k-tech</span>
           </div>
         </Link>
 
@@ -188,23 +193,27 @@ export default function SiteLayout({
         <div className="flex flex-col gap-4 tablet:flex-row tablet:items-start tablet:justify-between">
           <div>
             {/* Institution logos */}
-            <div className="mb-4 flex items-center gap-4">
+            <div className="mb-4 flex flex-wrap items-center gap-3">
               <Image
                 src="/logos/coe-ea.png"
                 alt="CoE-EA"
-                width={100}
-                height={30}
-                className="h-7 w-auto object-contain brightness-0 invert opacity-80"
+                width={130}
+                height={38}
+                className="h-9 w-auto object-contain brightness-0 invert opacity-80"
               />
               <span aria-hidden className="h-5 w-px bg-white/20" />
-              <div className="rounded bg-white/90 px-2 py-1">
+              <div className="rounded bg-white/90 px-2.5 py-1.5">
                 <Image
                   src="/logos/stpi.png"
                   alt="STPI"
-                  width={52}
-                  height={19}
-                  className="h-[19px] w-auto object-contain"
+                  width={66}
+                  height={26}
+                  className="h-7 w-auto object-contain"
                 />
+              </div>
+              <span aria-hidden className="h-5 w-px bg-white/20" />
+              <div className="rounded bg-white/90 px-2.5 py-1.5">
+                <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-[#3a5ca8]">k-tech</span>
               </div>
             </div>
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/70">

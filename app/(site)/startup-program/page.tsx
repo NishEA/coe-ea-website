@@ -3,7 +3,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { DarkHero } from '@/components/ui/DarkHero'
 import { PortfolioMorph } from '@/components/ui/morphs/PortfolioMorph'
-import { PARTNERS } from '@/data/impact-metrics'
+const PROGRAMME_PARTNERS = [
+  { name: 'HPE',                                              logoSrc: '/logos/hpe.avif' },
+  { name: 'Intel',                                            logoSrc: '/logos/intel.svg' },
+  { name: 'Schneider Electric',                               logoSrc: '/logos/schneider.svg' },
+  { name: 'Bosch Global Software Technologies Pvt Ltd',       logoSrc: '/logos/bosch-si.svg' },
+  { name: 'IEEE',                                             logoSrc: '/logos/ieee.svg' },
+  { name: 'KDEM',                                             logoSrc: undefined },
+]
 
 // Domain → visual cluster (amber=hardware/energy, cerulean=digital/AI, operational=sustainability/life)
 const DOMAIN_CLUSTER: Record<string, 'amber' | 'cerulean' | 'operational'> = {
@@ -324,15 +331,15 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* ── 5. Anchor partner logos ── */}
+      {/* ── 5. Partner logos ── */}
       <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-16 tablet:px-12">
         <div className="mx-auto max-w-[1100px]">
           <p className="mb-8 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
-            Anchor partners
+            Partners
           </p>
           <div className="rounded-sm border border-white/10 bg-white/5 px-10 py-8">
             <ul aria-label="Programme partners" className="flex flex-wrap items-center gap-x-12 gap-y-6">
-              {PARTNERS.map(p => (
+              {PROGRAMME_PARTNERS.map(p => (
                 <li key={p.name}>
                   {p.logoSrc ? (
                     <Image
@@ -340,10 +347,10 @@ export default function PortfolioPage() {
                       alt={p.name}
                       width={120}
                       height={44}
-                      className="h-11 w-auto object-contain brightness-0 invert opacity-65"
+                      className="h-11 w-auto object-contain"
                     />
                   ) : (
-                    <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/50">
+                    <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
                       {p.name}
                     </span>
                   )}
@@ -351,9 +358,6 @@ export default function PortfolioPage() {
               ))}
             </ul>
           </div>
-          <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/30">
-            + 8 associate partners
-          </p>
         </div>
       </section>
 
