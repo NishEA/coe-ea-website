@@ -69,9 +69,9 @@ export function TheInstrument() {
             </h2>
             <p className="mt-6 font-body text-[17px] leading-[1.6] text-ink/85">
               The Centre of Excellence on Efficiency Augmentation (CoE-EA) is jointly funded by{' '}
+              <strong className="font-semibold text-brand-navy">Software Technology Parks of India (STPI)</strong>,{' '}
               <strong className="font-semibold text-brand-navy">Karnataka Innovation &amp; Technology Society (KITS)</strong>,
-              Government of Karnataka,{' '}
-              <strong className="font-semibold text-brand-navy">Software Technology Parks of India (STPI)</strong>, and{' '}
+              Government of Karnataka, and{' '}
               <strong className="font-semibold text-brand-navy">Hewlett Packard Enterprise (HPE)</strong>.
               STPI is the implementing agency and an autonomous society under MeitY, Government of India.
             </p>

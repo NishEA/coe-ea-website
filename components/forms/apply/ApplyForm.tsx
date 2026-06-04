@@ -16,12 +16,12 @@ const DOMAINS = [
   { value: "smart_energy", label: "Smart Energy" },
   { value: "smart_water", label: "Smart Water" },
   { value: "smart_farming", label: "Smart Farming" },
-  { value: "home_office_automation", label: "Home & Office Automation" },
-  { value: "connected_transportation", label: "Connected Transportation" },
+  { value: "home_office_automation", label: "Home Automation" },
+  { value: "connected_transportation", label: "Connected Transport" },
   { value: "weather_monitoring", label: "Weather Monitoring" },
-  { value: "smart_hospital", label: "Smart Hospital" },
+  { value: "smart_hospital", label: "Smart Healthcare" },
   { value: "smart_security", label: "Smart Security" },
-  { value: "intelligent_asset_monitoring", label: "Intelligent Asset Monitoring" },
+  { value: "intelligent_asset_monitoring", label: "Asset Monitoring" },
 ];
 
 const STAGES = [

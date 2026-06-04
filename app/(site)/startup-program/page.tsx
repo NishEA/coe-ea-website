@@ -156,7 +156,7 @@ export default function PortfolioPage() {
             Built inside <span className="text-amber">the machine.</span>
           </>
         }
-        subhead="50 STARTUPS · 10 DOMAINS · 3 COHORTS"
+        subhead="52 STARTUPS · 10 DOMAINS · 3 COHORTS"
         visual={<PortfolioMorph className="h-full w-auto max-w-[600px]" />}
         bridge={false}
       />
@@ -268,7 +268,7 @@ export default function PortfolioPage() {
           </ul>
 
           <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-ice/40">
-            Full cohort of 50+ startups spans all ten domains.
+            Full cohort of 52 startups spans all ten domains.
           </p>
         </div>
       </section>
