@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
@@ -63,16 +64,29 @@ export default function SiteLayout({
       <header className="relative z-30 flex items-center justify-between gap-4 px-6 py-5 tablet:px-9">
         <Link
           href="/"
-          className="flex items-center gap-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
+          className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
         >
-          <span className="flex items-center text-[20px] font-bold leading-none tracking-[0.03em] text-white">
-            <span className="op-dot mr-1.5" aria-hidden />
-            CoE-EA
-          </span>
+          {/* CoE-EA: transparent-bg logo inverted to white on dark nav */}
+          <Image
+            src="/logos/coe-ea.png"
+            alt="CoE-EA — Centre of Excellence on Efficiency Augmentation"
+            width={120}
+            height={36}
+            className="h-8 w-auto object-contain brightness-0 invert"
+            priority
+          />
           <span aria-hidden className="hidden h-[22px] w-px bg-white/12 tablet:block" />
-          <span className="hidden font-mono text-[9px] uppercase tracking-[0.16em] text-white/50 tablet:inline">
-            Efficiency Augmentation · STPI Initiative
-          </span>
+          {/* STPI: white-bg logo in a chip so it reads on dark nav */}
+          <div aria-hidden className="hidden rounded bg-white/90 px-2 py-1 tablet:block">
+            <Image
+              src="/logos/stpi.png"
+              alt="STPI"
+              width={56}
+              height={20}
+              className="h-5 w-auto object-contain"
+              priority
+            />
+          </div>
         </Link>
 
         {/* Desktop nav */}
@@ -151,6 +165,26 @@ export default function SiteLayout({
       <footer className="relative z-10 border-t border-white/[0.06] px-6 py-10 tablet:px-9">
         <div className="flex flex-col gap-4 tablet:flex-row tablet:items-start tablet:justify-between">
           <div>
+            {/* Institution logos */}
+            <div className="mb-4 flex items-center gap-4">
+              <Image
+                src="/logos/coe-ea.png"
+                alt="CoE-EA"
+                width={100}
+                height={30}
+                className="h-7 w-auto object-contain brightness-0 invert opacity-80"
+              />
+              <span aria-hidden className="h-5 w-px bg-white/20" />
+              <div className="rounded bg-white/90 px-2 py-1">
+                <Image
+                  src="/logos/stpi.png"
+                  alt="STPI"
+                  width={52}
+                  height={19}
+                  className="h-[19px] w-auto object-contain"
+                />
+              </div>
+            </div>
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/70">
               Centre of Excellence — Efficiency Augmentation
             </p>

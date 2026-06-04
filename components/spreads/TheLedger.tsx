@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { IMPACT_METRICS, PARTNERS } from '@/data/impact-metrics'
 
 /** Split a metric value like "₹10.35 Cr" or "52" into a numeric head and a
@@ -65,10 +66,24 @@ export function TheLedger() {
         <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
           Partners
         </p>
-        <ul className="flex flex-wrap gap-x-8 gap-y-3" role="list">
+        <ul className="flex flex-wrap items-center gap-x-4 gap-y-3" role="list">
           {PARTNERS.map(p => (
-            <li key={p.name} className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
-              {p.name}
+            <li key={p.name}>
+              {p.logoSrc ? (
+                <div className="rounded bg-white/90 px-3 py-2">
+                  <Image
+                    src={p.logoSrc}
+                    alt={p.name}
+                    width={80}
+                    height={28}
+                    className="h-7 w-auto object-contain"
+                  />
+                </div>
+              ) : (
+                <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
+                  {p.name}
+                </span>
+              )}
             </li>
           ))}
         </ul>

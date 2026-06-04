@@ -6,6 +6,7 @@ export interface ImpactMetric {
 
 export interface Partner {
   name: string
+  logoSrc?: string
 }
 
 export const IMPACT_METRICS: ImpactMetric[] = [
@@ -21,9 +22,9 @@ export const IMPACT_METRICS: ImpactMetric[] = [
 ]
 
 export const PARTNERS: Partner[] = [
-  { name: 'HPE' },
-  { name: 'Intel' },
-  { name: 'Bosch' },
+  { name: 'HPE',       logoSrc: '/logos/hpe.jpg' },
+  { name: 'Intel',     logoSrc: '/logos/intel.svg' },
+  { name: 'Bosch',     logoSrc: '/logos/bosch.png' },
   { name: 'Schneider' },
   { name: 'MathWorks' },
 ]

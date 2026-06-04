@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { DarkHero } from '@/components/ui/DarkHero'
 import { PortfolioMorph } from '@/components/ui/morphs/PortfolioMorph'
+import { PARTNERS } from '@/data/impact-metrics'
 
 // Domain → visual cluster (amber=hardware/energy, cerulean=digital/AI, operational=sustainability/life)
 const DOMAIN_CLUSTER: Record<string, 'amber' | 'cerulean' | 'operational'> = {
@@ -219,7 +221,40 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* ── 3. The cohort ── */}
+      {/* ── 3. Anchor partner logos ── */}
+      <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-14 tablet:px-12">
+        <div className="mx-auto max-w-[1100px]">
+          <p className="mb-8 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
+            Anchor partners
+          </p>
+          <ul aria-label="Programme partners" className="flex flex-wrap items-center gap-x-4 gap-y-4">
+            {PARTNERS.map(p => (
+              <li key={p.name}>
+                {p.logoSrc ? (
+                  <div className="rounded bg-white/90 px-3 py-2">
+                    <Image
+                      src={p.logoSrc}
+                      alt={p.name}
+                      width={90}
+                      height={32}
+                      className="h-8 w-auto object-contain"
+                    />
+                  </div>
+                ) : (
+                  <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/50">
+                    {p.name}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/30">
+            + 8 associate partners
+          </p>
+        </div>
+      </section>
+
+      {/* ── 4. The cohort ── */}
       <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-24 tablet:px-12">
         <div className="mx-auto max-w-[1100px]">
           {/* section header */}
@@ -273,7 +308,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* ── 4. CTA ── */}
+      {/* ── 5. CTA ── */}
       <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-24 tablet:px-12">
         <div className="mx-auto max-w-[1100px]">
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
