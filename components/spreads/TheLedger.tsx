@@ -63,30 +63,30 @@ export function TheLedger() {
       </div>
 
       <div className="mt-20 border-t border-brand-ice/10 pt-10" aria-label="Partner organisations">
-        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
+        <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
           Partners
         </p>
-        <ul className="flex flex-wrap items-center gap-x-4 gap-y-3" role="list">
-          {PARTNERS.map(p => (
-            <li key={p.name}>
-              {p.logoSrc ? (
-                <div className="rounded bg-white/90 px-3 py-2">
+        <div className="rounded-sm border border-brand-ice/10 bg-brand-ice/5 px-10 py-8">
+          <ul className="flex flex-wrap items-center gap-x-12 gap-y-6" role="list">
+            {PARTNERS.map(p => (
+              <li key={p.name}>
+                {p.logoSrc ? (
                   <Image
                     src={p.logoSrc}
                     alt={p.name}
-                    width={80}
-                    height={28}
-                    className="h-7 w-auto object-contain"
+                    width={120}
+                    height={44}
+                    className="h-11 w-auto object-contain brightness-0 invert opacity-65"
                   />
-                </div>
-              ) : (
-                <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
-                  {p.name}
-                </span>
-              )}
-            </li>
-          ))}
-        </ul>
+                ) : (
+                  <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
+                    {p.name}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   )

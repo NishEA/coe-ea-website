@@ -221,40 +221,143 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* ── 3. Anchor partner logos ── */}
-      <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-14 tablet:px-12">
+      {/* ── 3. How selection works ── */}
+      <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-24 tablet:px-12">
+        <div className="mx-auto max-w-[1100px]">
+          <div className="mb-14 grid grid-cols-1 gap-6 tablet:grid-cols-12">
+            <div className="tablet:col-span-5">
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
+                Selection process
+              </p>
+              <h2 className="mt-4 font-display text-[2rem] font-semibold leading-tight text-white tablet:text-[2.5rem]">
+                How selection works.
+              </h2>
+            </div>
+            <p className="font-body text-[15px] leading-[1.65] text-brand-ice/65 tablet:col-span-6 tablet:col-start-7 tablet:pt-14">
+              Selection is conducted by the Project Management Group (PMG) — a nine-member body comprising
+              STPI, KITS, HPE, industry, and academic representatives. Criteria are weighted across technical
+              feasibility, market opportunity, team capability, and alignment with the Centre&apos;s ten priority
+              domains. Incubation term is 12 months, renewable for 6 months on demonstrated progress.
+            </p>
+          </div>
+
+          <ol className="grid grid-cols-1 gap-px border border-white/[0.08] bg-white/[0.06] tablet:grid-cols-2 desktop:grid-cols-4">
+            {[
+              {
+                step: '01',
+                title: 'Application review',
+                detail: 'All submissions are reviewed by the PMG — a nine-member body of STPI, KITS, HPE, industry, and academic representatives. Rolling intake; you\'ll hear within two weeks.',
+              },
+              {
+                step: '02',
+                title: 'Shortlist & pitch',
+                detail: 'Shortlisted founders are invited to a 30-minute pitch session at the Centre. Remote presentations available. Pitch day is typically within four weeks of shortlisting.',
+              },
+              {
+                step: '03',
+                title: 'Due diligence',
+                detail: 'The committee reviews incorporation documents, team background, and prototype evidence. This is a programme eligibility check, not investor-style financial due diligence.',
+              },
+              {
+                step: '04',
+                title: 'Equity signing & onboarding',
+                detail: 'Selected startups receive an offer letter within six weeks of submission. Onboarding completes only after the equity agreement is signed. The Centre takes 1–3% equity, scaled to revenue, grants, or valuation at signing.',
+              },
+            ].map(s => (
+              <li key={s.step} className="flex flex-col gap-4 bg-bg-void p-8">
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
+                  Step {s.step}
+                </span>
+                <h3 className="font-display text-[1.15rem] font-semibold text-white">{s.title}</h3>
+                <p className="mt-auto font-body text-[13px] leading-[1.65] text-brand-ice/60">{s.detail}</p>
+              </li>
+            ))}
+          </ol>
+
+          {/* Programme terms */}
+          <div className="mt-12 border-t border-white/[0.08] pt-10">
+            <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
+              Programme terms
+            </p>
+            <ul className="grid grid-cols-1 gap-3 tablet:grid-cols-2">
+              {[
+                'Equity-based engagement — the Centre takes 1–3% equity (scaled to revenue, grants, or valuation). Onboarding completes only after the equity agreement is signed.',
+                'IP developed during incubation is founder-owned.',
+                'Programme reporting obligations apply — quarterly milestone updates to STPI.',
+                'Grant disbursement is milestone-gated at 3-month intervals per GoI financial norms.',
+              ].map(t => (
+                <li key={t} className="flex items-start gap-3 font-body text-[14px] leading-[1.6] text-brand-ice/70">
+                  <span aria-hidden className="font-mono text-brand-cerulean">→</span>
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. Eligibility ── */}
+      <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-20 tablet:px-12">
+        <div className="mx-auto max-w-[1100px]">
+          <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
+            Eligibility
+          </p>
+          <h2 className="mb-10 font-display text-[1.75rem] font-semibold leading-tight text-white tablet:text-[2rem]">
+            Full eligibility criteria.
+          </h2>
+          <ul className="space-y-3 max-w-2xl">
+            {[
+              'Incorporated or registrable entity founded in the last 5 years.',
+              "Working on a problem within one of the Centre's ten Industry 4.0 domains.",
+              'Majority Indian shareholding. Foreign nationals may co-found but the lead founder must be an Indian citizen.',
+              'No prior or current incubation at another STPI Centre of Excellence during the application period.',
+              'Not receiving concurrent GoI incubation grants exceeding ₹5L at time of application.',
+              'Karnataka registration is preferred but not mandatory. Outstation startups may be considered subject to willingness to operate from the Bengaluru Centre during the incubation term.',
+              'DPIIT recognition is not required at application; it is encouraged before onboarding.',
+            ].map(c => (
+              <li key={c} className="flex items-start gap-3 font-body text-[15px] leading-[1.6] text-brand-ice/75">
+                <span aria-hidden className="font-mono text-brand-cerulean">→</span>
+                {c}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ── 5. Anchor partner logos ── */}
+      <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-16 tablet:px-12">
         <div className="mx-auto max-w-[1100px]">
           <p className="mb-8 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
             Anchor partners
           </p>
-          <ul aria-label="Programme partners" className="flex flex-wrap items-center gap-x-4 gap-y-4">
-            {PARTNERS.map(p => (
-              <li key={p.name}>
-                {p.logoSrc ? (
-                  <div className="rounded bg-white/90 px-3 py-2">
+          <div className="rounded-sm border border-white/10 bg-white/5 px-10 py-8">
+            <ul aria-label="Programme partners" className="flex flex-wrap items-center gap-x-12 gap-y-6">
+              {PARTNERS.map(p => (
+                <li key={p.name}>
+                  {p.logoSrc ? (
                     <Image
                       src={p.logoSrc}
                       alt={p.name}
-                      width={90}
-                      height={32}
-                      className="h-8 w-auto object-contain"
+                      width={120}
+                      height={44}
+                      className="h-11 w-auto object-contain brightness-0 invert opacity-65"
                     />
-                  </div>
-                ) : (
-                  <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/50">
-                    {p.name}
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/30">
+                  ) : (
+                    <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/50">
+                      {p.name}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/30">
             + 8 associate partners
           </p>
         </div>
       </section>
 
-      {/* ── 4. The cohort ── */}
+      {/* ── 6. The cohort ── */}
       <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-24 tablet:px-12">
         <div className="mx-auto max-w-[1100px]">
           {/* section header */}
@@ -308,7 +411,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* ── 5. CTA ── */}
+      {/* ── 7. CTA ── */}
       <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-24 tablet:px-12">
         <div className="mx-auto max-w-[1100px]">
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
