@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useField } from '@/components/field/FieldProvider'
+import { DOMAINS } from '@/data/domain-provenance'
 import { WaveformLoader } from '@/components/ui/WaveformLoader'
 import { OrbitCanvas } from '@/components/ui/OrbitCanvas'
 import { InstrumentCubes } from '@/components/ui/InstrumentCubes'
@@ -23,9 +24,27 @@ export function TheDiagnosis() {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    const onMove = (e: PointerEvent) => setPointer({ x: e.clientX, y: e.clientY })
+    // Mouse: track continuously so the canvas lens follows the cursor.
+    const onMove = (e: PointerEvent) => {
+      if (e.pointerType !== 'touch') setPointer({ x: e.clientX, y: e.clientY })
+    }
+    // Touch: pointermove fires during scroll and would clobber the pinned node.
+    // Instead, snap to the nearest domain's exact canvas coordinates on tap so
+    // the canvas always sees it as "in lens" (0 distance). Tap outside all nodes
+    // clears to {-999,-999} so the previous node deactivates cleanly.
     const onDown = (e: PointerEvent) => {
-      if (e.pointerType === 'touch') setPointer({ x: e.clientX, y: e.clientY })
+      if (e.pointerType !== 'touch') return
+      const W = window.innerWidth, H = window.innerHeight
+      const TAP_R2 = 280 * 280
+      let nearest: { x: number; y: number } | null = null
+      let bestD2 = TAP_R2
+      for (const d of DOMAINS) {
+        const nx = d.fieldX * W, ny = d.fieldY * H
+        const dx = e.clientX - nx, dy = e.clientY - ny
+        const d2 = dx * dx + dy * dy
+        if (d2 < bestD2) { bestD2 = d2; nearest = { x: nx, y: ny } }
+      }
+      setPointer(nearest ? { x: nearest.x, y: nearest.y } : { x: -999, y: -999 })
     }
     window.addEventListener('pointermove', onMove, { passive: true })
     window.addEventListener('pointerdown', onDown, { passive: true })
