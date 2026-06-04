@@ -4,7 +4,7 @@ import { DarkHero } from '@/components/ui/DarkHero'
 import { PortfolioMorph } from '@/components/ui/morphs/PortfolioMorph'
 
 export const metadata: Metadata = {
-  title: 'Incubatee Portfolio',
+  title: 'Startup Program',
   description:
     'The CoE-EA Startup Programme: ₹10L seed grant, 16,000 sq ft centre, domain mentors, and market support across 10 Industry 4.0 domains.',
 }
@@ -103,7 +103,7 @@ export default function PortfolioPage() {
     <>
       {/* ── 1. Hero ── */}
       <DarkHero
-        label="Incubatee Portfolio"
+        label="Startup Program"
         title={
           <>
             Built inside <span className="text-amber">the machine.</span>
