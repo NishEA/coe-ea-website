@@ -110,9 +110,16 @@ export default function SiteLayout({
             />
           </div>
           <span aria-hidden className="hidden h-6 w-px bg-white/12 tablet:block" />
-          {/* KITS — text chip until logo file is provided */}
+          {/* KITS */}
           <div aria-hidden className="hidden rounded bg-white/90 px-2.5 py-1.5 tablet:block">
-            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-[#3a5ca8]">k-tech</span>
+            <Image
+              src="/logos/kits.jpeg"
+              alt="KITS — Karnataka Innovation & Technology Society"
+              width={70}
+              height={26}
+              className="h-7 w-auto object-contain"
+              priority
+            />
           </div>
         </Link>
 
@@ -213,7 +220,13 @@ export default function SiteLayout({
               </div>
               <span aria-hidden className="h-5 w-px bg-white/20" />
               <div className="rounded bg-white/90 px-2.5 py-1.5">
-                <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-[#3a5ca8]">k-tech</span>
+                <Image
+                  src="/logos/kits.jpeg"
+                  alt="KITS — Karnataka Innovation & Technology Society"
+                  width={66}
+                  height={26}
+                  className="h-7 w-auto object-contain"
+                />
               </div>
             </div>
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/70">
