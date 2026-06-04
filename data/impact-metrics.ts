@@ -25,6 +25,6 @@ export const PARTNERS: Partner[] = [
   { name: 'HPE',       logoSrc: '/logos/hpe.jpg' },
   { name: 'Intel',     logoSrc: '/logos/intel.svg' },
   { name: 'Bosch',     logoSrc: '/logos/bosch.png' },
-  { name: 'Schneider' },
-  { name: 'MathWorks' },
+  { name: 'Schneider', logoSrc: '/logos/schneider.svg' },
+  { name: 'MathWorks', logoSrc: '/logos/mathworks.svg' },
 ]
