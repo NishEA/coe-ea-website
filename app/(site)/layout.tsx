@@ -4,8 +4,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import { DomainMarquee } from '@/components/ui/DomainMarquee'
-import { FieldProvider } from '@/components/field/FieldProvider'
-import { FieldCanvas } from '@/components/field/FieldCanvas'
 
 const NAV = [
   { href: '/', label: 'Home' },
@@ -58,12 +56,6 @@ export default function SiteLayout({
       </a>
 
       <div className="grid-bg" />
-      {/* Ambient particle field on all sub-pages — homepage provides its own via FieldProvider in page.tsx */}
-      {pathname !== '/' && (
-        <FieldProvider>
-          <FieldCanvas />
-        </FieldProvider>
-      )}
 
       {/* ── Pill nav ── */}
       <header className="relative z-30 flex items-center justify-between gap-4 px-6 py-5 tablet:px-9">
