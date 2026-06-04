@@ -20,7 +20,7 @@
   --color-brand-ice: #b7cfe8; /* secondary text, orbit particles */
   --color-ice: #b7cfe8;
   --color-brand-paper: #f7f4ed;
-  --color-ink: #1a1c22;         /* near-black body ink for paper sections */
+  --color-ink: #1a1c22; /* near-black body ink for paper sections */
   --color-text-on-paper: #1a1c22;
   --color-text-on-midnight: #f7f4ed;
   /* Operational green — status dot only (functional state encoding, not decorative) */
@@ -46,7 +46,9 @@
 /* Fonts — mapped from the next/font CSS vars in app/fonts.ts. */
 @theme inline {
   --font-display: var(--ff-display);
-  --font-body: var(--ff-display); /* single Space Grotesk load — see app/fonts.ts */
+  --font-body: var(
+    --ff-display
+  ); /* single Space Grotesk load — see app/fonts.ts */
   --font-mono: var(--ff-mono);
 }
 
@@ -371,12 +373,12 @@ body {
   color: rgba(255, 255, 255, 0.9) !important;
 }
 /* Recolour the navy text shades the form primitives use for paper. */
-.form-dark [class*='text-brand-navy'] {
+.form-dark [class*="text-brand-navy"] {
   color: rgba(183, 207, 232, 0.75) !important;
 }
-.form-dark input[type='text'],
-.form-dark input[type='email'],
-.form-dark input[type='tel'],
+.form-dark input[type="text"],
+.form-dark input[type="email"],
+.form-dark input[type="tel"],
 .form-dark select,
 .form-dark textarea {
   color: #fff !important;
@@ -402,8 +404,8 @@ body {
 .form-dark a {
   color: var(--color-brand-cerulean);
 }
-.form-dark input[type='radio'],
-.form-dark input[type='checkbox'] {
+.form-dark input[type="radio"],
+.form-dark input[type="checkbox"] {
   accent-color: var(--color-brand-cerulean);
 }
 
