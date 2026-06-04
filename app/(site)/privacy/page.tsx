@@ -86,18 +86,6 @@ export default function PrivacyPage() {
       <main className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[860px]">
 
-        <div className="mt-8 border border-brand-cerulean/30 bg-brand-cerulean/5 px-6 py-5">
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-cerulean">
-            Pending legal finalisation
-          </p>
-          <p className="mt-2 font-body text-[14px] leading-[1.6] text-brand-navy/70">
-            Fields marked{" "}
-            <span className="font-mono text-[12px] text-brand-cerulean">[TBD]</span> are
-            pending confirmation from legal counsel or programme management. This notice is
-            substantially complete and must be reviewed by a qualified Indian
-            data-protection lawyer before it governs live data collection.
-          </p>
-        </div>
 
         {/* 1. Who we are */}
         <section aria-labelledby="s-who" className="mt-16 border-t border-brand-navy/15 pt-12">

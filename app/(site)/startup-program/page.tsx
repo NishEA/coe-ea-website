@@ -61,7 +61,7 @@ const BENEFITS = [
     id: 'grant',
     label: 'Seed capital',
     headline: '₹10L grant',
-    body: 'Non-dilutive. No equity taken until a milestone trigger is reached — so you keep the cap table clean while you build.',
+    body: 'Equity-based. The Centre takes 1–3% equity on signing, scaled to your revenue, grants received, or valuation at time of onboarding.',
     accent: 'amber',
   },
   {
