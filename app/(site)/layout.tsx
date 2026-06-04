@@ -9,7 +9,7 @@ import { FieldCanvas } from '@/components/field/FieldCanvas'
 
 const NAV = [
   { href: '/', label: 'Home' },
-  { href: '/portfolio', label: 'Portfolio' },
+  { href: '/startup-program', label: 'Startup Program' },
   { href: '/book', label: 'Book' },
   { href: '/governance', label: 'Governance' },
   { href: '/events', label: 'Events' },
@@ -171,7 +171,7 @@ export default function SiteLayout({
           >
             {[
               { label: 'Privacy', href: '/privacy' },
-              { label: 'Portfolio', href: '/portfolio' },
+              { label: 'Startup Program', href: '/startup-program' },
               { label: 'Apply', href: '/apply' },
               { label: 'Governance', href: '/governance' },
               { label: 'STPI', href: 'https://www.stpi.in' },
