@@ -1,9 +1,9 @@
 export type DeviceTier = 'high' | 'mid' | 'low'
 
 export const TIER_COUNTS: Record<DeviceTier, number> = {
-  high: 900,
-  mid: 450,
-  low: 180,
+  high: 120,
+  mid: 60,
+  low: 30,
 }
 
 /** Synchronous hardware check — call once at canvas init */
@@ -35,7 +35,7 @@ export function createParticles(count: number, w: number, h: number): Particle[]
     const x = Math.random() * w
     const y = Math.random() * h
     return { x, y, homeX: x, homeY: y, vx: 0, vy: 0,
-             baseLum: 0.08 + Math.random() * 0.12,
+             baseLum: 0.04 + Math.random() * 0.05,
              noiseOffset: Math.random() * 1000 }
   })
 }
@@ -46,7 +46,7 @@ function valueNoise(seed: number): number {
 }
 
 /** Mutates in place — one frame of perlin-style drift */
-export function tickDrift(particles: Particle[], t: number, w: number, h: number, speed = 0.18): void {
+export function tickDrift(particles: Particle[], t: number, w: number, h: number, speed = 0.035): void {
   for (const p of particles) {
     const nx = valueNoise(p.noiseOffset + t * speed) - 0.5
     const ny = valueNoise(p.noiseOffset * 1.7 + t * speed) - 0.5
