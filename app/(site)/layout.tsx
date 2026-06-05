@@ -21,21 +21,17 @@ export default function SiteLayout({
   children: React.ReactNode
 }) {
   const pathname = usePathname()
-  const [mounted, setMounted] = useState(false)
-  const [showSplash, setShowSplash] = useState(true)
+  // showSplash is ONLY for route transitions — never on first load.
+  // The app-frame is visible immediately via CSS frame-draw animation.
+  const [showSplash, setShowSplash] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const mountedRef = useRef(false)
   const prevPathname = useRef<string | null>(null)
 
-  // Initial mount: hide splash after first paint so hydration gap is covered.
+  // Mark mounted and record initial path for route-change detection.
   useEffect(() => {
-    const id = requestAnimationFrame(() => {
-      setMounted(true)
-      setShowSplash(false)
-      mountedRef.current = true
-      prevPathname.current = pathname
-    })
-    return () => cancelAnimationFrame(id)
+    mountedRef.current = true
+    prevPathname.current = pathname
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Route change: briefly show splash so navigation feels instant.
@@ -88,7 +84,7 @@ export default function SiteLayout({
         </div>
       </div>
     )}
-    <div className={`app-frame ${mounted ? 'frame-enter' : 'opacity-0'}`}>
+    <div className="app-frame frame-enter">
       {/* Skip-to-content (WCAG 2.4.1) */}
       <a
         href="#main"

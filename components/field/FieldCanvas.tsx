@@ -171,10 +171,24 @@ export function FieldCanvas() {
     }
     document.addEventListener('visibilitychange', onVisibility)
 
-    frame = requestAnimationFrame(draw)
+    // Defer RAF start until the browser is idle — hydration and first paint
+    // complete before the particle loop competes for the main thread.
+    let idleId = 0
+    const startLoop = () => {
+      lastTime = performance.now()
+      frame = requestAnimationFrame(draw)
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const w = window as any
+    if ('requestIdleCallback' in window) {
+      idleId = w.requestIdleCallback(startLoop, { timeout: 1500 })
+    } else {
+      setTimeout(startLoop, 150)
+    }
 
     return () => {
       cancelAnimationFrame(frame)
+      if (idleId && 'cancelIdleCallback' in window) w.cancelIdleCallback(idleId)
       window.removeEventListener('resize', resize)
       document.removeEventListener('visibilitychange', onVisibility)
     }
