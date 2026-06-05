@@ -204,6 +204,26 @@ body {
   }
 }
 
+/* ── Cohort carousel ── */
+.cohort-track {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+}
+.cohort-track-inner {
+  display: flex;
+  width: max-content;
+  gap: 12px;
+  animation: cohort-scroll 90s linear infinite;
+}
+.cohort-track:hover .cohort-track-inner {
+  animation-play-state: paused;
+}
+@keyframes cohort-scroll {
+  from { transform: translateX(0) }
+  to   { transform: translateX(-50%) }
+}
+
 /* ── Waveform loader ── */
 .waveform {
   display: flex;

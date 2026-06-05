@@ -1,16 +1,7 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { DarkHero } from '@/components/ui/DarkHero'
 import { PortfolioMorph } from '@/components/ui/morphs/PortfolioMorph'
-const PROGRAMME_PARTNERS = [
-  { name: 'HPE',                                              logoSrc: '/logos/hpe.avif',  chip: true },
-  { name: 'Intel',                                            logoSrc: '/logos/intel.svg' },
-  { name: 'Schneider Electric',                               logoSrc: '/logos/schneider.svg' },
-  { name: 'Bosch Global Software Technologies Pvt Ltd',       logoSrc: '/logos/bosch-gst.png', chip: true },
-  { name: 'IEEE',                                             logoSrc: '/logos/ieee.svg' },
-  { name: 'Karnataka Digital Economy Mission',                 logoSrc: '/logos/kdem.png', chip: true },
-]
 
 // Domain → visual cluster (amber=hardware/energy, cerulean=digital/AI, operational=sustainability/life)
 const DOMAIN_CLUSTER: Record<string, 'amber' | 'cerulean' | 'operational'> = {
@@ -154,6 +145,9 @@ const STARTUPS = [
   { name: 'MeetNotes', domain: 'ProductivityTech', stage: 'Early' },
 ]
 
+// Doubled for seamless infinite loop
+const STARTUPS_DOUBLED = [...STARTUPS, ...STARTUPS]
+
 export default function PortfolioPage() {
   return (
     <>
@@ -170,13 +164,10 @@ export default function PortfolioPage() {
         bridge={false}
       />
 
-      {/* ── 2. What the programme gives you ── */}
+      {/* ── 2. What the programme gives you — DARK ── */}
       <section className="relative z-10 bg-bg-void px-6 py-24 tablet:px-12">
-        {/* subtle grid dot background */}
         <div className="grid-bg" aria-hidden />
-
         <div className="relative mx-auto max-w-[1100px]">
-          {/* section header */}
           <div className="mb-14">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
               What the programme gives you
@@ -190,8 +181,6 @@ export default function PortfolioPage() {
               domain engineers.
             </p>
           </div>
-
-          {/* benefit cards */}
           <ul
             aria-label="Programme benefits"
             className="grid grid-cols-1 gap-4 tablet:grid-cols-2 desktop:grid-cols-3"
@@ -201,7 +190,6 @@ export default function PortfolioPage() {
                 key={b.id}
                 className="flex flex-col gap-4 rounded-[6px] border border-white/[0.08] bg-bg-void p-8 transition hover:border-white/[0.14] hover:bg-white/[0.02]"
               >
-                {/* accent marker */}
                 <span
                   aria-hidden
                   className={
@@ -210,15 +198,12 @@ export default function PortfolioPage() {
                       : 'inline-block h-[3px] w-8 bg-brand-cerulean'
                   }
                 />
-                {/* label */}
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-cerulean">
                   {b.label}
                 </p>
-                {/* headline */}
                 <p className="font-display text-[1.3rem] font-semibold leading-snug text-white">
                   {b.headline}
                 </p>
-                {/* body */}
                 <p className="mt-auto font-body text-[13px] leading-[1.65] text-brand-ice/60">
                   {b.body}
                 </p>
@@ -228,7 +213,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* ── 3. How selection works ── */}
+      {/* ── 3. How selection works — DARK ── */}
       <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-24 tablet:px-12">
         <div className="mx-auto max-w-[1100px]">
           <div className="mb-14 grid grid-cols-1 gap-6 tablet:grid-cols-12">
@@ -247,7 +232,6 @@ export default function PortfolioPage() {
               domains. Incubation term is 12 months, renewable for 6 months on demonstrated progress.
             </p>
           </div>
-
           <ol className="grid grid-cols-1 gap-px border border-white/[0.08] bg-white/[0.06] tablet:grid-cols-2 desktop:grid-cols-4">
             {[
               {
@@ -280,8 +264,6 @@ export default function PortfolioPage() {
               </li>
             ))}
           </ol>
-
-          {/* Programme terms */}
           <div className="mt-12 border-t border-white/[0.08] pt-10">
             <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
               Programme terms
@@ -303,16 +285,16 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* ── 4. Eligibility ── */}
-      <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-20 tablet:px-12">
+      {/* ── 4. Eligibility — LIGHT ── */}
+      <section className="relative z-10 border-t border-brand-navy/10 bg-bg-paper px-6 py-20 tablet:px-12">
         <div className="mx-auto max-w-[1100px]">
           <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
             Eligibility
           </p>
-          <h2 className="mb-10 font-display text-[1.75rem] font-semibold leading-tight text-white tablet:text-[2rem]">
+          <h2 className="mb-10 font-display text-[1.75rem] font-semibold leading-tight text-brand-navy tablet:text-[2rem]">
             Full eligibility criteria.
           </h2>
-          <ul className="space-y-3 max-w-2xl">
+          <ul className="max-w-2xl space-y-3">
             {[
               'Incorporated or registrable entity founded in the last 5 years.',
               "Working on a problem within one of the Centre's ten Industry 4.0 domains.",
@@ -322,7 +304,7 @@ export default function PortfolioPage() {
               'Karnataka registration is preferred but not mandatory. Outstation startups may be considered subject to willingness to operate from the Bengaluru Centre during the incubation term.',
               'DPIIT recognition is not required at application; it is encouraged before onboarding.',
             ].map(c => (
-              <li key={c} className="flex items-start gap-3 font-body text-[15px] leading-[1.6] text-brand-ice/75">
+              <li key={c} className="flex items-start gap-3 font-body text-[15px] leading-[1.6] text-ink/75">
                 <span aria-hidden className="font-mono text-brand-cerulean">→</span>
                 {c}
               </li>
@@ -331,103 +313,61 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* ── 5. Partner logos ── */}
-      <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-16 tablet:px-12">
+      {/* ── 5. The cohort carousel — LIGHT ── */}
+      <section className="relative z-10 border-t border-brand-navy/10 bg-bg-paper px-6 py-24 tablet:px-12">
         <div className="mx-auto max-w-[1100px]">
-          <p className="mb-8 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
-            Partners
-          </p>
-          <div className="rounded-sm border border-white/10 bg-white/5 px-10 py-8">
-            <ul aria-label="Programme partners" className="flex flex-wrap items-center justify-center gap-x-8 gap-y-8">
-              {PROGRAMME_PARTNERS.map(p => (
-                <li key={p.name} className="flex items-center justify-center">
-                  {p.logoSrc ? (
-                    p.chip ? (
-                      <div className="rounded bg-white px-3 py-2.5">
-                        <Image
-                          src={p.logoSrc}
-                          alt={p.name}
-                          width={140}
-                          height={56}
-                          className="h-14 w-auto max-w-[140px] object-contain"
-                        />
-                      </div>
-                    ) : (
-                      <Image
-                        src={p.logoSrc}
-                        alt={p.name}
-                        width={160}
-                        height={56}
-                        className="h-14 w-auto max-w-[160px] object-contain"
-                      />
-                    )
-                  ) : (
-                    <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
-                      {p.name}
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 6. The cohort ── */}
-      <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-24 tablet:px-12">
-        <div className="mx-auto max-w-[1100px]">
-          {/* section header */}
           <div className="mb-10 flex flex-col gap-2 tablet:flex-row tablet:items-baseline tablet:justify-between">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
               The cohort
             </p>
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/40">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/40">
               13 partners · Bengaluru
             </p>
           </div>
-
-          <h2 className="mb-10 font-display text-[1.6rem] font-semibold leading-tight text-white tablet:text-[2rem]">
+          <h2 className="mb-10 font-display text-[1.6rem] font-semibold leading-tight text-brand-navy tablet:text-[2rem]">
             A selection from the cohort.
           </h2>
+        </div>
 
-          {/* startup card grid */}
-          <ul
-            aria-label="Portfolio startups"
-            className="grid grid-cols-1 gap-px border border-white/[0.08] bg-white/[0.06] tablet:grid-cols-2 desktop:grid-cols-3"
-          >
-            {STARTUPS.map(s => {
+        {/* Full-width carousel — bleeds past the max-width container */}
+        <div className="cohort-track" aria-label="Portfolio startups">
+          <div className="cohort-track-inner" role="list">
+            {STARTUPS_DOUBLED.map((s, i) => {
               const cluster = DOMAIN_CLUSTER[s.domain] ?? 'cerulean'
               return (
-                <li
-                  key={s.name}
-                  className="flex flex-col gap-3 bg-bg-void p-8 transition hover:bg-white/[0.03]"
+                <div
+                  key={`${s.name}-${i}`}
+                  role="listitem"
+                  className="flex w-52 flex-shrink-0 flex-col gap-3 rounded-[5px] border border-brand-navy/10 bg-white p-5 shadow-sm"
                 >
-                  <span aria-hidden className={`inline-block h-2 w-2 ${DOT_CLASS[cluster]}`} />
-                  <span className="font-display text-[1.4rem] font-semibold leading-tight text-white">
+                  <span aria-hidden className={`inline-block h-2 w-2 rounded-sm ${DOT_CLASS[cluster]}`} />
+                  <span className="font-display text-[0.95rem] font-semibold leading-tight text-brand-navy">
                     {s.name}
                   </span>
-                  <div className="mt-auto flex items-baseline justify-between pt-4">
-                    <span className={`font-mono text-[10px] uppercase tracking-[0.14em] ${TEXT_CLASS[cluster]}`}>
+                  <div className="mt-auto flex items-baseline justify-between pt-3">
+                    <span className={`font-mono text-[9px] uppercase tracking-[0.12em] ${TEXT_CLASS[cluster]}`}>
                       {s.domain}
                     </span>
-                    <span className={`font-mono text-[10px] uppercase tracking-[0.1em] ${
-                      s.stage === 'Growth' ? 'text-amber/70' : 'text-brand-ice/40'
+                    <span className={`font-mono text-[9px] uppercase tracking-[0.1em] ${
+                      s.stage === 'Growth' ? 'text-amber/70' : 'text-ink/35'
                     }`}>
                       {s.stage}
                     </span>
                   </div>
-                </li>
+                </div>
               )
             })}
-          </ul>
+          </div>
+        </div>
 
-          <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-ice/40">
-            Full cohort of 52 startups spans all ten domains.
+        <div className="mx-auto mt-8 max-w-[1100px]">
+          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/40">
+            Full cohort of 52 startups spans all ten domains. Hover to pause.
           </p>
         </div>
       </section>
 
-      {/* ── 7. CTA ── */}
+      {/* ── 6. CTA — DARK ── */}
       <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-24 tablet:px-12">
         <div className="mx-auto max-w-[1100px]">
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
@@ -440,7 +380,6 @@ export default function PortfolioPage() {
             12 months. ₹10L. A 16,000 sq ft centre, a domain expert, and a
             partner ecosystem in your vertical. Based in Bengaluru.
           </p>
-
           <div className="mt-12 flex flex-wrap gap-4">
             <Link
               href="/apply"
