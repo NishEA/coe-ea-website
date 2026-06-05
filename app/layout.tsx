@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { fontDisplay, fontMono } from "./fonts";
 import "./globals.css";
 
@@ -19,7 +20,10 @@ export default function RootLayout({
       lang="en"
       className={`${fontDisplay.variable} ${fontMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col font-body">{children}</body>
+      <body className="flex min-h-full flex-col font-body">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
