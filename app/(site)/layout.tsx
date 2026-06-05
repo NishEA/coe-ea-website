@@ -39,7 +39,7 @@ export default function SiteLayout({
     if (!mountedRef.current || prevPathname.current === pathname) return
     prevPathname.current = pathname
     setShowSplash(true)
-    const id = setTimeout(() => setShowSplash(false), 500)
+    const id = setTimeout(() => setShowSplash(false), 150)
     return () => clearTimeout(id)
   }, [pathname])
 
