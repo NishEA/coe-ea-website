@@ -55,6 +55,7 @@
 html,
 body {
   background: var(--color-bg-void);
+  overscroll-behavior: none;
 }
 
 body {

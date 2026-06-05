@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { DarkHero } from '@/components/ui/DarkHero'
 import { ApplyForm } from '@/components/forms/apply/ApplyForm'
+import { PortfolioMorph } from '@/components/ui/morphs/PortfolioMorph'
 
 export const metadata: Metadata = {
   title: 'Apply — Centre of Excellence on Efficiency Augmentation',
@@ -30,8 +31,10 @@ export default function ApplyPage() {
       <DarkHero
         label="Cohort 3 · Applications open · Rolling basis"
         title="Apply to the next cohort."
+        align="left"
+        visual={<PortfolioMorph className="h-full w-full" />}
       >
-        <ul className="mt-10 flex flex-wrap items-baseline justify-center gap-x-10 gap-y-6">
+        <ul className="mt-10 flex flex-wrap items-baseline justify-start gap-x-10 gap-y-6">
           {STATS.map(s => (
             <li key={s.label} className="flex flex-col items-center">
               <span className="font-display text-[1.8rem] font-bold leading-none text-white">
@@ -74,7 +77,7 @@ export default function ApplyPage() {
             ))}
           </ul>
 
-          <div className="form-dark max-w-2xl">
+          <div className="form-dark mx-auto max-w-2xl">
             <Suspense>
               <ApplyForm />
             </Suspense>

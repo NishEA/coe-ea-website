@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { DomainMarquee } from '@/components/ui/DomainMarquee'
 import { LenisProvider } from '@/components/motion/LenisProvider'
 
@@ -22,13 +22,30 @@ export default function SiteLayout({
 }) {
   const pathname = usePathname()
   const [mounted, setMounted] = useState(false)
+  const [showSplash, setShowSplash] = useState(true)
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const mountedRef = useRef(false)
+  const prevPathname = useRef<string | null>(null)
 
-  // Frame draws in once after first paint.
+  // Initial mount: hide splash after first paint so hydration gap is covered.
   useEffect(() => {
-    const id = requestAnimationFrame(() => setMounted(true))
+    const id = requestAnimationFrame(() => {
+      setMounted(true)
+      setShowSplash(false)
+      mountedRef.current = true
+      prevPathname.current = pathname
+    })
     return () => cancelAnimationFrame(id)
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Route change: briefly show splash so navigation feels instant.
+  useEffect(() => {
+    if (!mountedRef.current || prevPathname.current === pathname) return
+    prevPathname.current = pathname
+    setShowSplash(true)
+    const id = setTimeout(() => setShowSplash(false), 500)
+    return () => clearTimeout(id)
+  }, [pathname])
 
   // Close drawer on route change (back-button, Link navigation).
   useEffect(() => {
@@ -49,8 +66,8 @@ export default function SiteLayout({
 
   return (
     <LenisProvider>
-    {/* Splash — server-rendered, visible until React mounts (no blank screen) */}
-    {!mounted && (
+    {/* Splash — visible on initial hydration and on each route change */}
+    {showSplash && (
       <div
         aria-hidden="true"
         className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-5 bg-bg-void"

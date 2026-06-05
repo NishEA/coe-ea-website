@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DarkHero } from "@/components/ui/DarkHero";
 import { TimelineMorph } from "@/components/ui/morphs/TimelineMorph";
+import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Events",
@@ -67,13 +68,15 @@ export default function EventsPage() {
         </p>
 
         {/* Event types */}
+        <Reveal>
         <div className="mt-16 border-t border-brand-navy/15 pt-12">
           <h2 className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
             What we run
           </h2>
           <div className="grid grid-cols-1 gap-px border border-brand-navy/10 bg-brand-navy/10 tablet:grid-cols-2">
-            {EVENT_TYPES.map((e) => (
-              <div key={e.id} className="bg-bg-paper p-8">
+            {EVENT_TYPES.map((e, i) => (
+              <Reveal key={e.id} delay={i * 0.08}>
+              <div className="bg-bg-paper p-8">
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-cerulean">
                   {e.label}
                 </p>
@@ -87,11 +90,14 @@ export default function EventsPage() {
                   {e.who}
                 </p>
               </div>
+              </Reveal>
             ))}
           </div>
         </div>
+        </Reveal>
 
         {/* Current schedule — empty state */}
+        <Reveal delay={0.1}>
         <div className="mt-16 border-t border-brand-navy/15 pt-12">
           <h2 className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
             Upcoming events
@@ -107,8 +113,10 @@ export default function EventsPage() {
             </div>
           </div>
         </div>
+        </Reveal>
 
         {/* Stay informed */}
+        <Reveal delay={0.15}>
         <div className="mt-16 border-t border-brand-navy/15 pt-12">
           <h2 className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
             Stay informed
@@ -135,6 +143,7 @@ export default function EventsPage() {
             ))}
           </div>
         </div>
+        </Reveal>
 
         <div className="mt-16 border-t border-brand-navy/15 pt-8">
           <Link
