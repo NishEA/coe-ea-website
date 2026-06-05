@@ -17,8 +17,12 @@ describe('IMPACT_METRICS', () => {
 describe('PARTNERS', () => {
   it('includes the named partners', () => {
     const names = PARTNERS.map(p => p.name)
-    for (const expected of ['HPE', 'Intel', 'Bosch', 'Schneider']) {
+    for (const expected of ['HPE', 'Intel', 'Bosch', 'Schneider', 'IEEE']) {
       expect(names).toContain(expected)
     }
+  })
+
+  it('has at least 6 partners', () => {
+    expect(PARTNERS.length).toBeGreaterThanOrEqual(6)
   })
 })

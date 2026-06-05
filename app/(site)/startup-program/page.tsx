@@ -338,27 +338,27 @@ export default function PortfolioPage() {
             Partners
           </p>
           <div className="rounded-sm border border-white/10 bg-white/5 px-10 py-8">
-            <ul aria-label="Programme partners" className="flex flex-wrap items-center gap-x-12 gap-y-6">
+            <ul aria-label="Programme partners" className="flex flex-wrap items-center justify-center gap-x-8 gap-y-8">
               {PROGRAMME_PARTNERS.map(p => (
-                <li key={p.name}>
+                <li key={p.name} className="flex items-center justify-center">
                   {p.logoSrc ? (
                     p.chip ? (
-                      <div className="rounded bg-white px-3 py-2">
+                      <div className="rounded bg-white px-3 py-2.5">
                         <Image
                           src={p.logoSrc}
                           alt={p.name}
-                          width={120}
-                          height={44}
-                          className="h-11 w-auto object-contain"
+                          width={140}
+                          height={56}
+                          className="h-14 w-auto max-w-[140px] object-contain"
                         />
                       </div>
                     ) : (
                       <Image
                         src={p.logoSrc}
                         alt={p.name}
-                        width={120}
-                        height={44}
-                        className="h-11 w-auto object-contain"
+                        width={160}
+                        height={56}
+                        className="h-14 w-auto max-w-[160px] object-contain"
                       />
                     )
                   ) : (
