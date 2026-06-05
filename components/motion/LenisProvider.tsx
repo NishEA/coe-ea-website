@@ -16,10 +16,11 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     if (prefersReduced) return;
 
     const lenis = new Lenis({
-      duration: 1.0,
-      // Exponential ease-out stops cleanly at boundary. Default lerp(0.1)
-      // asymptotes slowly and keeps consuming trackpad events, causing freeze.
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      // lerp mode (no duration): settles proportionally each frame.
+      // duration:1.0 was worse — each inertia event restarts a 1s animation,
+      // creating a freeze lock at the scroll boundary on trackpad.
+      lerp: 0.12,
+      smoothWheel: true,
     });
     let frame = 0;
     const raf = (time: number) => {
