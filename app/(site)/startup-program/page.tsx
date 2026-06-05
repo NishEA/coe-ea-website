@@ -9,7 +9,7 @@ const PROGRAMME_PARTNERS = [
   { name: 'Schneider Electric',                               logoSrc: '/logos/schneider.svg' },
   { name: 'Bosch Global Software Technologies Pvt Ltd',       logoSrc: '/logos/bosch-gst.png', chip: true },
   { name: 'IEEE',                                             logoSrc: '/logos/ieee.svg' },
-  { name: 'KDEM',                                             logoSrc: undefined },
+  { name: 'Karnataka Digital Economy Mission',                 logoSrc: '/logos/kdem.png', chip: true },
 ]
 
 // Domain → visual cluster (amber=hardware/energy, cerulean=digital/AI, operational=sustainability/life)
