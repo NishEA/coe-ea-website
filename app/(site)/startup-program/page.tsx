@@ -53,14 +53,14 @@ const TEXT_CLASS: Record<string, string> = {
 export const metadata: Metadata = {
   title: 'Startup Program',
   description:
-    'The CoE-EA Startup Programme: ₹10L seed grant, 16,000 sq ft centre, domain mentors, and market support across 10 Industry 4.0 domains.',
+    'The CoE-EA Startup Programme: up to ₹25L seed grant, 16,000 sq ft centre, domain mentors, and market support across 10 Industry 4.0 domains.',
 }
 
 const BENEFITS = [
   {
     id: 'grant',
     label: 'Seed capital',
-    headline: '₹10L grant',
+    headline: 'up to ₹25L grant',
     body: 'Equity-based. The Centre takes 1–3% equity on signing, scaled to your revenue, grants received, or valuation at time of onboarding.',
     accent: 'amber',
   },
@@ -377,8 +377,8 @@ export default function PortfolioPage() {
             Cohort 3 applications are open.
           </h2>
           <p className="mt-4 max-w-md font-body text-[15px] leading-[1.65] text-brand-ice/60">
-            12 months. ₹10L. A 16,000 sq ft centre, a domain expert, and a
-            partner ecosystem in your vertical. Based in Bengaluru.
+            12 months. Up to ₹25L seed grant. A 16,000 sq ft centre, a domain
+            expert, and a partner ecosystem in your vertical. Based in Bengaluru.
           </p>
           <div className="mt-12 flex flex-wrap gap-4">
             <Link

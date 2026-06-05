@@ -259,10 +259,11 @@ export default function SiteLayout({
             className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/50"
           >
             {[
-              { label: 'Privacy', href: '/privacy' },
               { label: 'Startup Program', href: '/startup-program' },
-              { label: 'Apply', href: '/apply' },
+              { label: 'Events', href: '/events' },
               { label: 'Governance', href: '/governance' },
+              { label: 'Apply', href: '/apply' },
+              { label: 'Privacy', href: '/privacy' },
               { label: 'STPI', href: 'https://www.stpi.in' },
               { label: 'RTI', href: 'https://www.stpi.in/rti.html' },
             ].map(l => (

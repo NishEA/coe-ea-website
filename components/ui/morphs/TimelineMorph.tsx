@@ -34,8 +34,8 @@ export function TimelineMorph({ className = '' }: { className?: string }) {
       typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) { setStage(2); return }
-    const t1 = window.setTimeout(() => setStage(1), 600)
-    const t2 = window.setTimeout(() => setStage(2), 1200)
+    const t1 = window.setTimeout(() => setStage(1), 100)
+    const t2 = window.setTimeout(() => setStage(2), 450)
     return () => { window.clearTimeout(t1); window.clearTimeout(t2) }
   }, [])
 

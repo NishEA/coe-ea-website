@@ -15,7 +15,12 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     ).matches;
     if (prefersReduced) return;
 
-    const lenis = new Lenis();
+    const lenis = new Lenis({
+      duration: 1.0,
+      // Exponential ease-out stops cleanly at boundary. Default lerp(0.1)
+      // asymptotes slowly and keeps consuming trackpad events, causing freeze.
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
     let frame = 0;
     const raf = (time: number) => {
       lenis.raf(time);
