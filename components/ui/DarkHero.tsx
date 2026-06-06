@@ -64,7 +64,7 @@ export function DarkHero({
           {label}
         </p>
         <h1
-          className={`fade-up mt-5 font-display font-bold leading-[1.04] tracking-[-0.025em] text-white text-[clamp(50px,6.5vw,82px)]${visual ? '' : ' max-w-2xl'}`}
+          className="fade-up mt-5 max-w-2xl font-display font-bold leading-[1.04] tracking-[-0.025em] text-white text-[clamp(50px,6.5vw,82px)]"
           style={{ animationDelay: '0.18s' }}
         >
           {title}
