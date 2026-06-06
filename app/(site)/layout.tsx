@@ -25,6 +25,7 @@ export default function SiteLayout({
   // The app-frame is visible immediately via CSS frame-draw animation.
   const [showSplash, setShowSplash] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const mountedRef = useRef(false)
   const prevPathname = useRef<string | null>(null)
 
@@ -47,6 +48,12 @@ export default function SiteLayout({
   useEffect(() => {
     setDrawerOpen(false)
   }, [pathname])
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   // WCAG 2.1.2 — dismiss drawer with Escape key.
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
@@ -96,7 +103,7 @@ export default function SiteLayout({
       <div className="grid-bg" />
 
       {/* ── Pill nav ── */}
-      <header className="relative z-30 flex items-center justify-between gap-4 px-6 py-5 tablet:px-9">
+      <header className={`z-30 flex items-center justify-between gap-4 px-6 tablet:px-9 transition-all duration-300 ${scrolled ? 'sticky top-0 backdrop-blur-sm bg-bg-void/90 border-b border-white/[0.08] py-4' : 'relative py-5'}`}>
         <Link
           href="/"
           className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"

@@ -23,6 +23,8 @@ export default function HomePage() {
       <TheInstrument />
       <TheLedger />
       <div className="h-px bg-brand-cerulean" aria-hidden="true" />
+      {/* Seam bridge — dark midnight → cream paper */}
+      <div aria-hidden className="pointer-events-none h-14 bg-gradient-to-b from-bg-midnight to-bg-paper" />
       <Suspense>
         <TheApplication />
       </Suspense>

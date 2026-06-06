@@ -39,7 +39,7 @@ export function TheApplication() {
     <section
       id="apply"
       aria-label="Apply — Section 5"
-      className="relative min-h-dvh w-full bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20"
+      className="relative w-full bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20"
     >
       <header className="mb-16 flex items-baseline justify-between">
         <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">

@@ -387,7 +387,7 @@ export default function PortfolioPage() {
             </Link>
             <Link
               href="/"
-              className="rounded-[5px] border border-brand-ice/30 px-7 py-3.5 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-ice/70 transition hover:border-brand-cerulean hover:text-accent-spark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
+              className="rounded-[5px] border border-brand-ice/30 px-7 py-3.5 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-ice/70 transition shadow-[inset_0_1px_0_rgba(255,255,255,.06),0_1px_2px_rgba(0,0,0,.4)] hover:border-brand-cerulean hover:text-brand-cerulean hover:-translate-y-px active:translate-y-px active:scale-[.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
             >
               ← Back to home
             </Link>

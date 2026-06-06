@@ -5,7 +5,7 @@ import { CountUp } from '@/components/ui/CountUp'
 const ITEMS: { value: number; prefix?: string; suffix?: string; label: string }[] = [
   { value: 3,   label: 'Cohorts run' },
   { value: 10,  label: 'Industry 4.0 domains' },
-  { value: 13,  label: 'Partners & mentors' },
+  { value: 13,  label: 'Partners' },
   { value: 127, label: 'Prototypes developed' },
 ]
 

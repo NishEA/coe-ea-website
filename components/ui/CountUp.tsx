@@ -15,6 +15,7 @@ export function CountUp({
   prefix = '',
   suffix = '',
   format,
+  spring = false,
   className = '',
 }: {
   value: number
@@ -23,6 +24,7 @@ export function CountUp({
   prefix?: string
   suffix?: string
   format?: (n: number) => string
+  spring?: boolean
   className?: string
 }) {
   const [display, setDisplay] = useState(0)
@@ -42,8 +44,9 @@ export function CountUp({
       const t0 = performance.now()
       const tick = (now: number) => {
         const p = Math.min((now - t0) / duration, 1)
-        // easeOutCubic
-        const eased = 1 - Math.pow(1 - p, 3)
+        const eased = spring
+          ? 1 + 2.70158 * Math.pow(p - 1, 3) + 1.70158 * Math.pow(p - 1, 2)
+          : 1 - Math.pow(1 - p, 3)
         setDisplay(value * eased)
         if (p < 1) requestAnimationFrame(tick)
         else setDisplay(value)
@@ -74,7 +77,7 @@ export function CountUp({
     )
     io.observe(el)
     return () => io.disconnect()
-  }, [value, duration, start])
+  }, [value, duration, start, spring])
 
   const rounded = Math.round(display)
   const text = format ? format(rounded) : String(rounded)

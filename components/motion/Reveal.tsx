@@ -21,7 +21,7 @@ export function Reveal({
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 0.6, delay, ease: "easeOut" }}
+      transition={{ type: 'spring', stiffness: 120, damping: 20, delay }}
     >
       {children}
     </motion.div>

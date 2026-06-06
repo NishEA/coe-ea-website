@@ -91,7 +91,7 @@ export function TheDiagnosis() {
               System Operational · Centre Active · Cohort 3 Open
             </p>
 
-            <h1 className="font-display text-[clamp(32px,3.8vw,54px)] font-bold leading-[1.06] tracking-[-0.025em] text-white">
+            <h1 className="[text-wrap:balance] font-display text-[clamp(32px,3.8vw,54px)] font-bold leading-[1.06] tracking-[-0.025em] text-white">
               {HEADLINE.map((w, i) => (
                 <span key={i}>
                   <span
@@ -117,13 +117,13 @@ export function TheDiagnosis() {
             <div className="fade-up mt-1 flex flex-col gap-2.5 tablet:flex-row tablet:flex-wrap" style={d(ready ? 1.5 : 99)}>
               <a
                 href="/apply"
-                className="rounded-[5px] bg-amber px-6 py-3 text-center font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-bg-void transition hover:bg-amber-hi focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean focus-visible:ring-offset-2 focus-visible:ring-offset-bg-void tablet:py-2.5 tablet:text-left"
+                className="rounded-[5px] bg-amber px-6 py-3 text-center font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-bg-void transition shadow-[inset_0_1px_0_rgba(255,255,255,.12),0_1px_3px_rgba(0,0,0,.35)] hover:bg-amber-hi hover:-translate-y-px hover:shadow-[inset_0_1px_0_rgba(255,255,255,.12),0_4px_16px_rgba(212,168,83,.4),0_1px_3px_rgba(0,0,0,.35)] active:translate-y-px active:scale-[.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean focus-visible:ring-offset-2 focus-visible:ring-offset-bg-void tablet:py-2.5 tablet:text-left"
               >
                 Apply to Cohort 3 →
               </a>
               <a
                 href="#resolve"
-                className="rounded-[5px] border border-brand-ice/30 px-6 py-3 text-center font-mono text-[10px] uppercase tracking-[0.12em] text-brand-ice transition hover:border-brand-cerulean hover:text-accent-spark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean tablet:py-2.5 tablet:text-left"
+                className="rounded-[5px] border border-brand-ice/30 px-6 py-3 text-center font-mono text-[10px] uppercase tracking-[0.12em] text-brand-ice transition shadow-[inset_0_1px_0_rgba(255,255,255,.06),0_1px_2px_rgba(0,0,0,.4)] hover:border-brand-cerulean hover:text-brand-cerulean hover:-translate-y-px active:translate-y-px active:scale-[.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean tablet:py-2.5 tablet:text-left"
               >
                 See the Diagnostic ↓
               </a>

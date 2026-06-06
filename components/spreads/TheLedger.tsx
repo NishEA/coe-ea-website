@@ -1,8 +1,9 @@
+'use client'
+
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import { IMPACT_METRICS, PARTNERS } from '@/data/impact-metrics'
 
-/** Split a metric value like "₹10.35 Cr" or "52" into a numeric head and a
- *  trailing unit chip ("Cr", "%", etc.). The leading ₹ stays with the number. */
 function splitValue(value: string): { num: string; unit: string | null } {
   const m = value.match(/^([₹$]?\s?[\d.,–-]+)\s*(.*)$/)
   if (!m) return { num: value, unit: null }
@@ -10,14 +11,27 @@ function splitValue(value: string): { num: string; unit: string | null } {
   return { num: m[1].trim(), unit: unit.length > 0 ? unit : null }
 }
 
+const gridVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.05 } },
+}
+
+const cellVariants = {
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 120, damping: 20 } },
+}
+
 export function TheLedger() {
   return (
     <section
       id="ledger"
       aria-label="The Ledger — CoE-EA outcomes and partnerships"
-      className="relative min-h-dvh w-full bg-bg-midnight px-6 py-24 tablet:px-12 desktop:px-20"
+      className="relative w-full bg-bg-midnight px-6 py-24 tablet:px-12 desktop:px-20"
     >
-      {/* Corner brackets — dark precision section */}
+      {/* Top seam bridge — cream (TheInstrument) fades into this dark section */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-bg-paper to-transparent" />
+
+      {/* Corner brackets */}
       <span aria-hidden className="pointer-events-none absolute left-5 top-24 h-6 w-6 border-l border-t border-brand-ice/15" />
       <span aria-hidden className="pointer-events-none absolute right-5 top-24 h-6 w-6 border-r border-t border-brand-ice/15" />
       <span aria-hidden className="pointer-events-none absolute bottom-5 left-5 h-6 w-6 border-b border-l border-brand-ice/15" />
@@ -32,18 +46,35 @@ export function TheLedger() {
         </span>
       </header>
 
-      <h2 className="mb-14 max-w-2xl font-display text-[2rem] font-semibold leading-[1.1] tracking-[-0.02em] text-white tablet:text-[2.75rem]">
+      <h2 className="[text-wrap:balance] mb-14 max-w-2xl font-display text-[2rem] font-semibold leading-[1.1] tracking-[-0.02em] text-white tablet:text-[2.75rem]">
         What the instrument <span className="text-amber">measured</span>.
       </h2>
 
-      <div className="grid grid-cols-2 gap-x-8 gap-y-12 tablet:grid-cols-3 desktop:grid-cols-4">
+      <motion.div
+        className="grid grid-cols-2 gap-4 tablet:grid-cols-3 desktop:grid-cols-4"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: '-10%' }}
+        variants={gridVariants}
+      >
         {IMPACT_METRICS.map((m, i) => {
           const { num, unit } = splitValue(m.value)
+          const isLead = i === 0
           return (
-            <div key={m.label} className="flex flex-col gap-2">
+            <motion.div
+              key={m.label}
+              variants={cellVariants}
+              className={`flex flex-col gap-2 rounded-xl p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.04),0_1px_3px_rgba(0,0,0,.4)] ${
+                isLead
+                  ? 'border border-amber/20 bg-amber/[0.04]'
+                  : 'border border-brand-ice/[0.07] bg-brand-ice/[0.03]'
+              }`}
+            >
               <span
                 className={`flex items-baseline gap-1.5 font-display text-[3rem] font-bold leading-none tracking-tight tabular-nums desktop:text-[3.6rem] ${
-                  i === 0 ? 'text-white' : 'text-brand-ice/60'
+                  isLead
+                    ? 'text-amber drop-shadow-[0_0_12px_rgba(212,168,83,.35)]'
+                    : 'text-brand-ice/60'
                 }`}
                 aria-label={`${m.label}: ${m.value}`}
               >
@@ -57,17 +88,15 @@ export function TheLedger() {
               <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/55">
                 {m.label}
               </span>
-            </div>
+            </motion.div>
           )
         })}
-      </div>
+      </motion.div>
 
       <div className="mt-20 border-t border-brand-ice/10 pt-10" aria-label="Partner organisations">
         <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
           Partners
         </p>
-        {/* Mobile: single-row horizontal scroll (gold standard for partner strips).
-            Tablet+: centred flex-wrap. */}
         <div className="rounded-sm border border-brand-ice/10 bg-brand-ice/5 px-5 py-6 tablet:px-10 tablet:py-8">
           <div className="overflow-x-auto pb-1 tablet:overflow-visible">
             <ul
