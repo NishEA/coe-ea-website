@@ -114,16 +114,16 @@ export function TheDiagnosis() {
               citation-bound.
             </p>
 
-            <div className="fade-up mt-1 flex flex-wrap gap-2.5" style={d(ready ? 1.5 : 99)}>
+            <div className="fade-up mt-1 flex flex-col gap-2.5 tablet:flex-row tablet:flex-wrap" style={d(ready ? 1.5 : 99)}>
               <a
                 href="/apply"
-                className="rounded-[5px] bg-amber px-6 py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-bg-void transition hover:bg-amber-hi focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean focus-visible:ring-offset-2 focus-visible:ring-offset-bg-void"
+                className="rounded-[5px] bg-amber px-6 py-3 text-center font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-bg-void transition hover:bg-amber-hi focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean focus-visible:ring-offset-2 focus-visible:ring-offset-bg-void tablet:py-2.5 tablet:text-left"
               >
                 Apply to Cohort 3 →
               </a>
               <a
                 href="#resolve"
-                className="rounded-[5px] border border-brand-ice/30 px-6 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] text-brand-ice transition hover:border-brand-cerulean hover:text-accent-spark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
+                className="rounded-[5px] border border-brand-ice/30 px-6 py-3 text-center font-mono text-[10px] uppercase tracking-[0.12em] text-brand-ice transition hover:border-brand-cerulean hover:text-accent-spark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean tablet:py-2.5 tablet:text-left"
               >
                 See the Diagnostic ↓
               </a>

@@ -29,7 +29,7 @@ export function DarkHero({
   return (
     <section
       aria-label={typeof title === 'string' ? title : label}
-      className="relative flex min-h-[65vh] w-full items-center overflow-hidden px-6 py-20 tablet:px-12"
+      className="relative flex w-full flex-col overflow-hidden px-6 pb-16 pt-14 tablet:px-12 desktop:min-h-[65vh] desktop:flex-row desktop:items-center desktop:pb-20 desktop:pt-20"
     >
       <span aria-hidden className="corner-bracket left-3 top-3 border-l border-t" />
       <span aria-hidden className="corner-bracket right-3 top-3 border-r border-t" />
@@ -37,9 +37,9 @@ export function DarkHero({
       <span aria-hidden className="corner-bracket bottom-3 right-3 border-b border-r" />
 
       {/* Visual column — right half, full section height, behind text (z-0).
-          Visible at low opacity on mobile/tablet as decorative background. */}
+          Hidden on mobile: a half-width 25% opacity element reads as glitch debris. */}
       {visual && (
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-0 w-1/2 opacity-25 desktop:opacity-100">
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-1/2 desktop:block">
           {visual}
         </div>
       )}

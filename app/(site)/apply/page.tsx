@@ -15,7 +15,7 @@ export default function ApplyPage() {
   return (
     <>
       <DarkHero
-        label="Cohort 3 · Applications open · Rolling basis"
+        label="Cohort 3 · Applications open"
         title="Apply to the next cohort."
         subhead="10 Industry 4.0 domains · 12-month programme · Bengaluru"
         align="left"

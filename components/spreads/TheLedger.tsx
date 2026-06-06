@@ -66,38 +66,45 @@ export function TheLedger() {
         <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
           Partners
         </p>
+        {/* Mobile: single-row horizontal scroll (gold standard for partner strips).
+            Tablet+: centred flex-wrap. */}
         <div className="rounded-sm border border-brand-ice/10 bg-brand-ice/5 px-5 py-6 tablet:px-10 tablet:py-8">
-          <ul className="grid grid-cols-2 items-center justify-items-center gap-5 tablet:grid-cols-3 tablet:gap-8 desktop:flex desktop:flex-wrap desktop:justify-center desktop:gap-x-8 desktop:gap-y-8" role="list">
-            {PARTNERS.map(p => (
-              <li key={p.name} className="flex items-center justify-center">
-                {p.logoSrc ? (
-                  p.chip ? (
-                    <div className="rounded bg-white px-2.5 py-2">
+          <div className="overflow-x-auto pb-1 tablet:overflow-visible">
+            <ul
+              className="flex min-w-max items-center gap-6 tablet:min-w-0 tablet:flex-wrap tablet:justify-center tablet:gap-x-8 tablet:gap-y-6"
+              role="list"
+            >
+              {PARTNERS.map(p => (
+                <li key={p.name} className="flex flex-shrink-0 items-center justify-center tablet:flex-shrink">
+                  {p.logoSrc ? (
+                    p.chip ? (
+                      <div className="rounded bg-white px-2.5 py-2">
+                        <Image
+                          src={p.logoSrc}
+                          alt={p.name}
+                          width={140}
+                          height={56}
+                          className="h-10 w-auto max-w-[100px] object-contain tablet:h-12 tablet:max-w-[120px]"
+                        />
+                      </div>
+                    ) : (
                       <Image
                         src={p.logoSrc}
                         alt={p.name}
-                        width={140}
+                        width={160}
                         height={56}
-                        className="h-10 w-auto max-w-[100px] object-contain tablet:h-14 tablet:max-w-[140px]"
+                        className="h-10 w-auto max-w-[110px] object-contain tablet:h-12 tablet:max-w-[140px]"
                       />
-                    </div>
+                    )
                   ) : (
-                    <Image
-                      src={p.logoSrc}
-                      alt={p.name}
-                      width={160}
-                      height={56}
-                      className="h-10 w-auto max-w-[110px] object-contain tablet:h-14 tablet:max-w-[160px]"
-                    />
-                  )
-                ) : (
-                  <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
-                    {p.name}
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
+                    <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
+                      {p.name}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
