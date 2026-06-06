@@ -28,6 +28,9 @@ export default function SiteLayout({
   const [scrolled, setScrolled] = useState(false)
   const mountedRef = useRef(false)
   const prevPathname = useRef<string | null>(null)
+  const hamburgerRef = useRef<HTMLButtonElement>(null)
+  const drawerFirstLinkRef = useRef<HTMLAnchorElement>(null)
+  const prevDrawerOpen = useRef(false)
 
   // Mark mounted and record initial path for route-change detection.
   useEffect(() => {
@@ -58,6 +61,16 @@ export default function SiteLayout({
   // Drawer is position:fixed full-screen — no body overflow lock needed.
   // Removed: body.style.overflow race caused persistent scroll lock on route changes.
   // iOS scroll-through is prevented by overscroll-contain on the drawer <nav>.
+
+  // WCAG 2.4.3 — move focus into drawer on open; return to trigger on close.
+  useEffect(() => {
+    if (drawerOpen && !prevDrawerOpen.current) {
+      drawerFirstLinkRef.current?.focus()
+    } else if (!drawerOpen && prevDrawerOpen.current) {
+      hamburgerRef.current?.focus()
+    }
+    prevDrawerOpen.current = drawerOpen
+  }, [drawerOpen])
 
   // WCAG 2.1.2 — dismiss drawer with Escape key.
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
@@ -177,6 +190,7 @@ export default function SiteLayout({
             Apply →
           </Link>
           <button
+            ref={hamburgerRef}
             type="button"
             aria-label={drawerOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={drawerOpen}
@@ -198,10 +212,11 @@ export default function SiteLayout({
           drawerOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
       >
-        {NAV.map(item => (
+        {NAV.map((item, i) => (
           <Link
             key={item.href}
             href={item.href}
+            ref={i === 0 ? drawerFirstLinkRef : undefined}
             onClick={closeDrawer}
             tabIndex={drawerOpen ? undefined : -1}
             aria-current={isActive(item.href) ? 'page' : undefined}
@@ -217,10 +232,10 @@ export default function SiteLayout({
       </nav>
 
       {/* Page content */}
-      <main id="main" className="relative z-10">{children}</main>
+      <main id="main" className="relative z-10" {...(drawerOpen ? { inert: true } : {})}>{children}</main>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-white/[0.06] px-6 py-10 tablet:px-9">
+      <footer className="relative z-10 border-t border-white/[0.06] px-6 py-10 tablet:px-9" {...(drawerOpen ? { inert: true } : {})}>
         <div className="flex flex-col gap-4 tablet:flex-row tablet:items-start tablet:justify-between">
           <div>
             {/* Institution logos — frosted glass frame */}

@@ -27,7 +27,7 @@ export function Field({ label, error, hint, id, ...input }: Props) {
         aria-describedby={errorId}
         aria-invalid={!!error || undefined}
         suppressHydrationWarning
-        className="mt-2 w-full border-b border-brand-navy/30 bg-transparent py-2 font-body text-brand-navy outline-none focus:border-brand-cerulean"
+        className="mt-2 w-full border-b border-brand-navy/30 bg-transparent py-2 font-body text-brand-navy outline-none focus:border-brand-cerulean focus-visible:ring-2 focus-visible:ring-brand-cerulean focus-visible:ring-offset-1 focus-visible:rounded-sm"
         {...input}
       />
       {hint && !error && (

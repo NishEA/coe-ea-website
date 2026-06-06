@@ -36,7 +36,7 @@ export function Masthead() {
           <Link
             key={item.href}
             href={item.href}
-            className="border-b border-transparent pb-1 transition hover:border-brand-cerulean hover:text-brand-navy"
+            className="border-b border-transparent pb-1 transition hover:border-brand-cerulean hover:text-brand-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean focus-visible:rounded-sm"
           >
             {item.label}
           </Link>
