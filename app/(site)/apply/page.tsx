@@ -17,7 +17,7 @@ export default function ApplyPage() {
       <DarkHero
         label="Cohort 3 · Applications open"
         title="Apply to the next cohort."
-        subhead="10 Industry 4.0 domains · 12-month programme · Bengaluru"
+        subhead="10 Industry 4.0 domains · 12-month programme · 1–3% equity on signing · Bengaluru"
         align="left"
         visual={<OrbitCanvas className="h-full w-full" showLabels animate labelFontSize={13} />}
       />
@@ -59,7 +59,8 @@ export default function ApplyPage() {
 
           <p className="mt-12 max-w-xl font-mono text-[11px] uppercase tracking-[0.16em] text-ink/50">
             The up to ₹25L seed grant is funded by STPI · KITS · HPE. Disbursement is
-            milestone-gated and subject to the equity agreement.
+            milestone-gated. The Centre takes 1–3% equity on signing, scaled to your
+            revenue, grants received, or valuation at time of onboarding.
           </p>
         </div>
       </section>
