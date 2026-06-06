@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
+import { DarkHero } from '@/components/ui/DarkHero'
 import { ApplyForm } from '@/components/forms/apply/ApplyForm'
+import { OrbitCanvas } from '@/components/ui/OrbitCanvas'
 import { APPLY_BENEFITS } from '@/data/apply-benefits'
 
 export const metadata: Metadata = {
@@ -12,23 +14,20 @@ export const metadata: Metadata = {
 export default function ApplyPage() {
   return (
     <>
+      <DarkHero
+        label="Cohort 3 · Applications open"
+        title="Apply to the next cohort."
+        subhead="10 Industry 4.0 domains · 12-month programme · Bengaluru"
+        align="left"
+        visual={<OrbitCanvas className="h-full w-full" showLabels animate />}
+      />
+
       <section
         id="apply"
         aria-label="Apply"
-        className="relative z-10 border-t border-brand-cerulean px-6 pb-20 pt-14 tablet:px-12"
+        className="relative z-10 px-6 py-20 tablet:px-12"
       >
         <div className="mx-auto max-w-[1100px]">
-          <header className="mb-16 border-b border-white/10 pb-12">
-            <p className="fade-up font-mono text-[10px] uppercase tracking-[0.22em] text-brand-cerulean" style={{ animationDelay: '0.05s' }}>
-              Cohort 3 · Applications open
-            </p>
-            <h1 className="fade-up mt-4 max-w-2xl font-display text-[clamp(32px,4vw,56px)] font-bold leading-[1.04] tracking-[-0.025em] text-white" style={{ animationDelay: '0.18s' }}>
-              Apply to the next cohort.
-            </h1>
-            <p className="fade-up mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-brand-ice/55" style={{ animationDelay: '0.28s' }}>
-              10 Industry 4.0 domains · 12-month programme · Bengaluru
-            </p>
-          </header>
           {/* Benefit strip — amber markers */}
           <ul
             aria-label="What you get"

@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { DarkHero } from '@/components/ui/DarkHero'
+import { PortfolioMorph } from '@/components/ui/morphs/PortfolioMorph'
 
 // Domain → visual cluster (amber=hardware/energy, cerulean=digital/AI, operational=sustainability/life)
 const DOMAIN_CLUSTER: Record<string, 'amber' | 'cerulean' | 'operational'> = {
@@ -149,21 +151,21 @@ const STARTUPS_DOUBLED = [...STARTUPS, ...STARTUPS]
 export default function PortfolioPage() {
   return (
     <>
-      {/* ── 1. What the programme gives you — DARK ── */}
-      <section className="relative z-10 border-t border-brand-cerulean bg-bg-void px-6 pb-24 pt-14 tablet:px-12">
-        <div className="relative mx-auto max-w-[1100px]">
-          <header className="mb-14 border-b border-white/10 pb-12">
-            <p className="fade-up font-mono text-[10px] uppercase tracking-[0.22em] text-brand-cerulean" style={{ animationDelay: '0.05s' }}>
-              Startup Program
-            </p>
-            <h1 className="fade-up mt-4 max-w-2xl font-display text-[clamp(32px,4vw,56px)] font-bold leading-[1.04] tracking-[-0.025em] text-white" style={{ animationDelay: '0.18s' }}>
-              Built inside <span className="text-amber">the machine.</span>
-            </h1>
-            <p className="fade-up mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-brand-ice/55" style={{ animationDelay: '0.28s' }}>
-              52 startups · 10 domains · 3 cohorts
-            </p>
-          </header>
-        </div>
+      {/* ── 1. Hero ── */}
+      <DarkHero
+        label="Startup Program"
+        title={
+          <>
+            Built inside <span className="text-amber">the machine.</span>
+          </>
+        }
+        subhead="52 STARTUPS · 10 DOMAINS · 3 COHORTS"
+        visual={<PortfolioMorph className="h-full w-auto max-w-[600px]" />}
+        bridge={false}
+      />
+
+      {/* ── 2. What the programme gives you — DARK ── */}
+      <section className="relative z-10 bg-bg-void px-6 py-24 tablet:px-12">
         <div className="grid-bg" aria-hidden />
         <div className="relative mx-auto max-w-[1100px]">
           <div className="mb-14">

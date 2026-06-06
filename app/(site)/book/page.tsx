@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DarkHero } from "@/components/ui/DarkHero";
+import { FloorPlanMorph } from "@/components/ui/morphs/FloorPlanMorph";
 
 export const metadata: Metadata = {
   title: "Book a Facility",
@@ -71,16 +73,18 @@ const STEPS = [
 export default function BookPage() {
   return (
     <>
-      <main className="relative z-10 border-t border-brand-cerulean bg-bg-paper px-6 pb-20 pt-14 tablet:px-12 desktop:px-20">
-      <div className="mx-auto max-w-[1160px]">
-        <header className="mb-16 border-b border-brand-navy/15 pb-12">
-          <p className="fade-up font-mono text-[10px] uppercase tracking-[0.22em] text-brand-cerulean" style={{ animationDelay: '0.05s' }}>
-            Bengaluru · 16,000 sq ft · Industry 4.0
-          </p>
-          <h1 className="fade-up mt-4 max-w-2xl font-display text-[clamp(32px,4vw,56px)] font-bold leading-[1.04] tracking-[-0.025em] text-brand-navy" style={{ animationDelay: '0.18s' }}>
+      <DarkHero
+        label="Bengaluru · 16,000 sq ft · Industry 4.0"
+        title={
+          <>
             The field, in <span className="text-amber">physical space.</span>
-          </h1>
-        </header>
+          </>
+        }
+        visual={<FloorPlanMorph className="h-full w-auto max-w-[640px]" />}
+      />
+
+      <main className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
+      <div className="mx-auto max-w-[1160px]">
         <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-ink/75">
           CoE-EA&rsquo;s Bengaluru facility is available to incubatees, partners, and
           invited teams. Lab space, meeting infrastructure, and demo suites —
