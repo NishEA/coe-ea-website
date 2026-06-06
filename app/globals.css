@@ -148,6 +148,21 @@ body {
 .pill-amber:hover {
   background: var(--color-amber-hi);
 }
+/* Light-page pill variants — used when nav sits on bg-paper */
+.pill-active-light {
+  background: var(--color-brand-navy);
+  color: #fff;
+  font-weight: 700;
+}
+.pill-ghost-light {
+  background: transparent;
+  border: 1px solid rgba(14, 45, 122, 0.25);
+  color: rgba(14, 45, 122, 0.6);
+}
+.pill-ghost-light:hover {
+  color: var(--color-brand-navy);
+  border-color: rgba(14, 45, 122, 0.45);
+}
 
 /* Operational dot. */
 .op-dot {

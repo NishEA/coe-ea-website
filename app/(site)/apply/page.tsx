@@ -18,7 +18,7 @@ export default function ApplyPage() {
         className="relative z-10 border-t border-brand-cerulean px-6 pb-20 pt-14 tablet:px-12"
       >
         <div className="mx-auto max-w-[1100px]">
-          <header className="mb-16 border-b border-white/10 pb-12">
+          <header className="mb-10 border-b border-white/10 pb-12">
             <p className="fade-up font-mono text-[10px] uppercase tracking-[0.22em] text-brand-cerulean" style={{ animationDelay: '0.05s' }}>
               Cohort 3 · Applications open
             </p>
@@ -32,7 +32,7 @@ export default function ApplyPage() {
           {/* Benefit strip — amber markers */}
           <ul
             aria-label="What you get"
-            className="mb-20 grid grid-cols-1 gap-x-8 gap-y-8 border-y border-white/[0.08] py-10 tablet:grid-cols-3 desktop:grid-cols-5"
+            className="mb-12 grid grid-cols-1 gap-x-8 gap-y-8 border-y border-white/[0.08] py-10 tablet:grid-cols-3 desktop:grid-cols-5"
           >
             {APPLY_BENEFITS.map(b => (
               <li key={b.label} className="flex flex-col gap-1.5">

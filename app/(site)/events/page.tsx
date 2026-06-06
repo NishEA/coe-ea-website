@@ -48,15 +48,18 @@ export default function EventsPage() {
     <>
       <main className="relative z-10 border-t border-brand-cerulean bg-bg-paper px-6 pb-20 pt-14 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[900px]">
-        <header className="mb-16 border-b border-brand-navy/15 pb-12">
-          <p className="fade-up font-mono text-[10px] uppercase tracking-[0.22em] text-brand-cerulean" style={{ animationDelay: '0.05s' }}>
-            Open to engineers · researchers · startup founders
+        <header className="mb-10 border-b border-brand-navy/15 pb-12">
+          <p className="fade-up font-mono text-[10px] uppercase tracking-[0.14em] text-brand-cerulean tablet:tracking-[0.22em]" style={{ animationDelay: '0.05s' }}>
+            Events
           </p>
           <h1 className="fade-up mt-4 max-w-2xl font-display text-[clamp(32px,4vw,56px)] font-bold leading-[1.04] tracking-[-0.025em] text-brand-navy" style={{ animationDelay: '0.18s' }}>
             Where signal meets <span className="text-amber">founder.</span>
           </h1>
+          <p className="fade-up mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-navy/45" style={{ animationDelay: '0.28s' }}>
+            Open to engineers · researchers · startup founders
+          </p>
         </header>
-        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-ink/75">
+        <p className="max-w-[52ch] font-body text-[17px] leading-[1.7] text-ink/85">
           CoE-EA runs hackathons, ideathons, workshops, and industrial visits
           throughout the year — connecting founders with domain problems and
           partner infrastructure.
