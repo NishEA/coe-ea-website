@@ -1,20 +1,43 @@
 'use client'
 
-import { useField } from '@/components/field/FieldProvider'
+import { useEffect, useState } from 'react'
 
-const CHAPTERS = ['DIAGNOSE', 'RESOLVE', 'LEDGER', 'INSTRUMENT', 'APPLY'] as const
+const CHAPTERS = [
+  { label: 'DIAGNOSE', id: 'diagnosis' },
+  { label: 'SHIFT', id: 'resolve' },
+  { label: 'INSTRUMENT', id: 'instrument' },
+  { label: 'LEDGER', id: 'ledger' },
+  { label: 'APPLY', id: 'apply' },
+] as const
 
 export function ChapterProgress() {
-  const { activeSection } = useField()
+  const [activeIdx, setActiveIdx] = useState(-1)
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+
+    CHAPTERS.forEach(({ id }, i) => {
+      const el = document.getElementById(id)
+      if (!el) return
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveIdx(i) },
+        { threshold: 0.3 }
+      )
+      obs.observe(el)
+      observers.push(obs)
+    })
+
+    return () => observers.forEach(o => o.disconnect())
+  }, [])
 
   return (
     <nav
       aria-label="Chapter progress"
       className="pointer-events-none fixed left-5 top-1/2 z-20 hidden -translate-y-1/2 flex-col items-center tablet:flex"
     >
-      {CHAPTERS.map((label, i) => {
-        const isActive = i === activeSection
-        const isPast = activeSection >= 0 && i < activeSection
+      {CHAPTERS.map(({ label }, i) => {
+        const isActive = i === activeIdx
+        const isPast = activeIdx >= 0 && i < activeIdx
         const num = String(i + 1).padStart(2, '0')
 
         return (

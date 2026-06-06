@@ -28,9 +28,6 @@ export function TheLedger() {
       aria-label="The Ledger — CoE-EA outcomes and partnerships"
       className="relative w-full bg-bg-midnight px-6 py-24 tablet:px-12 desktop:px-20"
     >
-      {/* Top seam bridge — cream (TheInstrument) fades into this dark section */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-bg-paper to-transparent" />
-
       {/* Corner brackets */}
       <span aria-hidden className="pointer-events-none absolute left-5 top-24 h-6 w-6 border-l border-t border-brand-ice/15" />
       <span aria-hidden className="pointer-events-none absolute right-5 top-24 h-6 w-6 border-r border-t border-brand-ice/15" />

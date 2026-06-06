@@ -1,14 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useField } from '@/components/field/FieldProvider'
-import { DOMAINS } from '@/data/domain-provenance'
+import { useState } from 'react'
 import { WaveformLoader } from '@/components/ui/WaveformLoader'
 import { OrbitCanvas } from '@/components/ui/OrbitCanvas'
 import { InstrumentCubes } from '@/components/ui/InstrumentCubes'
 
-/** Headline split into words for the staggered word-by-word rise. The key
- *  phrase ("measured signal.") is amber. */
 const HEADLINE: { text: string; amber?: boolean; br?: boolean }[] = [
   { text: 'Industry' },
   { text: 'instinct,', br: true },
@@ -19,52 +15,8 @@ const HEADLINE: { text: string; amber?: boolean; br?: boolean }[] = [
 ]
 
 export function TheDiagnosis() {
-  const { setPointer, resolvedDomains } = useField()
-  // `ready` flips when the loader finishes — it gates the staged reveal.
   const [ready, setReady] = useState(false)
 
-  useEffect(() => {
-    // Mouse: track continuously so the canvas lens follows the cursor.
-    const onMove = (e: PointerEvent) => {
-      if (e.pointerType !== 'touch') setPointer({ x: e.clientX, y: e.clientY })
-    }
-    // Touch: pointermove fires during scroll and would clobber the pinned node.
-    // Instead, snap to the nearest domain's exact canvas coordinates on tap so
-    // the canvas always sees it as "in lens" (0 distance). Tap outside all nodes
-    // clears to {-999,-999} so the previous node deactivates cleanly.
-    const onDown = (e: PointerEvent) => {
-      if (e.pointerType !== 'touch') return
-      const W = window.innerWidth, H = window.innerHeight
-      const TAP_R2 = 280 * 280
-      let nearest: { x: number; y: number } | null = null
-      let bestD2 = TAP_R2
-      for (const d of DOMAINS) {
-        const nx = d.fieldX * W, ny = d.fieldY * H
-        const dx = e.clientX - nx, dy = e.clientY - ny
-        const d2 = dx * dx + dy * dy
-        if (d2 < bestD2) { bestD2 = d2; nearest = { x: nx, y: ny } }
-      }
-      setPointer(nearest ? { x: nearest.x, y: nearest.y } : { x: -999, y: -999 })
-    }
-    window.addEventListener('pointermove', onMove, { passive: true })
-    window.addEventListener('pointerdown', onDown, { passive: true })
-    return () => {
-      window.removeEventListener('pointermove', onMove)
-      window.removeEventListener('pointerdown', onDown)
-    }
-  }, [setPointer])
-
-  const ctaActive = resolvedDomains.size >= 1
-
-  // Hint block stays hidden until first scroll — keeps hero viewport clean on load.
-  const [hintVisible, setHintVisible] = useState(false)
-  useEffect(() => {
-    const show = () => setHintVisible(true)
-    window.addEventListener('scroll', show, { once: true, passive: true })
-    return () => window.removeEventListener('scroll', show)
-  }, [])
-
-  // Animation-delay helper (seconds) for staged reveal after loader completes.
   const d = (s: number): React.CSSProperties => ({ animationDelay: `${s}s` })
 
   return (
@@ -76,7 +28,6 @@ export function TheDiagnosis() {
         aria-label="The Diagnosis — CoE-EA hero"
         className="relative w-full overflow-hidden"
       >
-        {/* Corner brackets */}
         <span aria-hidden className="corner-bracket left-3 top-3 border-l border-t" />
         <span aria-hidden className="corner-bracket right-3 top-3 border-r border-t" />
 
@@ -125,7 +76,7 @@ export function TheDiagnosis() {
                 href="#resolve"
                 className="rounded-[5px] border border-brand-ice/30 px-6 py-3 text-center font-mono text-[10px] uppercase tracking-[0.12em] text-brand-ice transition shadow-[inset_0_1px_0_rgba(255,255,255,.06),0_1px_2px_rgba(0,0,0,.4)] hover:border-brand-cerulean hover:text-brand-cerulean hover:-translate-y-px active:translate-y-px active:scale-[.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean tablet:py-2.5 tablet:text-left"
               >
-                See the Diagnostic ↓
+                See the shift ↓
               </a>
             </div>
 
@@ -160,24 +111,6 @@ export function TheDiagnosis() {
               measure · diagnose · augment
             </div>
           </div>
-        </div>
-
-        {/* Diagnostic hint + state CTA — hidden until first scroll */}
-        <div className={`relative z-10 mx-auto -mt-6 mb-10 max-w-md px-6 text-center transition-opacity duration-700 ${hintVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/35">
-            Tap · hold any node to resolve
-          </p>
-          <a
-            href="#apply"
-            className={`cursor-pointer font-mono text-[12px] uppercase tracking-[0.14em] outline-none ring-brand-cerulean ring-offset-2 transition-all duration-500 focus:ring-2 focus-visible:ring-2 ${
-              ctaActive
-                ? 'text-brand-cerulean underline underline-offset-4'
-                : 'text-brand-ice/55 hover:text-brand-ice'
-            }`}
-            aria-label="Show us where it breaks — apply to CoE-EA"
-          >
-            Show us where it breaks →
-          </a>
         </div>
       </section>
     </>

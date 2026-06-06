@@ -1,7 +1,6 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import { useField } from '@/components/field/FieldProvider'
 import { ApplyForm } from '@/components/forms/apply/ApplyForm'
 import { APPLY_BENEFITS } from '@/data/apply-benefits'
 
@@ -13,8 +12,7 @@ const VALID_PILLAR_VALUES = new Set([
   'smart_hospital', 'smart_security', 'intelligent_asset_monitoring',
 ])
 
-// Bridges provenance domain IDs (dash-separated, used by the particle field)
-// to DB enum values. Four entries are renames, not just dash→underscore.
+// Bridges URL ?pillar= query param values to DB enum values.
 const PROVENANCE_TO_PILLAR: Record<string, string> = {
   'smart-manufacturing':  'smart_manufacturing',
   'smart-energy':         'smart_energy',
@@ -29,7 +27,6 @@ const PROVENANCE_TO_PILLAR: Record<string, string> = {
 }
 
 export function TheApplication() {
-  const { resolvedDomains } = useField()
   const searchParams = useSearchParams()
   const rawPillar = searchParams.get('pillar') ?? ''
   const resolvedPillar = PROVENANCE_TO_PILLAR[rawPillar] ?? rawPillar
@@ -53,11 +50,6 @@ export function TheApplication() {
       <h2 className="font-display text-[2.4rem] font-semibold leading-[1.05] tracking-[-0.02em] text-brand-navy tablet:text-[3.4rem]">
         Apply to the <span className="text-amber">next cohort</span>.
       </h2>
-      {resolvedDomains.size > 0 && (
-        <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.1em] text-brand-cerulean">
-          {resolvedDomains.size} domain{resolvedDomains.size > 1 ? 's' : ''} diagnosed
-        </p>
-      )}
 
       {/* Benefit strip — amber markers */}
       <ul
