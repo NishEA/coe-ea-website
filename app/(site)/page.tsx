@@ -22,6 +22,7 @@ export default function HomePage() {
       <TheResolve />
       <TheInstrument />
       <TheLedger />
+      <div className="h-px bg-brand-cerulean" aria-hidden="true" />
       <Suspense>
         <TheApplication />
       </Suspense>
