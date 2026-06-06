@@ -1,20 +1,13 @@
+import { DOMAINS as DOMAIN_DEFS } from '@/data/domain-provenance'
+
+const HI = new Set(['Smart Manufacturing', 'Smart Water', 'Asset Monitoring', 'Smart Farming'])
+
 /**
  * Concept D domain marquee — sits at the bottom of every page. Ten Industry
  * 4.0 domains scroll continuously; a subset is highlighted in cerulean. The
  * list is duplicated so the -50% translate loop is seamless.
  */
-const DOMAINS: { label: string; hi?: boolean }[] = [
-  { label: 'Smart Manufacturing', hi: true },
-  { label: 'Smart Energy' },
-  { label: 'Smart Water', hi: true },
-  { label: 'Connected Transport' },
-  { label: 'Smart Healthcare' },
-  { label: 'Asset Monitoring', hi: true },
-  { label: 'Smart Security' },
-  { label: 'Weather Monitoring' },
-  { label: 'Smart Farming', hi: true },
-  { label: 'Home Automation' },
-]
+const DOMAINS = DOMAIN_DEFS.map(d => ({ label: d.name, hi: HI.has(d.name) }))
 
 export function DomainMarquee() {
   const seq = [...DOMAINS, ...DOMAINS]

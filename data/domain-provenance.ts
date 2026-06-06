@@ -1,6 +1,10 @@
 export interface DomainDef {
   id: string
   name: string
+  /** Slug used as the form submission value in the apply form */
+  formValue: string
+  /** Abbreviated label for OrbitCanvas nodes */
+  orbitLabel: string
   /** Short stat string e.g. "35% less unplanned downtime" */
   stat: string
   /** Publication source e.g. "McKinsey 2024" */
@@ -29,6 +33,8 @@ export const DOMAINS: DomainDef[] = [
   {
     id: 'smart-manufacturing',
     name: 'Smart Manufacturing',
+    formValue: 'smart_manufacturing',
+    orbitLabel: 'MFG',
     stat: '35% less unplanned downtime',
     source: 'McKinsey 2024',
     sentence: 'IoT-instrumented production lines that predict faults before they cascade.',
@@ -41,6 +47,8 @@ export const DOMAINS: DomainDef[] = [
   {
     id: 'smart-energy',
     name: 'Smart Energy',
+    formValue: 'smart_energy',
+    orbitLabel: 'ENERGY',
     stat: '5–10% electricity reduction',
     source: 'IEA 2025',
     sentence: 'Grid intelligence that routes power where it is needed, not where it is habitual.',
@@ -53,6 +61,8 @@ export const DOMAINS: DomainDef[] = [
   {
     id: 'smart-water',
     name: 'Smart Water',
+    formValue: 'smart_water',
+    orbitLabel: 'WATER',
     stat: 'NRW cut from 38% to 15% in India Smart Cities pilot',
     source: 'Smart Utilities India 2025',
     sentence: 'Leak detection and smart metering that finds loss before it becomes a deficit.',
@@ -65,6 +75,8 @@ export const DOMAINS: DomainDef[] = [
   {
     id: 'smart-farming',
     name: 'Smart Farming',
+    formValue: 'smart_farming',
+    orbitLabel: 'FARMING',
     stat: 'up to 30% yield increase from IoT precision irrigation',
     source: 'Springer Nature 2025',
     sentence: 'Soil and crop sensing that turns guesswork into precision at the field level.',
@@ -77,6 +89,8 @@ export const DOMAINS: DomainDef[] = [
   {
     id: 'connected-transport',
     name: 'Connected Transport',
+    formValue: 'connected_transportation',
+    orbitLabel: 'TRNSPRT',
     stat: '20–33% travel time reduction from AI signals',
     source: 'Bengaluru Traffic Police 2024',
     sentence: 'Adaptive signal control that dissolves congestion before it calcifies into infrastructure debt.',
@@ -89,6 +103,8 @@ export const DOMAINS: DomainDef[] = [
   {
     id: 'smart-healthcare',
     name: 'Smart Healthcare',
+    formValue: 'smart_hospital',
+    orbitLabel: 'HEALTH',
     stat: 'up to 36% reduction in radiology reporting workload',
     source: 'European Radiology 2024',
     sentence: 'Clinical AI that reads what the queue cannot, so clinicians treat what only they can.',
@@ -101,6 +117,8 @@ export const DOMAINS: DomainDef[] = [
   {
     id: 'weather-monitoring',
     name: 'Weather Monitoring',
+    formValue: 'weather_monitoring',
+    orbitLabel: 'WEATHER',
     stat: '6× lower disaster mortality with early warning systems',
     source: 'UNDRR 2024',
     sentence: 'Micro-climate sensing that builds warning lead-time where populations have none.',
@@ -113,6 +131,8 @@ export const DOMAINS: DomainDef[] = [
   {
     id: 'smart-security',
     name: 'Smart Security',
+    formValue: 'smart_security',
+    orbitLabel: 'SECURITY',
     stat: 'up to 90% fewer false alarms from AI video analytics',
     source: 'Lumana AI 2025',
     sentence: 'Pattern recognition that filters noise so genuine threats are never buried.',
@@ -125,6 +145,8 @@ export const DOMAINS: DomainDef[] = [
   {
     id: 'asset-monitoring',
     name: 'Asset Monitoring',
+    formValue: 'intelligent_asset_monitoring',
+    orbitLabel: 'ASSETS',
     stat: '30% reduction in maintenance costs and downtime',
     source: 'McKinsey 2021',
     sentence: 'Condition monitoring that schedules work on its own evidence, not a calendar.',
@@ -137,6 +159,8 @@ export const DOMAINS: DomainDef[] = [
   {
     id: 'home-automation',
     name: 'Home Automation',
+    formValue: 'home_office_automation',
+    orbitLabel: 'HOME',
     stat: '20–30% reduction in cooling-related electricity demand',
     source: 'BEE India 2026',
     sentence: 'Occupancy-aware systems that stop paying for comfort no one is using.',

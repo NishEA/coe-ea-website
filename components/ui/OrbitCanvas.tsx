@@ -1,8 +1,9 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { DOMAINS as DOMAIN_DEFS } from '@/data/domain-provenance'
 
-const DOMAINS = ['MFG', 'ENERGY', 'WATER', 'TRNSPRT', 'HEALTH', 'SECURITY', 'FARMING', 'WEATHER', 'ASSETS', 'HOME']
+const DOMAINS = DOMAIN_DEFS.map(d => d.orbitLabel)
 const DCOLS = ['rgba(212,168,83,', 'rgba(0,164,228,', 'rgba(183,207,232,']
 
 type Dot = { ring: 1 | 2; a: number; j: number; spd: number; sz: number }

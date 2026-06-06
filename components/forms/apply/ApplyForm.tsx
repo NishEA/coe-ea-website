@@ -8,21 +8,11 @@ import { SubmitButton } from "@/components/forms/SubmitButton";
 import { ErrorBanner } from "@/components/forms/ErrorBanner";
 import type { ApplyState } from "@/app/actions/apply";
 import { submitApplication } from "@/app/actions/apply";
+import { DOMAINS as DOMAIN_DEFS } from "@/data/domain-provenance";
 
 const initialState: ApplyState = { errors: {} };
 
-const DOMAINS = [
-  { value: "smart_manufacturing", label: "Smart Manufacturing" },
-  { value: "smart_energy", label: "Smart Energy" },
-  { value: "smart_water", label: "Smart Water" },
-  { value: "smart_farming", label: "Smart Farming" },
-  { value: "home_office_automation", label: "Home Automation" },
-  { value: "connected_transportation", label: "Connected Transport" },
-  { value: "weather_monitoring", label: "Weather Monitoring" },
-  { value: "smart_hospital", label: "Smart Healthcare" },
-  { value: "smart_security", label: "Smart Security" },
-  { value: "intelligent_asset_monitoring", label: "Asset Monitoring" },
-];
+const DOMAINS = DOMAIN_DEFS.map(d => ({ value: d.formValue, label: d.name }));
 
 const STAGES = [
   { value: "idea", label: "Idea" },
