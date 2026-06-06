@@ -58,20 +58,20 @@ export function DarkHero({
         }`}
       >
         <p
-          className="fade-up font-mono text-[10px] uppercase tracking-[0.22em] text-brand-cerulean"
+          className="fade-up font-mono text-[11px] uppercase tracking-[0.22em] text-brand-cerulean"
           style={{ animationDelay: '0.05s' }}
         >
           {label}
         </p>
         <h1
-          className="fade-up mt-5 max-w-2xl font-display font-bold leading-[1.04] tracking-[-0.025em] text-white text-[clamp(34px,4.5vw,60px)]"
+          className="fade-up mt-5 max-w-2xl font-display font-bold leading-[1.04] tracking-[-0.025em] text-white text-[clamp(42px,5.5vw,72px)]"
           style={{ animationDelay: '0.18s' }}
         >
           {title}
         </h1>
         {subhead && (
           <p
-            className="fade-up mt-5 font-mono text-[11px] uppercase tracking-[0.16em] text-brand-ice/55"
+            className="fade-up mt-5 font-mono text-[13px] uppercase tracking-[0.16em] text-brand-ice/55"
             style={{ animationDelay: '0.32s' }}
           >
             {subhead}

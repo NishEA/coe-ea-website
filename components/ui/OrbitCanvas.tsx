@@ -91,23 +91,23 @@ export function OrbitCanvas({
       }
 
       // domain nodes (outer ring)
-      const nr = R1 + 38
+      const nr = R1 + 50
       domains.forEach((name, i) => {
         const a = (i / domains.length) * Math.PI * 2 + t * 0.00018
         const x = ox + Math.cos(a) * nr
         const y = oy + Math.sin(a) * nr * 0.4
         const col = DCOLS[i % 3]
-        const g = ctx!.createRadialGradient(x, y, 0, x, y, 16)
+        const g = ctx!.createRadialGradient(x, y, 0, x, y, 20)
         g.addColorStop(0, col + '0.22)')
         g.addColorStop(1, col + '0)')
-        ctx!.fillStyle = g; ctx!.beginPath(); ctx!.arc(x, y, 16, 0, Math.PI * 2); ctx!.fill()
-        ctx!.fillStyle = col + '0.9)'; ctx!.beginPath(); ctx!.arc(x, y, 5, 0, Math.PI * 2); ctx!.fill()
+        ctx!.fillStyle = g; ctx!.beginPath(); ctx!.arc(x, y, 20, 0, Math.PI * 2); ctx!.fill()
+        ctx!.fillStyle = col + '0.9)'; ctx!.beginPath(); ctx!.arc(x, y, 6.5, 0, Math.PI * 2); ctx!.fill()
         if (showLabels) {
-          ctx!.fillStyle = 'rgba(183,207,232,0.4)'
-          ctx!.font = '7px "Space Mono", monospace'
+          ctx!.fillStyle = 'rgba(183,207,232,0.5)'
+          ctx!.font = '9px "Space Mono", monospace'
           ctx!.textAlign = 'center'
-          // Flip label below node when in bottom half so it clears the glow circle (r=14)
-          ctx!.fillText(name, x, y < oy ? y - 22 : y + 22)
+          // Flip label below node when in bottom half so it clears the glow circle
+          ctx!.fillText(name, x, y < oy ? y - 27 : y + 27)
         }
       })
 

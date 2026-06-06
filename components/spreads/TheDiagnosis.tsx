@@ -99,7 +99,7 @@ export function TheDiagnosis() {
           </div>
 
           {/* ── CENTRE — orbit canvas + cube cluster ── */}
-          <div className="relative z-[5] mx-auto flex h-[280px] w-full items-center justify-center desktop:h-[460px]">
+          <div className="relative z-[5] mx-auto flex h-[340px] w-full items-center justify-center desktop:h-[540px]">
             <OrbitCanvas
               animate={ready}
               className="absolute inset-0 h-full w-full"
