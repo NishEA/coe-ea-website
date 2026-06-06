@@ -8,10 +8,10 @@
  */
 @theme {
   /* Surfaces */
-  --color-bg-void: #0b1d5c; /* deep structural navy — darkest blue from CoE-EA logo body */
+  --color-bg-void: #081540; /* deep midnight navy — darker structural blue */
   --color-bg-paper: #f7f4ed;
-  --color-bg-midnight: #0b1d5c; /* alias → void */
-  --color-bg-midnight-2: #0b1d5c;
+  --color-bg-midnight: #081540; /* alias → void */
+  --color-bg-midnight-2: #081540;
 
   /* Brand */
   --color-brand-navy: #0e2d7a;
