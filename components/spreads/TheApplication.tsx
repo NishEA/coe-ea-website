@@ -3,6 +3,7 @@
 import { useSearchParams } from 'next/navigation'
 import { useField } from '@/components/field/FieldProvider'
 import { ApplyForm } from '@/components/forms/apply/ApplyForm'
+import { APPLY_BENEFITS } from '@/data/apply-benefits'
 
 // DB enum values from app/actions/apply.ts — duplicated here because that
 // file uses 'use server' and cannot be imported by client components.
@@ -26,14 +27,6 @@ const PROVENANCE_TO_PILLAR: Record<string, string> = {
   'asset-monitoring':     'intelligent_asset_monitoring',
   'home-automation':      'home_office_automation',
 }
-
-const BENEFITS = [
-  { value: 'up to ₹25L', label: 'Seed grant',       detail: 'Equity-based; Centre takes 1–3% on signing.' },
-  { value: 'Centre',    label: '16,000 sq ft',     detail: 'IoT testbeds, instrumented bays, edge compute.' },
-  { value: 'Mentors',  label: 'Domain practitioners',   detail: 'Industry specialists, not generalist advisors.' },
-  { value: '50%',      label: 'Market support',         detail: 'Reimbursement on qualifying customer-development travel.' },
-  { value: 'Network',  label: 'Partner ecosystem',      detail: 'Anchor industry and research partners.' },
-]
 
 export function TheApplication() {
   const { resolvedDomains } = useField()
@@ -71,7 +64,7 @@ export function TheApplication() {
         aria-label="What you get"
         className="mt-12 mb-20 grid grid-cols-1 gap-x-8 gap-y-8 border-y border-brand-navy/15 py-10 tablet:grid-cols-3 desktop:grid-cols-5"
       >
-        {BENEFITS.map(b => (
+        {APPLY_BENEFITS.map(b => (
           <li key={b.label} className="flex flex-col gap-1.5">
             <span className="mb-1 flex items-center gap-2">
               <span aria-hidden className="inline-block h-2 w-2 bg-amber" />
