@@ -61,7 +61,8 @@ body {
 body {
   color: var(--color-text-on-midnight);
   font-family: var(--font-body), system-ui, sans-serif;
-  overflow-x: hidden;
+  /* clip not hidden — avoids creating a BFC that makes body the scroll container (breaks Lenis on Safari) */
+  overflow-x: clip;
 }
 
 /* ───────────────────────────── Concept D shared design language ─────────── */

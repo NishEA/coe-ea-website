@@ -55,10 +55,9 @@ export default function SiteLayout({
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => {
-    document.body.style.overflow = drawerOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [drawerOpen])
+  // Drawer is position:fixed full-screen — no body overflow lock needed.
+  // Removed: body.style.overflow race caused persistent scroll lock on route changes.
+  // iOS scroll-through is prevented by overscroll-contain on the drawer <nav>.
 
   // WCAG 2.1.2 — dismiss drawer with Escape key.
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
@@ -195,7 +194,7 @@ export default function SiteLayout({
         id="mobile-nav"
         aria-label="Mobile navigation"
         aria-hidden={!drawerOpen}
-        className={`fixed inset-x-0 top-0 bottom-0 z-[29] overflow-y-auto bg-bg-void pt-20 backdrop-blur-md tablet:hidden transition-[opacity,visibility] duration-200 ease-out ${
+        className={`fixed inset-x-0 top-0 bottom-0 z-[29] overflow-y-auto overscroll-contain bg-bg-void pt-20 backdrop-blur-md tablet:hidden transition-[opacity,visibility] duration-200 ease-out ${
           drawerOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
       >
