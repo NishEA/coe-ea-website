@@ -21,11 +21,13 @@ export function OrbitCanvas({
   showLabels = true,
   animate = true,
   className = '',
+  labelFontSize = 10,
 }: {
   domainCount?: number
   showLabels?: boolean
   animate?: boolean
   className?: string
+  labelFontSize?: number
 }) {
   const ref = useRef<HTMLCanvasElement>(null)
 
@@ -104,7 +106,7 @@ export function OrbitCanvas({
         ctx!.fillStyle = col + '0.9)'; ctx!.beginPath(); ctx!.arc(x, y, 6.5, 0, Math.PI * 2); ctx!.fill()
         if (showLabels) {
           ctx!.fillStyle = 'rgba(183,207,232,0.72)'
-          ctx!.font = '10px "Space Mono", monospace'
+          ctx!.font = `${labelFontSize}px "Space Mono", monospace`
           ctx!.textAlign = 'center'
           // Flip label below node when in bottom half so it clears the glow circle
           ctx!.fillText(name, x, y < oy ? y - 27 : y + 27)
@@ -122,7 +124,7 @@ export function OrbitCanvas({
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', resize)
     }
-  }, [domainCount, showLabels, animate])
+  }, [domainCount, showLabels, animate, labelFontSize])
 
   return (
     <canvas
