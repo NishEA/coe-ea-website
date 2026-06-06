@@ -8,10 +8,10 @@
  */
 @theme {
   /* Surfaces */
-  --color-bg-void: #050507; /* pure near-black — primary background (Concept D) */
+  --color-bg-void: #0e2d7a; /* brand navy — CoE-EA primary brand colour */
   --color-bg-paper: #f7f4ed;
-  --color-bg-midnight: #050507; /* alias → void, so existing bg-bg-midnight reads pure black */
-  --color-bg-midnight-2: #0b1633;
+  --color-bg-midnight: #0e2d7a; /* alias → void */
+  --color-bg-midnight-2: #0e2d7a;
 
   /* Brand */
   --color-brand-navy: #0e2d7a;
