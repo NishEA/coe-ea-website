@@ -165,7 +165,7 @@ export default function PortfolioPage() {
       />
 
       {/* ── 2. What the programme gives you — DARK ── */}
-      <section className="relative z-10 bg-bg-void px-6 py-24 tablet:px-12">
+      <section className="relative z-10 bg-bg-void px-6 py-24 tablet:px-12 desktop:px-20">
         <div className="grid-bg" aria-hidden />
         <div className="relative mx-auto max-w-[1100px]">
           <div className="mb-14">
@@ -214,7 +214,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* ── 3. How selection works — DARK ── */}
-      <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-24 tablet:px-12">
+      <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-24 tablet:px-12 desktop:px-20">
         <div className="mx-auto max-w-[1100px]">
           <div className="mb-14 grid grid-cols-1 gap-6 tablet:grid-cols-12">
             <div className="tablet:col-span-5">
@@ -286,7 +286,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* ── 4. Eligibility — LIGHT ── */}
-      <section className="relative z-10 border-t border-brand-navy/10 bg-bg-paper px-6 py-20 tablet:px-12">
+      <section className="relative z-10 border-t border-brand-navy/10 bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20">
         <div className="mx-auto max-w-[1100px]">
           <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
             Eligibility
@@ -314,7 +314,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* ── 5. The cohort carousel — LIGHT ── */}
-      <section className="relative z-10 border-t border-brand-navy/10 bg-bg-paper px-6 py-24 tablet:px-12">
+      <section className="relative z-10 border-t border-brand-navy/10 bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20">
         <div className="mx-auto max-w-[1100px]">
           <div className="mb-10 flex flex-col gap-2 tablet:flex-row tablet:items-baseline tablet:justify-between">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
@@ -368,7 +368,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* ── 6. CTA — DARK ── */}
-      <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-24 tablet:px-12">
+      <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-24 tablet:px-12 desktop:px-20">
         <div className="mx-auto max-w-[1100px]">
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
             Ready to apply

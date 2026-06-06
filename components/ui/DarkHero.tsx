@@ -29,7 +29,7 @@ export function DarkHero({
   return (
     <section
       aria-label={typeof title === 'string' ? title : label}
-      className="relative flex w-full flex-col overflow-hidden px-6 pb-16 pt-14 tablet:px-12 desktop:min-h-[65vh] desktop:flex-row desktop:items-center desktop:pb-20 desktop:pt-20"
+      className="relative flex w-full flex-col overflow-hidden px-6 pb-16 pt-14 tablet:px-12 desktop:px-20 desktop:min-h-[65vh] desktop:flex-row desktop:items-center desktop:pb-20 desktop:pt-20"
     >
       <span aria-hidden className="corner-bracket left-3 top-3 border-l border-t" />
       <span aria-hidden className="corner-bracket right-3 top-3 border-r border-t" />

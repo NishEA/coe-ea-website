@@ -83,8 +83,8 @@ export default function BookPage() {
         visual={<FloorPlanMorph className="h-full w-auto max-w-[640px]" />}
       />
 
-      <main className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
-      <div className="mx-auto max-w-[1160px]">
+      <main className="relative z-10 bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20">
+      <div className="mx-auto max-w-[1100px]">
         <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-ink/75">
           CoE-EA&rsquo;s Bengaluru facility is available to incubatees, partners, and
           invited teams. Lab space, meeting infrastructure, and demo suites —

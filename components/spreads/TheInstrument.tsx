@@ -18,7 +18,7 @@ export function TheInstrument() {
     <section
       id="instrument"
       aria-label="The Instrument — about the Centre of Excellence"
-      className="relative w-full bg-bg-paper px-8 py-24 tablet:px-16"
+      className="relative w-full bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20"
     >
       {/* Section header */}
       <header className="mb-16 flex items-baseline justify-between">
