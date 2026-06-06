@@ -8,10 +8,10 @@
  */
 @theme {
   /* Surfaces */
-  --color-bg-void: #081540; /* deep midnight navy — darker structural blue */
+  --color-bg-void: #060d2e; /* deep midnight navy — L=10% */
   --color-bg-paper: #f7f4ed;
-  --color-bg-midnight: #081540; /* alias → void */
-  --color-bg-midnight-2: #081540;
+  --color-bg-midnight: #060d2e; /* alias → void */
+  --color-bg-midnight-2: #060d2e;
 
   /* Brand */
   --color-brand-navy: #0e2d7a;
