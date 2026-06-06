@@ -73,7 +73,7 @@ export default function BookPage() {
     <>
       <main className="relative z-10 border-t border-brand-cerulean bg-bg-paper px-6 pb-20 pt-14 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[1160px]">
-        <header className="mb-10 border-b border-brand-navy/15 pb-12">
+        <header className="mb-16 border-b border-brand-navy/15 pb-12">
           <p className="fade-up font-mono text-[10px] uppercase tracking-[0.22em] text-brand-cerulean" style={{ animationDelay: '0.05s' }}>
             Bengaluru · 16,000 sq ft · Industry 4.0
           </p>

@@ -152,7 +152,7 @@ export default function PortfolioPage() {
       {/* ── 1. What the programme gives you — DARK ── */}
       <section className="relative z-10 border-t border-brand-cerulean bg-bg-void px-6 pb-24 pt-14 tablet:px-12">
         <div className="relative mx-auto max-w-[1100px]">
-          <header className="mb-10 border-b border-white/10 pb-12">
+          <header className="mb-14 border-b border-white/10 pb-12">
             <p className="fade-up font-mono text-[10px] uppercase tracking-[0.22em] text-brand-cerulean" style={{ animationDelay: '0.05s' }}>
               Startup Program
             </p>

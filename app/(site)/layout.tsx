@@ -60,9 +60,6 @@ export default function SiteLayout({
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href)
 
-  // Light pages sit on bg-paper — nav adopts matching background + dark text.
-  const isLightPage = pathname === '/governance' || pathname === '/events' || pathname === '/book'
-
   return (
     <LenisProvider>
     {/* Splash — visible on initial hydration and on each route change */}
@@ -99,22 +96,22 @@ export default function SiteLayout({
       <div className="grid-bg" />
 
       {/* ── Pill nav ── */}
-      <header className={`relative z-30 flex items-center justify-between gap-4 px-6 py-5 tablet:px-9 transition-colors${isLightPage ? ' bg-bg-paper border-b border-brand-navy/10' : ''}`}>
+      <header className="relative z-30 flex items-center justify-between gap-4 px-6 py-5 tablet:px-9">
         <Link
           href="/"
           className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
         >
-          {/* Logo pill — adapts to page background */}
-          <div className={`flex items-center gap-3 rounded-sm border px-4 py-2.5 ${isLightPage ? 'border-brand-navy/15 bg-transparent' : 'border-brand-ice/10 bg-brand-ice/5'}`}>
+          {/* Frosted glass frame — matches partner strip */}
+          <div className="flex items-center gap-3 rounded-sm border border-brand-ice/10 bg-brand-ice/5 px-4 py-2.5">
             <Image
               src="/logos/coe-ea.png"
               alt="CoE-EA — Centre of Excellence on Efficiency Augmentation"
               width={150}
               height={44}
-              className={`h-9 w-auto object-contain brightness-0${isLightPage ? '' : ' invert'}`}
+              className="h-9 w-auto object-contain brightness-0 invert"
               priority
             />
-            <span aria-hidden className={`hidden h-6 w-px tablet:block ${isLightPage ? 'bg-brand-navy/20' : 'bg-brand-ice/15'}`} />
+            <span aria-hidden className="hidden h-6 w-px bg-brand-ice/15 tablet:block" />
             <div aria-hidden className="hidden rounded bg-white px-2 py-1 tablet:block">
               <Image
                 src="/logos/stpi.png"
@@ -125,7 +122,7 @@ export default function SiteLayout({
                 priority
               />
             </div>
-            <span aria-hidden className={`hidden h-6 w-px tablet:block ${isLightPage ? 'bg-brand-navy/20' : 'bg-brand-ice/15'}`} />
+            <span aria-hidden className="hidden h-6 w-px bg-brand-ice/15 tablet:block" />
             <div aria-hidden className="hidden rounded bg-white px-2 py-1 tablet:block">
               <Image
                 src="/logos/kits.jpeg"
@@ -146,7 +143,7 @@ export default function SiteLayout({
               key={item.href}
               href={item.href}
               aria-current={isActive(item.href) ? 'page' : undefined}
-              className={`pill ${isActive(item.href) ? (isLightPage ? 'pill-active-light' : 'pill-active') : (isLightPage ? 'pill-ghost-light' : 'pill-ghost')} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean`}
+              className={`pill ${isActive(item.href) ? 'pill-active' : 'pill-ghost'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean`}
             >
               {item.label}
             </Link>
@@ -174,7 +171,7 @@ export default function SiteLayout({
             aria-expanded={drawerOpen}
             aria-controls="mobile-nav"
             onClick={() => setDrawerOpen(v => !v)}
-            className={`flex h-9 w-9 items-center justify-center rounded-full border transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean ${isLightPage ? 'border-brand-navy/25 text-brand-navy/60 hover:border-brand-navy/45 hover:text-brand-navy' : 'border-white/20 text-white/70 hover:border-white/40 hover:text-white'}`}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition hover:border-white/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
           >
             {drawerOpen ? '✕' : '☰'}
           </button>
@@ -186,7 +183,7 @@ export default function SiteLayout({
         id="mobile-nav"
         aria-label="Mobile navigation"
         aria-hidden={!drawerOpen}
-        className={`relative z-20 overflow-hidden border-b backdrop-blur-sm transition-[max-height,opacity] duration-150 ease-out tablet:hidden ${isLightPage ? 'border-brand-navy/10 bg-bg-paper/95' : 'border-white/[0.06] bg-bg-void/95'} ${
+        className={`relative z-20 overflow-hidden border-b border-white/[0.06] bg-bg-void/95 backdrop-blur-sm transition-[max-height,opacity] duration-150 ease-out tablet:hidden ${
           drawerOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
@@ -197,11 +194,11 @@ export default function SiteLayout({
             onClick={closeDrawer}
             tabIndex={drawerOpen ? undefined : -1}
             aria-current={isActive(item.href) ? 'page' : undefined}
-            className={`block px-6 py-4 font-mono text-[11px] uppercase tracking-[0.14em] transition focus-visible:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-brand-cerulean ${
+            className={`block px-6 py-4 font-mono text-[11px] uppercase tracking-[0.14em] transition ${
               isActive(item.href)
-                ? (isLightPage ? 'text-brand-navy' : 'text-white')
-                : (isLightPage ? 'text-brand-navy/60 hover:text-brand-navy' : 'text-white/60 hover:text-white')
-            }`}
+                ? 'text-white'
+                : 'text-white/60 hover:text-white'
+            } focus-visible:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-brand-cerulean`}
           >
             {item.label}
           </Link>
