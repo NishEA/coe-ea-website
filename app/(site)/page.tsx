@@ -20,8 +20,8 @@ export default function HomePage() {
       <TheDiagnosis />
       <CredibilityBand />
       <TheResolve />
-      <TheLedger />
       <TheInstrument />
+      <TheLedger />
       <Suspense>
         <TheApplication />
       </Suspense>

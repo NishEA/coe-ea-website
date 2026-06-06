@@ -36,7 +36,9 @@ export function TheApplication() {
   const defaultDomain = VALID_PILLAR_VALUES.has(resolvedPillar) ? resolvedPillar : ''
 
   return (
-    <section
+    <>
+      <div className="h-px bg-brand-cerulean" aria-hidden="true" />
+      <section
       id="apply"
       aria-label="Apply — Section 5"
       className="relative min-h-dvh w-full bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20"
@@ -113,5 +115,6 @@ export function TheApplication() {
         </aside>
       </div>
     </section>
+    </>
   )
 }

@@ -15,7 +15,7 @@ export function TheLedger() {
     <section
       id="ledger"
       aria-label="The Ledger — CoE-EA outcomes and partnerships"
-      className="relative min-h-dvh w-full overflow-hidden bg-bg-midnight px-8 py-24 tablet:px-16"
+      className="relative min-h-dvh w-full overflow-hidden bg-bg-midnight px-6 py-24 tablet:px-12 desktop:px-20"
     >
       {/* Corner brackets — dark precision section */}
       <span aria-hidden className="pointer-events-none absolute left-5 top-24 h-6 w-6 border-l border-t border-brand-ice/15" />

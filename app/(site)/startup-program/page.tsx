@@ -161,21 +161,19 @@ export default function PortfolioPage() {
         }
         subhead="52 STARTUPS · 10 DOMAINS · 3 COHORTS"
         visual={<PortfolioMorph className="h-full w-auto max-w-[600px]" />}
-        bridge={false}
       />
 
-      {/* ── 2. What the programme gives you — DARK ── */}
-      <section className="relative z-10 bg-bg-void px-6 py-24 tablet:px-12 desktop:px-20">
-        <div className="grid-bg" aria-hidden />
-        <div className="relative mx-auto max-w-[1100px]">
+      {/* ── 2. What the programme gives you — CREAM ── */}
+      <section className="relative z-10 bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20">
+        <div className="mx-auto max-w-[1100px]">
           <div className="mb-14">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
               What the programme gives you
             </p>
-            <h2 className="mt-4 max-w-xl font-display text-[2rem] font-semibold leading-tight text-white tablet:text-[2.5rem]">
+            <h2 className="mt-4 max-w-xl font-display text-[2rem] font-semibold leading-tight text-brand-navy tablet:text-[2.5rem]">
               Everything a hardware-first startup actually needs.
             </h2>
-            <p className="mt-4 max-w-lg font-body text-[15px] leading-[1.65] text-brand-ice/70">
+            <p className="mt-4 max-w-lg font-body text-[15px] leading-[1.65] text-ink/65">
               12 months inside a joint STPI + KITS + HPE initiative — not a
               virtual incubator, a physical lab with real machines and real
               domain engineers.
@@ -188,7 +186,7 @@ export default function PortfolioPage() {
             {BENEFITS.map(b => (
               <li
                 key={b.id}
-                className="flex flex-col gap-4 rounded-[6px] border border-white/[0.08] bg-bg-void p-8 transition hover:border-white/[0.14] hover:bg-white/[0.02]"
+                className="flex flex-col gap-4 rounded-[6px] border border-brand-navy/10 bg-white p-8 transition hover:border-brand-navy/25 hover:bg-brand-navy/[0.02]"
               >
                 <span
                   aria-hidden
@@ -201,10 +199,10 @@ export default function PortfolioPage() {
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-cerulean">
                   {b.label}
                 </p>
-                <p className="font-display text-[1.3rem] font-semibold leading-snug text-white">
+                <p className="font-display text-[1.3rem] font-semibold leading-snug text-brand-navy">
                   {b.headline}
                 </p>
-                <p className="mt-auto font-body text-[13px] leading-[1.65] text-brand-ice/60">
+                <p className="mt-auto font-body text-[13px] leading-[1.65] text-ink/65">
                   {b.body}
                 </p>
               </li>
