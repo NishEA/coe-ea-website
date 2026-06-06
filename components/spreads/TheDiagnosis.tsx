@@ -128,6 +128,23 @@ export function TheDiagnosis() {
                 See the Diagnostic ↓
               </a>
             </div>
+
+            <ul
+              className="fade-up flex flex-wrap gap-x-5 gap-y-2"
+              style={d(ready ? 1.8 : 99)}
+              aria-label="Programme highlights"
+            >
+              {[
+                'up to ₹25L seed grant',
+                '16,000 sq ft centre',
+                '1–3% equity',
+              ].map(item => (
+                <li key={item} className="flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-brand-ice/55">
+                  <span aria-hidden className="h-1 w-1 flex-shrink-0 rounded-sm bg-amber" />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* ── CENTRE — orbit canvas + cube cluster ── */}
