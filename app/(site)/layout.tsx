@@ -55,6 +55,11 @@ export default function SiteLayout({
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    document.body.style.overflow = drawerOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [drawerOpen])
+
   // WCAG 2.1.2 — dismiss drawer with Escape key.
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
   useEffect(() => {
@@ -190,8 +195,8 @@ export default function SiteLayout({
         id="mobile-nav"
         aria-label="Mobile navigation"
         aria-hidden={!drawerOpen}
-        className={`relative z-20 overflow-hidden border-b border-white/[0.06] bg-bg-void/95 backdrop-blur-sm transition-[max-height,opacity] duration-150 ease-out tablet:hidden ${
-          drawerOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        className={`fixed inset-x-0 top-0 bottom-0 z-[29] overflow-y-auto bg-bg-void pt-20 backdrop-blur-md tablet:hidden transition-[opacity,visibility] duration-200 ease-out ${
+          drawerOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
       >
         {NAV.map(item => (

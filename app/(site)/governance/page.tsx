@@ -229,7 +229,21 @@ export default function GovernancePage() {
             reviews overall performance. It is chaired by the Director General,
             STPI.
           </p>
-          <div className="overflow-x-auto">
+          {/* Mobile: stacked cards */}
+          <div className="divide-y divide-brand-navy/10 tablet:hidden">
+            {GOVERNING_COUNCIL.map((m) => (
+              <div key={m.name + m.role} className="py-5">
+                <p className="font-body text-[15px] font-medium text-brand-navy">{m.name}</p>
+                <p className="mt-1 font-body text-[13px] leading-[1.5] text-ink/85">{m.designation}</p>
+                <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-cerulean">
+                  {m.role}
+                  {m.note && <span className="ml-1 normal-case tracking-normal text-ink/50">({m.note})</span>}
+                </p>
+              </div>
+            ))}
+          </div>
+          {/* Tablet+: table */}
+          <div className="hidden overflow-x-auto tablet:block">
             <table className="w-full border-collapse" aria-label="Governing Council members">
               <thead>
                 <tr className="border-b border-brand-navy/15">
@@ -277,7 +291,18 @@ export default function GovernancePage() {
             The PMG is the governing body responsible for programme oversight,
             cohort selection, milestone review, and strategic direction of CoE-EA.
           </p>
-          <div className="overflow-x-auto">
+          {/* Mobile: stacked cards */}
+          <div className="divide-y divide-brand-navy/10 tablet:hidden">
+            {PMG.map((m) => (
+              <div key={m.name + m.role} className="py-5">
+                <p className="font-body text-[15px] font-medium text-brand-navy">{m.name}</p>
+                <p className="mt-1 font-body text-[13px] leading-[1.5] text-ink/85">{m.designation}</p>
+                <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-cerulean">{m.role}</p>
+              </div>
+            ))}
+          </div>
+          {/* Tablet+: table */}
+          <div className="hidden overflow-x-auto tablet:block">
             <table className="w-full border-collapse" aria-label="PMG members">
               <thead>
                 <tr className="border-b border-brand-navy/15">

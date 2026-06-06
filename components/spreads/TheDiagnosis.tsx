@@ -84,7 +84,7 @@ export function TheDiagnosis() {
           {/* ── LEFT — badge + headline + body + CTAs ── */}
           <div className="z-10 flex flex-col gap-5">
             <p
-              className="fade-up flex items-center gap-2 font-mono text-[9.5px] uppercase tracking-[0.18em] text-operational"
+              className="fade-up flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-operational"
               style={d(ready ? 1.0 : 99)}
             >
               <span className="op-dot" aria-hidden />

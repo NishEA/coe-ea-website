@@ -71,7 +71,7 @@ export function TheLedger() {
               }`}
             >
               <span
-                className={`flex items-baseline gap-1.5 font-display text-[3rem] font-bold leading-none tracking-tight tabular-nums desktop:text-[3.6rem] ${
+                className={`flex items-baseline gap-1.5 font-display text-[1.75rem] tablet:text-[3rem] font-bold leading-none tracking-tight tabular-nums desktop:text-[3.6rem] ${
                   isLead
                     ? 'text-amber drop-shadow-[0_0_12px_rgba(212,168,83,.35)]'
                     : 'text-brand-ice/60'

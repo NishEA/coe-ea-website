@@ -19,7 +19,7 @@ export function CredibilityBand() {
         aria-label="Programme at a glance"
         className="relative z-10 border-b border-brand-navy/10 bg-bg-paper px-6 py-14 tablet:px-12 desktop:px-20"
       >
-        <ul className="mx-auto flex max-w-[1100px] flex-wrap items-baseline justify-between gap-y-8">
+        <ul className="mx-auto grid grid-cols-2 gap-x-6 gap-y-10 max-w-[1100px] tablet:flex tablet:flex-wrap tablet:items-baseline tablet:justify-between">
           {ITEMS.map((it, i) => (
             <li key={it.label} className="flex items-center gap-4">
               <div className="flex flex-col">
