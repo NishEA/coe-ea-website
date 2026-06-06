@@ -360,7 +360,7 @@ export default function PortfolioPage() {
 
         <div className="mx-auto mt-8 max-w-[1100px]">
           <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/40">
-            Full cohort of 52 startups spans all ten domains. Hover to pause.
+            Full cohort of 52 startups across all ten domains. Auto-scrolling · touch or hover to pause.
           </p>
         </div>
       </section>

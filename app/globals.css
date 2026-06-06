@@ -220,8 +220,8 @@ body {
 /* ── Cohort carousel ── */
 .cohort-track {
   overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 .cohort-track-inner {
   display: flex;
@@ -229,7 +229,8 @@ body {
   gap: 12px;
   animation: cohort-scroll 90s linear infinite;
 }
-.cohort-track:hover .cohort-track-inner {
+.cohort-track:hover .cohort-track-inner,
+.cohort-track:active .cohort-track-inner {
   animation-play-state: paused;
 }
 @keyframes cohort-scroll {

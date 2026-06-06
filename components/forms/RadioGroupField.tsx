@@ -26,7 +26,7 @@ export function RadioGroupField({
       </legend>
       <div className="mt-3 flex flex-wrap gap-x-6 gap-y-3">
         {options.map((o) => (
-          <label key={o.value} className="flex cursor-pointer items-center gap-2">
+          <label key={o.value} className="flex cursor-pointer items-center gap-2 min-h-[44px]">
             <input
               type="radio"
               name={name}
