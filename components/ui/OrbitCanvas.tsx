@@ -50,11 +50,11 @@ export function OrbitCanvas({
       dots = []
       for (let i = 0; i < 200; i++) {
         const a = (i / 200) * Math.PI * 2
-        dots.push({ ring: 1, a, j: (Math.random() - 0.5) * 16, spd: 0.00025 + Math.random() * 0.00015, sz: Math.random() * 1.3 + 0.3 })
+        dots.push({ ring: 1, a, j: (Math.random() - 0.5) * 16, spd: 0.00025 + Math.random() * 0.00015, sz: Math.random() * 1.8 + 0.5 })
       }
       for (let i = 0; i < 150; i++) {
         const a = (i / 150) * Math.PI * 2
-        dots.push({ ring: 2, a, j: (Math.random() - 0.5) * 11, spd: -(0.00035 + Math.random() * 0.00025), sz: Math.random() * 1.0 + 0.25 })
+        dots.push({ ring: 2, a, j: (Math.random() - 0.5) * 11, spd: -(0.00035 + Math.random() * 0.00025), sz: Math.random() * 1.4 + 0.4 })
       }
     }
 
@@ -74,8 +74,8 @@ export function OrbitCanvas({
       t++
 
       // ring guides
-      ctx!.strokeStyle = 'rgba(0,164,228,0.07)'
-      ctx!.lineWidth = 0.5
+      ctx!.strokeStyle = 'rgba(0,164,228,0.18)'
+      ctx!.lineWidth = 1
       ctx!.beginPath(); ctx!.ellipse(ox, oy, R1, R1 * 0.4, 0, 0, Math.PI * 2); ctx!.stroke()
       ctx!.beginPath(); ctx!.ellipse(ox, oy, R2, R2 * 0.4, 0, 0, Math.PI * 2); ctx!.stroke()
 
@@ -85,7 +85,7 @@ export function OrbitCanvas({
         const rad = (d.ring === 1 ? R1 : R2) + d.j
         const x = ox + Math.cos(a) * rad
         const y = oy + Math.sin(a) * rad * 0.4
-        const alpha = 0.18 + Math.sin(a * 4 + t * 0.008) * 0.1
+        const alpha = 0.32 + Math.sin(a * 4 + t * 0.008) * 0.15
         ctx!.fillStyle = d.ring === 1 ? `rgba(183,207,232,${alpha})` : `rgba(0,164,228,${alpha})`
         ctx!.beginPath(); ctx!.arc(x, y, d.sz, 0, Math.PI * 2); ctx!.fill()
       }
@@ -98,13 +98,13 @@ export function OrbitCanvas({
         const y = oy + Math.sin(a) * nr * 0.4
         const col = DCOLS[i % 3]
         const g = ctx!.createRadialGradient(x, y, 0, x, y, 20)
-        g.addColorStop(0, col + '0.22)')
+        g.addColorStop(0, col + '0.42)')
         g.addColorStop(1, col + '0)')
         ctx!.fillStyle = g; ctx!.beginPath(); ctx!.arc(x, y, 20, 0, Math.PI * 2); ctx!.fill()
         ctx!.fillStyle = col + '0.9)'; ctx!.beginPath(); ctx!.arc(x, y, 6.5, 0, Math.PI * 2); ctx!.fill()
         if (showLabels) {
-          ctx!.fillStyle = 'rgba(183,207,232,0.5)'
-          ctx!.font = '9px "Space Mono", monospace'
+          ctx!.fillStyle = 'rgba(183,207,232,0.72)'
+          ctx!.font = '10px "Space Mono", monospace'
           ctx!.textAlign = 'center'
           // Flip label below node when in bottom half so it clears the glow circle
           ctx!.fillText(name, x, y < oy ? y - 27 : y + 27)

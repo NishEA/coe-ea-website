@@ -37,14 +37,14 @@ export default function ApplyPage() {
               <li key={b.label} className="flex flex-col gap-1.5">
                 <span className="mb-1 flex items-center gap-2">
                   <span aria-hidden className="inline-block h-1.5 w-1.5 flex-shrink-0 rounded-sm bg-amber" />
-                  <span className="font-display text-[1.15rem] font-bold leading-none text-brand-navy">
+                  <span className="font-display text-[1.35rem] font-bold leading-none text-brand-navy">
                     {b.value}
                   </span>
                 </span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink/60">
+                <span className="font-mono text-[12px] uppercase tracking-[0.14em] text-ink/60">
                   {b.label}
                 </span>
-                <span className="font-body text-[12.5px] leading-[1.5] text-ink/50">
+                <span className="font-body text-[14px] leading-[1.5] text-ink/50">
                   {b.detail}
                 </span>
               </li>

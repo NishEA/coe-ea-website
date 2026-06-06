@@ -42,7 +42,7 @@ export function TheDiagnosis() {
               System Operational · Centre Active · Cohort 3 Open
             </p>
 
-            <h1 className="[text-wrap:balance] font-display text-[clamp(32px,3.8vw,54px)] font-bold leading-[1.06] tracking-[-0.025em] text-white">
+            <h1 className="[text-wrap:balance] font-display text-[clamp(38px,4.5vw,64px)] font-bold leading-[1.06] tracking-[-0.025em] text-white">
               {HEADLINE.map((w, i) => (
                 <span key={i}>
                   <span
@@ -57,7 +57,7 @@ export function TheDiagnosis() {
             </h1>
 
             <p
-              className="fade-up max-w-[360px] font-body text-[14.5px] leading-[1.72] text-white/50"
+              className="fade-up max-w-[360px] font-body text-[16px] leading-[1.72] text-white/50"
               style={d(ready ? 0.9 : 99)}
             >
               CoE-EA instruments, diagnoses, and augments India&rsquo;s
