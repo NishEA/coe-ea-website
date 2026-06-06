@@ -74,7 +74,7 @@ export default function BookPage() {
   return (
     <>
       <DarkHero
-        label="Bengaluru · 12,000 sq ft · Industry 4.0 infrastructure"
+        label="Bengaluru · 16,000 sq ft · Industry 4.0 infrastructure"
         title={
           <>
             The field, in <span className="text-amber">physical space.</span>

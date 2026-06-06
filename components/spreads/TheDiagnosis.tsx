@@ -80,7 +80,7 @@ export function TheDiagnosis() {
         <span aria-hidden className="corner-bracket left-3 top-3 border-l border-t" />
         <span aria-hidden className="corner-bracket right-3 top-3 border-r border-t" />
 
-        <div className="relative z-10 grid min-h-[calc(100dvh-150px)] grid-cols-1 items-center gap-10 px-6 pb-16 pt-8 tablet:px-12 desktop:grid-cols-[42%_58%] desktop:gap-8 desktop:px-12">
+        <div className="relative z-10 grid min-h-dvh grid-cols-1 items-center gap-10 px-6 pb-16 pt-8 tablet:px-12 desktop:min-h-[calc(100dvh-150px)] desktop:grid-cols-[42%_58%] desktop:gap-8 desktop:px-12">
           {/* ── LEFT — badge + headline + body + CTAs ── */}
           <div className="z-10 flex flex-col gap-5">
             <p
@@ -148,7 +148,7 @@ export function TheDiagnosis() {
           </div>
 
           {/* ── CENTRE — orbit canvas + cube cluster ── */}
-          <div className="relative z-[5] mx-auto hidden h-[460px] w-full items-center justify-center desktop:flex">
+          <div className="relative z-[5] mx-auto flex h-[280px] w-full items-center justify-center desktop:h-[460px]">
             <OrbitCanvas
               animate={ready}
               className="absolute inset-0 h-full w-full"

@@ -102,34 +102,34 @@ export default function SiteLayout({
           className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
         >
           {/* Frosted glass frame — matches partner strip */}
-          <div className="flex items-center gap-3 rounded-sm border border-brand-ice/10 bg-brand-ice/5 px-4 py-2.5">
+          <div className="flex items-center gap-1.5 rounded-sm border border-brand-ice/10 bg-brand-ice/5 px-2.5 py-2 tablet:gap-3 tablet:px-4 tablet:py-2.5">
             <Image
               src="/logos/coe-ea.png"
               alt="CoE-EA — Centre of Excellence on Efficiency Augmentation"
               width={150}
               height={44}
-              className="h-9 w-auto object-contain brightness-0 invert"
+              className="h-7 w-auto object-contain brightness-0 invert tablet:h-9"
               priority
             />
             <span aria-hidden className="hidden h-6 w-px bg-brand-ice/15 tablet:block" />
-            <div aria-hidden className="hidden rounded bg-white px-2 py-1 tablet:block">
+            <div aria-hidden className="rounded bg-white px-1 py-0.5 tablet:px-2 tablet:py-1">
               <Image
                 src="/logos/stpi.png"
                 alt="STPI"
                 width={70}
                 height={26}
-                className="h-6 w-auto object-contain"
+                className="h-[13px] w-auto object-contain tablet:h-6"
                 priority
               />
             </div>
             <span aria-hidden className="hidden h-6 w-px bg-brand-ice/15 tablet:block" />
-            <div aria-hidden className="hidden rounded bg-white px-2 py-1 tablet:block">
+            <div aria-hidden className="rounded bg-white px-1 py-0.5 tablet:px-2 tablet:py-1">
               <Image
                 src="/logos/kits.jpeg"
                 alt="KITS — Karnataka Innovation & Technology Society"
                 width={70}
                 height={26}
-                className="h-6 w-auto object-contain"
+                className="h-[13px] w-auto object-contain tablet:h-6"
                 priority
               />
             </div>

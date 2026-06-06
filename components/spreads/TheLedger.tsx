@@ -66,19 +66,19 @@ export function TheLedger() {
         <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
           Partners
         </p>
-        <div className="rounded-sm border border-brand-ice/10 bg-brand-ice/5 px-10 py-8">
-          <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-8" role="list">
+        <div className="rounded-sm border border-brand-ice/10 bg-brand-ice/5 px-5 py-6 tablet:px-10 tablet:py-8">
+          <ul className="grid grid-cols-2 items-center justify-items-center gap-5 tablet:grid-cols-3 tablet:gap-8 desktop:flex desktop:flex-wrap desktop:justify-center desktop:gap-x-8 desktop:gap-y-8" role="list">
             {PARTNERS.map(p => (
               <li key={p.name} className="flex items-center justify-center">
                 {p.logoSrc ? (
                   p.chip ? (
-                    <div className="rounded bg-white px-3 py-2.5">
+                    <div className="rounded bg-white px-2.5 py-2">
                       <Image
                         src={p.logoSrc}
                         alt={p.name}
                         width={140}
                         height={56}
-                        className="h-14 w-auto max-w-[140px] object-contain"
+                        className="h-10 w-auto max-w-[100px] object-contain tablet:h-14 tablet:max-w-[140px]"
                       />
                     </div>
                   ) : (
@@ -87,7 +87,7 @@ export function TheLedger() {
                       alt={p.name}
                       width={160}
                       height={56}
-                      className="h-14 w-auto max-w-[160px] object-contain"
+                      className="h-10 w-auto max-w-[110px] object-contain tablet:h-14 tablet:max-w-[160px]"
                     />
                   )
                 ) : (

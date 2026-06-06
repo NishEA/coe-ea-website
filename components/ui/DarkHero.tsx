@@ -36,9 +36,10 @@ export function DarkHero({
       <span aria-hidden className="corner-bracket bottom-3 left-3 border-b border-l" />
       <span aria-hidden className="corner-bracket bottom-3 right-3 border-b border-r" />
 
-      {/* Visual column — right half, full section height, behind text (z-0) */}
+      {/* Visual column — right half, full section height, behind text (z-0).
+          Visible at low opacity on mobile/tablet as decorative background. */}
       {visual && (
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-1/2 desktop:block">
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-0 w-1/2 opacity-25 desktop:opacity-100">
           {visual}
         </div>
       )}
@@ -56,20 +57,31 @@ export function DarkHero({
             : `mx-auto w-full max-w-[1100px] ${align === 'center' ? 'text-center' : ''}`
         }`}
       >
-        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-brand-cerulean">
+        <p
+          className="fade-up font-mono text-[10px] uppercase tracking-[0.22em] text-brand-cerulean"
+          style={{ animationDelay: '0.05s' }}
+        >
           {label}
         </p>
         <h1
-          className="mt-5 max-w-2xl font-display font-bold leading-[1.04] tracking-[-0.025em] text-white text-[clamp(34px,4.5vw,60px)]"
+          className="fade-up mt-5 max-w-2xl font-display font-bold leading-[1.04] tracking-[-0.025em] text-white text-[clamp(34px,4.5vw,60px)]"
+          style={{ animationDelay: '0.18s' }}
         >
           {title}
         </h1>
         {subhead && (
-          <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.16em] text-brand-ice/55">
+          <p
+            className="fade-up mt-5 font-mono text-[11px] uppercase tracking-[0.16em] text-brand-ice/55"
+            style={{ animationDelay: '0.32s' }}
+          >
             {subhead}
           </p>
         )}
-        {children}
+        {children && (
+          <div className="fade-up" style={{ animationDelay: '0.45s' }}>
+            {children}
+          </div>
+        )}
       </div>
     </section>
   )
