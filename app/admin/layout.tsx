@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { signOut } from "./actions";
 
@@ -18,8 +17,6 @@ export default async function AdminLayout({
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  if (!user) redirect('/admin/login');
 
   return (
     <div className="min-h-screen bg-bg-paper">
