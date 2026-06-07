@@ -1,12 +1,10 @@
 import { defineType, defineField } from "sanity";
 
 /**
- * Team member — design-doc §9.
- *
- * NOTE: storing team email addresses in Sanity (EU-hosted) is flagged in
- * dpdp-privacy-scaffold-v1.md Part D — re-evaluate whether emails belong in
- * the CMS at all or in an internal system. Until that decision lands, `email`
- * is optional and `emailVisible` controls whether it is rendered publicly.
+ * Team / committee member.
+ * `group` distinguishes Governing Council from PMG from CoE-EA Team.
+ * `role` = committee role (Chairperson, Member Secretary, etc.)
+ * `designation` = their actual job title / organisation.
  */
 export const team = defineType({
   name: "team",
@@ -18,13 +16,40 @@ export const team = defineType({
       type: "string",
       validation: (r) => r.required(),
     }),
-    defineField({ name: "role", type: "string" }),
+    defineField({
+      name: "group",
+      type: "string",
+      options: {
+        list: [
+          { title: "Governing Council", value: "governing-council" },
+          { title: "Programme Management Group", value: "pmg" },
+          { title: "CoE-EA Team", value: "coe-team" },
+        ],
+        layout: "radio",
+      },
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: "role",
+      type: "string",
+      description: "Committee role — e.g. Chairperson, Member Secretary, Member.",
+    }),
+    defineField({
+      name: "designation",
+      type: "string",
+      description: "Job title and organisation — e.g. Director General, STPI, MeitY.",
+    }),
+    defineField({
+      name: "sortOrder",
+      title: "Sort order",
+      type: "number",
+      description: "Lower numbers appear first within each group.",
+    }),
     defineField({
       name: "photo",
       type: "image",
       options: { hotspot: true },
     }),
-    defineField({ name: "bio", type: "text", rows: 3 }),
     defineField({
       name: "linkedIn",
       title: "LinkedIn",
@@ -35,11 +60,11 @@ export const team = defineType({
       name: "emailVisible",
       title: "Show email publicly",
       type: "boolean",
-      description: "Default off. See team-schema note re: residency.",
+      description: "Default off.",
       initialValue: false,
     }),
   ],
   preview: {
-    select: { title: "name", subtitle: "role", media: "photo" },
+    select: { title: "name", subtitle: "group", media: "photo" },
   },
 });

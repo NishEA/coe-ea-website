@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DarkHero } from "@/components/ui/DarkHero";
 import { HierarchyMorph } from "@/components/ui/morphs/HierarchyMorph";
+import { getTeamByGroup } from "@/lib/sanity/fetchers";
 
 export const metadata: Metadata = {
   title: "Governance & Reports",
@@ -168,7 +169,13 @@ const REPORTING = [
   },
 ];
 
-export default function GovernancePage() {
+export default async function GovernancePage() {
+  const [sanityGC, sanityPMG] = await Promise.all([
+    getTeamByGroup("governing-council"),
+    getTeamByGroup("pmg"),
+  ])
+  const gc = sanityGC.length > 0 ? sanityGC : GOVERNING_COUNCIL
+  const pmg = sanityPMG.length > 0 ? sanityPMG : PMG
   return (
     <>
       <DarkHero
@@ -231,13 +238,13 @@ export default function GovernancePage() {
           </p>
           {/* Mobile: stacked cards */}
           <div className="divide-y divide-brand-navy/10 tablet:hidden">
-            {GOVERNING_COUNCIL.map((m) => (
+            {gc.map((m) => (
               <div key={m.name + m.role} className="py-5">
                 <p className="font-body text-[15px] font-medium text-brand-navy">{m.name}</p>
                 <p className="mt-1 font-body text-[13px] leading-[1.5] text-ink/85">{m.designation}</p>
                 <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-cerulean">
                   {m.role}
-                  {m.note && <span className="ml-1 normal-case tracking-normal text-ink/50">({m.note})</span>}
+                  {'note' in m && m.note && <span className="ml-1 normal-case tracking-normal text-ink/50">({m.note as string})</span>}
                 </p>
               </div>
             ))}
@@ -259,7 +266,7 @@ export default function GovernancePage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-brand-navy/10">
-                {GOVERNING_COUNCIL.map((m) => (
+                {gc.map((m) => (
                   <tr key={m.name + m.role}>
                     <td className="py-4 pr-6 font-body text-[14px] font-medium text-brand-navy">
                       {m.name}
@@ -269,9 +276,9 @@ export default function GovernancePage() {
                     </td>
                     <td className="py-4 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-cerulean">
                       {m.role}
-                      {m.note && (
+                      {'note' in m && m.note && (
                         <span className="ml-2 normal-case tracking-normal text-ink/50">
-                          ({m.note})
+                          ({m.note as string})
                         </span>
                       )}
                     </td>
@@ -293,7 +300,7 @@ export default function GovernancePage() {
           </p>
           {/* Mobile: stacked cards */}
           <div className="divide-y divide-brand-navy/10 tablet:hidden">
-            {PMG.map((m) => (
+            {pmg.map((m) => (
               <div key={m.name + m.role} className="py-5">
                 <p className="font-body text-[15px] font-medium text-brand-navy">{m.name}</p>
                 <p className="mt-1 font-body text-[13px] leading-[1.5] text-ink/85">{m.designation}</p>
@@ -318,7 +325,7 @@ export default function GovernancePage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-brand-navy/10">
-                {PMG.map((m) => (
+                {pmg.map((m) => (
                   <tr key={m.name + m.role}>
                     <td className="py-4 pr-6 font-body text-[14px] font-medium text-brand-navy">
                       {m.name}

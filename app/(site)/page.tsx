@@ -7,8 +7,15 @@ import { TheResolve } from '@/components/spreads/TheResolve'
 import { TheInstrument } from '@/components/spreads/TheInstrument'
 import { TheLedger } from '@/components/spreads/TheLedger'
 import { TheApplication } from '@/components/spreads/TheApplication'
+import { getImpactMetrics, getPartners, getApplyBenefits } from '@/lib/sanity/fetchers'
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [metrics, partners, benefits] = await Promise.all([
+    getImpactMetrics(),
+    getPartners(),
+    getApplyBenefits(),
+  ])
+
   return (
     <>
       <ChapterProgress />
@@ -17,10 +24,10 @@ export default function HomePage() {
       <TheResolve />
       <TheInstrument />
       <div className="h-px bg-brand-cerulean" aria-hidden="true" />
-      <TheLedger />
+      <TheLedger metrics={metrics} partners={partners} />
       <div className="h-px bg-brand-cerulean" aria-hidden="true" />
       <Suspense>
-        <TheApplication />
+        <TheApplication benefits={benefits} />
       </Suspense>
     </>
   )

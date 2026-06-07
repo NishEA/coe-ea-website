@@ -1,6 +1,6 @@
 import { defineType, defineField } from "sanity";
 
-/** A portfolio startup — design-doc §9 + Section 6 six domain pillars. */
+/** A portfolio startup — all cohorts. Domain is free-text to accommodate new verticals. */
 export const startup = defineType({
   name: "startup",
   title: "Startup",
@@ -12,60 +12,26 @@ export const startup = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
-      name: "logo",
-      type: "image",
-      options: { hotspot: true },
-    }),
-    defineField({ name: "founder", type: "string" }),
-    defineField({
-      name: "founderRole",
-      title: "Founder role",
-      type: "string",
-    }),
-    defineField({
-      name: "founderPhoto",
-      title: "Founder photo",
-      type: "image",
-      options: { hotspot: true },
-    }),
-    defineField({
       name: "domain",
       type: "string",
-      options: {
-        list: [
-          { title: "Smart Manufacturing", value: "smart-manufacturing" },
-          { title: "Smart Energy", value: "smart-energy" },
-          { title: "Smart Water", value: "smart-water" },
-          { title: "Smart Farming", value: "smart-farming" },
-          { title: "Intelligent Asset Monitoring", value: "intelligent-asset-monitoring" },
-          { title: "Connected Transportation", value: "connected-transportation" },
-        ],
-        layout: "radio",
-      },
+      description: "e.g. Smart Manufacturing, AgriTech, AI / ML",
       validation: (r) => r.required(),
     }),
     defineField({
-      name: "whatTheyBuild",
-      title: "What they build",
-      type: "text",
-      rows: 2,
-      description: "2-line plain-text summary for the portfolio ledger.",
-    }),
-    defineField({
-      name: "fundingRaised",
-      title: "Funding raised",
+      name: "stage",
       type: "string",
-      description: "Formatted for display — e.g. ₹2.5 Cr, $1.2M.",
+      options: { list: ["Early", "Growth", "Alumni"], layout: "radio" },
+      initialValue: "Early",
+      validation: (r) => r.required(),
     }),
     defineField({
-      name: "jobsCreated",
-      title: "Jobs created",
-      type: "number",
-    }),
-    defineField({
-      name: "ipFiled",
-      title: "IP filed",
-      type: "number",
+      name: "cohort",
+      type: "string",
+      options: {
+        list: ["Cohort 1", "Cohort 2", "Cohort 3"],
+        layout: "radio",
+      },
+      description: "Which intake cohort this startup belongs to.",
     }),
     defineField({
       name: "status",
@@ -75,14 +41,36 @@ export const startup = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
-      name: "dateJoined",
-      title: "Date joined",
-      type: "date",
+      name: "whatTheyBuild",
+      title: "What they build",
+      type: "text",
+      rows: 2,
+      description: "2-line plain-text summary for the portfolio ledger.",
     }),
+    defineField({ name: "founder", type: "string" }),
+    defineField({
+      name: "founderRole",
+      title: "Founder role",
+      type: "string",
+    }),
+    defineField({
+      name: "fundingRaised",
+      title: "Funding raised",
+      type: "string",
+      description: "Formatted for display — e.g. ₹2.5 Cr, $1.2M.",
+    }),
+    defineField({ name: "jobsCreated", title: "Jobs created", type: "number" }),
+    defineField({ name: "ipFiled", title: "IP filed", type: "number" }),
+    defineField({ name: "dateJoined", title: "Date joined", type: "date" }),
     defineField({ name: "website", type: "url" }),
     defineField({
-      name: "heroImage",
-      title: "Hero image",
+      name: "logo",
+      type: "image",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "founderPhoto",
+      title: "Founder photo",
       type: "image",
       options: { hotspot: true },
     }),

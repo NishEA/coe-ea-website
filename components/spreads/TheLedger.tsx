@@ -3,6 +3,12 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { IMPACT_METRICS, PARTNERS } from '@/data/impact-metrics'
+import type { SanityImpactMetric, SanityPartner } from '@/lib/sanity/fetchers'
+
+interface TheLedgerProps {
+  metrics?: SanityImpactMetric[]
+  partners?: SanityPartner[]
+}
 
 function splitValue(value: string): { num: string; unit: string | null } {
   const m = value.match(/^([₹$]?\s?[\d.,–-]+)\s*(.*)$/)
@@ -21,7 +27,10 @@ const cellVariants = {
   show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 120, damping: 20 } },
 }
 
-export function TheLedger() {
+export function TheLedger({ metrics, partners }: TheLedgerProps) {
+  const displayMetrics = metrics && metrics.length > 0 ? metrics : IMPACT_METRICS
+  const displayPartners = partners && partners.length > 0 ? partners : null
+
   return (
     <section
       id="ledger"
@@ -54,7 +63,7 @@ export function TheLedger() {
         viewport={{ once: true, margin: '-10%' }}
         variants={gridVariants}
       >
-        {IMPACT_METRICS.map((m, i) => {
+        {displayMetrics.map((m, i) => {
           const { num, unit } = splitValue(m.value)
           const isLead = i === 0
           return (
@@ -100,35 +109,65 @@ export function TheLedger() {
               className="flex min-w-max items-center gap-6 tablet:min-w-0 tablet:flex-wrap tablet:justify-center tablet:gap-x-8 tablet:gap-y-6"
               role="list"
             >
-              {PARTNERS.map(p => (
-                <li key={p.name} className="flex flex-shrink-0 items-center justify-center tablet:flex-shrink">
-                  {p.logoSrc ? (
-                    p.chip ? (
-                      <div className="rounded bg-white px-2.5 py-2">
-                        <Image
-                          src={p.logoSrc}
-                          alt={p.name}
-                          width={140}
-                          height={56}
-                          className="h-10 w-auto max-w-[100px] object-contain tablet:h-12 tablet:max-w-[120px]"
-                        />
-                      </div>
-                    ) : (
-                      <Image
-                        src={p.logoSrc}
-                        alt={p.name}
-                        width={160}
-                        height={56}
-                        className="h-10 w-auto max-w-[110px] object-contain tablet:h-12 tablet:max-w-[140px]"
-                      />
-                    )
-                  ) : (
-                    <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
-                      {p.name}
-                    </span>
-                  )}
-                </li>
-              ))}
+              {displayPartners
+                ? displayPartners.map(p => (
+                    <li key={p._id} className="flex flex-shrink-0 items-center justify-center tablet:flex-shrink">
+                      {p.logoUrl ? (
+                        p.useWhiteChip ? (
+                          <div className="rounded bg-white px-2.5 py-2">
+                            <Image
+                              src={p.logoUrl}
+                              alt={p.name}
+                              width={140}
+                              height={56}
+                              className="h-10 w-auto max-w-[100px] object-contain tablet:h-12 tablet:max-w-[120px]"
+                            />
+                          </div>
+                        ) : (
+                          <Image
+                            src={p.logoUrl}
+                            alt={p.name}
+                            width={160}
+                            height={56}
+                            className="h-10 w-auto max-w-[110px] object-contain tablet:h-12 tablet:max-w-[140px]"
+                          />
+                        )
+                      ) : (
+                        <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
+                          {p.name}
+                        </span>
+                      )}
+                    </li>
+                  ))
+                : PARTNERS.map(p => (
+                    <li key={p.name} className="flex flex-shrink-0 items-center justify-center tablet:flex-shrink">
+                      {p.logoSrc ? (
+                        p.chip ? (
+                          <div className="rounded bg-white px-2.5 py-2">
+                            <Image
+                              src={p.logoSrc}
+                              alt={p.name}
+                              width={140}
+                              height={56}
+                              className="h-10 w-auto max-w-[100px] object-contain tablet:h-12 tablet:max-w-[120px]"
+                            />
+                          </div>
+                        ) : (
+                          <Image
+                            src={p.logoSrc}
+                            alt={p.name}
+                            width={160}
+                            height={56}
+                            className="h-10 w-auto max-w-[110px] object-contain tablet:h-12 tablet:max-w-[140px]"
+                          />
+                        )
+                      ) : (
+                        <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
+                          {p.name}
+                        </span>
+                      )}
+                    </li>
+                  ))}
             </ul>
           </div>
         </div>

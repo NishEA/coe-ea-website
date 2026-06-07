@@ -13,6 +13,7 @@ import { news } from "./news";
 import { team } from "./team";
 import { page } from "./page";
 import { impactMetrics } from "./impactMetrics";
+import { applyBenefits } from "./applyBenefits";
 
 export const schemaTypes = [
   startup,
@@ -23,4 +24,5 @@ export const schemaTypes = [
   team,
   page,
   impactMetrics,
+  applyBenefits,
 ];

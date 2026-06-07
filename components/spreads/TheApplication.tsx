@@ -3,6 +3,7 @@
 import { useSearchParams } from 'next/navigation'
 import { ApplyForm } from '@/components/forms/apply/ApplyForm'
 import { APPLY_BENEFITS } from '@/data/apply-benefits'
+import type { SanityApplyBenefit } from '@/lib/sanity/fetchers'
 
 // DB enum values from app/actions/apply.ts — duplicated here because that
 // file uses 'use server' and cannot be imported by client components.
@@ -26,7 +27,8 @@ const PROVENANCE_TO_PILLAR: Record<string, string> = {
   'home-automation':      'home_office_automation',
 }
 
-export function TheApplication() {
+export function TheApplication({ benefits: propBenefits }: { benefits?: SanityApplyBenefit[] } = {}) {
+  const benefits = propBenefits && propBenefits.length > 0 ? propBenefits : APPLY_BENEFITS
   const searchParams = useSearchParams()
   const rawPillar = searchParams.get('pillar') ?? ''
   const resolvedPillar = PROVENANCE_TO_PILLAR[rawPillar] ?? rawPillar
@@ -56,7 +58,7 @@ export function TheApplication() {
         aria-label="What you get"
         className="mt-12 mb-20 grid grid-cols-1 gap-x-8 gap-y-8 border-y border-brand-navy/15 py-10 tablet:grid-cols-3 desktop:grid-cols-5"
       >
-        {APPLY_BENEFITS.map(b => (
+        {benefits.map(b => (
           <li key={b.label} className="flex flex-col gap-1.5">
             <span className="mb-1 flex items-center gap-2">
               <span aria-hidden className="inline-block h-2 w-2 bg-amber" />

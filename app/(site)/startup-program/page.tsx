@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { DarkHero } from '@/components/ui/DarkHero'
 import { PortfolioMorph } from '@/components/ui/morphs/PortfolioMorph'
+import { getStartups } from '@/lib/sanity/fetchers'
 
 // Domain → visual cluster (amber=hardware/energy, cerulean=digital/AI, operational=sustainability/life)
 const DOMAIN_CLUSTER: Record<string, 'amber' | 'cerulean' | 'operational'> = {
@@ -94,61 +95,64 @@ const BENEFITS = [
   },
 ] as const
 
-const STARTUPS = [
-  { name: 'Abhiyantrik Solutions', domain: 'Home Automation', stage: 'Growth' },
-  { name: 'Ada Lovelace Software', domain: 'AssistiveTech', stage: 'Growth' },
-  { name: 'Artitech Innovations', domain: 'Industry 4.0', stage: 'Growth' },
-  { name: 'Atibha R&D', domain: 'AI / ML', stage: 'Growth' },
-  { name: 'Avatarbot', domain: 'Smart Energy', stage: 'Growth' },
-  { name: 'Dopamine Technology', domain: 'Smart Manufacturing', stage: 'Growth' },
-  { name: 'Evoride Motors', domain: 'E-Mobility', stage: 'Growth' },
-  { name: 'Ouranos Robotics', domain: 'AgriTech', stage: 'Growth' },
-  { name: 'Prayogik Energy', domain: 'Smart Energy', stage: 'Growth' },
-  { name: 'STG Labs India', domain: 'Smart Energy', stage: 'Growth' },
-  { name: 'Suncharge Smartgrids India', domain: 'CleanTech', stage: 'Early' },
-  { name: 'Ignomagine (Enlightened Machines)', domain: 'Robotics', stage: 'Early' },
-  { name: 'Small Acts Technologies', domain: 'HealthTech', stage: 'Early' },
-  { name: 'DSeT Consulting', domain: 'Industry 4.0', stage: 'Early' },
-  { name: 'Ikshana Bin', domain: 'Sustainability', stage: 'Early' },
-  { name: 'Kubar Protocol', domain: 'FinTech', stage: 'Early' },
-  { name: 'Iqponics Technologies', domain: 'AgriTech', stage: 'Early' },
-  { name: 'Stavar Systems', domain: 'IoT', stage: 'Early' },
-  { name: 'Ecologia Designs', domain: 'IoT', stage: 'Early' },
-  { name: 'Amlaan RiverCorp', domain: 'Sustainability', stage: 'Early' },
-  { name: 'Enwinove Social Solutions', domain: 'Smart Water', stage: 'Early' },
-  { name: 'ZeroMOQ', domain: 'Smart Manufacturing', stage: 'Early' },
-  { name: 'Zenathom', domain: 'CleanTech', stage: 'Early' },
-  { name: 'Bharat Dome Innovation', domain: 'SpaceTech', stage: 'Early' },
-  { name: 'Green Junction Technologies', domain: 'E-Mobility', stage: 'Early' },
-  { name: 'Augtual Reality Labs', domain: 'Extended Reality', stage: 'Early' },
-  { name: 'YAPPES Technologies', domain: 'Enterprise SaaS', stage: 'Early' },
-  { name: 'TechXEarthSpace', domain: 'ClimateTech', stage: 'Early' },
-  { name: 'Trustadditive', domain: 'Smart Manufacturing', stage: 'Early' },
-  { name: 'Drobots Tech', domain: 'DronesTech', stage: 'Early' },
-  { name: 'Solitary Spaces', domain: 'DesignTech', stage: 'Early' },
-  { name: 'PRIMESOC Technologies', domain: 'Semiconductor', stage: 'Early' },
-  { name: 'Aavishkaara Electronics India', domain: 'Electronics', stage: 'Early' },
-  { name: 'Bworth Technologies', domain: 'FashionTech', stage: 'Early' },
-  { name: 'TEA Inntech Services', domain: 'AgriTech', stage: 'Early' },
-  { name: 'Aarts Maestro', domain: 'CreativeTech', stage: 'Early' },
-  { name: 'Source X', domain: 'MarketingTech', stage: 'Early' },
-  { name: 'Billionloans Technology Services', domain: 'FinTech', stage: 'Early' },
-  { name: 'Enectron Energy Storage Systems', domain: 'CleanTech', stage: 'Early' },
-  { name: 'Zealdash Solutions', domain: 'Enterprise SaaS', stage: 'Early' },
-  { name: 'Hypertechpreneurs', domain: 'AI / DeepTech', stage: 'Early' },
-  { name: 'Trinav Spacetech', domain: 'SpaceTech', stage: 'Early' },
-  { name: 'Calypsion Innovations', domain: 'Industry 4.0', stage: 'Early' },
-  { name: 'Sunitech AI', domain: 'EdTech', stage: 'Early' },
-  { name: 'Fiacre Telematics', domain: 'MobilityTech', stage: 'Early' },
-  { name: 'Knovative Tech Labs', domain: 'IT Services', stage: 'Early' },
-  { name: 'Eyres AI Solutions', domain: 'Industrial AI', stage: 'Early' },
-  { name: 'MeetNotes', domain: 'ProductivityTech', stage: 'Early' },
+// Fallback data used before Sanity is seeded
+const STARTUPS_FALLBACK = [
+  { _id: 'fb-1',  name: 'Abhiyantrik Solutions',          domain: 'Home Automation',     stage: 'Growth' as const },
+  { _id: 'fb-2',  name: 'Ada Lovelace Software',           domain: 'AssistiveTech',       stage: 'Growth' as const },
+  { _id: 'fb-3',  name: 'Artitech Innovations',            domain: 'Industry 4.0',        stage: 'Growth' as const },
+  { _id: 'fb-4',  name: 'Atibha R&D',                      domain: 'AI / ML',             stage: 'Growth' as const },
+  { _id: 'fb-5',  name: 'Avatarbot',                       domain: 'Smart Energy',        stage: 'Growth' as const },
+  { _id: 'fb-6',  name: 'Dopamine Technology',             domain: 'Smart Manufacturing', stage: 'Growth' as const },
+  { _id: 'fb-7',  name: 'Evoride Motors',                  domain: 'E-Mobility',          stage: 'Growth' as const },
+  { _id: 'fb-8',  name: 'Ouranos Robotics',                domain: 'AgriTech',            stage: 'Growth' as const },
+  { _id: 'fb-9',  name: 'Prayogik Energy',                 domain: 'Smart Energy',        stage: 'Growth' as const },
+  { _id: 'fb-10', name: 'STG Labs India',                  domain: 'Smart Energy',        stage: 'Growth' as const },
+  { _id: 'fb-11', name: 'Suncharge Smartgrids India',      domain: 'CleanTech',           stage: 'Early'  as const },
+  { _id: 'fb-12', name: 'Ignomagine (Enlightened Machines)', domain: 'Robotics',          stage: 'Early'  as const },
+  { _id: 'fb-13', name: 'Small Acts Technologies',         domain: 'HealthTech',          stage: 'Early'  as const },
+  { _id: 'fb-14', name: 'DSeT Consulting',                 domain: 'Industry 4.0',        stage: 'Early'  as const },
+  { _id: 'fb-15', name: 'Ikshana Bin',                     domain: 'Sustainability',      stage: 'Early'  as const },
+  { _id: 'fb-16', name: 'Kubar Protocol',                  domain: 'FinTech',             stage: 'Early'  as const },
+  { _id: 'fb-17', name: 'Iqponics Technologies',           domain: 'AgriTech',            stage: 'Early'  as const },
+  { _id: 'fb-18', name: 'Stavar Systems',                  domain: 'IoT',                 stage: 'Early'  as const },
+  { _id: 'fb-19', name: 'Ecologia Designs',                domain: 'IoT',                 stage: 'Early'  as const },
+  { _id: 'fb-20', name: 'Amlaan RiverCorp',                domain: 'Sustainability',      stage: 'Early'  as const },
+  { _id: 'fb-21', name: 'Enwinove Social Solutions',       domain: 'Smart Water',         stage: 'Early'  as const },
+  { _id: 'fb-22', name: 'ZeroMOQ',                         domain: 'Smart Manufacturing', stage: 'Early'  as const },
+  { _id: 'fb-23', name: 'Zenathom',                        domain: 'CleanTech',           stage: 'Early'  as const },
+  { _id: 'fb-24', name: 'Bharat Dome Innovation',          domain: 'SpaceTech',           stage: 'Early'  as const },
+  { _id: 'fb-25', name: 'Green Junction Technologies',     domain: 'E-Mobility',          stage: 'Early'  as const },
+  { _id: 'fb-26', name: 'Augtual Reality Labs',            domain: 'Extended Reality',    stage: 'Early'  as const },
+  { _id: 'fb-27', name: 'YAPPES Technologies',             domain: 'Enterprise SaaS',     stage: 'Early'  as const },
+  { _id: 'fb-28', name: 'TechXEarthSpace',                 domain: 'ClimateTech',         stage: 'Early'  as const },
+  { _id: 'fb-29', name: 'Trustadditive',                   domain: 'Smart Manufacturing', stage: 'Early'  as const },
+  { _id: 'fb-30', name: 'Drobots Tech',                    domain: 'DronesTech',          stage: 'Early'  as const },
+  { _id: 'fb-31', name: 'Solitary Spaces',                 domain: 'DesignTech',          stage: 'Early'  as const },
+  { _id: 'fb-32', name: 'PRIMESOC Technologies',           domain: 'Semiconductor',       stage: 'Early'  as const },
+  { _id: 'fb-33', name: 'Aavishkaara Electronics India',   domain: 'Electronics',         stage: 'Early'  as const },
+  { _id: 'fb-34', name: 'Bworth Technologies',             domain: 'FashionTech',         stage: 'Early'  as const },
+  { _id: 'fb-35', name: 'TEA Inntech Services',            domain: 'AgriTech',            stage: 'Early'  as const },
+  { _id: 'fb-36', name: 'Aarts Maestro',                   domain: 'CreativeTech',        stage: 'Early'  as const },
+  { _id: 'fb-37', name: 'Source X',                        domain: 'MarketingTech',       stage: 'Early'  as const },
+  { _id: 'fb-38', name: 'Billionloans Technology Services', domain: 'FinTech',            stage: 'Early'  as const },
+  { _id: 'fb-39', name: 'Enectron Energy Storage Systems', domain: 'CleanTech',           stage: 'Early'  as const },
+  { _id: 'fb-40', name: 'Zealdash Solutions',              domain: 'Enterprise SaaS',     stage: 'Early'  as const },
+  { _id: 'fb-41', name: 'Hypertechpreneurs',               domain: 'AI / DeepTech',       stage: 'Early'  as const },
+  { _id: 'fb-42', name: 'Trinav Spacetech',                domain: 'SpaceTech',           stage: 'Early'  as const },
+  { _id: 'fb-43', name: 'Calypsion Innovations',           domain: 'Industry 4.0',        stage: 'Early'  as const },
+  { _id: 'fb-44', name: 'Sunitech AI',                     domain: 'EdTech',              stage: 'Early'  as const },
+  { _id: 'fb-45', name: 'Fiacre Telematics',               domain: 'MobilityTech',        stage: 'Early'  as const },
+  { _id: 'fb-46', name: 'Knovative Tech Labs',             domain: 'IT Services',         stage: 'Early'  as const },
+  { _id: 'fb-47', name: 'Eyres AI Solutions',              domain: 'Industrial AI',        stage: 'Early'  as const },
+  { _id: 'fb-48', name: 'MeetNotes',                       domain: 'ProductivityTech',    stage: 'Early'  as const },
 ]
 
-// Doubled for seamless infinite loop
-const STARTUPS_DOUBLED = [...STARTUPS, ...STARTUPS]
-
-export default function PortfolioPage() {
+export default async function PortfolioPage() {
+  const sanityStartups = await getStartups()
+  const startups = sanityStartups.length > 0 ? sanityStartups : STARTUPS_FALLBACK
+  const startupCount = startups.length
+  // Doubled for seamless infinite loop
+  const STARTUPS_DOUBLED = [...startups, ...startups]
   return (
     <>
       {/* ── 1. Hero ── */}
@@ -159,7 +163,7 @@ export default function PortfolioPage() {
             Built inside <span className="text-amber">the machine.</span>
           </>
         }
-        subhead="52 STARTUPS · 10 DOMAINS · 3 COHORTS"
+        subhead={`${startupCount} STARTUPS · 10 DOMAINS · 3 COHORTS`}
         visual={<PortfolioMorph className="h-full w-auto max-w-[600px]" />}
       />
 
@@ -360,7 +364,7 @@ export default function PortfolioPage() {
 
         <div className="mx-auto mt-8 max-w-[1100px]">
           <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/40">
-            Full cohort of 52 startups across all ten domains. Auto-scrolling · touch or hover to pause.
+            Full cohort of {startupCount} startups across all ten domains. Auto-scrolling · touch or hover to pause.
           </p>
         </div>
       </section>
