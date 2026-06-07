@@ -1,5 +1,6 @@
 "use server";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { after } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { resend } from "@/lib/resend/client";
@@ -35,10 +36,40 @@ function str(formData: FormData, key: string): string {
   return typeof val === "string" ? val.trim() : "";
 }
 
+// --- Rate limiting -----------------------------------------------------------
+// TODO: swap for Upstash Redis before launch.
+// In-memory sliding window — resets on serverless cold start and is not shared
+// across instances. Acceptable while the form isn't live yet; durable
+// rate limiting requires Upstash (UPSTASH_REDIS_REST_URL / _TOKEN).
+const submissions = new Map<string, number[]>();
+const WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const MAX_SUBMISSIONS = 3;
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const times = (submissions.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  if (times.length >= MAX_SUBMISSIONS) return true;
+  submissions.set(ip, [...times, now]);
+  return false;
+}
+
 export async function submitApplication(
   _prev: ApplyState,
   formData: FormData,
 ): Promise<ApplyState> {
+  const headersList = await headers();
+  const ip =
+    headersList.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+    headersList.get("x-real-ip") ??
+    "unknown";
+
+  if (isRateLimited(ip)) {
+    return {
+      errors: {},
+      message: "Too many submissions. Please try again in an hour.",
+    };
+  }
+
   const errors: Record<string, string> = {};
 
   const founderName = str(formData, "founder_name");
