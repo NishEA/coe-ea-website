@@ -37,13 +37,13 @@ interface PartnerLogoProps {
 
 function PartnerLogo({ name, src }: PartnerLogoProps) {
   return (
-    <div className="group flex h-[52px] w-fit min-w-[80px] max-w-[150px] items-center justify-center rounded-xl bg-white px-5 py-3 shadow-[0_2px_12px_rgba(0,0,0,0.25)]">
+    <div className="group flex h-[72px] w-[160px] items-center justify-center rounded-xl bg-white px-5 py-4 shadow-[0_2px_12px_rgba(0,0,0,0.25)]">
       <Image
         src={src}
         alt={name}
-        width={110}
-        height={36}
-        className="h-7 w-auto max-w-[110px] object-contain grayscale transition-all duration-300 group-hover:grayscale-0"
+        width={120}
+        height={44}
+        className="max-h-[44px] w-full object-contain grayscale transition-all duration-300 group-hover:grayscale-0"
       />
     </div>
   )
