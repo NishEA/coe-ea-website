@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroShell } from "@/components/ui/HeroShell";
-import { TimelineMorph } from "@/components/ui/morphs/TimelineMorph";
+import { DepartureBoard } from "@/components/spreads/heroes/DepartureBoard";
 import { Reveal } from "@/components/motion/Reveal";
+import { getEvents } from "@/lib/sanity/fetchers";
 
 export const metadata: Metadata = {
   title: "Events",
@@ -45,7 +46,9 @@ const EVENT_TYPES = [
   },
 ];
 
-export default function EventsPage() {
+export default async function EventsPage() {
+  const events = await getEvents();
+
   return (
     <>
       <HeroShell
@@ -56,8 +59,8 @@ export default function EventsPage() {
             Where signal meets <span className="text-amber">founder.</span>
           </>
         }
-        layout="right-visual"
-        visual={<TimelineMorph className="h-auto w-auto max-w-[420px]" />}
+        layout="band"
+        visual={<DepartureBoard events={events} />}
       />
 
       <main className="relative z-10 dark-atmosphere grain px-6 py-24 tablet:px-12 desktop:px-20">
