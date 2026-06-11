@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { DarkHero } from "@/components/ui/DarkHero";
+import { HeroShell } from "@/components/ui/HeroShell";
 import { HierarchyMorph } from "@/components/ui/morphs/HierarchyMorph";
 import { getTeamByGroup } from "@/lib/sanity/fetchers";
 
@@ -186,7 +186,7 @@ export default async function GovernancePage() {
   const pmg = sanityPMG.length > 0 ? sanityPMG : PMG
   return (
     <>
-      <DarkHero
+      <HeroShell
         label="Tripartite structure · STPI · KITS · HPE"
         badge="OVERSIGHT STRUCTURE · STPI · KITS"
         title={
@@ -194,6 +194,7 @@ export default async function GovernancePage() {
             How the instrument is <span className="text-amber">governed.</span>
           </>
         }
+        layout="right-visual"
         visual={<HierarchyMorph className="h-full w-auto max-w-[520px]" />}
       />
 

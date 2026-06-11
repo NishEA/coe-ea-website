@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { DarkHero } from "@/components/ui/DarkHero";
+import { HeroShell } from "@/components/ui/HeroShell";
 
 export const metadata: Metadata = {
   title: "Privacy Notice",
@@ -77,10 +77,11 @@ const PROCESSORS = [
 export default function PrivacyPage() {
   return (
     <>
-      <DarkHero
+      <HeroShell
         label="Last updated: May 2026"
         title="Privacy Policy."
         subhead="Digital Personal Data Protection Act, 2023 · Version 1.0"
+        layout="center"
       />
 
       <main className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">

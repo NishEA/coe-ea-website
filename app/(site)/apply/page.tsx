@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
-import { DarkHero } from '@/components/ui/DarkHero'
+import { HeroShell } from '@/components/ui/HeroShell'
+import { IgnitionSequence } from '@/components/spreads/heroes/IgnitionSequence'
 import { ApplyForm } from '@/components/forms/apply/ApplyForm'
-import { OrbitCanvas } from '@/components/ui/OrbitCanvas'
 import { APPLY_BENEFITS } from '@/data/apply-benefits'
 import { getApplyBenefits } from '@/lib/sanity/fetchers'
 
@@ -18,13 +18,12 @@ export default async function ApplyPage() {
 
   return (
     <div className="dark-atmosphere grain bg-bg-void">
-      <DarkHero
+      <HeroShell
         label="Cohort 3 · Applications open"
         badge="COHORT 3 · OPEN NOW"
         title="Apply to the next cohort."
-        subhead="10 Industry 4.0 domains · 12-month programme · 1–3% equity on signing · Bengaluru"
-        align="left"
-        visual={<OrbitCanvas className="h-full w-full" showLabels animate labelFontSize={13} />}
+        layout="center"
+        visual={<IgnitionSequence />}
       />
 
       <section

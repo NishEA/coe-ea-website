@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { DarkHero } from "@/components/ui/DarkHero";
+import { HeroShell } from "@/components/ui/HeroShell";
 import { TimelineMorph } from "@/components/ui/morphs/TimelineMorph";
 import { Reveal } from "@/components/motion/Reveal";
 
@@ -48,7 +48,7 @@ const EVENT_TYPES = [
 export default function EventsPage() {
   return (
     <>
-      <DarkHero
+      <HeroShell
         label="Open to engineers · researchers · startup founders"
         badge="SIGNAL EVENTS · COHORT CALENDAR"
         title={
@@ -56,7 +56,7 @@ export default function EventsPage() {
             Where signal meets <span className="text-amber">founder.</span>
           </>
         }
-        align="left"
+        layout="right-visual"
         visual={<TimelineMorph className="h-auto w-auto max-w-[420px]" />}
       />
 

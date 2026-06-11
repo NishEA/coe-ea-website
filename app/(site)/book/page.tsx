@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { DarkHero } from "@/components/ui/DarkHero";
+import { HeroShell } from "@/components/ui/HeroShell";
 import { FloorPlanMorph } from "@/components/ui/morphs/FloorPlanMorph";
 
 export const metadata: Metadata = {
@@ -73,7 +73,7 @@ const STEPS = [
 export default function BookPage() {
   return (
     <>
-      <DarkHero
+      <HeroShell
         label="Bengaluru · 16,000 sq ft · Industry 4.0"
         badge="FACILITY BOOKING · BENGALURU"
         title={
@@ -81,6 +81,7 @@ export default function BookPage() {
             The field, in <span className="text-amber">physical space.</span>
           </>
         }
+        layout="right-visual"
         visual={<FloorPlanMorph className="h-full w-auto max-w-[640px]" />}
       />
 

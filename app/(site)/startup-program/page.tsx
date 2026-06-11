@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { DarkHero } from '@/components/ui/DarkHero'
+import { HeroShell } from '@/components/ui/HeroShell'
 import { PortfolioMorph } from '@/components/ui/morphs/PortfolioMorph'
 import { getStartups } from '@/lib/sanity/fetchers'
 
@@ -156,7 +156,7 @@ export default async function PortfolioPage() {
   return (
     <>
       {/* ── 1. Hero ── */}
-      <DarkHero
+      <HeroShell
         label="Startup Program"
         badge="PORTFOLIO MAP · 40+ COMPANIES"
         title={
@@ -165,6 +165,7 @@ export default async function PortfolioPage() {
           </>
         }
         subhead={`${startupCount} STARTUPS · 10 DOMAINS · 3 COHORTS`}
+        layout="right-visual"
         visual={<PortfolioMorph className="h-full w-auto max-w-[600px]" />}
       />
 
