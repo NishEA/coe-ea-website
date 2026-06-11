@@ -406,36 +406,41 @@ body {
  * one place rather than forking every field component. */
 .form-dark label > span,
 .form-dark legend {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
 }
-/* Recolour the navy text shades the form primitives use for paper. */
+/* Recolour any remaining navy text shades (hints, consent copy, radio labels). */
 .form-dark [class*="text-brand-navy"] {
-  color: rgba(183, 207, 232, 0.75) !important;
+  color: rgba(183, 207, 232, 0.65) !important;
 }
+/* Keep the underline aesthetic but make it visible on void.
+ * Original: border-b border-brand-navy/30 (invisible on dark).
+ * Fix: reset full border, restore only a visible bottom line. */
 .form-dark input[type="text"],
 .form-dark input[type="email"],
 .form-dark input[type="tel"],
 .form-dark select,
 .form-dark textarea {
   color: #fff !important;
-  background: rgba(255, 255, 255, 0.02) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-radius: 5px;
-  padding-left: 12px;
-  padding-right: 12px;
+  background: rgba(183, 207, 232, 0.04) !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(183, 207, 232, 0.28) !important;
+  border-radius: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 .form-dark input::placeholder,
 .form-dark textarea::placeholder {
-  color: rgba(183, 207, 232, 0.35);
+  color: rgba(183, 207, 232, 0.3) !important;
 }
 .form-dark input:focus,
 .form-dark select:focus,
 .form-dark textarea:focus {
-  border-color: var(--color-brand-cerulean) !important;
-  outline: none;
+  border-bottom-color: var(--color-brand-cerulean) !important;
+  outline: none !important;
 }
 .form-dark select option {
   color: #000;
+  background: #0a1a3a;
 }
 .form-dark a {
   color: var(--color-brand-cerulean);
