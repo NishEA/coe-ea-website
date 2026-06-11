@@ -33,28 +33,17 @@ const breathClasses = ['idle-breath-a', 'idle-breath-b', 'idle-breath-c', 'idle-
 interface PartnerLogoProps {
   name: string
   src: string
-  useWhiteChip?: boolean
 }
 
-function PartnerLogo({ name, src, useWhiteChip }: PartnerLogoProps) {
+function PartnerLogo({ name, src }: PartnerLogoProps) {
   return (
-    <div
-      className={`group flex h-14 w-fit min-w-[72px] max-w-[148px] items-center justify-center rounded-lg px-4 py-2.5 ${
-        useWhiteChip
-          ? 'bg-white'
-          : 'border border-brand-ice/[0.12] bg-white/[0.06]'
-      }`}
-    >
+    <div className="group flex h-14 w-fit min-w-[72px] max-w-[148px] items-center justify-center rounded-lg border border-brand-ice/[0.12] bg-white/[0.06] px-4 py-2.5">
       <Image
         src={src}
         alt={name}
         width={100}
         height={32}
-        className={`h-8 w-auto max-w-[100px] object-contain ${
-          useWhiteChip
-            ? ''
-            : '[filter:brightness(0)_invert(1)] opacity-60 transition-opacity duration-200 group-hover:opacity-90'
-        }`}
+        className="h-8 w-auto max-w-[100px] object-contain [filter:brightness(0)_invert(1)] opacity-60 transition-opacity duration-200 group-hover:opacity-95"
       />
     </div>
   )
@@ -169,7 +158,7 @@ export function TheLedger({ metrics, partners }: TheLedgerProps) {
             {partnerItems.map(p => (
               <li key={p.key} className="flex items-center justify-center">
                 {p.src ? (
-                  <PartnerLogo name={p.name} src={p.src} useWhiteChip={p.useWhiteChip} />
+                  <PartnerLogo name={p.name} src={p.src} />
                 ) : (
                   <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
                     {p.name}
