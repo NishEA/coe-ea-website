@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { HeroShell } from '@/components/ui/HeroShell'
-import { PortfolioMorph } from '@/components/ui/morphs/PortfolioMorph'
+import { CapabilityRadar } from '@/components/spreads/heroes/CapabilityRadar'
 import { getStartups } from '@/lib/sanity/fetchers'
 
 // Domain → visual cluster (amber=hardware/energy, cerulean=digital/AI, operational=sustainability/life)
@@ -166,7 +166,7 @@ export default async function PortfolioPage() {
         }
         subhead={`${startupCount} STARTUPS · 10 DOMAINS · 3 COHORTS`}
         layout="right-visual"
-        visual={<PortfolioMorph className="h-full w-auto max-w-[600px]" />}
+        visual={<CapabilityRadar />}
       />
 
       {/* ── 2. What the programme gives you — DARK ── */}
