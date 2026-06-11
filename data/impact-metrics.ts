@@ -7,7 +7,7 @@ export interface ImpactMetric {
 export interface Partner {
   name: string
   logoSrc?: string
-  chip?: boolean  // true = render inside a white chip (for white-background images)
+  useWhiteChip?: boolean  // true = logo designed for white bg (rendered on a white badge)
 }
 
 export const IMPACT_METRICS: ImpactMetric[] = [
@@ -23,10 +23,10 @@ export const IMPACT_METRICS: ImpactMetric[] = [
 ]
 
 export const PARTNERS: Partner[] = [
-  { name: 'HPE',       logoSrc: '/logos/hpe.avif',      chip: true },
+  { name: 'HPE',       logoSrc: '/logos/hpe.avif',      useWhiteChip: true },
   { name: 'Intel',     logoSrc: '/logos/intel.svg' },
-  { name: 'Bosch',     logoSrc: '/logos/bosch-gst.png', chip: true },
+  { name: 'Bosch',     logoSrc: '/logos/bosch-gst.png', useWhiteChip: true },
   { name: 'Schneider', logoSrc: '/logos/schneider.svg' },
   { name: 'IEEE',      logoSrc: '/logos/ieee.svg' },
-  { name: 'Karnataka Digital Economy Mission', logoSrc: '/logos/kdem.png', chip: true },
+  { name: 'Karnataka Digital Economy Mission', logoSrc: '/logos/kdem.png', useWhiteChip: true },
 ]

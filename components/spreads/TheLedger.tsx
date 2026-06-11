@@ -30,9 +30,43 @@ const cellVariants = {
 
 const breathClasses = ['idle-breath-a', 'idle-breath-b', 'idle-breath-c', 'idle-breath-d'] as const
 
+interface PartnerLogoProps {
+  name: string
+  src: string
+  useWhiteChip?: boolean
+}
+
+function PartnerLogo({ name, src, useWhiteChip }: PartnerLogoProps) {
+  return (
+    <div
+      className={`group flex h-14 w-fit min-w-[72px] max-w-[148px] items-center justify-center rounded-lg px-4 py-2.5 ${
+        useWhiteChip
+          ? 'bg-white'
+          : 'border border-brand-ice/[0.12] bg-white/[0.06]'
+      }`}
+    >
+      <Image
+        src={src}
+        alt={name}
+        width={100}
+        height={32}
+        className={`h-8 w-auto max-w-[100px] object-contain ${
+          useWhiteChip
+            ? ''
+            : '[filter:brightness(0)_invert(1)] opacity-60 transition-opacity duration-200 group-hover:opacity-90'
+        }`}
+      />
+    </div>
+  )
+}
+
 export function TheLedger({ metrics, partners }: TheLedgerProps) {
   const displayMetrics = metrics && metrics.length > 0 ? metrics : IMPACT_METRICS
-  const displayPartners = partners?.some(p => p.logoUrl) ? partners : null
+
+  // Normalise Sanity and static partner shapes into one render-ready list
+  const partnerItems = partners?.some(p => p.logoUrl)
+    ? partners.map(p => ({ key: p._id, name: p.name, src: p.logoUrl, useWhiteChip: p.useWhiteChip }))
+    : PARTNERS.map(p => ({ key: p.name, name: p.name, src: p.logoSrc, useWhiteChip: p.useWhiteChip }))
 
   return (
     <section
@@ -128,72 +162,22 @@ export function TheLedger({ metrics, partners }: TheLedgerProps) {
           Partners
         </p>
         <div className="glass-shelf rounded-lg px-5 py-6 tablet:px-10 tablet:py-8">
-          <div className="overflow-x-auto pb-1 tablet:overflow-visible">
-            <ul
-              className="flex min-w-max items-center gap-6 tablet:min-w-0 tablet:flex-wrap tablet:justify-center tablet:gap-x-8 tablet:gap-y-6"
-              role="list"
-            >
-              {displayPartners
-                ? displayPartners.map(p => (
-                    <li key={p._id} className="flex flex-shrink-0 items-center justify-center tablet:flex-shrink">
-                      {p.logoUrl ? (
-                        p.useWhiteChip ? (
-                          <div className="rounded bg-white px-2.5 py-2">
-                            <Image
-                              src={p.logoUrl}
-                              alt={p.name}
-                              width={140}
-                              height={56}
-                              className="h-10 w-auto max-w-[100px] object-contain tablet:h-12 tablet:max-w-[120px]"
-                            />
-                          </div>
-                        ) : (
-                          <Image
-                            src={p.logoUrl}
-                            alt={p.name}
-                            width={160}
-                            height={56}
-                            className="h-10 w-auto max-w-[110px] object-contain tablet:h-12 tablet:max-w-[140px]"
-                          />
-                        )
-                      ) : (
-                        <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
-                          {p.name}
-                        </span>
-                      )}
-                    </li>
-                  ))
-                : PARTNERS.map(p => (
-                    <li key={p.name} className="flex flex-shrink-0 items-center justify-center tablet:flex-shrink">
-                      {p.logoSrc ? (
-                        p.chip ? (
-                          <div className="rounded bg-white px-2.5 py-2">
-                            <Image
-                              src={p.logoSrc}
-                              alt={p.name}
-                              width={140}
-                              height={56}
-                              className="h-10 w-auto max-w-[100px] object-contain tablet:h-12 tablet:max-w-[120px]"
-                            />
-                          </div>
-                        ) : (
-                          <Image
-                            src={p.logoSrc}
-                            alt={p.name}
-                            width={160}
-                            height={56}
-                            className="h-10 w-auto max-w-[110px] object-contain tablet:h-12 tablet:max-w-[140px]"
-                          />
-                        )
-                      ) : (
-                        <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
-                          {p.name}
-                        </span>
-                      )}
-                    </li>
-                  ))}
-            </ul>
-          </div>
+          <ul
+            className="flex flex-wrap items-center justify-center gap-4 tablet:gap-6"
+            role="list"
+          >
+            {partnerItems.map(p => (
+              <li key={p.key} className="flex items-center justify-center">
+                {p.src ? (
+                  <PartnerLogo name={p.name} src={p.src} useWhiteChip={p.useWhiteChip} />
+                ) : (
+                  <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
+                    {p.name}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
