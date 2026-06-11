@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroShell } from "@/components/ui/HeroShell";
-import { FloorPlanMorph } from "@/components/ui/morphs/FloorPlanMorph";
+import { Airlock } from "@/components/spreads/heroes/Airlock";
 
 export const metadata: Metadata = {
   title: "Book a Facility",
@@ -81,8 +81,8 @@ export default function BookPage() {
             The field, in <span className="text-amber">physical space.</span>
           </>
         }
-        layout="right-visual"
-        visual={<FloorPlanMorph className="h-full w-auto max-w-[640px]" />}
+        layout="fullbleed"
+        visual={<Airlock />}
       />
 
       <main className="relative z-10 dark-atmosphere grain px-6 py-24 tablet:px-12 desktop:px-20">
