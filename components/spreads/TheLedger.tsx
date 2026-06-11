@@ -30,32 +30,9 @@ const cellVariants = {
 
 const breathClasses = ['idle-breath-a', 'idle-breath-b', 'idle-breath-c', 'idle-breath-d'] as const
 
-interface PartnerLogoProps {
-  name: string
-  src: string
-}
-
-function PartnerLogo({ name, src }: PartnerLogoProps) {
-  return (
-    <div className="group flex h-[72px] w-[160px] items-center justify-center rounded-xl bg-white px-5 py-4 shadow-[0_2px_12px_rgba(0,0,0,0.25)]">
-      <Image
-        src={src}
-        alt={name}
-        width={120}
-        height={44}
-        className="max-h-[44px] w-full object-contain"
-      />
-    </div>
-  )
-}
-
 export function TheLedger({ metrics, partners }: TheLedgerProps) {
   const displayMetrics = metrics && metrics.length > 0 ? metrics : IMPACT_METRICS
-
-  // Normalise Sanity and static partner shapes into one render-ready list
-  const partnerItems = partners?.some(p => p.logoUrl)
-    ? partners.map(p => ({ key: p._id, name: p.name, src: p.logoUrl }))
-    : PARTNERS.map(p => ({ key: p.name, name: p.name, src: p.logoSrc }))
+  const displayPartners = partners && partners.length > 0 ? partners : null
 
   return (
     <section
@@ -151,22 +128,72 @@ export function TheLedger({ metrics, partners }: TheLedgerProps) {
           Partners
         </p>
         <div className="glass-shelf rounded-lg px-5 py-6 tablet:px-10 tablet:py-8">
-          <ul
-            className="flex flex-wrap items-center justify-center gap-4 tablet:gap-6"
-            role="list"
-          >
-            {partnerItems.map(p => (
-              <li key={p.key} className="flex items-center justify-center">
-                {p.src ? (
-                  <PartnerLogo name={p.name} src={p.src} />
-                ) : (
-                  <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
-                    {p.name}
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
+          <div className="overflow-x-auto pb-1 tablet:overflow-visible">
+            <ul
+              className="flex min-w-max items-center gap-6 tablet:min-w-0 tablet:flex-wrap tablet:justify-center tablet:gap-x-8 tablet:gap-y-6"
+              role="list"
+            >
+              {displayPartners
+                ? displayPartners.map(p => (
+                    <li key={p._id} className="flex flex-shrink-0 items-center justify-center tablet:flex-shrink">
+                      {p.logoUrl ? (
+                        p.useWhiteChip ? (
+                          <div className="rounded bg-white px-2.5 py-2">
+                            <Image
+                              src={p.logoUrl}
+                              alt={p.name}
+                              width={140}
+                              height={56}
+                              className="h-10 w-auto max-w-[100px] object-contain tablet:h-12 tablet:max-w-[120px]"
+                            />
+                          </div>
+                        ) : (
+                          <Image
+                            src={p.logoUrl}
+                            alt={p.name}
+                            width={160}
+                            height={56}
+                            className="h-10 w-auto max-w-[110px] object-contain tablet:h-12 tablet:max-w-[140px]"
+                          />
+                        )
+                      ) : (
+                        <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
+                          {p.name}
+                        </span>
+                      )}
+                    </li>
+                  ))
+                : PARTNERS.map(p => (
+                    <li key={p.name} className="flex flex-shrink-0 items-center justify-center tablet:flex-shrink">
+                      {p.logoSrc ? (
+                        p.chip ? (
+                          <div className="rounded bg-white px-2.5 py-2">
+                            <Image
+                              src={p.logoSrc}
+                              alt={p.name}
+                              width={140}
+                              height={56}
+                              className="h-10 w-auto max-w-[100px] object-contain tablet:h-12 tablet:max-w-[120px]"
+                            />
+                          </div>
+                        ) : (
+                          <Image
+                            src={p.logoSrc}
+                            alt={p.name}
+                            width={160}
+                            height={56}
+                            className="h-10 w-auto max-w-[110px] object-contain tablet:h-12 tablet:max-w-[140px]"
+                          />
+                        )
+                      ) : (
+                        <span className="font-mono text-[13px] tracking-[0.06em] text-brand-ice/60">
+                          {p.name}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
