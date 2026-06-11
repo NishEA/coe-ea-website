@@ -43,7 +43,7 @@ function PartnerLogo({ name, src }: PartnerLogoProps) {
         alt={name}
         width={120}
         height={44}
-        className="max-h-[44px] w-full object-contain grayscale transition-all duration-300 group-hover:grayscale-0"
+        className="max-h-[44px] w-full object-contain"
       />
     </div>
   )
