@@ -38,38 +38,44 @@ export function TheApplication({ benefits: propBenefits }: { benefits?: SanityAp
     <section
       id="apply"
       aria-label="Apply — Section 5"
-      className="relative w-full bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20"
+      className="relative w-full dark-atmosphere grain bg-bg-void px-6 py-24 tablet:px-12 desktop:px-20"
     >
       <header className="mb-16 flex items-baseline justify-between">
         <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
           The Application
         </span>
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60">
+        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/50">
           Cohort 3 · Rolling basis
         </span>
       </header>
 
-      <h2 className="font-display text-[2.4rem] font-semibold leading-[1.05] tracking-[-0.02em] text-brand-navy tablet:text-[3.4rem]">
-        Apply to the <span className="text-amber">next cohort</span>.
-      </h2>
+      <div className="flex flex-wrap items-center gap-4 mb-4">
+        <h2 className="font-display text-[2.4rem] font-semibold leading-[1.05] tracking-[-0.02em] text-white tablet:text-[3.4rem]">
+          Apply to the <span className="text-amber">next cohort</span>.
+        </h2>
+        {/* Status badge */}
+        <span className="glass-chip px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-brand-cerulean inline-flex items-center">
+          <span className="op-dot mr-2" aria-hidden /> Cohort 3 · Open
+        </span>
+      </div>
 
       {/* Benefit strip — amber markers */}
       <ul
         aria-label="What you get"
-        className="mt-12 mb-20 grid grid-cols-1 gap-x-8 gap-y-8 border-y border-brand-navy/15 py-10 tablet:grid-cols-3 desktop:grid-cols-5"
+        className="mt-12 mb-20 grid grid-cols-1 gap-x-8 gap-y-8 border-y border-brand-ice/10 py-10 tablet:grid-cols-3 desktop:grid-cols-5"
       >
         {benefits.map(b => (
           <li key={b.label} className="flex flex-col gap-1.5">
             <span className="mb-1 flex items-center gap-2">
               <span aria-hidden className="inline-block h-2 w-2 bg-amber" />
-              <span className="font-display text-[1.7rem] font-light leading-none text-brand-navy">
+              <span className="font-display text-[1.7rem] font-light leading-none text-brand-ice">
                 {b.value}
               </span>
             </span>
-            <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-ink/85">
+            <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-brand-ice/75">
               {b.label}
             </span>
-            <span className="font-body text-[13px] leading-[1.5] text-ink/60">
+            <span className="font-body text-[13px] leading-[1.5] text-brand-ice/50">
               {b.detail}
             </span>
           </li>
@@ -77,14 +83,17 @@ export function TheApplication({ benefits: propBenefits }: { benefits?: SanityAp
       </ul>
 
       <div className="desktop:grid desktop:grid-cols-[3fr_2fr] desktop:items-start desktop:gap-16">
-        <ApplyForm defaultDomain={defaultDomain} />
+        {/* Form wrapped in field-scan-wrap and form-dark scope */}
+        <div className="field-scan-wrap form-dark">
+          <ApplyForm defaultDomain={defaultDomain} />
+        </div>
 
-        {/* Process sidebar — desktop only */}
-        <aside className="mt-16 hidden desktop:block desktop:sticky desktop:top-24">
+        {/* Process sidebar — desktop only, glass-panel wrapper */}
+        <aside className="glass-panel mt-16 p-8 hidden desktop:block desktop:sticky desktop:top-24">
           <h3 className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-cerulean">
             What happens next
           </h3>
-          <ol className="space-y-5 border-t border-brand-navy/15 pt-6">
+          <ol className="space-y-5 border-t border-brand-ice/10 pt-6">
             {[
               ['01', 'PMG review — you\'ll hear within two weeks of submission'],
               ['02', 'Shortlisted founders invited to a 30-minute pitch session'],
@@ -92,13 +101,13 @@ export function TheApplication({ benefits: propBenefits }: { benefits?: SanityAp
               ['04', 'Offer within six weeks; onboarding after equity signing'],
             ].map(([n, text]) => (
               <li key={n} className="flex items-start gap-4">
-                <span className="font-mono text-[10px] text-ink/35">{n}</span>
-                <span className="font-body text-[14px] leading-[1.55] text-ink/75">{text}</span>
+                <span className="font-mono text-[10px] text-brand-ice/25">{n}</span>
+                <span className="font-body text-[14px] leading-[1.55] text-brand-ice/60">{text}</span>
               </li>
             ))}
           </ol>
 
-          <p className="mt-10 border-t border-brand-navy/10 pt-6 font-body text-[13px] leading-[1.6] text-ink/50">
+          <p className="mt-10 border-t border-brand-ice/8 pt-6 font-body text-[13px] leading-[1.6] text-brand-ice/40">
             Questions? Write to{' '}
             <a href="mailto:blr.coeea@stpi.in" className="text-brand-cerulean underline underline-offset-2">
               blr.coeea@stpi.in

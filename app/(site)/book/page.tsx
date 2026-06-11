@@ -75,6 +75,7 @@ export default function BookPage() {
     <>
       <DarkHero
         label="Bengaluru · 16,000 sq ft · Industry 4.0"
+        badge="FACILITY BOOKING · BENGALURU"
         title={
           <>
             The field, in <span className="text-amber">physical space.</span>
@@ -83,35 +84,35 @@ export default function BookPage() {
         visual={<FloorPlanMorph className="h-full w-auto max-w-[640px]" />}
       />
 
-      <main className="relative z-10 bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20">
+      <main className="relative z-10 dark-atmosphere grain px-6 py-24 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[1100px]">
-        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-ink/75">
+        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-ice/75">
           CoE-EA&rsquo;s Bengaluru facility is available to incubatees, partners, and
           invited teams. Lab space, meeting infrastructure, and demo suites —
           all under one roof.
         </p>
 
-        {/* Facility cards */}
-        <div className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        {/* Facility cards — dark section */}
+        <div className="dark-atmosphere grain mt-16 border-t border-white/[0.06] pt-12">
+          <h2 className="mb-8 font-display text-[24px] text-white tablet:text-[30px]">
             Available spaces
           </h2>
-          <div className="space-y-0">
+          <div className="space-y-4">
             {FACILITIES.map((f) => (
               <div
                 key={f.id}
-                className="border-b border-brand-navy/10 py-8 first:border-t"
+                className="glass-panel py-8 px-8"
               >
                 <div className="grid grid-cols-1 gap-4 tablet:grid-cols-12 tablet:gap-8">
                   <div className="tablet:col-span-4">
-                    <p className="font-display text-[18px] font-semibold text-brand-navy">
+                    <p className="font-display text-[18px] font-semibold text-white">
                       {f.name}
                     </p>
                     <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink/60">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/60">
                         {f.area}
                       </span>
-                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink/60">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/60">
                         {f.capacity}
                       </span>
                     </div>
@@ -120,14 +121,14 @@ export default function BookPage() {
                     </p>
                   </div>
                   <div className="tablet:col-span-8">
-                    <p className="font-body text-[15px] leading-[1.7] text-ink/85">
+                    <p className="font-body text-[15px] leading-[1.7] text-brand-ice/85">
                       {f.description}
                     </p>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {f.useCases.map((u) => (
                         <span
                           key={u}
-                          className="border border-brand-navy/15 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-ink/60"
+                          className="glass-chip font-mono text-[10px] uppercase tracking-[0.12em] text-brand-ice/70"
                         >
                           {u}
                         </span>
@@ -141,8 +142,8 @@ export default function BookPage() {
         </div>
 
         {/* How to book */}
-        <div className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <div className="mt-16 border-t border-white/[0.06] pt-12">
+          <h2 className="mb-8 font-display text-[24px] text-white tablet:text-[30px]">
             How to book
           </h2>
           <div className="grid grid-cols-1 gap-6 tablet:grid-cols-3">
@@ -151,10 +152,10 @@ export default function BookPage() {
                 <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
                   {s.n}
                 </p>
-                <p className="mt-2 font-display text-[16px] text-brand-navy">
+                <p className="mt-2 font-display text-[16px] text-white">
                   {s.title}
                 </p>
-                <p className="mt-1 font-body text-[14px] leading-[1.6] text-ink/75">
+                <p className="mt-1 font-body text-[14px] leading-[1.6] text-brand-ice/75">
                   {s.body}
                 </p>
               </div>
@@ -163,11 +164,11 @@ export default function BookPage() {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <div className="mt-16 border-t border-white/[0.06] pt-12">
+          <h2 className="mb-2 font-display text-[24px] text-white tablet:text-[30px]">
             Make an enquiry
           </h2>
-          <p className="mb-6 max-w-[48ch] font-body text-[15px] leading-[1.7] text-ink/75">
+          <p className="mb-6 max-w-[48ch] font-body text-[15px] leading-[1.7] text-brand-ice/75">
             Online booking is coming soon. Until then, email the Centre directly
             with your requirement and preferred dates.
           </p>
@@ -177,16 +178,16 @@ export default function BookPage() {
           >
             Email blr.coeea@stpi.in →
           </a>
-          <p className="mt-4 font-body text-[13px] text-ink/50">
+          <p className="mt-4 font-body text-[13px] text-brand-ice/50">
             Include: facility name, preferred dates, number of attendees, and
             purpose. We respond within two working days.
           </p>
           <div className="mt-8 grid grid-cols-1 gap-4 tablet:grid-cols-2">
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60">
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/60">
                 Location
               </p>
-              <p className="mt-2 font-body text-[14px] leading-[1.6] text-ink/85">
+              <p className="mt-2 font-body text-[14px] leading-[1.6] text-brand-ice/85">
                 No. 4, 1st Floor, 31st Cross<br />
                 11th Main Road, 4th T Block<br />
                 Jayanagar, Bengaluru – 560 011<br />
@@ -194,10 +195,10 @@ export default function BookPage() {
               </p>
             </div>
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60">
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/60">
                 Pricing
               </p>
-              <p className="mt-2 font-body text-[14px] leading-[1.6] text-ink/85">
+              <p className="mt-2 font-body text-[14px] leading-[1.6] text-brand-ice/85">
                 Facility use is included for CoE-EA incubatees. Pricing for
                 external and partner bookings is available on request.
               </p>
@@ -206,11 +207,11 @@ export default function BookPage() {
         </div>
 
         {/* Access policy note */}
-        <div className="mt-12 border border-brand-navy/10 px-6 py-5">
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/50">
+        <div className="mt-12 glass-panel px-6 py-5">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/50">
             Access policy
           </p>
-          <p className="mt-2 font-body text-[13px] leading-[1.6] text-ink/60">
+          <p className="mt-2 font-body text-[13px] leading-[1.6] text-brand-ice/60">
             Facilities are primarily reserved for CoE-EA incubatees. External
             bookings are considered for partner organisations and invited teams
             at the discretion of the Centre management. All visitors must sign
@@ -218,7 +219,7 @@ export default function BookPage() {
           </p>
         </div>
 
-        <div className="mt-12 border-t border-brand-navy/15 pt-8">
+        <div className="mt-12 border-t border-white/[0.06] pt-8">
           <Link
             href="/"
             className="font-mono text-[12px] uppercase tracking-[0.18em] text-brand-cerulean hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"

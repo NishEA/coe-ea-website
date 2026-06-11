@@ -158,6 +158,7 @@ export default async function PortfolioPage() {
       {/* ── 1. Hero ── */}
       <DarkHero
         label="Startup Program"
+        badge="PORTFOLIO MAP · 40+ COMPANIES"
         title={
           <>
             Built inside <span className="text-amber">the machine.</span>
@@ -167,17 +168,17 @@ export default async function PortfolioPage() {
         visual={<PortfolioMorph className="h-full w-auto max-w-[600px]" />}
       />
 
-      {/* ── 2. What the programme gives you — CREAM ── */}
-      <section className="relative z-10 bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20">
+      {/* ── 2. What the programme gives you — DARK ── */}
+      <section className="dark-atmosphere grain relative z-10 px-6 py-24 tablet:px-12 desktop:px-20">
         <div className="mx-auto max-w-[1100px]">
           <div className="mb-14">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
               What the programme gives you
             </p>
-            <h2 className="mt-4 max-w-xl font-display text-[2rem] font-semibold leading-tight text-brand-navy tablet:text-[2.5rem]">
+            <h2 className="mt-4 max-w-xl font-display text-[2rem] font-semibold leading-tight text-white tablet:text-[2.5rem]">
               Everything a hardware-first startup actually needs.
             </h2>
-            <p className="mt-4 max-w-lg font-body text-[15px] leading-[1.65] text-ink/65">
+            <p className="mt-4 max-w-lg font-body text-[15px] leading-[1.65] text-brand-ice/65">
               12 months inside a joint STPI + KITS + HPE initiative — not a
               virtual incubator, a physical lab with real machines and real
               domain engineers.
@@ -187,10 +188,11 @@ export default async function PortfolioPage() {
             aria-label="Programme benefits"
             className="grid grid-cols-1 gap-4 tablet:grid-cols-2 desktop:grid-cols-3"
           >
-            {BENEFITS.map(b => (
+            {BENEFITS.map((b, i) => (
               <li
                 key={b.id}
-                className="flex flex-col gap-4 rounded-[6px] border border-brand-navy/10 bg-white p-8 transition hover:border-brand-navy/25 hover:bg-brand-navy/[0.02]"
+                className="glass-panel materialise flex flex-col gap-4 p-8 transition hover:brightness-110"
+                style={{ animationDelay: `${i * 0.06}s` }}
               >
                 <span
                   aria-hidden
@@ -203,10 +205,10 @@ export default async function PortfolioPage() {
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-cerulean">
                   {b.label}
                 </p>
-                <p className="font-display text-[1.3rem] font-semibold leading-snug text-brand-navy">
+                <p className="font-display text-[1.3rem] font-semibold leading-snug text-white">
                   {b.headline}
                 </p>
-                <p className="mt-auto font-body text-[13px] leading-[1.65] text-ink/65">
+                <p className="mt-auto font-body text-[13px] leading-[1.65] text-brand-ice/65">
                   {b.body}
                 </p>
               </li>
@@ -216,7 +218,7 @@ export default async function PortfolioPage() {
       </section>
 
       {/* ── 3. How selection works — DARK ── */}
-      <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-24 tablet:px-12 desktop:px-20">
+      <section className="dark-atmosphere grain relative z-10 border-t border-white/[0.06] px-6 py-24 tablet:px-12 desktop:px-20">
         <div className="mx-auto max-w-[1100px]">
           <div className="mb-14 grid grid-cols-1 gap-6 tablet:grid-cols-12">
             <div className="tablet:col-span-5">
@@ -257,7 +259,7 @@ export default async function PortfolioPage() {
                 detail: 'Selected startups receive an offer letter within six weeks of submission. Onboarding completes only after the equity agreement is signed. The Centre takes 1–3% equity, scaled to revenue, grants, or valuation at signing.',
               },
             ].map(s => (
-              <li key={s.step} className="flex flex-col gap-4 bg-bg-void p-8">
+              <li key={s.step} className="glass-panel flex flex-col gap-4 p-8">
                 <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
                   Step {s.step}
                 </span>
@@ -287,13 +289,13 @@ export default async function PortfolioPage() {
         </div>
       </section>
 
-      {/* ── 4. Eligibility — LIGHT ── */}
-      <section className="relative z-10 border-t border-brand-navy/10 bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20">
+      {/* ── 4. Eligibility — DARK ── */}
+      <section className="dark-atmosphere grain relative z-10 border-t border-white/[0.06] px-6 py-24 tablet:px-12 desktop:px-20">
         <div className="mx-auto max-w-[1100px]">
           <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
             Eligibility
           </p>
-          <h2 className="mb-10 font-display text-[1.75rem] font-semibold leading-tight text-brand-navy tablet:text-[2rem]">
+          <h2 className="mb-10 font-display text-[1.75rem] font-semibold leading-tight text-white tablet:text-[2rem]">
             Full eligibility criteria.
           </h2>
           <ul className="max-w-2xl space-y-3">
@@ -306,7 +308,7 @@ export default async function PortfolioPage() {
               'Karnataka registration is preferred but not mandatory. Outstation startups may be considered subject to willingness to operate from the Bengaluru Centre during the incubation term.',
               'DPIIT recognition is not required at application; it is encouraged before onboarding.',
             ].map(c => (
-              <li key={c} className="flex items-start gap-3 font-body text-[15px] leading-[1.6] text-ink/75">
+              <li key={c} className="flex items-start gap-3 font-body text-[15px] leading-[1.6] text-brand-ice/75">
                 <span aria-hidden className="font-mono text-brand-cerulean">→</span>
                 {c}
               </li>
@@ -315,18 +317,18 @@ export default async function PortfolioPage() {
         </div>
       </section>
 
-      {/* ── 5. The cohort carousel — LIGHT ── */}
-      <section className="relative z-10 border-t border-brand-navy/10 bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20">
+      {/* ── 5. The cohort carousel — DARK ── */}
+      <section className="dark-atmosphere grain relative z-10 border-t border-white/[0.06] px-6 py-24 tablet:px-12 desktop:px-20">
         <div className="mx-auto max-w-[1100px]">
           <div className="mb-10 flex flex-col gap-2 tablet:flex-row tablet:items-baseline tablet:justify-between">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
               The cohort
             </p>
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/40">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/40">
               13 partners · Bengaluru
             </p>
           </div>
-          <h2 className="mb-10 font-display text-[1.6rem] font-semibold leading-tight text-brand-navy tablet:text-[2rem]">
+          <h2 className="mb-10 font-display text-[1.6rem] font-semibold leading-tight text-white tablet:text-[2rem]">
             A selection from the cohort.
           </h2>
         </div>
@@ -340,10 +342,10 @@ export default async function PortfolioPage() {
                 <div
                   key={`${s.name}-${i}`}
                   role="listitem"
-                  className="flex w-52 flex-shrink-0 flex-col gap-3 rounded-[5px] border border-brand-navy/10 bg-white p-5 shadow-sm"
+                  className="glass-panel flex w-52 flex-shrink-0 flex-col gap-3 p-5"
                 >
                   <span aria-hidden className={`inline-block h-2 w-2 rounded-sm ${DOT_CLASS[cluster]}`} />
-                  <span className="font-display text-[0.95rem] font-semibold leading-tight text-brand-navy">
+                  <span className="font-display text-[0.95rem] font-semibold leading-tight text-white">
                     {s.name}
                   </span>
                   <div className="mt-auto flex items-baseline justify-between pt-3">
@@ -351,7 +353,7 @@ export default async function PortfolioPage() {
                       {s.domain}
                     </span>
                     <span className={`font-mono text-[9px] uppercase tracking-[0.1em] ${
-                      s.stage === 'Growth' ? 'text-amber/70' : 'text-ink/35'
+                      s.stage === 'Growth' ? 'text-amber/70' : 'text-brand-ice/35'
                     }`}>
                       {s.stage}
                     </span>
@@ -363,14 +365,14 @@ export default async function PortfolioPage() {
         </div>
 
         <div className="mx-auto mt-8 max-w-[1100px]">
-          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/40">
+          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-brand-ice/40">
             Full cohort of {startupCount} startups across all ten domains. Auto-scrolling · touch or hover to pause.
           </p>
         </div>
       </section>
 
       {/* ── 6. CTA — DARK ── */}
-      <section className="relative z-10 border-t border-white/[0.06] bg-bg-void px-6 py-24 tablet:px-12 desktop:px-20">
+      <section className="dark-atmosphere grain relative z-10 border-t border-white/[0.06] px-6 py-24 tablet:px-12 desktop:px-20">
         <div className="mx-auto max-w-[1100px]">
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
             Ready to apply

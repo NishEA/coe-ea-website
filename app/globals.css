@@ -454,6 +454,190 @@ body {
   40%            { opacity: 1;    transform: scale(1); }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   OBSERVATORY DESIGN SYSTEM — v2 (2026-06-11)
+   ═══════════════════════════════════════════════════════════════ */
+
+@theme {
+  --color-void-deep: #03061c;
+  --color-cerulean-hot: #3ddcff;
+  --color-cerulean-haze: #0a4a6e;
+  --color-amber-core: #ffd98a;
+  --color-signal-teal: #2dd4bf;
+}
+
+/* ── Atmosphere floor ── */
+.dark-atmosphere {
+  background: radial-gradient(
+    140% 100% at 50% 0%,
+    #0a1640 0%,
+    var(--color-bg-void) 45%,
+    var(--color-void-deep) 100%
+  );
+}
+
+/* ── Film grain overlay ── */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.038;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  mix-blend-mode: overlay;
+}
+
+/* ── Glass panel — 1px gradient border via mask-composite ── */
+.glass-panel {
+  position: relative;
+  background: linear-gradient(135deg, rgba(183,207,232,0.07) 0%, rgba(183,207,232,0.02) 55%);
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  border-radius: 14px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 4px 24px rgba(0,0,0,0.4),
+    0 1px 3px rgba(0,0,0,0.3);
+}
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(160deg, rgba(183,207,232,0.32) 0%, rgba(183,207,232,0.04) 40%, rgba(0,164,228,0.22) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+/* Amber lead-card variant */
+.glass-panel-lead {
+  background: linear-gradient(135deg, rgba(212,168,83,0.08) 0%, rgba(212,168,83,0.03) 55%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 4px 32px rgba(212,168,83,0.12),
+    0 1px 3px rgba(0,0,0,0.4);
+}
+.glass-panel-lead::before {
+  background: linear-gradient(160deg, rgba(255,217,138,0.45) 0%, rgba(212,168,83,0.06) 40%, rgba(212,168,83,0.28) 100%);
+}
+/* Glass shelf — horizontal strip */
+.glass-shelf {
+  position: relative;
+  background: linear-gradient(180deg, rgba(183,207,232,0.055) 0%, rgba(183,207,232,0.02) 100%);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  border-top: 1px solid rgba(183,207,232,0.10);
+  border-bottom: 1px solid rgba(183,207,232,0.05);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 8px 32px rgba(0,0,0,0.28);
+}
+/* Glass chip — badge/tag */
+.glass-chip {
+  position: relative;
+  background: rgba(183,207,232,0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 999px;
+  border: 1px solid rgba(183,207,232,0.14);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+/* ── IDLE BREATH — ambient float for glass cards ── */
+@keyframes idle-breath-a { 0%,100% { transform:translateY(0px); }    50% { transform:translateY(-3.5px); } }
+@keyframes idle-breath-b { 0%,100% { transform:translateY(-2px); }   50% { transform:translateY(2.5px); }  }
+@keyframes idle-breath-c { 0%,100% { transform:translateY(-1px); }   50% { transform:translateY(3px); }    }
+@keyframes idle-breath-d { 0%,100% { transform:translateY(1.5px); }  50% { transform:translateY(-2.5px); } }
+.idle-breath-a { animation: idle-breath-a 7.2s ease-in-out infinite; }
+.idle-breath-b { animation: idle-breath-b 8.5s ease-in-out infinite 1.4s; }
+.idle-breath-c { animation: idle-breath-c 9.1s ease-in-out infinite 2.8s; }
+.idle-breath-d { animation: idle-breath-d 7.8s ease-in-out infinite 0.7s; }
+
+/* ── SCAN — clip-path wipe reveal ── */
+@keyframes scan-wipe {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+.scan-reveal { animation: scan-wipe 0.65s cubic-bezier(0.16,1,0.3,1) both; }
+
+/* ── MATERIALISE — blur+lift entrance (CSS fallback) ── */
+@keyframes materialise {
+  from { opacity:0; transform:translateY(20px) scale(0.97); filter:blur(10px); }
+  to   { opacity:1; transform:translateY(0) scale(1);       filter:blur(0px);  }
+}
+.materialise { animation: materialise 0.9s cubic-bezier(0.16,1,0.3,1) both; }
+
+/* ── Sonar ring — op-dot upgrade ── */
+.op-dot { position: relative; }
+.op-dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid var(--color-operational);
+  opacity: 0;
+  animation: sonar-ring 2.4s ease-out infinite;
+}
+@keyframes sonar-ring {
+  0%   { transform:scale(1);   opacity:0.55; }
+  100% { transform:scale(2.8); opacity:0;    }
+}
+
+/* ── Blueprint grid — TheInstrument ── */
+.blueprint-grid {
+  background-image:
+    linear-gradient(rgba(14,45,122,0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,45,122,0.055) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* ── Glow helpers ── */
+.glow-cerulean { box-shadow: 0 0 0 1px rgba(0,164,228,0.18), 0 0 24px rgba(0,164,228,0.10), 0 0 80px rgba(0,164,228,0.04); }
+.glow-amber    { box-shadow: 0 0 0 1px rgba(212,168,83,0.22), 0 0 24px rgba(212,168,83,0.14), 0 0 80px rgba(212,168,83,0.05); }
+.text-glow-amber    { text-shadow: 0 0 28px rgba(212,168,83,0.45), 0 0 56px rgba(212,168,83,0.18); }
+.text-glow-cerulean { text-shadow: 0 0 24px rgba(0,164,228,0.5),  0 0 48px rgba(0,164,228,0.2); }
+
+/* ── Holographic conic sheen ── */
+@property --holo-angle { syntax:'<angle>'; inherits:false; initial-value:0deg; }
+@keyframes holo-spin { to { --holo-angle: 360deg; } }
+.holo-sheen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(from var(--holo-angle), transparent 70%, rgba(61,220,255,0.10) 83%, rgba(255,217,138,0.08) 88%, transparent 94%);
+  animation: holo-spin 9s linear infinite;
+  pointer-events: none;
+  mix-blend-mode: plus-lighter;
+}
+
+/* ── Scan-line field focus (TheApplication) ── */
+.field-scan-wrap {
+  position: relative;
+}
+.field-scan-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  height: 2px;
+  width: 0;
+  background: var(--color-cerulean-hot);
+  box-shadow: 0 0 12px rgba(61,220,255,0.6);
+  transition: width 0.3s cubic-bezier(0.16,1,0.3,1), left 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.field-scan-wrap:focus-within::after {
+  width: 100%;
+  left: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .app-frame.frame-enter,
   .word-rise,
@@ -463,14 +647,28 @@ body {
   .waveform span,
   .dot-anim,
   .op-dot,
+  .op-dot::after,
   .splash-logo,
-  .splash-dot {
+  .splash-dot,
+  .idle-breath-a,
+  .idle-breath-b,
+  .idle-breath-c,
+  .idle-breath-d,
+  .scan-reveal,
+  .materialise,
+  .holo-sheen::after {
     animation: none !important;
+    transition: none !important;
   }
   .word-rise,
   .fade-up,
-  .cube-materialise {
+  .cube-materialise,
+  .materialise {
     opacity: 1;
     transform: none;
+    filter: none;
+  }
+  .scan-reveal {
+    clip-path: none;
   }
 }

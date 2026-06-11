@@ -1,9 +1,17 @@
 'use client'
 
 import { useState } from 'react'
+import dynamic from 'next/dynamic'
 import { WaveformLoader } from '@/components/ui/WaveformLoader'
 import { OrbitCanvas } from '@/components/ui/OrbitCanvas'
-import { InstrumentCubes } from '@/components/ui/InstrumentCubes'
+
+const ParticleField = dynamic(
+  () => import('@/components/three/ParticleField').then(m => ({ default: m.ParticleField })),
+  {
+    ssr: false,
+    loading: () => <OrbitCanvas animate={false} className="absolute inset-0 h-full w-full" />,
+  },
+)
 
 const HEADLINE: { text: string; amber?: boolean; br?: boolean }[] = [
   { text: 'Industry' },
@@ -14,6 +22,15 @@ const HEADLINE: { text: string; amber?: boolean; br?: boolean }[] = [
   { text: 'signal.', amber: true },
 ]
 
+// Pre-compute per-character stagger offsets across all headline words.
+let _cumIdx = 0
+const HEADLINE_CHARS = HEADLINE.map(w => {
+  const chars = w.text.split('')
+  const startIdx = _cumIdx
+  _cumIdx += chars.length
+  return { ...w, chars, startIdx }
+})
+
 export function TheDiagnosis() {
   const [ready, setReady] = useState(false)
 
@@ -21,12 +38,28 @@ export function TheDiagnosis() {
 
   return (
     <>
+      <style>{`
+        .char-rise {
+          display: inline-block;
+          opacity: 0;
+          clip-path: inset(0 0 100% 0);
+          transform: translateY(0.4em);
+          animation: char-rise 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        @keyframes char-rise {
+          to { opacity: 1; clip-path: inset(0 0 0% 0); transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .char-rise { animation: none; opacity: 1; clip-path: none; transform: none; }
+        }
+      `}</style>
+
       <WaveformLoader onComplete={() => setReady(true)} />
 
       <section
         id="diagnosis"
         aria-label="The Diagnosis — CoE-EA hero"
-        className="relative w-full overflow-hidden"
+        className="dark-atmosphere grain relative w-full overflow-hidden"
       >
         <span aria-hidden className="corner-bracket left-3 top-3 border-l border-t" />
         <span aria-hidden className="corner-bracket right-3 top-3 border-r border-t" />
@@ -43,14 +76,20 @@ export function TheDiagnosis() {
             </p>
 
             <h1 className="[text-wrap:balance] font-display text-[clamp(38px,4.5vw,64px)] font-bold leading-[1.06] tracking-[-0.025em] text-white">
-              {HEADLINE.map((w, i) => (
-                <span key={i}>
-                  <span
-                    className="word-rise"
-                    style={d(ready ? 0.35 + i * 0.08 : 99)}
-                  >
-                    <span className={w.amber ? 'text-amber' : undefined}>{w.text}</span>
-                  </span>
+              {HEADLINE_CHARS.map((w, wi) => (
+                <span key={wi}>
+                  {w.chars.map((ch, ci) => (
+                    <span
+                      key={ci}
+                      className={`char-rise${w.amber ? ' text-amber' : ''}`}
+                      style={{
+                        ...d(ready ? 0.35 + (w.startIdx + ci) * 0.035 : 99),
+                        ...(w.amber ? { textShadow: '0 0 28px rgba(212,168,83,0.45)' } : {}),
+                      }}
+                    >
+                      {ch}
+                    </span>
+                  ))}
                   {w.br ? <br /> : ' '}
                 </span>
               ))}
@@ -98,16 +137,13 @@ export function TheDiagnosis() {
             </ul>
           </div>
 
-          {/* ── CENTRE — orbit canvas + cube cluster ── */}
-          <div className="relative z-[5] mx-auto flex h-[340px] w-full items-center justify-center desktop:h-[540px]">
-            <OrbitCanvas
+          {/* ── RIGHT — cinematic particle field ── */}
+          <div className="relative z-[5] h-[340px] w-full desktop:h-full desktop:min-h-[540px]">
+            <ParticleField
               animate={ready}
               className="absolute inset-0 h-full w-full"
             />
-            <div className="cube-materialise" style={d(ready ? 1.2 : 99)}>
-              <InstrumentCubes />
-            </div>
-            <div className="tagline-vertical absolute right-0 top-1/2 -translate-y-1/2 font-mono text-[9px] uppercase tracking-[0.16em] text-white/20">
+            <div className="tagline-vertical pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 font-mono text-[9px] uppercase tracking-[0.16em] text-white/20">
               measure · diagnose · augment
             </div>
           </div>

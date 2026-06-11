@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { motion } from 'motion/react'
 import { DomainMarquee } from '@/components/ui/DomainMarquee'
 import { LenisProvider } from '@/components/motion/LenisProvider'
 
@@ -13,6 +14,14 @@ const NAV = [
   { href: '/book', label: 'Book' },
   { href: '/governance', label: 'Governance' },
   { href: '/events', label: 'Events' },
+]
+
+const NAV_WITH_META = [
+  { href: '/', label: 'Home', index: '01', status: 'Active' },
+  { href: '/startup-program', label: 'Startup Program', index: '02', status: '40+ Companies' },
+  { href: '/book', label: 'Book', index: '03', status: 'Available' },
+  { href: '/governance', label: 'Governance', index: '04', status: 'STPI · KITS' },
+  { href: '/events', label: 'Events', index: '05', status: 'Upcoming' },
 ]
 
 export default function SiteLayout({
@@ -119,100 +128,115 @@ export default function SiteLayout({
 
       <div className="grid-bg" />
 
-      {/* ── Pill nav ── */}
-      <header className={`z-30 flex items-center justify-between gap-4 px-6 tablet:px-9 transition-all duration-300 ${scrolled ? 'sticky top-0 backdrop-blur-sm bg-bg-void/90 border-b border-white/[0.08] py-4' : 'relative py-5'}`}>
-        <Link
-          href="/"
-          className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
-        >
-          {/* Frosted glass frame — matches partner strip */}
-          <div className="flex items-center gap-3 rounded-sm border border-brand-ice/10 bg-brand-ice/5 px-4 py-2.5">
-            <Image
-              src="/logos/coe-ea.png"
-              alt="CoE-EA — Centre of Excellence on Efficiency Augmentation"
-              width={150}
-              height={44}
-              className="h-9 w-auto object-contain brightness-0 invert"
-              priority
-            />
-            <span aria-hidden className="hidden h-6 w-px bg-brand-ice/15 tablet:block" />
-            <div aria-hidden className="hidden rounded bg-white px-2 py-1 tablet:block">
-              <Image
-                src="/logos/stpi.png"
-                alt="STPI"
-                width={70}
-                height={26}
-                className="h-6 w-auto object-contain"
-                priority
-              />
-            </div>
-            <span aria-hidden className="hidden h-6 w-px bg-brand-ice/15 tablet:block" />
-            <div aria-hidden className="hidden rounded bg-white px-2 py-1 tablet:block">
-              <Image
-                src="/logos/kits.jpeg"
-                alt="KITS — Karnataka Innovation & Technology Society"
-                width={70}
-                height={26}
-                className="h-6 w-auto object-contain"
-                priority
-              />
-            </div>
-          </div>
-        </Link>
+      {/* ── Observatory glass capsule nav ── */}
+      <header className={`z-30 flex items-center justify-between gap-4 px-4 tablet:px-6 transition-all duration-300 ${scrolled ? 'fixed top-3 left-3 right-3' : 'relative py-4'}`}>
+        <div className={`glass-shelf w-full rounded-2xl flex items-center justify-between gap-4 px-4 py-2.5 tablet:px-5 transition-all duration-500 ${scrolled ? 'py-2' : 'py-3'}`}>
 
-        {/* Desktop nav */}
-        <nav aria-label="Primary" className="hidden items-center gap-1.5 tablet:flex">
-          {NAV.map(item => (
+          {/* Logo */}
+          <Link
+            href="/"
+            className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean focus-visible:ring-offset-1 focus-visible:ring-offset-transparent rounded-sm"
+          >
+            {/* Frosted glass frame — matches partner strip */}
+            <div className="flex items-center gap-3 rounded-sm border border-brand-ice/10 bg-brand-ice/5 px-4 py-2.5">
+              <Image
+                src="/logos/coe-ea.png"
+                alt="CoE-EA — Centre of Excellence on Efficiency Augmentation"
+                width={150}
+                height={44}
+                className="h-9 w-auto object-contain brightness-0 invert"
+                priority
+              />
+              <span aria-hidden className="hidden h-6 w-px bg-brand-ice/15 tablet:block" />
+              <div aria-hidden className="hidden rounded bg-white px-2 py-1 tablet:block">
+                <Image
+                  src="/logos/stpi.png"
+                  alt="STPI"
+                  width={70}
+                  height={26}
+                  className="h-6 w-auto object-contain"
+                  priority
+                />
+              </div>
+              <span aria-hidden className="hidden h-6 w-px bg-brand-ice/15 tablet:block" />
+              <div aria-hidden className="hidden rounded bg-white px-2 py-1 tablet:block">
+                <Image
+                  src="/logos/kits.jpeg"
+                  alt="KITS — Karnataka Innovation & Technology Society"
+                  width={70}
+                  height={26}
+                  className="h-6 w-auto object-contain"
+                  priority
+                />
+              </div>
+            </div>
+          </Link>
+
+          {/* Desktop nav */}
+          <nav aria-label="Primary" className="hidden items-center gap-1 tablet:flex">
+            {NAV.map(item => (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                className={`font-mono text-[11px] uppercase tracking-[0.11em] cursor-pointer px-3.5 py-2 rounded-full transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean ${
+                  isActive(item.href) ? 'text-white' : 'text-brand-ice/60 hover:text-white'
+                }`}
+              >
+                {isActive(item.href) && (
+                  <motion.span
+                    layoutId="nav-active-dot"
+                    className="absolute inset-0 rounded-full bg-white/10"
+                    transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+                  />
+                )}
+                <span className="relative z-10">{item.label}</span>
+              </Link>
+            ))}
             <Link
-              key={item.href}
-              href={item.href}
-              aria-current={isActive(item.href) ? 'page' : undefined}
-              className={`pill ${isActive(item.href) ? 'pill-active' : 'pill-ghost'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean`}
+              href="/apply"
+              aria-current={isActive('/apply') ? 'page' : undefined}
+              className="pill pill-amber focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean focus-visible:ring-offset-2"
             >
-              {item.label}
+              Apply →
             </Link>
-          ))}
-          <Link
-            href="/apply"
-            aria-current={isActive('/apply') ? 'page' : undefined}
-            className="pill pill-amber focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean focus-visible:ring-offset-2"
-          >
-            Apply →
-          </Link>
-        </nav>
+          </nav>
 
-        {/* Mobile: Apply pill + hamburger */}
-        <div className="flex items-center gap-2 tablet:hidden">
-          <Link
-            href="/apply"
-            className="pill pill-amber focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
-          >
-            Apply →
-          </Link>
-          <button
-            ref={hamburgerRef}
-            type="button"
-            aria-label={drawerOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={drawerOpen}
-            aria-controls="mobile-nav"
-            onClick={() => setDrawerOpen(v => !v)}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition hover:border-white/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
-          >
-            {drawerOpen ? '✕' : '☰'}
-          </button>
+          {/* Mobile: Apply pill + hamburger */}
+          <div className="flex items-center gap-2 tablet:hidden">
+            <Link
+              href="/apply"
+              className="pill pill-amber focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
+            >
+              Apply →
+            </Link>
+            <button
+              ref={hamburgerRef}
+              type="button"
+              aria-label={drawerOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={drawerOpen}
+              aria-controls="mobile-nav"
+              onClick={() => setDrawerOpen(v => !v)}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition hover:border-white/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
+            >
+              {drawerOpen ? '✕' : '☰'}
+            </button>
+          </div>
+
         </div>
       </header>
 
-      {/* Mobile drawer — slides in below header, hidden on tablet+ */}
+      {/* Mobile drawer — Observatory overlay */}
       <nav
         id="mobile-nav"
         aria-label="Mobile navigation"
         aria-hidden={!drawerOpen}
-        className={`fixed inset-x-0 top-0 bottom-0 z-[29] overflow-y-auto overscroll-contain bg-bg-void pt-20 backdrop-blur-md tablet:hidden transition-[opacity,visibility] duration-200 ease-out ${
+        className={`fixed inset-x-0 top-0 bottom-0 z-[29] overflow-y-auto overscroll-contain pt-24 backdrop-blur-xl tablet:hidden transition-[opacity,visibility] duration-300 ease-out ${
           drawerOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
+        style={{ background: 'linear-gradient(180deg, rgba(6,13,46,0.97) 0%, rgba(3,6,28,0.99) 100%)' }}
       >
-        {NAV.map((item, i) => (
+        {NAV_WITH_META.map((item, i) => (
           <Link
             key={item.href}
             href={item.href}
@@ -220,13 +244,15 @@ export default function SiteLayout({
             onClick={closeDrawer}
             tabIndex={drawerOpen ? undefined : -1}
             aria-current={isActive(item.href) ? 'page' : undefined}
-            className={`block px-6 py-4 font-mono text-[11px] uppercase tracking-[0.14em] transition ${
-              isActive(item.href)
-                ? 'text-white'
-                : 'text-white/60 hover:text-white'
+            className={`flex items-baseline justify-between px-6 py-5 border-b border-brand-ice/[0.06] font-mono text-[13px] uppercase tracking-[0.12em] transition ${
+              isActive(item.href) ? 'text-white' : 'text-brand-ice/50 hover:text-white'
             } focus-visible:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-brand-cerulean`}
           >
-            {item.label}
+            <span className="flex items-baseline gap-4">
+              <span className="text-[10px] text-brand-ice/25">{item.index}</span>
+              {item.label}
+            </span>
+            <span className="glass-chip px-2 py-0.5 text-[9px] text-brand-cerulean/70 uppercase tracking-[0.14em]">{item.status}</span>
           </Link>
         ))}
       </nav>

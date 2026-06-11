@@ -50,6 +50,7 @@ export default function EventsPage() {
     <>
       <DarkHero
         label="Open to engineers · researchers · startup founders"
+        badge="SIGNAL EVENTS · COHORT CALENDAR"
         title={
           <>
             Where signal meets <span className="text-amber">founder.</span>
@@ -59,9 +60,9 @@ export default function EventsPage() {
         visual={<TimelineMorph className="h-auto w-auto max-w-[420px]" />}
       />
 
-      <main className="relative z-10 bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20">
+      <main className="relative z-10 dark-atmosphere grain px-6 py-24 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[900px]">
-        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-ink/75">
+        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-ice/75">
           CoE-EA runs hackathons, ideathons, workshops, and industrial visits
           throughout the year — connecting founders with domain problems and
           partner infrastructure.
@@ -69,24 +70,24 @@ export default function EventsPage() {
 
         {/* Event types */}
         <Reveal>
-        <div className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <div className="dark-atmosphere grain mt-16 border-t border-white/[0.06] pt-12">
+          <h2 className="mb-8 font-display text-[24px] text-white tablet:text-[30px]">
             What we run
           </h2>
-          <div className="grid grid-cols-1 gap-px border border-brand-navy/10 bg-brand-navy/10 tablet:grid-cols-2">
+          <div className="grid grid-cols-1 gap-px border border-white/[0.08] bg-white/[0.06] tablet:grid-cols-2">
             {EVENT_TYPES.map((e, i) => (
               <Reveal key={e.id} delay={i * 0.08}>
-              <div className="bg-bg-paper p-8">
+              <div className="glass-panel materialise p-8" style={{ animationDelay: `${i * 0.08}s` }}>
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-cerulean">
                   {e.label}
                 </p>
-                <p className="mt-2 font-display text-[18px] text-brand-navy">
+                <p className="mt-2 font-display text-[18px] text-white">
                   {e.tagline}
                 </p>
-                <p className="mt-2 font-body text-[14px] leading-[1.6] text-ink/75">
+                <p className="mt-2 font-body text-[14px] leading-[1.6] text-brand-ice/75">
                   {e.description}
                 </p>
-                <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.13em] text-brand-navy/40">
+                <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.13em] text-brand-ice/40">
                   {e.who}
                 </p>
               </div>
@@ -98,16 +99,16 @@ export default function EventsPage() {
 
         {/* Current schedule — empty state */}
         <Reveal delay={0.1}>
-        <div className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <div className="mt-16 border-t border-white/[0.06] pt-12">
+          <h2 className="mb-8 font-display text-[24px] text-white tablet:text-[30px]">
             Upcoming events
           </h2>
-          <div className="flex h-56 w-full items-center justify-center border border-dashed border-brand-navy/20 bg-bg-paper px-8 py-10 text-center">
+          <div className="flex h-56 w-full items-center justify-center border border-dashed border-white/[0.12] px-8 py-10 text-center">
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/40">
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/40">
                 No events scheduled yet
               </p>
-              <p className="mt-2 font-body text-[13px] leading-[1.55] text-ink/35">
+              <p className="mt-2 font-body text-[13px] leading-[1.55] text-brand-ice/35">
                 Events for the current cohort cycle will appear here when announced.
               </p>
             </div>
@@ -117,11 +118,11 @@ export default function EventsPage() {
 
         {/* Stay informed */}
         <Reveal delay={0.15}>
-        <div className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <div className="mt-16 border-t border-white/[0.06] pt-12">
+          <h2 className="mb-2 font-display text-[24px] text-white tablet:text-[30px]">
             Stay informed
           </h2>
-          <p className="mb-6 max-w-[48ch] font-body text-[15px] leading-[1.7] text-ink/75">
+          <p className="mb-6 max-w-[48ch] font-body text-[15px] leading-[1.7] text-brand-ice/75">
             Events are announced through STPI&rsquo;s official channels. To express
             interest in participating or hosting an event at the Centre, reach
             out directly.
@@ -145,7 +146,7 @@ export default function EventsPage() {
         </div>
         </Reveal>
 
-        <div className="mt-16 border-t border-brand-navy/15 pt-8">
+        <div className="mt-16 border-t border-white/[0.06] pt-8">
           <Link
             href="/"
             className="font-mono text-[12px] uppercase tracking-[0.18em] text-brand-cerulean hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"

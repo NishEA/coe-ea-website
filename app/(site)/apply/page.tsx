@@ -17,9 +17,10 @@ export default async function ApplyPage() {
   const benefits = sanityBenefits.length > 0 ? sanityBenefits : APPLY_BENEFITS
 
   return (
-    <>
+    <div className="dark-atmosphere grain bg-bg-void">
       <DarkHero
         label="Cohort 3 · Applications open"
+        badge="COHORT 3 · OPEN NOW"
         title="Apply to the next cohort."
         subhead="10 Industry 4.0 domains · 12-month programme · 1–3% equity on signing · Bengaluru"
         align="left"
@@ -29,26 +30,26 @@ export default async function ApplyPage() {
       <section
         id="apply"
         aria-label="Apply"
-        className="relative z-10 bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20"
+        className="relative z-10 px-6 py-24 tablet:px-12 desktop:px-20"
       >
         <div className="mx-auto max-w-[1100px]">
-          {/* Benefit strip — amber markers */}
+          {/* Benefit strip — amber markers with glass-chip values */}
           <ul
             aria-label="What you get"
-            className="mb-20 grid grid-cols-1 gap-x-8 gap-y-8 border-y border-brand-navy/15 py-10 tablet:grid-cols-3 desktop:grid-cols-5"
+            className="mb-20 grid grid-cols-1 gap-x-8 gap-y-8 border-y border-white/[0.08] py-10 tablet:grid-cols-3 desktop:grid-cols-5"
           >
             {benefits.map(b => (
               <li key={b.label} className="flex flex-col gap-1.5">
                 <span className="mb-1 flex items-center gap-2">
                   <span aria-hidden className="inline-block h-1.5 w-1.5 flex-shrink-0 rounded-sm bg-amber" />
-                  <span className="font-display text-[1.35rem] font-bold leading-none text-brand-navy">
+                  <span className="glass-chip font-display text-[1.1rem] font-bold leading-none text-amber">
                     {b.value}
                   </span>
                 </span>
-                <span className="font-mono text-[12px] uppercase tracking-[0.14em] text-ink/60">
+                <span className="font-mono text-[12px] uppercase tracking-[0.14em] text-brand-ice/60">
                   {b.label}
                 </span>
-                <span className="font-body text-[14px] leading-[1.5] text-ink/50">
+                <span className="font-body text-[14px] leading-[1.5] text-brand-ice/50">
                   {b.detail}
                 </span>
               </li>
@@ -56,18 +57,20 @@ export default async function ApplyPage() {
           </ul>
 
           <div className="mx-auto max-w-2xl">
-            <Suspense>
-              <ApplyForm />
-            </Suspense>
+            <div className="glass-panel p-8 tablet:p-12">
+              <Suspense>
+                <ApplyForm />
+              </Suspense>
+            </div>
           </div>
 
-          <p className="mt-12 max-w-xl font-mono text-[11px] uppercase tracking-[0.16em] text-ink/50">
+          <p className="mt-12 max-w-xl font-mono text-[11px] uppercase tracking-[0.16em] text-brand-ice/40">
             The up to ₹25L seed grant is funded by STPI · KITS · HPE. Disbursement is
             milestone-gated. The Centre takes 1–3% equity on signing, scaled to your
             revenue, grants received, or valuation at time of onboarding.
           </p>
         </div>
       </section>
-    </>
+    </div>
   )
 }

@@ -169,6 +169,14 @@ const REPORTING = [
   },
 ];
 
+// Breath animation cycle: distribute a/b/c/d across members
+const BREATH_CLASSES = [
+  'idle-breath-a',
+  'idle-breath-b',
+  'idle-breath-c',
+  'idle-breath-d',
+] as const
+
 export default async function GovernancePage() {
   const [sanityGC, sanityPMG] = await Promise.all([
     getTeamByGroup("governing-council"),
@@ -180,6 +188,7 @@ export default async function GovernancePage() {
     <>
       <DarkHero
         label="Tripartite structure · STPI · KITS · HPE"
+        badge="OVERSIGHT STRUCTURE · STPI · KITS"
         title={
           <>
             How the instrument is <span className="text-amber">governed.</span>
@@ -188,35 +197,35 @@ export default async function GovernancePage() {
         visual={<HierarchyMorph className="h-full w-auto max-w-[520px]" />}
       />
 
-      <main className="relative z-10 bg-bg-paper px-6 py-24 tablet:px-12 desktop:px-20">
+      <main className="relative z-10 dark-atmosphere grain px-6 py-24 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[900px]">
-        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-ink/75">
+        <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-ice/75">
           CoE-EA operates under a formal governance framework defined by KITS,
           STPI, and HPE. This page is for funding bodies, programme managers,
           and RTI / audit stakeholders.
         </p>
 
         {/* Oversight structure */}
-        <section aria-labelledby="s-oversight" className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 id="s-oversight" className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-oversight" className="mt-16 border-t border-white/[0.06] pt-12">
+          <h2 id="s-oversight" className="mb-8 font-display text-[24px] text-white tablet:text-[30px]">
             Oversight structure
           </h2>
           <div className="space-y-6">
             {OVERSIGHT.map((o) => (
               <div
                 key={o.role}
-                className="grid grid-cols-1 gap-2 border-b border-brand-navy/10 pb-6 tablet:grid-cols-12 tablet:gap-8"
+                className="grid grid-cols-1 gap-2 border-b border-white/[0.06] pb-6 tablet:grid-cols-12 tablet:gap-8"
               >
                 <div className="tablet:col-span-3">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/60">
                     {o.role}
                   </p>
                 </div>
                 <div className="tablet:col-span-9">
-                  <p className="font-body text-[15px] font-medium text-brand-navy">
+                  <p className="font-body text-[15px] font-medium text-white">
                     {o.body}
                   </p>
-                  <p className="mt-1 font-body text-[14px] leading-[1.6] text-ink/75">
+                  <p className="mt-1 font-body text-[14px] leading-[1.6] text-brand-ice/75">
                     {o.detail}
                   </p>
                 </div>
@@ -225,26 +234,29 @@ export default async function GovernancePage() {
           </div>
         </section>
 
-        {/* Governing Council */}
-        <section aria-labelledby="s-gc" className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 id="s-gc" className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        {/* Governing Council — dark section with glass cards on mobile */}
+        <section aria-labelledby="s-gc" className="dark-atmosphere grain mt-16 border-t border-white/[0.06] pt-12">
+          <h2 id="s-gc" className="mb-2 font-display text-[24px] text-white tablet:text-[30px]">
             Governing Council
           </h2>
-          <p className="mb-8 font-body text-[15px] leading-[1.7] text-ink/75">
+          <p className="mb-8 font-body text-[15px] leading-[1.7] text-brand-ice/75">
             The Apex Body of CoE-EA. The Governing Council sets the strategic
             direction of the Centre, approves the annual programme plan, and
             reviews overall performance. It is chaired by the Director General,
             STPI.
           </p>
-          {/* Mobile: stacked cards */}
-          <div className="divide-y divide-brand-navy/10 tablet:hidden">
-            {gc.map((m) => (
-              <div key={m.name + m.role} className="py-5">
-                <p className="font-body text-[15px] font-medium text-brand-navy">{m.name}</p>
-                <p className="mt-1 font-body text-[13px] leading-[1.5] text-ink/85">{m.designation}</p>
+          {/* Mobile: glass cards */}
+          <div className="space-y-3 tablet:hidden">
+            {gc.map((m, idx) => (
+              <div
+                key={m.name + m.role}
+                className={`glass-panel p-5 ${BREATH_CLASSES[idx % BREATH_CLASSES.length]}`}
+              >
+                <p className="font-body text-[15px] font-medium text-white">{m.name}</p>
+                <p className="mt-1 font-body text-[13px] leading-[1.5] text-brand-ice/85">{m.designation}</p>
                 <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-cerulean">
                   {m.role}
-                  {'note' in m && m.note && <span className="ml-1 normal-case tracking-normal text-ink/50">({m.note as string})</span>}
+                  {'note' in m && m.note && <span className="ml-1 normal-case tracking-normal text-brand-ice/50">({m.note as string})</span>}
                 </p>
               </div>
             ))}
@@ -253,31 +265,31 @@ export default async function GovernancePage() {
           <div className="hidden overflow-x-auto tablet:block">
             <table className="w-full border-collapse" aria-label="Governing Council members">
               <thead>
-                <tr className="border-b border-brand-navy/15">
+                <tr className="border-b border-white/[0.12]">
                   {["Name", "Designation", "Role"].map((h) => (
                     <th
                       key={h}
                       scope="col"
-                      className="pb-3 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60"
+                      className="pb-3 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/50"
                     >
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-brand-navy/10">
+              <tbody className="divide-y divide-white/[0.06]">
                 {gc.map((m) => (
                   <tr key={m.name + m.role}>
-                    <td className="py-4 pr-6 font-body text-[14px] font-medium text-brand-navy">
+                    <td className="py-4 pr-6 font-body text-[14px] font-medium text-white">
                       {m.name}
                     </td>
-                    <td className="py-4 pr-6 font-body text-[14px] leading-[1.5] text-ink/85">
+                    <td className="py-4 pr-6 font-body text-[14px] leading-[1.5] text-brand-ice/85">
                       {m.designation}
                     </td>
                     <td className="py-4 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-cerulean">
                       {m.role}
                       {'note' in m && m.note && (
-                        <span className="ml-2 normal-case tracking-normal text-ink/50">
+                        <span className="ml-2 normal-case tracking-normal text-brand-ice/50">
                           ({m.note as string})
                         </span>
                       )}
@@ -289,21 +301,24 @@ export default async function GovernancePage() {
           </div>
         </section>
 
-        {/* PMG */}
-        <section aria-labelledby="s-pmg" className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 id="s-pmg" className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        {/* PMG — dark section with glass cards on mobile */}
+        <section aria-labelledby="s-pmg" className="dark-atmosphere grain mt-16 border-t border-white/[0.06] pt-12">
+          <h2 id="s-pmg" className="mb-2 font-display text-[24px] text-white tablet:text-[30px]">
             Project Management Group
           </h2>
-          <p className="mb-8 font-body text-[15px] leading-[1.7] text-ink/75">
+          <p className="mb-8 font-body text-[15px] leading-[1.7] text-brand-ice/75">
             The PMG is the governing body responsible for programme oversight,
             cohort selection, milestone review, and strategic direction of CoE-EA.
           </p>
-          {/* Mobile: stacked cards */}
-          <div className="divide-y divide-brand-navy/10 tablet:hidden">
-            {pmg.map((m) => (
-              <div key={m.name + m.role} className="py-5">
-                <p className="font-body text-[15px] font-medium text-brand-navy">{m.name}</p>
-                <p className="mt-1 font-body text-[13px] leading-[1.5] text-ink/85">{m.designation}</p>
+          {/* Mobile: glass cards */}
+          <div className="space-y-3 tablet:hidden">
+            {pmg.map((m, idx) => (
+              <div
+                key={m.name + m.role}
+                className={`glass-panel p-5 ${BREATH_CLASSES[idx % BREATH_CLASSES.length]}`}
+              >
+                <p className="font-body text-[15px] font-medium text-white">{m.name}</p>
+                <p className="mt-1 font-body text-[13px] leading-[1.5] text-brand-ice/85">{m.designation}</p>
                 <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-cerulean">{m.role}</p>
               </div>
             ))}
@@ -312,25 +327,25 @@ export default async function GovernancePage() {
           <div className="hidden overflow-x-auto tablet:block">
             <table className="w-full border-collapse" aria-label="PMG members">
               <thead>
-                <tr className="border-b border-brand-navy/15">
+                <tr className="border-b border-white/[0.12]">
                   {["Name", "Designation", "Role"].map((h) => (
                     <th
                       key={h}
                       scope="col"
-                      className="pb-3 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60"
+                      className="pb-3 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/50"
                     >
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-brand-navy/10">
+              <tbody className="divide-y divide-white/[0.06]">
                 {pmg.map((m) => (
                   <tr key={m.name + m.role}>
-                    <td className="py-4 pr-6 font-body text-[14px] font-medium text-brand-navy">
+                    <td className="py-4 pr-6 font-body text-[14px] font-medium text-white">
                       {m.name}
                     </td>
-                    <td className="py-4 pr-6 font-body text-[14px] leading-[1.5] text-ink/85">
+                    <td className="py-4 pr-6 font-body text-[14px] leading-[1.5] text-brand-ice/85">
                       {m.designation}
                     </td>
                     <td className="py-4 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-cerulean">
@@ -344,35 +359,35 @@ export default async function GovernancePage() {
         </section>
 
         {/* Reporting cadence */}
-        <section aria-labelledby="s-reporting" className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 id="s-reporting" className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-reporting" className="mt-16 border-t border-white/[0.06] pt-12">
+          <h2 id="s-reporting" className="mb-8 font-display text-[24px] text-white tablet:text-[30px]">
             Reporting cadence
           </h2>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse" aria-label="Reporting cadence">
               <thead>
-                <tr className="border-b border-brand-navy/15">
+                <tr className="border-b border-white/[0.12]">
                   {["Cadence", "Audience", "Content"].map((h) => (
                     <th
                       key={h}
                       scope="col"
-                      className="pb-3 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60"
+                      className="pb-3 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/50"
                     >
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-brand-navy/10">
+              <tbody className="divide-y divide-white/[0.06]">
                 {REPORTING.map((r) => (
                   <tr key={r.cadence}>
                     <td className="py-4 pr-6 font-mono text-[12px] uppercase tracking-[0.14em] text-brand-cerulean">
                       {r.cadence}
                     </td>
-                    <td className="py-4 pr-6 font-body text-[14px] text-brand-navy">
+                    <td className="py-4 pr-6 font-body text-[14px] text-white">
                       {r.audience}
                     </td>
-                    <td className="py-4 font-body text-[14px] leading-[1.6] text-ink/75">
+                    <td className="py-4 font-body text-[14px] leading-[1.6] text-brand-ice/75">
                       {r.content}
                     </td>
                   </tr>
@@ -383,26 +398,26 @@ export default async function GovernancePage() {
         </section>
 
         {/* Published reports */}
-        <section aria-labelledby="s-reports" className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 id="s-reports" className="mb-8 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-reports" className="mt-16 border-t border-white/[0.06] pt-12">
+          <h2 id="s-reports" className="mb-8 font-display text-[24px] text-white tablet:text-[30px]">
             Published reports
           </h2>
-          <div className="border border-brand-navy/10 px-8 py-14 text-center">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/50">
+          <div className="border border-dashed border-white/[0.12] px-8 py-14 text-center">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/40">
               No reports published yet
             </p>
-            <p className="mt-2 font-body text-[13px] text-ink/50">
+            <p className="mt-2 font-body text-[13px] text-brand-ice/35">
               Annual and quarterly reports will appear here when released.
             </p>
           </div>
         </section>
 
         {/* RTI */}
-        <section aria-labelledby="s-rti" className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 id="s-rti" className="mb-4 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-rti" className="mt-16 border-t border-white/[0.06] pt-12">
+          <h2 id="s-rti" className="mb-4 font-display text-[24px] text-white tablet:text-[30px]">
             RTI &amp; grievance
           </h2>
-          <p className="mb-6 font-body text-[15px] leading-[1.7] text-ink/85">
+          <p className="mb-6 font-body text-[15px] leading-[1.7] text-brand-ice/85">
             RTI applications and grievances for CoE-EA matters are handled
             through STPI&rsquo;s established RTI machinery.
           </p>
@@ -426,7 +441,7 @@ export default async function GovernancePage() {
           </div>
         </section>
 
-        <div className="mt-16 border-t border-brand-navy/15 pt-8">
+        <div className="mt-16 border-t border-white/[0.06] pt-8">
           <Link
             href="/"
             className="font-mono text-[12px] uppercase tracking-[0.18em] text-brand-cerulean hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
