@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroShell } from "@/components/ui/HeroShell";
-import { HierarchyMorph } from "@/components/ui/morphs/HierarchyMorph";
+import { TitleBlock } from "@/components/spreads/heroes/TitleBlock";
 import { getTeamByGroup } from "@/lib/sanity/fetchers";
 
 export const metadata: Metadata = {
@@ -194,8 +194,8 @@ export default async function GovernancePage() {
             How the instrument is <span className="text-amber">governed.</span>
           </>
         }
-        layout="right-visual"
-        visual={<HierarchyMorph className="h-full w-auto max-w-[520px]" />}
+        layout="left-visual"
+        visual={<TitleBlock />}
       />
 
       <main className="relative z-10 dark-atmosphere grain px-6 py-24 tablet:px-12 desktop:px-20">
