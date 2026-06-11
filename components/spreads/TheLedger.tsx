@@ -32,7 +32,7 @@ const breathClasses = ['idle-breath-a', 'idle-breath-b', 'idle-breath-c', 'idle-
 
 export function TheLedger({ metrics, partners }: TheLedgerProps) {
   const displayMetrics = metrics && metrics.length > 0 ? metrics : IMPACT_METRICS
-  const displayPartners = partners && partners.length > 0 ? partners : null
+  const displayPartners = partners?.some(p => p.logoUrl) ? partners : null
 
   return (
     <section
