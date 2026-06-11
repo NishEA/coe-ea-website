@@ -37,13 +37,13 @@ interface PartnerLogoProps {
 
 function PartnerLogo({ name, src }: PartnerLogoProps) {
   return (
-    <div className="group flex h-14 w-fit min-w-[72px] max-w-[148px] items-center justify-center rounded-lg border border-brand-ice/[0.12] bg-white/[0.06] px-4 py-2.5">
+    <div className="group flex h-[52px] w-fit min-w-[80px] max-w-[150px] items-center justify-center rounded-xl bg-white px-5 py-3 shadow-[0_2px_12px_rgba(0,0,0,0.25)]">
       <Image
         src={src}
         alt={name}
-        width={100}
-        height={32}
-        className="h-8 w-auto max-w-[100px] object-contain [filter:brightness(0)_invert(1)] opacity-60 transition-opacity duration-200 group-hover:opacity-95"
+        width={110}
+        height={36}
+        className="h-7 w-auto max-w-[110px] object-contain grayscale transition-all duration-300 group-hover:grayscale-0"
       />
     </div>
   )
@@ -54,8 +54,8 @@ export function TheLedger({ metrics, partners }: TheLedgerProps) {
 
   // Normalise Sanity and static partner shapes into one render-ready list
   const partnerItems = partners?.some(p => p.logoUrl)
-    ? partners.map(p => ({ key: p._id, name: p.name, src: p.logoUrl, useWhiteChip: p.useWhiteChip }))
-    : PARTNERS.map(p => ({ key: p.name, name: p.name, src: p.logoSrc, useWhiteChip: p.useWhiteChip }))
+    ? partners.map(p => ({ key: p._id, name: p.name, src: p.logoUrl }))
+    : PARTNERS.map(p => ({ key: p.name, name: p.name, src: p.logoSrc }))
 
   return (
     <section
