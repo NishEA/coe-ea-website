@@ -57,7 +57,7 @@ export default async function ApplyPage() {
           </ul>
 
           <div className="mx-auto max-w-2xl">
-            <div className="glass-panel p-8 tablet:p-12">
+            <div className="glass-panel form-dark p-8 tablet:p-12">
               <Suspense>
                 <ApplyForm />
               </Suspense>
