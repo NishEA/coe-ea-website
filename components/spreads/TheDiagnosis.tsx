@@ -1,9 +1,16 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin'
 import { WaveformLoader } from '@/components/ui/WaveformLoader'
 import { OrbitCanvas } from '@/components/ui/OrbitCanvas'
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin)
+}
 
 const ParticleField = dynamic(
   () => import('@/components/three/ParticleField').then(m => ({ default: m.ParticleField })),
@@ -31,8 +38,82 @@ const HEADLINE_CHARS = HEADLINE.map(w => {
   return { ...w, chars, startIdx }
 })
 
+const TAGLINE_WORDS = ['measure', 'diagnose', 'augment'] as const
+
 export function TheDiagnosis() {
   const [ready, setReady] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+  const scanRef = useRef<HTMLDivElement>(null)
+  const taglineRef = useRef<HTMLDivElement>(null)
+  const particleWrapRef = useRef<HTMLDivElement>(null)
+
+  // ── Post-loader GSAP sequence: instrument scan line + tagline decode ──
+  // Gated on `ready` so nothing fires before WaveformLoader completes.
+  useEffect(() => {
+    if (!ready) return
+    const section = sectionRef.current
+    const scan = scanRef.current
+    if (!section || !scan) return
+
+    const mm = gsap.matchMedia()
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      // 1 — oscilloscope calibration sweep: a bright streak races L→R once.
+      gsap.fromTo(
+        scan,
+        { x: -280, opacity: 1 },
+        {
+          x: () => section.offsetWidth + 80,
+          duration: 0.85,
+          delay: 0.2,
+          ease: 'power2.inOut',
+          onComplete: () => {
+            gsap.set(scan, { opacity: 0 })
+          },
+        },
+      )
+
+      // 2 — matrix-decode scramble on the vertical tagline, word by word.
+      const words = taglineRef.current?.querySelectorAll<HTMLElement>('[data-scramble]')
+      words?.forEach((word, i) => {
+        gsap.to(word, {
+          duration: 0.45,
+          delay: 0.9 + i * 0.22,
+          ease: 'none',
+          scrambleText: {
+            text: TAGLINE_WORDS[i],
+            chars: '01·/|—×+▪',
+            speed: 0.4,
+          },
+        })
+      })
+    })
+    return () => mm.revert()
+  }, [ready])
+
+  // ── Scroll-driven parallax: particle field recedes at ~70% scroll rate ──
+  // Scroll-gated by nature (only acts once the user scrolls), so it can be
+  // wired on mount without violating the WaveformLoader gate.
+  useEffect(() => {
+    const section = sectionRef.current
+    const wrap = particleWrapRef.current
+    if (!section || !wrap) return
+
+    const mm = gsap.matchMedia()
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      gsap.to(wrap, {
+        yPercent: 28,
+        opacity: 0.35,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      })
+    })
+    return () => mm.revert()
+  }, [])
 
   const d = (s: number): React.CSSProperties => ({ animationDelay: `${s}s` })
 
@@ -57,12 +138,29 @@ export function TheDiagnosis() {
       <WaveformLoader onComplete={() => setReady(true)} />
 
       <section
+        ref={sectionRef}
         id="diagnosis"
         aria-label="The Diagnosis — CoE-EA hero"
         className="dark-atmosphere grain relative w-full overflow-hidden"
       >
         <span aria-hidden className="corner-bracket left-3 top-3 border-l border-t" />
         <span aria-hidden className="corner-bracket right-3 top-3 border-r border-t" />
+
+        {/* Instrument calibration scan line — GSAP sweeps it L→R once after
+            the loader completes. opacity-0 at rest; GSAP raises it only
+            inside the prefers-reduced-motion: no-preference context. */}
+        <div
+          ref={scanRef}
+          aria-hidden
+          className="pointer-events-none absolute left-0 top-[31%] z-20 h-px w-[280px] opacity-0"
+          style={{
+            background:
+              'linear-gradient(90deg, transparent 0%, rgba(0,164,228,0.5) 55%, rgba(183,207,232,0.95) 88%, #ffffff 100%)',
+            boxShadow:
+              '0 0 14px rgba(0,164,228,0.75), 0 0 3px rgba(183,207,232,0.9)',
+            willChange: 'transform',
+          }}
+        />
 
         <div className="relative z-10 grid min-h-dvh grid-cols-1 items-center gap-10 px-6 pb-16 pt-8 tablet:px-12 desktop:min-h-[calc(100dvh-150px)] desktop:grid-cols-[42%_58%] desktop:gap-8 desktop:px-12">
           {/* ── LEFT — badge + headline + body + CTAs ── */}
@@ -145,6 +243,7 @@ export function TheDiagnosis() {
                 box, so particles never hard-cut against the rectangular canvas
                 boundary. */}
             <div
+              ref={particleWrapRef}
               className="absolute inset-0"
               style={{
                 maskImage: 'radial-gradient(ellipse 50% 50% at 50% 50%, black 40%, transparent 92%)',
@@ -156,8 +255,16 @@ export function TheDiagnosis() {
                 className="absolute inset-0 h-full w-full"
               />
             </div>
-            <div className="tagline-vertical pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 font-mono text-[9px] uppercase tracking-[0.16em] text-white/20">
-              measure · diagnose · augment
+            <div
+              ref={taglineRef}
+              className="tagline-vertical pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 font-mono text-[9px] uppercase tracking-[0.16em] text-white/20"
+            >
+              {TAGLINE_WORDS.map((w, i) => (
+                <span key={w}>
+                  <span data-scramble>{w}</span>
+                  {i < TAGLINE_WORDS.length - 1 ? ' · ' : ''}
+                </span>
+              ))}
             </div>
           </div>
         </div>

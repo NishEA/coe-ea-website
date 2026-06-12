@@ -1,10 +1,16 @@
 'use client'
 
 import Image from 'next/image'
-import { motion } from 'motion/react'
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { IMPACT_METRICS, PARTNERS } from '@/data/impact-metrics'
 import { CountUp } from '@/components/ui/CountUp'
 import type { SanityImpactMetric, SanityPartner } from '@/lib/sanity/fetchers'
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 interface TheLedgerProps {
   metrics?: SanityImpactMetric[]
@@ -18,21 +24,64 @@ function splitValue(value: string): { num: string; unit: string | null } {
   return { num: m[1].trim(), unit: unit.length > 0 ? unit : null }
 }
 
-const gridVariants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.05 } },
-}
-
-const cellVariants = {
-  hidden: { opacity: 0, y: 14 },
-  show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 120, damping: 20 } },
-}
-
 const breathClasses = ['idle-breath-a', 'idle-breath-b', 'idle-breath-c', 'idle-breath-d'] as const
 
 export function TheLedger({ metrics, partners }: TheLedgerProps) {
   const displayMetrics = metrics && metrics.length > 0 ? metrics : IMPACT_METRICS
   const displayPartners = partners && partners.some(p => p.logoUrl) ? partners : null
+
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
+
+  // ── GSAP ScrollTrigger reveal: heading wipe + clip-path card stagger ──
+  // Cells are wrapper divs (data-ledger-cell) so the GSAP transform never
+  // fights the inner glass-panel's mouse-tilt inline transform.
+  useEffect(() => {
+    const grid = gridRef.current
+    const heading = headingRef.current
+    if (!grid) return
+
+    const mm = gsap.matchMedia()
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      if (heading) {
+        gsap.fromTo(
+          heading,
+          { clipPath: 'inset(0% 0% 100% 0%)', y: 18, opacity: 0 },
+          {
+            clipPath: 'inset(0% 0% 0% 0%)',
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: heading, start: 'top 85%', once: true },
+            onComplete: () => {
+              gsap.set(heading, { clearProps: 'all' })
+            },
+          },
+        )
+      }
+
+      const cells = gsap.utils.toArray<HTMLElement>('[data-ledger-cell]', grid)
+      if (cells.length === 0) return
+      gsap.fromTo(
+        cells,
+        { clipPath: 'inset(0% 0% 100% 0%)', y: 26, opacity: 0 },
+        {
+          clipPath: 'inset(0% 0% 0% 0%)',
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: 'power3.out',
+          stagger: 0.07,
+          scrollTrigger: { trigger: grid, start: 'top 80%', once: true },
+          onComplete: () => {
+            gsap.set(cells, { clearProps: 'clipPath,transform,opacity' })
+          },
+        },
+      )
+    })
+    return () => mm.revert()
+  }, [])
 
   return (
     <section
@@ -55,16 +104,16 @@ export function TheLedger({ metrics, partners }: TheLedgerProps) {
         </span>
       </header>
 
-      <h2 className="[text-wrap:balance] mb-14 max-w-2xl font-display text-[2rem] font-semibold leading-[1.1] tracking-[-0.02em] text-white tablet:text-[2.75rem]">
+      <h2
+        ref={headingRef}
+        className="[text-wrap:balance] mb-14 max-w-2xl font-display text-[2rem] font-semibold leading-[1.1] tracking-[-0.02em] text-white tablet:text-[2.75rem]"
+      >
         What the instrument <span className="text-amber">measured</span>.
       </h2>
 
-      <motion.div
+      <div
+        ref={gridRef}
         className="grid grid-cols-2 gap-4 tablet:grid-cols-3 desktop:grid-cols-4"
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: '-10%' }}
-        variants={gridVariants}
       >
         {displayMetrics.map((m, i) => {
           const { num, unit } = splitValue(m.value)
@@ -76,10 +125,9 @@ export function TheLedger({ metrics, partners }: TheLedgerProps) {
           const hasNumeric = !isNaN(numericValue)
 
           return (
-            <motion.div
-              key={m.label}
-              variants={cellVariants}
-              className={`${isLead ? 'glass-panel-lead holo-sheen' : 'glass-panel'} ${breathClass} flex flex-col gap-2 rounded-xl p-5`}
+            <div key={m.label} data-ledger-cell>
+            <div
+              className={`${isLead ? 'glass-panel-lead holo-sheen' : 'glass-panel'} ${breathClass} flex h-full flex-col gap-2 rounded-xl p-5`}
               style={{ transition: 'transform 0.3s cubic-bezier(0.16,1,0.3,1)' }}
               onMouseMove={(e) => {
                 const rect = e.currentTarget.getBoundingClientRect()
@@ -118,10 +166,11 @@ export function TheLedger({ metrics, partners }: TheLedgerProps) {
               <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/55">
                 {m.label}
               </span>
-            </motion.div>
+            </div>
+            </div>
           )
         })}
-      </motion.div>
+      </div>
 
       <div className="mt-20 border-t border-brand-ice/10 pt-10" aria-label="Partner organisations">
         <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
