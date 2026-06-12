@@ -138,17 +138,24 @@ export function TheDiagnosis() {
           </div>
 
           {/* ── RIGHT — cinematic particle field ── */}
-          <div
-            className="relative z-[5] h-[340px] w-full desktop:h-full desktop:min-h-[540px]"
-            style={{
-              maskImage: 'radial-gradient(ellipse 85% 80% at 55% 50%, black 55%, transparent 100%)',
-              WebkitMaskImage: 'radial-gradient(ellipse 85% 80% at 55% 50%, black 55%, transparent 100%)',
-            }}
-          >
-            <ParticleField
-              animate={ready}
-              className="absolute inset-0 h-full w-full"
-            />
+          <div className="relative z-[5] h-[340px] w-full desktop:h-full desktop:min-h-[540px]">
+            {/* Mask sits on an inner wrapper (not the column) so the vertical
+                tagline isn't masked away. Ellipse radii are 50%/50% with the
+                fade completing at 92% — fully transparent at every edge of the
+                box, so particles never hard-cut against the rectangular canvas
+                boundary. */}
+            <div
+              className="absolute inset-0"
+              style={{
+                maskImage: 'radial-gradient(ellipse 50% 50% at 50% 50%, black 40%, transparent 92%)',
+                WebkitMaskImage: 'radial-gradient(ellipse 50% 50% at 50% 50%, black 40%, transparent 92%)',
+              }}
+            >
+              <ParticleField
+                animate={ready}
+                className="absolute inset-0 h-full w-full"
+              />
+            </div>
             <div className="tagline-vertical pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 font-mono text-[9px] uppercase tracking-[0.16em] text-white/20">
               measure · diagnose · augment
             </div>

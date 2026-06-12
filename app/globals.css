@@ -84,7 +84,10 @@ body {
 @keyframes frame-draw {
   from {
     opacity: 0;
-    transform: scale(0.985);
+    /* No transform here either — fill-mode:both keeps the `from` transform
+       applied through the delay + run, which makes .app-frame the containing
+       block for position:fixed descendants (WaveformLoader) and hard-clips
+       them at the frame's rounded corners via overflow:clip. */
   }
   to {
     opacity: 1;
