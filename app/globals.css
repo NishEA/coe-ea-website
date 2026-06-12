@@ -243,31 +243,6 @@ body {
   to   { transform: translateX(-50%) }
 }
 
-/* ── Waveform loader ── */
-.waveform {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  height: 52px;
-}
-.waveform span {
-  display: block;
-  width: 3px;
-  border-radius: 2px;
-  background: var(--color-ice);
-  animation: wave 1.2s ease-in-out infinite;
-  transform-origin: center;
-}
-@keyframes wave {
-  0%,
-  100% {
-    transform: scaleY(0.3);
-  }
-  50% {
-    transform: scaleY(1);
-  }
-}
-
 /* ── CSS 3D instrument cubes ── */
 .cube {
   width: 36px;
@@ -462,6 +437,27 @@ body {
   0%, 80%, 100% { opacity: 0.15; transform: scale(0.7); }
   40%            { opacity: 1;    transform: scale(1); }
 }
+@keyframes splashLine {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+.splash-logo {
+  animation: splashPulse 2.4s ease-in-out infinite;
+}
+.splash-dot {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: var(--color-brand-cerulean);
+  animation: splashDot 1.2s ease-in-out infinite;
+}
+.splash-line {
+  height: 100%;
+  width: 0;
+  background: var(--color-brand-cerulean);
+  animation: splashLine var(--splash-duration, 2200ms) linear forwards;
+}
 
 /* ═══════════════════════════════════════════════════════════════
    OBSERVATORY DESIGN SYSTEM — v2 (2026-06-11)
@@ -653,12 +649,12 @@ body {
   .fade-up,
   .cube-materialise,
   .marquee-inner,
-  .waveform span,
   .dot-anim,
   .op-dot,
   .op-dot::after,
   .splash-logo,
   .splash-dot,
+  .splash-line,
   .idle-breath-a,
   .idle-breath-b,
   .idle-breath-c,

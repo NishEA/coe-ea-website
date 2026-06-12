@@ -2,13 +2,16 @@
 
 import { useEffect, useState } from 'react'
 
-const BAR_HEIGHTS = [16, 26, 38, 48, 52, 44, 32, 18, 10, 18, 32, 44, 52, 48, 38, 26, 16]
-const DELAYS = [0, 0.07, 0.14, 0.21, 0.28, 0.35, 0.42, 0.49, 0.56, 0.49, 0.42, 0.35, 0.28, 0.21, 0.14, 0.07, 0]
+const DOT_DELAYS = [0, 0.16, 0.32]
 
 /**
- * Concept D waveform loader. Shows a symmetric audio-waveform animation for
- * `duration` ms, then fades out and fires `onComplete`. Reduced-motion users
- * skip straight through.
+ * Loading splash — the CoE-EA logo as centrepiece, breathing via
+ * `splashPulse`, with three staggered cerulean dots (`splashDot`) and a
+ * thin calibration line that fills over `duration` ms. Feels like an
+ * instrument powering up rather than a spinner. After `duration` ms it
+ * fades out and fires `onComplete`; reduced-motion users skip straight
+ * through (CSS animations are also paused via the reduced-motion block
+ * in globals.css — .splash-logo / .splash-dot / .splash-line).
  */
 export function WaveformLoader({
   onComplete,
@@ -45,20 +48,40 @@ export function WaveformLoader({
   return (
     <div
       aria-hidden="true"
-      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center gap-4 bg-bg-void transition-opacity duration-700 ${
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-bg-void transition-opacity duration-700 ${
         out ? 'pointer-events-none opacity-0' : 'opacity-100'
       }`}
     >
-      <div className="waveform">
-        {BAR_HEIGHTS.map((h, i) => (
+      <div className="splash-logo">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/logos/coe-ea.png"
+          alt=""
+          width={120}
+          height={120}
+          className="h-auto w-[120px]"
+        />
+      </div>
+
+      <div className="mt-6 flex items-center gap-2.5">
+        {DOT_DELAYS.map((d) => (
           <span
-            key={i}
-            style={{ height: `${h}px`, animationDelay: `${DELAYS[i]}s` }}
+            key={d}
+            className="splash-dot"
+            style={{ animationDelay: `${d}s` }}
           />
         ))}
       </div>
-      <div className="font-mono text-[9px] uppercase tracking-[0.22em] text-brand-ice/40">
+
+      <div className="mt-4 font-mono text-[9px] uppercase tracking-[0.22em] text-brand-ice/40">
         {label}
+      </div>
+
+      <div className="mt-5 h-px w-40 overflow-hidden bg-brand-ice/10">
+        <div
+          className="splash-line"
+          style={{ '--splash-duration': `${duration}ms` } as React.CSSProperties}
+        />
       </div>
     </div>
   )
