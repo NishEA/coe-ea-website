@@ -130,7 +130,10 @@ export default function SiteLayout({
 
       {/* ── Observatory glass capsule nav ── */}
       <header className={`z-30 flex items-center justify-between gap-4 px-4 tablet:px-6 transition-all duration-300 ${scrolled ? 'fixed top-3 left-3 right-3' : 'relative py-4'}`}>
-        <div className={`glass-shelf w-full rounded-2xl flex items-center justify-between gap-4 px-4 py-2.5 tablet:px-5 transition-all duration-500 ${scrolled ? 'py-2' : 'py-3'}`}>
+        <div
+          className={`glass-shelf w-full rounded-2xl flex items-center justify-between gap-4 px-4 py-2.5 tablet:px-5 transition-all duration-500 ${scrolled ? 'py-2' : 'py-3'}`}
+          style={scrolled ? { background: 'rgba(6,13,46,0.88)' } : undefined}
+        >
 
           {/* Logo */}
           <Link
