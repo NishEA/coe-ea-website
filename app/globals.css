@@ -456,10 +456,10 @@ body {
   to   { stroke-dashoffset: 0; }
 }
 @keyframes splashAcquire {
-  0%   { opacity: 0.25; transform: scale(0.97); filter: saturate(0.5) brightness(0.85); }
-  74%  { opacity: 0.35; transform: scale(0.97); filter: saturate(0.5) brightness(0.85); }
-  86%  { opacity: 1; transform: scale(1); filter: saturate(1) brightness(1.25); }
-  100% { opacity: 1; transform: scale(1); filter: saturate(1) brightness(1); }
+  0%   { opacity: 0.3; transform: scale(0.97); filter: brightness(0.8); }
+  74%  { opacity: 0.4; transform: scale(0.97); filter: brightness(0.8); }
+  86%  { opacity: 1; transform: scale(1); filter: brightness(1.2); }
+  100% { opacity: 1; transform: scale(1); filter: brightness(1); }
 }
 @keyframes splashLockFlash {
   0%, 84% { opacity: 0; }
