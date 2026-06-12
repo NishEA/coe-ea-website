@@ -59,6 +59,7 @@ export async function submitApplication(
 ): Promise<ApplyState> {
   const headersList = await headers();
   const ip =
+    headersList.get("x-vercel-forwarded-for") ??
     headersList.get("x-forwarded-for")?.split(",")[0]?.trim() ??
     headersList.get("x-real-ip") ??
     "unknown";

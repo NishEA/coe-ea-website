@@ -46,6 +46,21 @@ const nextConfig: NextConfig = {
           key: "Strict-Transport-Security",
           value: "max-age=63072000; includeSubDomains; preload",
         },
+        {
+          // Three.js requires unsafe-eval (shader compilation) and blob: workers.
+          // Supabase auth uses wss: for realtime. Vercel Analytics uses va.vercel-scripts.com.
+          key: "Content-Security-Policy",
+          value: [
+            "default-src 'self'",
+            "script-src 'self' 'unsafe-eval' 'unsafe-inline' va.vercel-scripts.com",
+            "style-src 'self' 'unsafe-inline'",
+            "img-src 'self' data: blob: cdn.sanity.io",
+            "font-src 'self' data:",
+            "connect-src 'self' *.supabase.co wss://*.supabase.co cdn.sanity.io va.vercel-scripts.com",
+            "worker-src 'self' blob:",
+            "frame-ancestors 'none'",
+          ].join("; "),
+        },
       ],
     },
   ],
