@@ -19,7 +19,6 @@ const WHITE_70 = 'rgba(255, 255, 255, 0.7)'
 const WHITE_55 = 'rgba(255, 255, 255, 0.55)'
 const MONO = "'Space Mono', monospace"
 
-const STAMP_OUTER_DASH = '3 2'
 
 /* ------------------------------------------------------------------ */
 /* Component                                                           */
@@ -53,9 +52,6 @@ export function TitleBlock() {
       circle.style.strokeDashoffset = String(circumference)
     })
 
-    const stamp = svg.querySelector<SVGGElement>('#stamp')
-    const stampOuter = svg.querySelector<SVGCircleElement>('#stamp-outer')
-
     if (reduced) {
       lines.forEach((l) => {
         l.style.strokeDashoffset = '0'
@@ -63,12 +59,6 @@ export function TitleBlock() {
       circles.forEach((c) => {
         c.style.strokeDashoffset = '0'
       })
-      if (stampOuter) {
-        stampOuter.style.strokeDasharray = STAMP_OUTER_DASH
-      }
-      if (stamp) {
-        stamp.style.opacity = '1'
-      }
       return
     }
 
@@ -123,7 +113,6 @@ export function TitleBlock() {
 
         .to('#pediment-l', { strokeDashoffset: 0, duration: 0.2, ease: 'power1.out' }, 1.7)
         .to('#pediment-r', { strokeDashoffset: 0, duration: 0.2, ease: 'power1.out' }, 1.78)
-
         .to(
           [
             '#tick-l',
@@ -144,19 +133,6 @@ export function TitleBlock() {
           { autoAlpha: 1, duration: 0.3, ease: 'power1.out', stagger: 0.05 },
           2.1,
         )
-
-        .fromTo(
-          '#stamp',
-          { opacity: 0, rotation: -15, svgOrigin: '460 280' },
-          { opacity: 1, rotation: 0, duration: 0.3, ease: 'power2.out' },
-          2.5,
-        )
-        .to(
-          ['#stamp-outer', '#stamp-inner'],
-          { strokeDashoffset: 0, duration: 0.3, ease: 'power1.out' },
-          2.5,
-        )
-        .set('#stamp-outer', { strokeDasharray: STAMP_OUTER_DASH, strokeDashoffset: 0 }, 2.82)
     }, svg)
 
     return () => ctx.revert()
@@ -594,54 +570,6 @@ export function TitleBlock() {
         GOVERNANCE
       </text>
 
-      {/* Layer 7 — Amber approval stamp */}
-      <g id="stamp" opacity="0">
-        <circle
-          id="stamp-outer"
-          data-draw
-          cx="460"
-          cy="280"
-          r="38"
-          stroke={AMBER}
-          strokeWidth="1.5"
-          fill="none"
-          strokeDasharray={STAMP_OUTER_DASH}
-        />
-        <circle
-          id="stamp-inner"
-          data-draw
-          cx="460"
-          cy="280"
-          r="30"
-          stroke={AMBER}
-          strokeWidth="0.8"
-          fill="none"
-        />
-        <text
-          x="460"
-          y="274"
-          textAnchor="middle"
-          fill={AMBER}
-          fontSize="7"
-          fontFamily={MONO}
-          letterSpacing="0.14em"
-        >
-          DSIR
-        </text>
-        <text
-          x="460"
-          y="284"
-          textAnchor="middle"
-          fill={AMBER}
-          fontSize="7"
-          fontFamily={MONO}
-          letterSpacing="0.14em"
-        >
-          RECOGNISED
-        </text>
-        <line x1="456" y1="265" x2="464" y2="265" stroke={AMBER} strokeWidth="0.8" />
-        <line x1="460" y1="261" x2="460" y2="269" stroke={AMBER} strokeWidth="0.8" />
-      </g>
     </svg>
   )
 }
