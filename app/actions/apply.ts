@@ -83,6 +83,7 @@ export async function submitApplication(
   const karnatakaRegistered = str(formData, "karnataka_registered");
   const foundedInLast5Years = str(formData, "founded_in_last_5_years");
   const raisedCapital = str(formData, "raised_capital") || null;
+  const teamSize = str(formData, "team_size") || null;
   const referralSource = str(formData, "referral_source") || null;
   const privacyConsentRaw = str(formData, "privacy_consent");
 
@@ -129,6 +130,7 @@ export async function submitApplication(
       problem_statement: problemStatement,
       why_coe_ea: whyCoeEa,
       raised_capital: raisedCapital,
+      team_size: teamSize,
       referral_source: referralSource,
       privacy_consent: true,
       consent_recorded_at: submittedAt,

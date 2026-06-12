@@ -12,27 +12,12 @@ const RETENTION_ROWS = [
   {
     data: "Application — not selected",
     period: "12 months from decision",
-    then: "Erase personal data and pitch deck; retain only anonymised domain/stage statistics",
+    then: "Erase personal data; retain only anonymised domain/stage statistics",
   },
   {
     data: "Application — selected / incubated",
     period: "Duration of incubation + 3 years",
     then: "Review, then erase or fully anonymise",
-  },
-  {
-    data: "Pitch deck (PDF)",
-    period: "Within 30 days of any decision (rejection or acceptance)",
-    then: "Permanent deletion from storage and backups",
-  },
-  {
-    data: "Facility booking — completed",
-    period: "5 years (government invoicing/audit)",
-    then: "Erase personal data",
-  },
-  {
-    data: "Facility booking — declined or cancelled",
-    period: "6 months",
-    then: "Erase",
   },
   {
     data: "Website analytics",
@@ -49,7 +34,7 @@ const RETENTION_ROWS = [
 const PROCESSORS = [
   {
     name: "Supabase",
-    handles: "Application records, pitch decks, backups, admin login",
+    handles: "Application records, backups, admin login",
     location: "India (Mumbai)",
   },
   {
@@ -68,9 +53,9 @@ const PROCESSORS = [
     location: "European Union",
   },
   {
-    name: "Plausible",
-    handles: "Cookie-free, non-identifying website analytics",
-    location: "European Union",
+    name: "Vercel Analytics",
+    handles: "Cookie-free, aggregate website performance analytics and speed insights",
+    location: "United States",
   },
 ];
 
@@ -84,7 +69,7 @@ export default function PrivacyPage() {
         layout="center"
       />
 
-      <main className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
+      <section className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[860px]">
 
 
@@ -94,8 +79,7 @@ export default function PrivacyPage() {
             1. Who we are
           </h2>
           <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
-            This website (<span className="font-mono text-[13px]">ea.stpi.in</span>) is
-            operated by the{" "}
+            This website is operated by the{" "}
             <strong className="text-brand-navy">
               Centre of Excellence on Efficiency Augmentation (CoE-EA)
             </strong>
@@ -136,8 +120,7 @@ export default function PrivacyPage() {
             This notice explains what personal data we collect through this website, why
             we collect it, how long we keep it, who we share it with, where it is stored,
             and the rights you have as a Data Principal. It covers the incubation{" "}
-            <strong className="text-brand-navy">application form</strong>, the{" "}
-            <strong className="text-brand-navy">facility booking</strong> request, website{" "}
+            <strong className="text-brand-navy">application form</strong>, website{" "}
             <strong className="text-brand-navy">analytics</strong>, and{" "}
             <strong className="text-brand-navy">administrator accounts</strong>. It does
             not cover third-party sites we link to.
@@ -153,11 +136,7 @@ export default function PrivacyPage() {
             {[
               {
                 point: "Incubation application (/apply)",
-                data: "Founder name, email, phone number, startup name, capability domain, development stage, problem statement, motivation for applying, Karnataka registration status, founding date, optional prior-capital details, optional referral source, and an optional uploaded pitch deck (PDF).",
-              },
-              {
-                point: "Facility booking (/book)",
-                data: "Booker name, email, organisation, the facility and dates requested, number of attendees, and the stated purpose of use.",
+                data: "Founder name, email, phone number, startup name, capability domain, development stage, problem statement, motivation for applying, Karnataka registration status, founding date, optional team size, optional prior-capital details, and optional referral source.",
               },
               {
                 point: "Website analytics",
@@ -197,13 +176,12 @@ export default function PrivacyPage() {
             4. Why we collect it
           </h2>
           <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
-            We process application and booking data only to:
+            We process application data only to:
           </p>
           <ul className="mt-4 space-y-2 pl-2">
             {[
               "assess and respond to incubation applications;",
-              "administer facility-booking requests and related government invoicing;",
-              "contact you about your application or booking;",
+              "contact you about your application;",
               "maintain aggregate, non-identifying statistics about site usage.",
             ].map((item) => (
               <li key={item} className="flex items-start gap-3">
@@ -222,30 +200,14 @@ export default function PrivacyPage() {
           </p>
         </section>
 
-        {/* 5. Pitch decks */}
-        <section aria-labelledby="s-decks" className="mt-12 border-t border-brand-navy/15 pt-10">
-          <h2 id="s-decks" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
-            5. Pitch decks and confidential information
-          </h2>
-          <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
-            A pitch deck you upload may contain confidential business information and
-            intellectual property. We treat it as confidential: stored in a private,
-            access-controlled location in India, visible only to authorised PMG reviewers
-            through our secure admin dashboard,{" "}
-            <strong className="text-brand-navy">never</strong> sent as an email attachment,
-            and deleted on the schedule in Section&nbsp;6. No onward sharing occurs outside
-            the review team without your separate, specific consent.
-          </p>
-        </section>
-
-        {/* 6. Retention */}
+        {/* 5. Retention */}
         <section aria-labelledby="s-retention" className="mt-12 border-t border-brand-navy/15 pt-10">
           <h2 id="s-retention" className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
-            6. How long we keep your data
+            5. How long we keep your data
           </h2>
           <p className="mb-8 font-body text-[15px] leading-[1.7] text-brand-navy/60">
             We keep personal data only for as long as needed, then erase it. Retention is
-            enforced in the primary database, storage, database backups, and sent-email logs.
+            enforced in the primary database, database backups, and sent-email logs.
           </p>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse" aria-label="Data retention schedule">
@@ -281,10 +243,10 @@ export default function PrivacyPage() {
           </div>
         </section>
 
-        {/* 7. Sharing */}
+        {/* 6. Sharing */}
         <section aria-labelledby="s-share" className="mt-12 border-t border-brand-navy/15 pt-10">
           <h2 id="s-share" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
-            7. Who we share it with
+            6. Who we share it with
           </h2>
           <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
             We do <strong className="text-brand-navy">not</strong> sell or rent your personal
@@ -292,9 +254,9 @@ export default function PrivacyPage() {
           </p>
           <ul className="mt-4 space-y-2 pl-2">
             {[
-              "Authorised Centre / PMG staff who assess applications and bookings;",
+              "Authorised Centre / PMG staff who assess applications;",
               "STPI HQ as part of programme oversight reporting (aggregate data; personal data only where legally required);",
-              "Service providers (Data Processors) listed in Section 8 — each bound by a written Data Processing Agreement.",
+              "Service providers (Data Processors) listed in Section 7 — each bound by a written Data Processing Agreement.",
             ].map((item) => (
               <li key={item} className="flex items-start gap-3">
                 <span aria-hidden="true" className="mt-[7px] h-1.5 w-1.5 flex-none rounded-full bg-brand-cerulean" />
@@ -306,15 +268,15 @@ export default function PrivacyPage() {
           </ul>
         </section>
 
-        {/* 8. Storage */}
+        {/* 7. Storage */}
         <section aria-labelledby="s-storage" className="mt-12 border-t border-brand-navy/15 pt-10">
           <h2 id="s-storage" className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
-            8. Where your data is stored
+            7. Where your data is stored
           </h2>
           <p className="mb-8 font-body text-[15px] leading-[1.7] text-brand-navy/70">
             Your{" "}
             <strong className="text-brand-navy">
-              application data and pitch deck are stored in India
+              application data is stored in India
             </strong>{" "}
             (Supabase, Mumbai region). Some service providers that send our emails, manage
             website content, or measure aggregate traffic operate outside India. Each is
@@ -323,8 +285,8 @@ export default function PrivacyPage() {
             DPDP-restricted list.
           </p>
           <p className="mb-6 font-body text-[13px] leading-[1.6] text-brand-navy/50">
-            Sanity and Plausible receive <strong className="text-brand-navy/70">no personal data</strong> — Sanity
-            holds only website content, and Plausible records only anonymous aggregate traffic.
+            Sanity and Vercel Analytics receive <strong className="text-brand-navy/70">no personal data</strong> — Sanity
+            holds only website content, and Vercel Analytics records only anonymous aggregate traffic.
           </p>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse" aria-label="Data processor locations">
@@ -360,24 +322,23 @@ export default function PrivacyPage() {
           </div>
         </section>
 
-        {/* 9. Security */}
+        {/* 8. Security */}
         <section aria-labelledby="s-security" className="mt-12 border-t border-brand-navy/15 pt-10">
           <h2 id="s-security" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
-            9. How we protect your data
+            8. How we protect your data
           </h2>
           <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
-            We apply row-level database security, private access-controlled storage for
-            pitch decks, encrypted connections (HTTPS throughout), role-based administrator
-            access, and activity logging. In the event of a personal-data breach we will
-            notify the Data Protection Board of India and affected Data Principals as
-            required by the DPDP Act and Rules.
+            We apply row-level database security, encrypted connections (HTTPS throughout),
+            role-based administrator access, and activity logging. In the event of a
+            personal-data breach we will notify the Data Protection Board of India and
+            affected Data Principals as required by the DPDP Act and Rules.
           </p>
         </section>
 
-        {/* 10. Rights */}
+        {/* 9. Rights */}
         <section aria-labelledby="s-rights" className="mt-12 border-t border-brand-navy/15 pt-10">
           <h2 id="s-rights" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
-            10. Your rights as a Data Principal
+            9. Your rights as a Data Principal
           </h2>
           <div className="space-y-0">
             {[
@@ -427,28 +388,29 @@ export default function PrivacyPage() {
             >
               nishant.peddagopu@stpi.in
             </a>{" "}
-            quoting your application or booking reference number.
+            quoting your application reference number.
           </p>
         </section>
 
-        {/* 11. Cookies */}
+        {/* 10. Cookies */}
         <section aria-labelledby="s-cookies" className="mt-12 border-t border-brand-navy/15 pt-10">
           <h2 id="s-cookies" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
-            11. Cookies and analytics
+            10. Cookies and analytics
           </h2>
           <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
             This site does <strong className="text-brand-navy">not</strong> use cookies for
             tracking, profiling, or advertising — no cookie-consent banner is shown. We use
-            Plausible, a privacy-first analytics tool that counts page views in aggregate
-            without storing your IP address or identifying you. The administrator login uses
-            a secure session cookie to keep staff signed in; it is not used for tracking.
+            Vercel Analytics, a privacy-first analytics tool that counts page views in
+            aggregate without storing your IP address or identifying you. The administrator
+            login uses a secure session cookie to keep staff signed in; it is not used for
+            tracking.
           </p>
         </section>
 
-        {/* 12. Age */}
+        {/* 11. Age */}
         <section aria-labelledby="s-age" className="mt-12 border-t border-brand-navy/15 pt-10">
           <h2 id="s-age" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
-            12. Age
+            11. Age
           </h2>
           <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
             This site is intended for adults. By submitting a form you confirm you are 18
@@ -458,10 +420,10 @@ export default function PrivacyPage() {
           </p>
         </section>
 
-        {/* 13. Changes */}
+        {/* 12. Changes */}
         <section aria-labelledby="s-changes" className="mt-12 border-t border-brand-navy/15 pt-10">
           <h2 id="s-changes" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
-            13. Changes to this notice
+            12. Changes to this notice
           </h2>
           <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
             We may update this notice. The version and date at the top reflect the current
@@ -469,10 +431,10 @@ export default function PrivacyPage() {
           </p>
         </section>
 
-        {/* 14. Contact */}
+        {/* 13. Contact */}
         <section aria-labelledby="s-contact" className="mt-12 border-t border-brand-navy/15 pt-10">
           <h2 id="s-contact" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
-            14. Contact and grievance
+            13. Contact and grievance
           </h2>
           <p className="mb-6 font-body text-[15px] leading-[1.7] text-brand-navy/70">
             If you have a concern about how we handle your personal data, contact our
@@ -521,7 +483,7 @@ export default function PrivacyPage() {
           </Link>
         </div>
       </div>
-      </main>
+      </section>
     </>
   );
 }

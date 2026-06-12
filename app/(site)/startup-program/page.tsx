@@ -158,7 +158,7 @@ export default async function PortfolioPage() {
       {/* ── 1. Hero ── */}
       <HeroShell
         label="Startup Program"
-        badge="PORTFOLIO MAP · 40+ COMPANIES"
+        badge={`PORTFOLIO MAP · ${startupCount} STARTUPS`}
         title={
           <>
             Built inside <span className="text-amber">the machine.</span>

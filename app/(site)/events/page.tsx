@@ -63,7 +63,7 @@ export default async function EventsPage() {
         visual={<DepartureBoard events={events} />}
       />
 
-      <main className="relative z-10 dark-atmosphere grain px-6 py-24 tablet:px-12 desktop:px-20">
+      <section className="relative z-10 dark-atmosphere grain px-6 py-24 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[900px]">
         <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-ice/75">
           CoE-EA runs hackathons, ideathons, workshops, and industrial visits
@@ -133,7 +133,7 @@ export default async function EventsPage() {
           <div className="flex flex-wrap gap-x-8 gap-y-3">
             {[
               { label: "Apply to the programme", href: "/apply", external: false },
-              { label: "Contact the Centre", href: "/#contact", external: false },
+              { label: "Contact the Centre", href: "mailto:blr.coeea@stpi.in", external: true },
               { label: "STPI India", href: "https://www.stpi.in", external: true },
             ].map((l) => (
               <Link
@@ -158,7 +158,7 @@ export default async function EventsPage() {
           </Link>
         </div>
       </div>
-      </main>
+      </section>
     </>
   );
 }

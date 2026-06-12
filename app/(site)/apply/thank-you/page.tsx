@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function ThankYouPage() {
   return (
-    <main
+    <div
       className="flex min-h-screen flex-col items-center justify-center bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20"
       aria-label="Application received"
     >
@@ -41,6 +41,6 @@ export default function ThankYouPage() {
           &larr; Back to home
         </Link>
       </div>
-    </main>
+    </div>
   );
 }

@@ -85,7 +85,7 @@ export default function BookPage() {
         visual={<Airlock />}
       />
 
-      <main className="relative z-10 dark-atmosphere grain px-6 py-24 tablet:px-12 desktop:px-20">
+      <section className="relative z-10 dark-atmosphere grain px-6 py-24 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[1100px]">
         <p className="max-w-[52ch] font-body text-[16px] leading-[1.7] text-brand-ice/75">
           CoE-EA&rsquo;s Bengaluru facility is available to incubatees, partners, and
@@ -229,7 +229,7 @@ export default function BookPage() {
           </Link>
         </div>
       </div>
-      </main>
+      </section>
     </>
   );
 }
