@@ -9,7 +9,9 @@ import { useEffect, useRef } from 'react'
 const SIZE = 560
 const CX = 280
 const CY = 280
-const R = 220
+// R reduced from 220 → 190 to give labels enough horizontal room
+// at the original 10px font size without clipping the canvas edges.
+const R = 190
 const NODE_RADIUS_FRACTION = 0.8
 const SWEEP_PERIOD_MS = 12_000
 const SWEEP_FAN_RAD = (35 * Math.PI) / 180
@@ -18,18 +20,19 @@ const PING_MAX_RADIUS = 28
 const DOT_PULSE_MS = 400
 const MAX_PINGS = 20
 const TWO_PI = Math.PI * 2
+const LABEL_LINE_HEIGHT = 13
 
 const NODES: readonly { label: string; angle: number }[] = [
-  { label: 'SMART MFG', angle: 0 },
-  { label: 'INDUSTRIAL AI', angle: 36 },
-  { label: 'SMART ENERGY', angle: 72 },
-  { label: 'IoT', angle: 108 },
-  { label: 'ROBOTICS', angle: 144 },
-  { label: 'CLEANTECH', angle: 180 },
-  { label: 'ELECTRONICS', angle: 216 },
-  { label: 'E-MOBILITY', angle: 252 },
-  { label: 'DEEPTECH', angle: 288 },
-  { label: 'DRONES', angle: 324 },
+  { label: 'SMART MANUFACTURING', angle: 0 },
+  { label: 'SMART CITY ENERGY', angle: 36 },
+  { label: 'SMART CITY WATER', angle: 72 },
+  { label: 'INTELLIGENT ASSET MONITORING', angle: 108 },
+  { label: 'HOME AND OFFICE AUTOMATION', angle: 144 },
+  { label: 'SMART SECURITY', angle: 180 },
+  { label: 'WEATHER MONITORING', angle: 216 },
+  { label: 'CONNECTED TRANSPORTATION', angle: 252 },
+  { label: 'SMART HOSPITALS', angle: 288 },
+  { label: 'SMART FARMING', angle: 324 },
 ]
 
 const RING_FRACTIONS = [0.25, 0.5, 0.75, 1] as const
@@ -51,6 +54,14 @@ interface RadarNode {
 /** Normalize an angle to [0, 2π). */
 function norm(angle: number): number {
   return ((angle % TWO_PI) + TWO_PI) % TWO_PI
+}
+
+/** Split a multi-word label into two lines at the midpoint word. */
+function splitLabel(label: string): [string, string] {
+  const words = label.split(' ')
+  if (words.length <= 1) return [label, '']
+  const mid = Math.ceil(words.length / 2)
+  return [words.slice(0, mid).join(' '), words.slice(mid).join(' ')]
 }
 
 /** Precompute node positions (0° at top, clockwise). */
@@ -248,15 +259,29 @@ export function CapabilityRadar() {
           ctx.textAlign = 'center'
         }
 
-        if (sin < -0.25) {
-          ctx.textBaseline = 'bottom'
-        } else if (sin > 0.25) {
-          ctx.textBaseline = 'top'
-        } else {
-          ctx.textBaseline = 'middle'
-        }
+        const [line1, line2] = splitLabel(node.label)
 
-        ctx.fillText(node.label, labelX, labelY)
+        if (!line2) {
+          // Single word — original baseline logic
+          ctx.textBaseline = sin < -0.25 ? 'bottom' : sin > 0.25 ? 'top' : 'middle'
+          ctx.fillText(line1, labelX, labelY)
+        } else if (sin < -0.25) {
+          // Label is above the node: line1 on top, line2 below it
+          ctx.textBaseline = 'bottom'
+          ctx.fillText(line2, labelX, labelY)
+          ctx.fillText(line1, labelX, labelY - LABEL_LINE_HEIGHT)
+        } else if (sin > 0.25) {
+          // Label is below the node: line1 on top, line2 below it
+          ctx.textBaseline = 'top'
+          ctx.fillText(line1, labelX, labelY)
+          ctx.fillText(line2, labelX, labelY + LABEL_LINE_HEIGHT)
+        } else {
+          // Side (cos dominant): center two lines on the label point
+          ctx.textBaseline = 'bottom'
+          ctx.fillText(line1, labelX, labelY)
+          ctx.textBaseline = 'top'
+          ctx.fillText(line2, labelX, labelY)
+        }
       }
     }
 
@@ -300,8 +325,12 @@ export function CapabilityRadar() {
   }, [])
 
   return (
-    <div className="pointer-events-none relative flex items-center justify-center">
-      <canvas ref={canvasRef} style={{ width: 560, height: 560 }} aria-hidden />
+    <div className="pointer-events-none relative flex h-full w-full items-center justify-center">
+      <canvas
+        ref={canvasRef}
+        style={{ width: '100%', maxWidth: SIZE, aspectRatio: '1 / 1' }}
+        aria-hidden
+      />
     </div>
   )
 }
