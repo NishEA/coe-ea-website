@@ -69,37 +69,37 @@ export default function PrivacyPage() {
         layout="center"
       />
 
-      <section className="relative z-10 bg-bg-paper px-6 py-20 tablet:px-12 desktop:px-20">
+      <section className="relative z-10 dark-atmosphere grain px-6 py-20 tablet:px-12 desktop:px-20">
       <div className="mx-auto max-w-[860px]">
 
 
         {/* 1. Who we are */}
-        <section aria-labelledby="s-who" className="mt-16 border-t border-brand-navy/15 pt-12">
-          <h2 id="s-who" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-who" className="mt-16 border-t border-white/[0.06] pt-12">
+          <h2 id="s-who" className="mb-6 font-display text-[24px] text-white tablet:text-[30px]">
             1. Who we are
           </h2>
-          <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
+          <p className="font-body text-[15px] leading-[1.7] text-brand-ice/75">
             This website is operated by the{" "}
-            <strong className="text-brand-navy">
+            <strong className="text-white">
               Centre of Excellence on Efficiency Augmentation (CoE-EA)
             </strong>
             , a programme of Software Technology Parks of India (STPI), Ministry of
             Electronics and Information Technology, Government of India. For the purpose of
             the DPDP Act, 2023, CoE-EA&nbsp;/&nbsp;STPI is the{" "}
-            <strong className="text-brand-navy">Data Fiduciary</strong> for the personal
+            <strong className="text-white">Data Fiduciary</strong> for the personal
             data described in this notice.
           </p>
-          <div className="mt-6 border border-brand-navy/10 px-6 py-5">
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50">
+          <div className="mt-6 glass-panel px-6 py-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
               Grievance Officer
             </p>
-            <p className="mt-2 font-body text-[15px] text-brand-navy">
+            <p className="mt-2 font-body text-[15px] text-white">
               Dr. Nishant Peddagopu
             </p>
-            <p className="mt-0.5 font-body text-[13px] text-brand-navy/60">
+            <p className="mt-0.5 font-body text-[13px] text-brand-ice/60">
               Chief Operating Officer, CoE-EA
             </p>
-            <p className="mt-1 font-body text-[14px] text-brand-navy/60">
+            <p className="mt-1 font-body text-[14px] text-brand-ice/60">
               <a
                 href="mailto:nishant.peddagopu@stpi.in"
                 className="font-mono text-[13px] text-brand-cerulean hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
@@ -112,24 +112,24 @@ export default function PrivacyPage() {
         </section>
 
         {/* 2. Scope */}
-        <section aria-labelledby="s-scope" className="mt-12 border-t border-brand-navy/15 pt-10">
-          <h2 id="s-scope" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-scope" className="mt-12 border-t border-white/[0.06] pt-10">
+          <h2 id="s-scope" className="mb-6 font-display text-[24px] text-white tablet:text-[30px]">
             2. What this notice covers
           </h2>
-          <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
+          <p className="font-body text-[15px] leading-[1.7] text-brand-ice/75">
             This notice explains what personal data we collect through this website, why
             we collect it, how long we keep it, who we share it with, where it is stored,
             and the rights you have as a Data Principal. It covers the incubation{" "}
-            <strong className="text-brand-navy">application form</strong>, website{" "}
-            <strong className="text-brand-navy">analytics</strong>, and{" "}
-            <strong className="text-brand-navy">administrator accounts</strong>. It does
+            <strong className="text-white">application form</strong>, website{" "}
+            <strong className="text-white">analytics</strong>, and{" "}
+            <strong className="text-white">administrator accounts</strong>. It does
             not cover third-party sites we link to.
           </p>
         </section>
 
         {/* 3. What we collect */}
-        <section aria-labelledby="s-collect" className="mt-12 border-t border-brand-navy/15 pt-10">
-          <h2 id="s-collect" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-collect" className="mt-12 border-t border-white/[0.06] pt-10">
+          <h2 id="s-collect" className="mb-6 font-display text-[24px] text-white tablet:text-[30px]">
             3. What personal data we collect
           </h2>
           <div className="space-y-0">
@@ -149,7 +149,7 @@ export default function PrivacyPage() {
             ].map((item) => (
               <div
                 key={item.point}
-                className="grid grid-cols-1 gap-2 border-b border-brand-navy/10 py-5 tablet:grid-cols-12 tablet:gap-8"
+                className="grid grid-cols-1 gap-2 border-b border-white/[0.06] py-5 tablet:grid-cols-12 tablet:gap-8"
               >
                 <div className="tablet:col-span-4">
                   <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-brand-cerulean">
@@ -157,25 +157,25 @@ export default function PrivacyPage() {
                   </p>
                 </div>
                 <div className="tablet:col-span-8">
-                  <p className="font-body text-[14px] leading-[1.6] text-brand-navy/70">
+                  <p className="font-body text-[14px] leading-[1.6] text-brand-ice/75">
                     {item.data}
                   </p>
                 </div>
               </div>
             ))}
           </div>
-          <p className="mt-5 font-body text-[14px] leading-[1.6] text-brand-navy/60">
-            We do <strong className="text-brand-navy">not</strong> collect special-category
+          <p className="mt-5 font-body text-[14px] leading-[1.6] text-brand-ice/60">
+            We do <strong className="text-white">not</strong> collect special-category
             or sensitive personal data, and we do not use cookies for tracking or advertising.
           </p>
         </section>
 
         {/* 4. Why */}
-        <section aria-labelledby="s-why" className="mt-12 border-t border-brand-navy/15 pt-10">
-          <h2 id="s-why" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-why" className="mt-12 border-t border-white/[0.06] pt-10">
+          <h2 id="s-why" className="mb-6 font-display text-[24px] text-white tablet:text-[30px]">
             4. Why we collect it
           </h2>
-          <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
+          <p className="font-body text-[15px] leading-[1.7] text-brand-ice/75">
             We process application data only to:
           </p>
           <ul className="mt-4 space-y-2 pl-2">
@@ -186,54 +186,54 @@ export default function PrivacyPage() {
             ].map((item) => (
               <li key={item} className="flex items-start gap-3">
                 <span aria-hidden="true" className="mt-[7px] h-1.5 w-1.5 flex-none rounded-full bg-brand-cerulean" />
-                <span className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
+                <span className="font-body text-[15px] leading-[1.7] text-brand-ice/75">
                   {item}
                 </span>
               </li>
             ))}
           </ul>
-          <p className="mt-4 font-body text-[15px] leading-[1.7] text-brand-navy/70">
+          <p className="mt-4 font-body text-[15px] leading-[1.7] text-brand-ice/75">
             Our legal basis is your{" "}
-            <strong className="text-brand-navy">consent</strong>, given by a clear
+            <strong className="text-white">consent</strong>, given by a clear
             affirmative action at each point of collection (DPDP Act ss.5–6). We will not
             use your data for any purpose not listed here without asking you again.
           </p>
         </section>
 
         {/* 5. Retention */}
-        <section aria-labelledby="s-retention" className="mt-12 border-t border-brand-navy/15 pt-10">
-          <h2 id="s-retention" className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-retention" className="mt-12 border-t border-white/[0.06] pt-10">
+          <h2 id="s-retention" className="mb-2 font-display text-[24px] text-white tablet:text-[30px]">
             5. How long we keep your data
           </h2>
-          <p className="mb-8 font-body text-[15px] leading-[1.7] text-brand-navy/60">
+          <p className="mb-8 font-body text-[15px] leading-[1.7] text-brand-ice/60">
             We keep personal data only for as long as needed, then erase it. Retention is
             enforced in the primary database, database backups, and sent-email logs.
           </p>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse" aria-label="Data retention schedule">
               <thead>
-                <tr className="border-b border-brand-navy/15">
+                <tr className="border-b border-white/[0.06]">
                   {["Data", "Retention period", "Then"].map((h) => (
                     <th
                       key={h}
                       scope="col"
-                      className="pb-3 pr-6 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50"
+                      className="pb-3 pr-6 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40"
                     >
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-brand-navy/10">
+              <tbody className="divide-y divide-white/[0.06]">
                 {RETENTION_ROWS.map((r) => (
                   <tr key={r.data}>
-                    <td className="py-4 pr-6 font-body text-[13px] font-medium text-brand-navy">
+                    <td className="py-4 pr-6 font-body text-[13px] font-medium text-white">
                       {r.data}
                     </td>
-                    <td className="py-4 pr-6 font-body text-[13px] leading-[1.5] text-brand-navy/60">
+                    <td className="py-4 pr-6 font-body text-[13px] leading-[1.5] text-brand-ice/60">
                       {r.period}
                     </td>
-                    <td className="py-4 font-body text-[13px] leading-[1.5] text-brand-navy/50">
+                    <td className="py-4 font-body text-[13px] leading-[1.5] text-brand-ice/50">
                       {r.then}
                     </td>
                   </tr>
@@ -244,12 +244,12 @@ export default function PrivacyPage() {
         </section>
 
         {/* 6. Sharing */}
-        <section aria-labelledby="s-share" className="mt-12 border-t border-brand-navy/15 pt-10">
-          <h2 id="s-share" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-share" className="mt-12 border-t border-white/[0.06] pt-10">
+          <h2 id="s-share" className="mb-6 font-display text-[24px] text-white tablet:text-[30px]">
             6. Who we share it with
           </h2>
-          <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
-            We do <strong className="text-brand-navy">not</strong> sell or rent your personal
+          <p className="font-body text-[15px] leading-[1.7] text-brand-ice/75">
+            We do <strong className="text-white">not</strong> sell or rent your personal
             data. We share it with:
           </p>
           <ul className="mt-4 space-y-2 pl-2">
@@ -260,7 +260,7 @@ export default function PrivacyPage() {
             ].map((item) => (
               <li key={item} className="flex items-start gap-3">
                 <span aria-hidden="true" className="mt-[7px] h-1.5 w-1.5 flex-none rounded-full bg-brand-cerulean" />
-                <span className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
+                <span className="font-body text-[15px] leading-[1.7] text-brand-ice/75">
                   {item}
                 </span>
               </li>
@@ -269,13 +269,13 @@ export default function PrivacyPage() {
         </section>
 
         {/* 7. Storage */}
-        <section aria-labelledby="s-storage" className="mt-12 border-t border-brand-navy/15 pt-10">
-          <h2 id="s-storage" className="mb-2 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-storage" className="mt-12 border-t border-white/[0.06] pt-10">
+          <h2 id="s-storage" className="mb-2 font-display text-[24px] text-white tablet:text-[30px]">
             7. Where your data is stored
           </h2>
-          <p className="mb-8 font-body text-[15px] leading-[1.7] text-brand-navy/70">
+          <p className="mb-8 font-body text-[15px] leading-[1.7] text-brand-ice/75">
             Your{" "}
-            <strong className="text-brand-navy">
+            <strong className="text-white">
               application data is stored in India
             </strong>{" "}
             (Supabase, Mumbai region). Some service providers that send our emails, manage
@@ -284,35 +284,35 @@ export default function PrivacyPage() {
             them. The DPDP Act permits this transfer; no destination is on a
             DPDP-restricted list.
           </p>
-          <p className="mb-6 font-body text-[13px] leading-[1.6] text-brand-navy/50">
-            Sanity and Vercel Analytics receive <strong className="text-brand-navy/70">no personal data</strong> — Sanity
+          <p className="mb-6 font-body text-[13px] leading-[1.6] text-brand-ice/50">
+            Sanity and Vercel Analytics receive <strong className="text-brand-ice/75">no personal data</strong> — Sanity
             holds only website content, and Vercel Analytics records only anonymous aggregate traffic.
           </p>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse" aria-label="Data processor locations">
               <thead>
-                <tr className="border-b border-brand-navy/15">
+                <tr className="border-b border-white/[0.06]">
                   {["Provider", "What it handles", "Location"].map((h) => (
                     <th
                       key={h}
                       scope="col"
-                      className="pb-3 pr-6 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50"
+                      className="pb-3 pr-6 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40"
                     >
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-brand-navy/10">
+              <tbody className="divide-y divide-white/[0.06]">
                 {PROCESSORS.map((p) => (
                   <tr key={p.name}>
                     <td className="py-4 pr-6 font-mono text-[12px] text-brand-cerulean">
                       {p.name}
                     </td>
-                    <td className="py-4 pr-6 font-body text-[13px] leading-[1.5] text-brand-navy/70">
+                    <td className="py-4 pr-6 font-body text-[13px] leading-[1.5] text-brand-ice/75">
                       {p.handles}
                     </td>
-                    <td className="py-4 font-body text-[13px] text-brand-navy/60">
+                    <td className="py-4 font-body text-[13px] text-brand-ice/60">
                       {p.location}
                     </td>
                   </tr>
@@ -323,11 +323,11 @@ export default function PrivacyPage() {
         </section>
 
         {/* 8. Security */}
-        <section aria-labelledby="s-security" className="mt-12 border-t border-brand-navy/15 pt-10">
-          <h2 id="s-security" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-security" className="mt-12 border-t border-white/[0.06] pt-10">
+          <h2 id="s-security" className="mb-6 font-display text-[24px] text-white tablet:text-[30px]">
             8. How we protect your data
           </h2>
-          <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
+          <p className="font-body text-[15px] leading-[1.7] text-brand-ice/75">
             We apply row-level database security, encrypted connections (HTTPS throughout),
             role-based administrator access, and activity logging. In the event of a
             personal-data breach we will notify the Data Protection Board of India and
@@ -336,8 +336,8 @@ export default function PrivacyPage() {
         </section>
 
         {/* 9. Rights */}
-        <section aria-labelledby="s-rights" className="mt-12 border-t border-brand-navy/15 pt-10">
-          <h2 id="s-rights" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-rights" className="mt-12 border-t border-white/[0.06] pt-10">
+          <h2 id="s-rights" className="mb-6 font-display text-[24px] text-white tablet:text-[30px]">
             9. Your rights as a Data Principal
           </h2>
           <div className="space-y-0">
@@ -369,18 +369,18 @@ export default function PrivacyPage() {
             ].map((item) => (
               <div
                 key={item.right}
-                className="flex items-start gap-6 border-b border-brand-navy/10 py-4"
+                className="flex items-start gap-6 border-b border-white/[0.06] py-4"
               >
-                <span className="w-36 flex-none font-display text-[15px] text-brand-navy">
+                <span className="w-36 flex-none font-display text-[15px] text-white">
                   {item.right}
                 </span>
-                <p className="font-body text-[14px] leading-[1.6] text-brand-navy/60">
+                <p className="font-body text-[14px] leading-[1.6] text-brand-ice/60">
                   {item.desc}
                 </p>
               </div>
             ))}
           </div>
-          <p className="mt-6 font-body text-[14px] leading-[1.6] text-brand-navy/60">
+          <p className="mt-6 font-body text-[14px] leading-[1.6] text-brand-ice/60">
             To exercise any right, email our Grievance Officer at{" "}
             <a
               href="mailto:nishant.peddagopu@stpi.in"
@@ -393,12 +393,12 @@ export default function PrivacyPage() {
         </section>
 
         {/* 10. Cookies */}
-        <section aria-labelledby="s-cookies" className="mt-12 border-t border-brand-navy/15 pt-10">
-          <h2 id="s-cookies" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-cookies" className="mt-12 border-t border-white/[0.06] pt-10">
+          <h2 id="s-cookies" className="mb-6 font-display text-[24px] text-white tablet:text-[30px]">
             10. Cookies and analytics
           </h2>
-          <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
-            This site does <strong className="text-brand-navy">not</strong> use cookies for
+          <p className="font-body text-[15px] leading-[1.7] text-brand-ice/75">
+            This site does <strong className="text-white">not</strong> use cookies for
             tracking, profiling, or advertising — no cookie-consent banner is shown. We use
             Vercel Analytics, a privacy-first analytics tool that counts page views in
             aggregate without storing your IP address or identifying you. The administrator
@@ -408,11 +408,11 @@ export default function PrivacyPage() {
         </section>
 
         {/* 11. Age */}
-        <section aria-labelledby="s-age" className="mt-12 border-t border-brand-navy/15 pt-10">
-          <h2 id="s-age" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-age" className="mt-12 border-t border-white/[0.06] pt-10">
+          <h2 id="s-age" className="mb-6 font-display text-[24px] text-white tablet:text-[30px]">
             11. Age
           </h2>
-          <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
+          <p className="font-body text-[15px] leading-[1.7] text-brand-ice/75">
             This site is intended for adults. By submitting a form you confirm you are 18
             or older. We do not knowingly collect data from children. Under the DPDP Act,
             processing a child&rsquo;s data requires verifiable parental consent, which
@@ -421,35 +421,35 @@ export default function PrivacyPage() {
         </section>
 
         {/* 12. Changes */}
-        <section aria-labelledby="s-changes" className="mt-12 border-t border-brand-navy/15 pt-10">
-          <h2 id="s-changes" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-changes" className="mt-12 border-t border-white/[0.06] pt-10">
+          <h2 id="s-changes" className="mb-6 font-display text-[24px] text-white tablet:text-[30px]">
             12. Changes to this notice
           </h2>
-          <p className="font-body text-[15px] leading-[1.7] text-brand-navy/70">
+          <p className="font-body text-[15px] leading-[1.7] text-brand-ice/75">
             We may update this notice. The version and date at the top reflect the current
             version. Material changes will be communicated where we hold your contact details.
           </p>
         </section>
 
         {/* 13. Contact */}
-        <section aria-labelledby="s-contact" className="mt-12 border-t border-brand-navy/15 pt-10">
-          <h2 id="s-contact" className="mb-6 font-display text-[24px] text-brand-navy tablet:text-[30px]">
+        <section aria-labelledby="s-contact" className="mt-12 border-t border-white/[0.06] pt-10">
+          <h2 id="s-contact" className="mb-6 font-display text-[24px] text-white tablet:text-[30px]">
             13. Contact and grievance
           </h2>
-          <p className="mb-6 font-body text-[15px] leading-[1.7] text-brand-navy/70">
+          <p className="mb-6 font-body text-[15px] leading-[1.7] text-brand-ice/75">
             If you have a concern about how we handle your personal data, contact our
             Grievance Officer first. If unsatisfied, you may refer the matter to the{" "}
-            <strong className="text-brand-navy">Data Protection Board of India</strong>.
+            <strong className="text-white">Data Protection Board of India</strong>.
           </p>
           <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2">
-            <div className="border border-brand-navy/10 px-6 py-5">
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50">
+            <div className="glass-panel px-6 py-5">
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
                 Grievance Officer
               </p>
-              <p className="mt-2 font-body text-[15px] text-brand-navy">
+              <p className="mt-2 font-body text-[15px] text-white">
                 Dr. Nishant Peddagopu
               </p>
-              <p className="mt-0.5 font-body text-[13px] text-brand-navy/60">
+              <p className="mt-0.5 font-body text-[13px] text-brand-ice/60">
                 Chief Operating Officer, CoE-EA
               </p>
               <a
@@ -458,15 +458,15 @@ export default function PrivacyPage() {
               >
                 nishant.peddagopu@stpi.in
               </a>
-              <p className="mt-1 font-body text-[13px] text-brand-navy/50">
+              <p className="mt-1 font-body text-[13px] text-brand-ice/50">
                 CoE-EA, Jayanagar, Bengaluru, Karnataka
               </p>
             </div>
-            <div className="border border-brand-navy/10 px-6 py-5">
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-navy/50">
+            <div className="glass-panel px-6 py-5">
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
                 Data Protection Board of India
               </p>
-              <p className="mt-2 font-body text-[14px] leading-[1.6] text-brand-navy/60">
+              <p className="mt-2 font-body text-[14px] leading-[1.6] text-brand-ice/60">
                 Escalation body under the DPDP Act, 2023. File a complaint if your
                 grievance is not resolved by the Grievance Officer.
               </p>
@@ -474,7 +474,7 @@ export default function PrivacyPage() {
           </div>
         </section>
 
-        <div className="mt-16 border-t border-brand-navy/15 pt-8">
+        <div className="mt-16 border-t border-white/[0.06] pt-8">
           <Link
             href="/"
             className="font-mono text-[12px] uppercase tracking-[0.18em] text-brand-cerulean hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
