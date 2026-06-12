@@ -325,10 +325,9 @@ export function CapabilityRadar() {
   }, [])
 
   return (
-    <div className="pointer-events-none relative flex h-full w-full items-center justify-center py-8 desktop:py-12">
+    <div className="pointer-events-none relative flex h-full w-full items-center justify-center">
       <canvas
         ref={canvasRef}
-        className="mx-auto max-w-[640px]"
         style={{ width: '100%', maxWidth: SIZE, aspectRatio: '1 / 1' }}
         aria-hidden
       />

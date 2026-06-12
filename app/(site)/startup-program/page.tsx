@@ -165,7 +165,7 @@ export default async function PortfolioPage() {
           </>
         }
         subhead={`${startupCount} STARTUPS · 10 DOMAINS · 3 COHORTS`}
-        layout="band"
+        layout="right-visual"
         visual={<CapabilityRadar />}
       />
 

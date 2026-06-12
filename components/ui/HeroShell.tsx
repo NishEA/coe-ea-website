@@ -222,14 +222,14 @@ export function HeroShell({
   return (
     <section
       aria-label={typeof title === 'string' ? title : label}
-      className={`${base} flex-col px-6 pb-16 pt-14 tablet:px-12 desktop:min-h-[65vh] desktop:flex-row desktop:items-center desktop:px-20 desktop:pb-20 desktop:pt-20`}
+      className={`${base} flex-col px-6 pb-16 pt-14 tablet:px-12 desktop:min-h-[90vh] desktop:flex-row desktop:items-center desktop:px-20 desktop:pb-20 desktop:pt-20`}
     >
       <Brackets />
 
       {visual && (
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-1/2 desktop:block">
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[55%] desktop:block">
           <div aria-hidden className="absolute inset-0 flex items-center justify-center">
-            <div className="glow-cerulean h-[480px] w-[480px] rounded-full opacity-30 blur-[120px]" />
+            <div className="glow-cerulean h-[560px] w-[560px] rounded-full opacity-30 blur-[120px]" />
           </div>
           {visual}
         </div>
@@ -238,7 +238,7 @@ export function HeroShell({
       <div
         className={`relative z-10 ${
           visual
-            ? 'w-full desktop:w-1/2'
+            ? 'w-full desktop:w-[45%]'
             : 'mx-auto w-full max-w-[1100px]'
         }`}
       >
