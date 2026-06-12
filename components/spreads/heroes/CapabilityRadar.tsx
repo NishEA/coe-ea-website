@@ -6,12 +6,12 @@ import { useEffect, useRef } from 'react'
 /* Constants                                                           */
 /* ------------------------------------------------------------------ */
 
-const SIZE = 560
-const CX = 280
-const CY = 280
-// R reduced from 220 → 190 to give labels enough horizontal room
-// at the original 10px font size without clipping the canvas edges.
-const R = 190
+const SIZE = 640
+const CX = 320
+const CY = 320
+// Band layout gives the radar full width — R restored to 220 with
+// SIZE 640 so labels have horizontal room without clipping the edges.
+const R = 220
 const NODE_RADIUS_FRACTION = 0.8
 const SWEEP_PERIOD_MS = 12_000
 const SWEEP_FAN_RAD = (35 * Math.PI) / 180
@@ -325,9 +325,10 @@ export function CapabilityRadar() {
   }, [])
 
   return (
-    <div className="pointer-events-none relative flex h-full w-full items-center justify-center">
+    <div className="pointer-events-none relative flex h-full w-full items-center justify-center py-8 desktop:py-12">
       <canvas
         ref={canvasRef}
+        className="mx-auto max-w-[640px]"
         style={{ width: '100%', maxWidth: SIZE, aspectRatio: '1 / 1' }}
         aria-hidden
       />

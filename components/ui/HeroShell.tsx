@@ -185,7 +185,7 @@ export function HeroShell({
     return (
       <section
         aria-label={typeof title === 'string' ? title : label}
-        className={`${base} flex-col px-6 pb-0 pt-14 tablet:px-12 desktop:min-h-[65vh] desktop:px-20 desktop:pt-20`}
+        className={`${base} flex-col px-6 pb-12 pt-14 tablet:px-12 desktop:min-h-[65vh] desktop:px-20 desktop:pb-16 desktop:pt-20`}
       >
         <Brackets />
 
