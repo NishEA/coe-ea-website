@@ -191,6 +191,7 @@ export function TheLedger({ metrics, partners }: TheLedgerProps) {
                             <Image
                               src={p.logoUrl}
                               alt={p.name}
+                              title={p.name}
                               width={140}
                               height={56}
                               className="h-10 w-auto max-w-[100px] object-contain tablet:h-12 tablet:max-w-[120px]"
@@ -200,6 +201,7 @@ export function TheLedger({ metrics, partners }: TheLedgerProps) {
                           <Image
                             src={p.logoUrl}
                             alt={p.name}
+                            title={p.name}
                             width={160}
                             height={56}
                             className="h-10 w-auto max-w-[110px] object-contain tablet:h-12 tablet:max-w-[140px]"
@@ -220,6 +222,7 @@ export function TheLedger({ metrics, partners }: TheLedgerProps) {
                             <Image
                               src={p.logoSrc}
                               alt={p.name}
+                              title={p.name}
                               width={140}
                               height={56}
                               className="h-10 w-auto max-w-[100px] object-contain tablet:h-12 tablet:max-w-[120px]"
@@ -229,6 +232,7 @@ export function TheLedger({ metrics, partners }: TheLedgerProps) {
                           <Image
                             src={p.logoSrc}
                             alt={p.name}
+                            title={p.name}
                             width={160}
                             height={56}
                             className="h-10 w-auto max-w-[110px] object-contain tablet:h-12 tablet:max-w-[140px]"
