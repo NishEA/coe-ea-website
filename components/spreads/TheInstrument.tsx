@@ -110,7 +110,7 @@ export function TheInstrument() {
               {/* Self-drawing SVG border card */}
               <div ref={cardRef} className="relative p-8">
                 {/* Programme Contact badge */}
-                <span className="glass-chip px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-brand-cerulean absolute top-4 left-4">
+                <span className="glass-chip px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean absolute top-4 left-4">
                   Programme Contact
                 </span>
 

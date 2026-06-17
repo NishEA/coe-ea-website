@@ -84,7 +84,7 @@ export function TheResolve() {
             type="button"
             aria-pressed={!showAfter}
             onClick={() => setShowAfter(false)}
-            className={`rounded-full px-5 py-2 font-mono text-[10px] uppercase tracking-[0.16em] transition ${!showAfter ? 'bg-amber/20 text-amber' : 'text-brand-ice/65 hover:text-white'}`}
+            className={`rounded-full px-5 py-2 font-mono text-[12px] uppercase tracking-[0.16em] transition ${!showAfter ? 'bg-amber/20 text-amber' : 'text-brand-ice/65 hover:text-white'}`}
           >
             Before
           </button>
@@ -92,7 +92,7 @@ export function TheResolve() {
             type="button"
             aria-pressed={showAfter}
             onClick={() => setShowAfter(true)}
-            className={`rounded-full px-5 py-2 font-mono text-[10px] uppercase tracking-[0.16em] transition ${showAfter ? 'bg-brand-cerulean/20 text-brand-cerulean' : 'text-brand-ice/65 hover:text-white'}`}
+            className={`rounded-full px-5 py-2 font-mono text-[12px] uppercase tracking-[0.16em] transition ${showAfter ? 'bg-brand-cerulean/20 text-brand-cerulean' : 'text-brand-ice/65 hover:text-white'}`}
           >
             After
           </button>
@@ -100,7 +100,7 @@ export function TheResolve() {
 
         {!showAfter ? (
           <div className="mt-6 rounded-xl border border-amber/20 bg-gradient-to-br from-amber/10 via-transparent to-transparent p-6">
-            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-amber">Before Instrumentation</p>
+            <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.3em] text-amber">Before Instrumentation</p>
             <div className="flex flex-wrap gap-x-5 gap-y-3">
               {BEFORE_ITEMS.map(item => (
                 <span key={item.text} className="font-mono text-[12px] text-amber/60">{item.text}</span>
@@ -109,11 +109,11 @@ export function TheResolve() {
           </div>
         ) : (
           <div className="mt-6 rounded-xl border border-brand-cerulean/20 bg-gradient-to-br from-brand-cerulean/10 via-transparent to-transparent p-6">
-            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--color-cerulean-hot)]">After CoE-EA</p>
+            <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--color-cerulean-hot)]">After CoE-EA</p>
             <div className="flex flex-col gap-4">
               {AFTER_ROWS.map(row => (
                 <div key={row.metric} className="grid items-baseline gap-4 border-b border-brand-cerulean/10 pb-3" style={{ gridTemplateColumns: '1fr auto 20px' }}>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-ice/65">{row.metric}</span>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-ice/65">{row.metric}</span>
                   <span className="font-display text-[18px] font-bold text-white">{row.value}</span>
                   <span className="font-mono text-[13px]" style={{ color: 'var(--color-cerulean-hot)', textShadow: '0 0 10px rgba(61,220,255,0.7)' }}>✓</span>
                 </div>
@@ -170,7 +170,7 @@ export function TheResolve() {
               className="absolute inset-y-0 left-0 w-1/2 overflow-hidden px-10 py-8"
               style={{ background: 'linear-gradient(135deg,rgba(212,168,83,.12),rgba(212,168,83,.03) 60%),rgba(3,6,28,.5)' }}
             >
-              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-amber">Before Instrumentation</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-amber">Before Instrumentation</p>
               <p className="sr-only">Before instrumentation data: OEE 43.7%, unknown downtime, defect rate 6.8%, ₹14.2 per unit energy cost, 11.4 hours per week lost, batch drift +3.1 sigma, manual readouts, no signal.</p>
               <div aria-hidden className="relative mt-3 h-[calc(100%-32px)]">
                 {BEFORE_ITEMS.map(item => (
@@ -200,7 +200,7 @@ export function TheResolve() {
                 transition: 'clip-path 0.6s cubic-bezier(0.16,1,0.3,1)',
               }}
             >
-              <p className="font-mono text-[10px] uppercase tracking-[0.3em]" style={{ color: 'var(--color-cerulean-hot)' }}>
+              <p className="font-mono text-[11px] uppercase tracking-[0.3em]" style={{ color: 'var(--color-cerulean-hot)' }}>
                 After CoE-EA
               </p>
               <div className="mt-4 flex flex-col gap-[14px]">
@@ -210,7 +210,7 @@ export function TheResolve() {
                     className="grid items-baseline gap-4 border-b pb-3"
                     style={{ gridTemplateColumns: '1fr auto 26px', borderColor: 'rgba(0,164,228,0.14)' }}
                   >
-                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-brand-ice/65">
+                    <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-brand-ice/65">
                       {row.metric}
                     </span>
                     <span className="font-display text-[20px] font-bold text-white">

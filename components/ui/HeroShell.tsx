@@ -22,7 +22,7 @@ function Eyebrow({ label, badge }: { label: string; badge?: string }) {
     <div className="fade-up flex flex-wrap items-center gap-3" style={{ animationDelay: '0.05s' }}>
       <p className="font-mono text-[12px] uppercase tracking-[0.22em] text-brand-cerulean">{label}</p>
       {badge && (
-        <span className="glass-chip font-mono text-[10px] uppercase tracking-[0.16em] text-brand-cerulean">
+        <span className="glass-chip font-mono text-[11px] uppercase tracking-[0.16em] text-brand-cerulean">
           {badge}
         </span>
       )}

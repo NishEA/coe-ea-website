@@ -83,7 +83,7 @@ export function CredibilityBand() {
             </svg>
 
             {/* Label */}
-            <span className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/60">
+            <span className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/60">
               {it.label}
             </span>
 

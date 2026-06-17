@@ -163,7 +163,7 @@ export function TheLedger({ metrics, partners }: TheLedgerProps) {
                   </span>
                 )}
               </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-brand-ice/55">
+              <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-brand-ice/55">
                 {m.label}
               </span>
             </div>
@@ -173,7 +173,7 @@ export function TheLedger({ metrics, partners }: TheLedgerProps) {
       </div>
 
       <div className="mt-20 border-t border-brand-ice/10 pt-10" aria-label="Partner organisations">
-        <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-ice/40">
+        <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/40">
           Partners
         </p>
         <div className="glass-shelf rounded-lg px-5 py-6 tablet:px-10 tablet:py-8">

@@ -17,7 +17,7 @@ export function DomainMarquee() {
         type="button"
         onClick={() => setPaused(p => !p)}
         aria-label={paused ? 'Resume scrolling domains' : 'Pause scrolling domains'}
-        className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-brand-ice/65 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
+        className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-ice/65 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
       >
         {paused ? '▶' : '⏸'}
       </button>

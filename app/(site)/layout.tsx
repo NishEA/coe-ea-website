@@ -149,6 +149,7 @@ export default function SiteLayout({
               <Image
                 src="/logos/coe-ea.png"
                 alt="CoE-EA — Centre of Excellence on Efficiency Augmentation"
+                title="CoE-EA — Centre of Excellence on Efficiency Augmentation"
                 width={150}
                 height={44}
                 className="h-9 w-auto object-contain brightness-0 invert"
@@ -158,7 +159,8 @@ export default function SiteLayout({
               <div aria-hidden className="hidden rounded bg-white px-2 py-1 tablet:block">
                 <Image
                   src="/logos/stpi.png"
-                  alt="STPI"
+                  alt="Software Technology Parks of India (STPI)"
+                  title="Software Technology Parks of India (STPI)"
                   width={70}
                   height={26}
                   className="h-6 w-auto object-contain"
@@ -170,6 +172,7 @@ export default function SiteLayout({
                 <Image
                   src="/logos/kits.jpeg"
                   alt="KITS — Karnataka Innovation & Technology Society"
+                  title="KITS — Karnataka Innovation & Technology Society"
                   width={70}
                   height={26}
                   className="h-6 w-auto object-contain"
@@ -275,7 +278,8 @@ export default function SiteLayout({
             <div className="mb-4 inline-flex items-center gap-3 rounded-sm border border-brand-ice/10 bg-brand-ice/5 px-5 py-3">
               <Image
                 src="/logos/coe-ea.png"
-                alt="CoE-EA"
+                alt="CoE-EA — Centre of Excellence on Efficiency Augmentation"
+                title="CoE-EA — Centre of Excellence on Efficiency Augmentation"
                 width={130}
                 height={38}
                 className="h-9 w-auto object-contain brightness-0 invert opacity-80"
@@ -284,7 +288,8 @@ export default function SiteLayout({
               <div className="rounded bg-white px-2 py-1">
                 <Image
                   src="/logos/stpi.png"
-                  alt="STPI"
+                  alt="Software Technology Parks of India (STPI)"
+                  title="Software Technology Parks of India (STPI)"
                   width={66}
                   height={26}
                   className="h-6 w-auto object-contain"
@@ -295,6 +300,7 @@ export default function SiteLayout({
                 <Image
                   src="/logos/kits.jpeg"
                   alt="KITS — Karnataka Innovation & Technology Society"
+                  title="KITS — Karnataka Innovation & Technology Society"
                   width={66}
                   height={26}
                   className="h-6 w-auto object-contain"

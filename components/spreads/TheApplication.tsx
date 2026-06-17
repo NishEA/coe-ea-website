@@ -54,7 +54,7 @@ export function TheApplication({ benefits: propBenefits }: { benefits?: SanityAp
           Apply to the <span className="text-amber">next cohort</span>.
         </h2>
         {/* Status badge */}
-        <span className="glass-chip px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-brand-cerulean inline-flex items-center">
+        <span className="glass-chip px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean inline-flex items-center">
           <span className="op-dot mr-2" aria-hidden /> Cohort 3 · Open
         </span>
       </div>
@@ -90,7 +90,7 @@ export function TheApplication({ benefits: propBenefits }: { benefits?: SanityAp
 
         {/* Process sidebar — desktop only, glass-panel wrapper */}
         <aside className="glass-panel mt-16 p-8 hidden desktop:block desktop:sticky desktop:top-24">
-          <h3 className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-cerulean">
+          <h3 className="mb-6 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cerulean">
             What happens next
           </h3>
           <ol className="space-y-5 border-t border-brand-ice/10 pt-6">
