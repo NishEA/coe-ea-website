@@ -14,6 +14,8 @@ const NAV = [
   { href: '/book', label: 'Book' },
   { href: '/governance', label: 'Governance' },
   { href: '/events', label: 'Events' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 const NAV_WITH_META = [
@@ -22,6 +24,8 @@ const NAV_WITH_META = [
   { href: '/book', label: 'Book', index: '03', status: 'Available' },
   { href: '/governance', label: 'Governance', index: '04', status: 'STPI · KITS' },
   { href: '/events', label: 'Events', index: '05', status: 'Upcoming' },
+  { href: '/about', label: 'About', index: '06', status: 'STPI · KITS' },
+  { href: '/contact', label: 'Contact', index: '07', status: 'Get in touch' },
 ]
 
 export default function SiteLayout({
@@ -220,7 +224,7 @@ export default function SiteLayout({
               aria-expanded={drawerOpen}
               aria-controls="mobile-nav"
               onClick={() => setDrawerOpen(v => !v)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition hover:border-white/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/40 text-white/80 transition hover:border-white/60 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cerulean"
             >
               {drawerOpen ? '✕' : '☰'}
             </button>
@@ -248,11 +252,11 @@ export default function SiteLayout({
             tabIndex={drawerOpen ? undefined : -1}
             aria-current={isActive(item.href) ? 'page' : undefined}
             className={`flex items-baseline justify-between px-6 py-5 border-b border-brand-ice/[0.06] font-mono text-[13px] uppercase tracking-[0.12em] transition ${
-              isActive(item.href) ? 'text-white' : 'text-brand-ice/50 hover:text-white'
+              isActive(item.href) ? 'text-white' : 'text-brand-ice/65 hover:text-white'
             } focus-visible:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-brand-cerulean`}
           >
             <span className="flex items-baseline gap-4">
-              <span className="text-[10px] text-brand-ice/25">{item.index}</span>
+              <span aria-hidden="true" className="text-[10px] text-brand-ice/25">{item.index}</span>
               {item.label}
             </span>
             <span className="glass-chip px-2 py-0.5 text-[9px] text-brand-cerulean/70 uppercase tracking-[0.14em]">{item.status}</span>
@@ -300,16 +304,24 @@ export default function SiteLayout({
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/70">
               Centre of Excellence — Efficiency Augmentation
             </p>
-            <p className="mt-1 max-w-md font-body text-[13px] leading-[1.6] text-brand-ice/40">
+            <p className="mt-1 max-w-md font-body text-[13px] leading-[1.6] text-brand-ice/65">
               Funded by STPI · KITS · HPE. Software Technology Parks of India is
               an autonomous society under MeitY, Government of India.
+            </p>
+            <p className="mt-3 font-mono text-[11px] text-brand-ice/65">
+              © 2026 Software Technology Parks of India. All rights reserved.
             </p>
           </div>
           <nav
             aria-label="Footer"
-            className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/50"
+            className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-ice/65"
           >
             {[
+              { label: 'About', href: '/about' },
+              { label: 'Contact', href: '/contact' },
+              { label: 'Feedback', href: '/feedback' },
+              { label: 'Help', href: '/help' },
+              { label: 'Sitemap', href: '/sitemap' },
               { label: 'Startup Program', href: '/startup-program' },
               { label: 'Events', href: '/events' },
               { label: 'Governance', href: '/governance' },
@@ -317,6 +329,7 @@ export default function SiteLayout({
               { label: 'Privacy', href: '/privacy' },
               { label: 'STPI', href: 'https://www.stpi.in' },
               { label: 'RTI', href: 'https://www.stpi.in/rti.html' },
+              { label: 'National Portal', href: 'https://www.india.gov.in/' },
             ].map(l => (
               <a
                 key={l.label}

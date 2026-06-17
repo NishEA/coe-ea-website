@@ -77,7 +77,7 @@ export function HeroShell({
           <HeroTitle title={title} />
           {subhead && (
             <p
-              className="fade-up mt-5 font-mono text-[15px] uppercase tracking-[0.16em] text-brand-ice/55"
+              className="fade-up mt-5 font-mono text-[15px] uppercase tracking-[0.16em] text-brand-ice/65"
               style={{ animationDelay: '0.32s' }}
             >
               {subhead}
@@ -124,7 +124,7 @@ export function HeroShell({
           <HeroTitle title={title} />
           {subhead && (
             <p
-              className="fade-up mt-5 font-mono text-[15px] uppercase tracking-[0.16em] text-brand-ice/55"
+              className="fade-up mt-5 font-mono text-[15px] uppercase tracking-[0.16em] text-brand-ice/65"
               style={{ animationDelay: '0.32s' }}
             >
               {subhead}
@@ -162,7 +162,7 @@ export function HeroShell({
             <HeroTitle title={title} />
             {subhead && (
               <p
-                className="fade-up mt-5 font-mono text-[15px] uppercase tracking-[0.16em] text-brand-ice/55"
+                className="fade-up mt-5 font-mono text-[15px] uppercase tracking-[0.16em] text-brand-ice/65"
                 style={{ animationDelay: '0.32s' }}
               >
                 {subhead}
@@ -194,7 +194,7 @@ export function HeroShell({
           <HeroTitle title={title} />
           {subhead && (
             <p
-              className="fade-up mt-5 font-mono text-[15px] uppercase tracking-[0.16em] text-brand-ice/55"
+              className="fade-up mt-5 font-mono text-[15px] uppercase tracking-[0.16em] text-brand-ice/65"
               style={{ animationDelay: '0.32s' }}
             >
               {subhead}
@@ -246,7 +246,7 @@ export function HeroShell({
         <HeroTitle title={title} />
         {subhead && (
           <p
-            className="fade-up mt-5 font-mono text-[15px] uppercase tracking-[0.16em] text-brand-ice/55"
+            className="fade-up mt-5 font-mono text-[15px] uppercase tracking-[0.16em] text-brand-ice/65"
             style={{ animationDelay: '0.32s' }}
           >
             {subhead}

@@ -75,7 +75,7 @@ export function TheResolve() {
         <h2 className="mt-4 font-display text-[clamp(28px,7vw,44px)] font-bold leading-[1.06] tracking-[-0.02em] text-white">
           The Shift
         </h2>
-        <p className="mt-4 max-w-xs font-mono text-[12px] leading-relaxed tracking-[0.06em] text-brand-ice/50">
+        <p className="mt-4 max-w-xs font-mono text-[12px] leading-relaxed tracking-[0.06em] text-brand-ice/65">
           Two states of the same infrastructure — instinct, then instrumentation.
         </p>
 
@@ -84,7 +84,7 @@ export function TheResolve() {
             type="button"
             aria-pressed={!showAfter}
             onClick={() => setShowAfter(false)}
-            className={`rounded-full px-5 py-2 font-mono text-[10px] uppercase tracking-[0.16em] transition ${!showAfter ? 'bg-amber/20 text-amber' : 'text-brand-ice/40 hover:text-brand-ice/70'}`}
+            className={`rounded-full px-5 py-2 font-mono text-[10px] uppercase tracking-[0.16em] transition ${!showAfter ? 'bg-amber/20 text-amber' : 'text-brand-ice/65 hover:text-white'}`}
           >
             Before
           </button>
@@ -92,7 +92,7 @@ export function TheResolve() {
             type="button"
             aria-pressed={showAfter}
             onClick={() => setShowAfter(true)}
-            className={`rounded-full px-5 py-2 font-mono text-[10px] uppercase tracking-[0.16em] transition ${showAfter ? 'bg-brand-cerulean/20 text-brand-cerulean' : 'text-brand-ice/40 hover:text-brand-ice/70'}`}
+            className={`rounded-full px-5 py-2 font-mono text-[10px] uppercase tracking-[0.16em] transition ${showAfter ? 'bg-brand-cerulean/20 text-brand-cerulean' : 'text-brand-ice/65 hover:text-white'}`}
           >
             After
           </button>
@@ -113,7 +113,7 @@ export function TheResolve() {
             <div className="flex flex-col gap-4">
               {AFTER_ROWS.map(row => (
                 <div key={row.metric} className="grid items-baseline gap-4 border-b border-brand-cerulean/10 pb-3" style={{ gridTemplateColumns: '1fr auto 20px' }}>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-ice/50">{row.metric}</span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-ice/65">{row.metric}</span>
                   <span className="font-display text-[18px] font-bold text-white">{row.value}</span>
                   <span className="font-mono text-[13px]" style={{ color: 'var(--color-cerulean-hot)', textShadow: '0 0 10px rgba(61,220,255,0.7)' }}>✓</span>
                 </div>
@@ -158,7 +158,7 @@ export function TheResolve() {
           <h2 className="mb-2 font-display text-[clamp(32px,3.5vw,52px)] font-bold leading-[1.06] tracking-[-0.02em] text-white">
             The Shift
           </h2>
-          <p className="mb-8 max-w-md font-mono text-[12px] leading-relaxed tracking-[0.06em] text-brand-ice/40">
+          <p className="mb-8 max-w-md font-mono text-[12px] leading-relaxed tracking-[0.06em] text-brand-ice/65">
             Two states of the same infrastructure — instinct, then instrumentation.
           </p>
 
@@ -171,6 +171,7 @@ export function TheResolve() {
               style={{ background: 'linear-gradient(135deg,rgba(212,168,83,.12),rgba(212,168,83,.03) 60%),rgba(3,6,28,.5)' }}
             >
               <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-amber">Before Instrumentation</p>
+              <p className="sr-only">Before instrumentation data: OEE 43.7%, unknown downtime, defect rate 6.8%, ₹14.2 per unit energy cost, 11.4 hours per week lost, batch drift +3.1 sigma, manual readouts, no signal.</p>
               <div aria-hidden className="relative mt-3 h-[calc(100%-32px)]">
                 {BEFORE_ITEMS.map(item => (
                   <span
@@ -209,7 +210,7 @@ export function TheResolve() {
                     className="grid items-baseline gap-4 border-b pb-3"
                     style={{ gridTemplateColumns: '1fr auto 26px', borderColor: 'rgba(0,164,228,0.14)' }}
                   >
-                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-brand-ice/55">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-brand-ice/65">
                       {row.metric}
                     </span>
                     <span className="font-display text-[20px] font-bold text-white">
@@ -257,7 +258,7 @@ export function TheResolve() {
 
           {/* Bottom copy — fades in at scan complete */}
           <p
-            className="mt-6 max-w-lg font-mono text-[11px] leading-relaxed tracking-[0.05em] text-brand-ice/35 transition-opacity duration-700"
+            className="mt-6 max-w-lg font-mono text-[11px] leading-relaxed tracking-[0.05em] text-brand-ice/65 transition-opacity duration-700"
             style={{ opacity: progress > 0.9 ? 1 : 0 }}
           >
             CoE-EA turns instinct into measured efficiency — every claim citation-bound,
